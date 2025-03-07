@@ -1,6 +1,0 @@
-= form_for @photo, :url => { :action => "m_upload_photo" } do |f|
-  = error_msg @photo
-  = t'choose_photo'
-  = f.file_field :avatar
-  br  
-  = f.submit t'upload_now'

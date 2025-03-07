@@ -1,8 +1,0 @@
-= title t('s_category_title', c: @category.name, w: @user.name)
-= metadesc meta_desc_blog_list
-= hidden_field_tag :view, params[:view]
-h2
-  /= link_to t('_archive'), blogs_archives_path
-  /| &nbsp;&nbsp;&nbsp;
-  = render 'shared/category_list'
-= render 'shared/blog/list'

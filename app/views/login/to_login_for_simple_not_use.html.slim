@@ -1,7 +1,0 @@
-- if flash[:error]
-  #error=flash[:error]
-= form_tag "login/login" do
-  = t 'hello_login',w:@user.name
-  = password_field_tag :passwd
-  .actions
-    = submit_tag t '_login'

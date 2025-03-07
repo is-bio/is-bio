@@ -1,7 +1,0 @@
-= title t('s_album', w: @user.name)
-= metadesc meta_desc_albums
-| #{link_to @user.name, m(site(@user))} > #{t('s_album', w: @user.name)}
-br
-- @albums.each_with_index do |album, i|
-  = link_to album.name, album
-  br

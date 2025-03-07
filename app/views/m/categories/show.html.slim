@@ -1,6 +1,0 @@
-= title t('s_category_title', c: @category.name, w: @user.name)
-strong
-  = render 'shared/category_list'
-br
-| #{link_to @user.name, m(site(@user))} > #{t('s_blog', w: @user.name)} > #{link_to @category.name, @category} >
-= render 'm/shared/blog/list'

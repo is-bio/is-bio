@@ -1,3 +1,0 @@
-- if Rails.env.production? and Settings[:baidu] and Settings[:baidu]['tongji_js_secret']
-  span style="display:none"
-    script type="text/javascript" src="#{Settings[:baidu] ? 'http://hm.baidu.com/h.js?' + Settings.baidu.tongji_js_secret : ''}"

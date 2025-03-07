@@ -1,8 +1,0 @@
-= title t('s_album_title', a: @album.name, w: @user.name)
-= metadesc meta_desc_album_show
-| #{link_to @user.name, m(site(@user))} > #{link_to t('s_album', w: @user.name), albums_path} > #{link_to @album.name, m(album_path(@album))} #{@album.description}
-br
-- @photos.each_with_index do |photo|
-  = m_photo_a photo
-  br
-= will_paginate @photos

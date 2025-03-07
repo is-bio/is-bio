@@ -1,7 +1,0 @@
-= title t('tags_who_title', w: @user.name)
-.table.b
-  - if @tags.blank?
-    | 作者还没有添加标签。
-    br
-    | 在发表日记、作品时添加的标签将会显示在这里。
-  = render 'list'

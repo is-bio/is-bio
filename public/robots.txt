@@ -1,4 +1,1 @@
-User-Agent: *
-Disallow: /admin/
-Disallow: /my/
-Crawl-delay: 20
+# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file

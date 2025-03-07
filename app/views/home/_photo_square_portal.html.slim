@@ -1,8 +1,0 @@
-.photolst.clearfix
-  - @all_photos.each_with_index do |item, i|
-    - break if i==8
-    - if item.is_a?(Photo)
-      - @photo = item
-    - elsif item.is_a?(Rphoto)
-      - @photo = item.photo
-    = render 'photo_content'

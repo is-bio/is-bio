@@ -1,5 +1,0 @@
-#footer
-  span#icp.fleft.gray-link title='访问量的计算方法是将#{@user.name}发的日记、作品、照片的点击次数简单相加，不包括个人主页、分类页、归档页、自传页、个人资料页、评论页等的访问量。因此该数值远小于实际的访问量。每周更新一次。'
-    | © 本页内容是#{@user.name}原创，未经许可不得转载。#{@user.name}主页访问量 >#{@user.clicks_count}次&nbsp;
-  = link_to "RSS", feed_path, title: "通过RSS订阅#{@user.name}的文章"
-  = render 'shared/footer_c'

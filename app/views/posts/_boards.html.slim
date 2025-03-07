@@ -1,6 +1,0 @@
-= t('whose_board', w: @user.name)
-= t'none_board' if @fboards.blank?
-- @fboards.each do |fboard|
-  = link_to fboard.board.name, sub_site('bbs') + "/#{fboard.board.id}"
-  | &nbsp;&nbsp;
-br

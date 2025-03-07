@@ -1,9 +1,0 @@
-= title t'reply_comment'
-= t('somebody_comment', w: @comment.user.name)
-= comment_info @comment
-br
-| 您的回复：
-= form_for @comment, url: {action: "do_m_#{controller_path}_reply"}, html: {id: "new_comment"} do |f|
-  = f.hidden_field :id
-  = m_comment_form f
-= render 'm/shared/validate_comment'

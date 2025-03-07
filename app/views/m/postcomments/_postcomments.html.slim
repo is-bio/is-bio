@@ -1,8 +1,0 @@
-- @all_comments.each_with_index do |comment, i|
-  - first_style = (i==0 ? "guset-topbr" : "")
-  .cont-list class=first_style
-    - user = comment.user
-    = link_to user.name, m(site(user))
-    | :#{p_comment_info comment.body}
-    em.font-g
-      | &nbsp;(#{comment.created_at.strftime(t'no_year')})

@@ -1,6 +1,0 @@
-= title t('s_notecate_title', c: @notecate.name, w: @user.name)
-strong
-  = render 'shared/notecate_list'
-br
-| #{link_to @user.name, m(site(@user))} > #{t('s_note', w: @user.name)} > #{link_to @notecate.name, @notecate} >
-= render 'm/shared/note/list'

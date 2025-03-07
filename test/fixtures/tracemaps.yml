@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-one:
-  site_id: MyString
-  blog: 
-
-two:
-  site_id: MyString
-  blog: 

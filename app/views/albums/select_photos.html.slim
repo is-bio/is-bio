@@ -1,9 +1,0 @@
-= link_to t('album.return_home'), select_albums_path
-.photolst.clearfix
-  - @photos.each_with_index do |photo, i|
-    .photo_wrap
-      a.photolst_photo href="javascript:selectPhoto(#{photo.id}, '#{site_url + "/select_albums"}')"
-        = image_tag(photo.avatar.thumb.url)
-      br
-      .pl
-        = photo.description

@@ -1,8 +1,0 @@
-- cache "user_home_photos_#{@user.id}" do
-  - photos = Photo.where(album_id: @user.albums).includes(:album).limit(5).order('id desc')
-  - photos.each do |photo|
-    .photo_user
-      a.photolst_photo href=album_photo_path(photo.album, photo)
-        = image_tag(photo.avatar.square.url, title: photo.description.to_s[0..43], width: PHOTO_SQUARE_SIZE, height: PHOTO_SQUARE_SIZE)
-  - unless photos.blank?
-    .clear

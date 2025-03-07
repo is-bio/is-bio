@@ -1,7 +1,0 @@
-Some models are dynamic defined in config/initializers/load_dynamic_models.rb
-e.g.
-Blogcomment
-Notecomment
-Memoircomment
-Photocomment
-Postcomment

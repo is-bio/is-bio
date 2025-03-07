@@ -1,8 +1,0 @@
-- @photos.each do |photo|
-  .photo_user
-    - album = photo.album
-    - user = album.user
-    a.photolst_photo href=site(user)+album_photo_path(album, photo) target='_blank'
-      = image_tag(photo.avatar.square.url, title: "#{user.name} [#{album.name}] #{photo.description.to_s[0..43]}", width: PHOTO_SQUARE_SIZE, height: PHOTO_SQUARE_SIZE)
-- unless @photos.blank?
-  .clear

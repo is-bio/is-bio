@@ -1,94 +1,68 @@
 class PostsController < ApplicationController
-  layout 'help'
+  allow_unauthenticated_access
 
-  def new
-    @post = Post.new
-    @post.board_id = request.env["HTTP_REFERER"].match(/.*\/(\d{1,})$/)[1]
-    @board = Board.find(@post.board_id)
-    if @m
-      render mr, :layout => 'm/portal'
-    else
-      render :layout => 'post_new'
-    end
-  end
+  before_action :set_post, only: %i[ show edit update destroy ]
 
-  def create
-    @post = Post.create(params[:post])
-    @post.user_id = session[:id]
-    @post.replied_at = Time.now
-    if @post.save
-      flash[:notice] = t'post_posted'
-      send_weibo
-      send_qq
-      redirect_to m_or(sub_site("bbs") + "/#{@post.board_id.to_s}")
-    else
-      @board = Board.find(@post.board_id)
-      _render :new
-    end
+  def index
+    @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
-    if request.subdomain == 'bbs' or request.subdomain == 'bbs.m' or @post.user == @user
-      @all_comments = @post.postcomments.order('likecount DESC, created_at')
-      @comments_uids = @all_comments.collect{|c| c.user_id}
-      if @m
-        render mr, :layout => 'm/portal'
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def edit
+  end
+
+  # POST /posts
+  def create
+    @post = Post.new(post_params)
+
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to @post, notice: "Post was successfully created." }
+        format.json { render :show, status: :created, location: @post }
       else
-        render :layout => 'post_share'
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
-    else
-      r404
     end
   end
 
-  def my
-    @posts = Post.where("user_id = ?", session[:id]).includes([:postcomments, :board]).page(params[:page]).order('id DESC')
+  # PATCH/PUT /posts/1
+  def update
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to @post, notice: "Post was successfully updated." }
+        format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  def my_reply
-    @postcomments = Postcomment.where("user_id = ?", session[:id]).includes(:post => [:user, :board, :postcomments]).page(params[:page]).order('id DESC')
+  # DELETE /posts/1
+  def destroy
+    @post.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to posts_path, status: :see_other, notice: "Post was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
-  def bbs
-    @fboards = @user.fboards.includes(:board).order('created_at')
-    @posts = @user.posts.includes([:postcomments, :board]).page(params[:page]).order('id DESC')
-    render :layout => 'memoir'
-  end
-
-  def reply
-    @fboards = @user.fboards.includes(:board).order('created_at')
-    @postcomments = @user.postcomments.includes(:post => [:user, :board, :postcomments]).page(params[:page]).order('id DESC')
-    render :layout => 'memoir'
-  end
-  
   private
-  def send_weibo
-    if weibo_active?
-      begin
-        oauth = weibo_auth
-        str = "#{@post.title + ' - '}"
-        data = "#{str}#{text_it_pure(@post.content)[0..130-str.size]}#{site(@user)}/p/#{@post.id}"
-        Weibo::Base.new(oauth).update(data)
-      rescue
-        logger.warn("---Send_post_to_weibo post.id=#{@post.id} failed.Data is #{data} #{session[:atoken]} ")
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_post
+      @post = Post.find(params.expect(:id))
     end
-  end
 
-  def send_qq
-    if qq_active?
-      begin
-        qq = Qq.new
-        auth = qq.gen_auth(session[:token], session[:openid])
-        text = text_it_pure(@post.content)
-        url = "#{site(@user)}/p/#{@post.id}"
-        comment = text[0..40]
-        summary = "...#{text[41..160]}"
-        qq.add_share(auth, @post.title, url, comment, summary, "", '1', site(@user), '', '')
-      rescue
-        logger.warn("---Send_post_to_qq post.id=#{@post.id} failed.Data is #{url}, #{comment}, #{summary}, #{auth} ")
-      end
+    # Only allow a list of trusted parameters through.
+    def post_params
+      params.expect(post: [ :title, :content ])
     end
-  end
 end

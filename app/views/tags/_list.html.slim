@@ -1,5 +1,0 @@
-- unless @tags.blank?
-  | 标签云&nbsp;&nbsp;&nbsp;
-  - @tags.each do |k, v|
-    = link_to k, "/tags/#{k}"
-    | (#{v})&nbsp;&nbsp;
