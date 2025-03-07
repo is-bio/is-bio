@@ -36,7 +36,7 @@
 /.idea/*
 _themes/DevBlog-Theme
 /app/assets/images/
-/app/assets/stylesheets/theme-1.css
+!/app/assets/images/profile.png
 /app/assets/stylesheets/theme-2.css
 /app/assets/stylesheets/theme-3.css
 /app/assets/stylesheets/theme-4.css

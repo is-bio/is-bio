@@ -1,10 +1,10 @@
 Ruby-on-Rails-Markdown-Blog
 
-# Blog5 - Enjoy blogging with Markdown. An open source personal blog built with Ruby on Rails 8 and DevBlog theme.
+# Enjoy blogging with Markdown and Git. An open source personal blog based on Ruby on Rails 8 and 'DevBlog' theme.
 
 ## Free theme 'DevBlog' installation
 
-### Download 'DevBlog Theme'
+### Download 'DevBlog' Theme
 
 - Option 1: Use Git to download.
 
@@ -23,7 +23,7 @@ Ruby-on-Rails-Markdown-Blog
   3. Run `unzip DevBlog-Theme-master.zip`.
   4. Run `mv DevBlog-Theme-master DevBlog-Theme` to rename it.
 
-### Install 'DevBlog Theme'
+### Install 'DevBlog' Theme
 
 Run:
 
@@ -33,6 +33,4 @@ sh install-theme-devblog.sh
 ```
 
 ## TODO
-* favicon
-
-[comment]: # (This two files are not really used: [conflict-detection.js](../../../github/DevBlog-Theme/assets/fontawesome/js/conflict-detection.js) [v4-shims.js](../../../github/DevBlog-Theme/assets/fontawesome/js/v4-shims.js))
+* Add favicon.
