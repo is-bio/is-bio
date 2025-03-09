@@ -1,0 +1,49 @@
+<header class="header text-center">
+  <h1 class="blog-name pt-lg-4 mb-0" id="blog-name">
+    <a class="no-text-decoration" href="<%= root_path %>"><%= t(:blog_name) %></a>
+  </h1>
+
+  <nav class="navbar navbar-expand-lg navbar-dark" >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navigation" class="collapse navbar-collapse flex-column" >
+      <div class="profile-section pt-3 pt-lg-0">
+        <%= image_tag "profile.png", class: "profile-image mb-3 rounded-circle mx-auto" %>
+
+        <div class="bio mb-3">
+          <%= t(:brief_personal_introduction) %><br>
+          <a href="about.html"><%= t(:find_more_about_me) %></a>
+        </div>
+
+        <ul class="social-list list-inline py-3 mx-auto">
+          <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+        </ul>
+        <hr>
+      </div>
+
+      <ul class="navbar-nav flex-column text-start">
+        <li class="nav-item">
+          <a class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>" href="<%= root_path %>"><i class="fas fa-home fa-fw me-2"></i>Blog Home</a>
+        </li>
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link <%#= controller_name == 'posts' && action_name == 'show' ? 'active' : nil %>" href="<%#= post_path %>"><i class="fas fa-bookmark fa-fw me-2"></i>Blog Post</a>-->
+<!--        </li>-->
+        <li class="nav-item">
+          <a class="nav-link" href="about.html"><i class="fas fa-user fa-fw me-2"></i>About Me</a>
+        </li>
+      </ul>
+
+      <div class="my-2 my-md-3">
+        <a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">
+          <%= t(:get_in_touch) %>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>

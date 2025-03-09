@@ -74,6 +74,7 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    annotaterb (4.13.0)
     ast (2.4.2)
     base64 (0.2.0)
     bcrypt (3.1.20)
@@ -251,10 +252,12 @@ GEM
     rake (13.2.1)
     rdoc (6.12.0)
       psych (>= 4.0.0)
+    redcarpet (3.6.0)
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
     rexml (3.4.1)
+    rouge (4.5.1)
     rspec-core (3.13.3)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.3)
@@ -386,6 +389,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  annotaterb (= 4.13.0)
   bcrypt (~> 3.1.7)
   bootsnap (= 1.18.4)
   brakeman
@@ -397,6 +401,8 @@ DEPENDENCIES
   propshaft (= 1.1.0)
   puma (= 6.6.0)
   rails (~> 8.0.1)
+  redcarpet (= 3.6.0)
+  rouge (= 4.5.1)
   rspec-rails (~> 7.0.2)
   rubocop-rails-omakase
   selenium-webdriver

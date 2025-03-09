@@ -10,7 +10,7 @@ en:
   subscribe: "Subscribe"
   subscribe_to_receive_email: "Welcome to my blog. Subscribe via email to never miss my latest posts!"
 
-  posted_at: "Posted"
+  published_at: "Published"
 
   # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
   datetime:

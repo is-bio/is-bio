@@ -1,131 +1,54 @@
 <% content_for :title, "Posts" %>
 
-<header class="header text-center">
-  <h1 class="blog-name pt-lg-4 mb-0"><a class="no-text-decoration" href="index.html"><%= t(:blog_name) %></a></h1>
-
-  <nav class="navbar navbar-expand-lg navbar-dark" >
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div id="navigation" class="collapse navbar-collapse flex-column" >
-      <div class="profile-section pt-3 pt-lg-0">
-        <%= image_tag "profile.png", class: "profile-image mb-3 rounded-circle mx-auto" %>
-
-        <div class="bio mb-3">
-          <%= t(:brief_personal_introduction) %><br>
-          <a href="about.html"><%= t(:find_more_about_me) %></a>
+<section class="cta-section theme-bg-light py-5">
+  <div class="container text-center single-col-max-width">
+    <h2 class="heading"><%= t(:headline) %></h2>
+    <div class="intro"><%= t(:subscribe_to_receive_email) %></div>
+    <div class="single-form-max-width pt-3 mx-auto">
+      <form class="signup-form row g-2 g-lg-2 align-items-center">
+        <div class="col-12 col-md-9">
+          <input type="email" name="semail" class="form-control me-md-1 semail" placeholder="Enter email">
         </div>
 
-        <ul class="social-list list-inline py-3 mx-auto">
-          <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
-        </ul>
-        <hr>
-      </div>
-
-      <ul class="navbar-nav flex-column text-start">
-        <li class="nav-item">
-          <a class="nav-link active" href="index.html"><i class="fas fa-home fa-fw me-2"></i>Blog Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="blog-post.html"><i class="fas fa-bookmark fa-fw me-2"></i>Blog Post</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="about.html"><i class="fas fa-user fa-fw me-2"></i>About Me</a>
-        </li>
-      </ul>
-
-      <div class="my-2 my-md-3">
-        <a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">
-          <%= t(:get_in_touch) %>
-        </a>
-      </div>
+        <div class="col-12 col-md-2">
+          <button type="submit" class="btn btn-primary"><%= t(:subscribe) %></button>
+        </div>
+      </form>
     </div>
-  </nav>
-</header>
+  </div>
+</section>
 
-<div class="main-wrapper">
+<section class="blog-list px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
 
-  <section class="cta-section theme-bg-light py-5">
-    <div class="container text-center single-col-max-width">
-      <h2 class="heading"><%= t(:headline) %></h2>
-      <div class="intro"><%= t(:subscribe_to_receive_email) %></div>
-      <div class="single-form-max-width pt-3 mx-auto">
-        <form class="signup-form row g-2 g-lg-2 align-items-center">
-          <div class="col-12 col-md-9">
-            <input type="email" name="semail" class="form-control me-md-1 semail" placeholder="Enter email">
+    <% @posts.each_with_index do |post, i| %>
+      <div class="item mb-5">
+        <div class="row g-3 g-xl-0">
+          <div class="col-2 col-xl-3">
+            <%= image_tag "blog/blog-post-thumb-#{i + 1}.jpg", class: "img-fluid post-thumb" %>
           </div>
 
-          <div class="col-12 col-md-2">
-            <button type="submit" class="btn btn-primary"><%= t(:subscribe) %></button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="blog-list px-3 py-5 p-md-5">
-    <div class="container single-col-max-width">
-
-      <% @posts.each_with_index do |post, i| %>
-        <div class="item mb-5">
-          <div class="row g-3 g-xl-0">
-            <div class="col-2 col-xl-3">
-              <%= image_tag "blog/blog-post-thumb-#{i + 1}.jpg", class: "img-fluid post-thumb" %>
+          <div class="col">
+            <h3 class="title mb-1"><a class="text-link" href="<%= post_path(post) %>"><%= post.title %></a></h3>
+            <div class="meta mb-1">
+              <span class="date"><%= t(:published_at) %> <%= time_ago_in_words(post.created_at) %></span>
+              <span class="time"><%= post.content.size / 200 %> min read</span>
+              <span class="comment">
+                <a class="text-link" href="#">8 comments</a>
+              </span>
             </div>
-
-            <div class="col">
-              <h3 class="title mb-1"><a class="text-link" href="blog-post.html"><%= post.title %></a></h3>
-              <div class="meta mb-1">
-                <span class="date"><%= t(:posted_at) %> <%= time_ago_in_words(post.created_at) %></span>
-                <span class="time"><%= post.content.size / 200 %> min read</span>
-                <span class="comment">
-                  <a class="text-link" href="#">8 comments</a>
-                </span>
-              </div>
-              <div class="intro"><%= post.content[..250] %>...</div>
-              <a class="text-link" href="blog-post.html">Read more &rarr;</a>
-            </div>
+            <div class="intro"><%= post.content[..250] %>...</div>
+            <a class="text-link" href="<%= post_path(post) %>">Read more &rarr;</a>
           </div>
         </div>
+      </div>
 
-      <% end %>
+    <% end %>
 
-      <nav class="blog-nav nav nav-justified my-5">
-        <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-        <a class="nav-link-next nav-item nav-link rounded" href="#">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-      </nav>
+    <nav class="blog-nav nav nav-justified my-5">
+      <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+      <a class="nav-link-next nav-item nav-link rounded" href="#">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+    </nav>
 
-    </div>
-  </section>
-
-  <footer class="footer text-center py-2 theme-bg-dark">
-
-    <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-    <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a href="https://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
-
-  </footer>
-
-</div><!--//main-wrapper-->
-
-
-<!-- Javascript -->
-<script src="assets/plugins/popper.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
-</div>
-
-<%#= link_to "New post", new_post_path %>
+  </div>
+</section>

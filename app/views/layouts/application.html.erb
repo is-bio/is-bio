@@ -29,16 +29,27 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "rouge-theme-molokai.css", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "theme-1.css", "data-turbo-track": "reload" %>
 
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/left_sidebar' %>
+
+    <div class="main-wrapper">
+      <%= yield %>
+
+      <footer class="footer text-center py-2 theme-bg-dark">
+        <small class="copyright">Powered by <a href="https://markdown-blog.com" target="_blank">Markdown Blog</a></small>,
+        <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+        <small class="copyright">designed by <a href="https://themes.3rdwavemedia.com" target="_blank">Xiaoying</a></small>
+      </footer>
+    </div>
   </body>
 
   <%= javascript_include_tag 'src/fontawesome/js/all.min', defer: 'defer' %>
-  <%= javascript_include_tag 'src/popper.min.js', defer: 'defer' %>
-  <%= javascript_include_tag 'src/bootstrap.min.js', defer: 'defer' %>
+  <%= javascript_include_tag 'src/popper.min.js' %>
+  <%= javascript_include_tag 'src/bootstrap.min.js' %>
 </html>
