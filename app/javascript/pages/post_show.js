@@ -7,20 +7,16 @@ function pageLoaded() {
 }
 
 function createHeadingAnchors() {
-  const headingAnchors = document.querySelectorAll("h1 a, h2 a, h3 a, h4 a, h5 a, h6 a");
+  const firstHeadingAnchor = document.querySelector(".blog-post-body h1 a, .blog-post-body h2 a, .blog-post-body h3 a, .blog-post-body h4 a, .blog-post-body h5 a, .blog-post-body h6 a");
 
-  // Protect from creating `headingAnchor` multi-times because in some conditions `'turbo:load'` event was trigger more than once.
-  if (headingAnchors.length > 1) {
+  // Prevent from creating `heading anchors` multiple times because in some conditions (e.g.: on post show page, click home page, then and click home show page again), `'turbo:load'` event was triggered more than once.
+  if (firstHeadingAnchor != null) {
     return;
   }
 
-  const headingList = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  const headingList = document.querySelectorAll('.blog-post-body h1, .blog-post-body h2, .blog-post-body h3, .blog-post-body h4, .blog-post-body h5, .blog-post-body h6');
 
   headingList.forEach((heading) => {
-    if (heading.id) {
-      return;
-    }
-
     const headingId = encodeURIComponent(heading.textContent.split(' ')[0].toLowerCase());
     heading.id = headingId;
 
@@ -41,10 +37,10 @@ function createHeadingAnchors() {
 }
 
 function createCopyButtons() {
-  const small = document.querySelector('small');
+  const firstCopyButton = document.querySelector('.blog-post-body small');
 
-  // Protect from creating `small` multi-times because in some conditions `'turbo:load'` event was trigger more than once.
-  if (small != null && !small.classList.contains('copyright')) {
+  // Prevent from creating `copy buttons` multiple times because in some conditions (e.g.: on post show page, click home page, then and click home show page again), `'turbo:load'` event was triggered more than once.
+  if (firstCopyButton != null) {
     return;
   }
 
