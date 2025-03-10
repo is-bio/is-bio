@@ -8,7 +8,7 @@ module ApplicationHelper
     options = {
       filter_html: false,
       hard_wrap: true,
-      link_attributes: { rel: 'nofollow', target: '_blank' }
+      link_attributes: { rel: "nofollow", target: "_blank" }
     }
 
     extensions = {
@@ -18,19 +18,19 @@ module ApplicationHelper
       superscript: true,
       disable_indented_code_blocks: true,
       fenced_code_blocks: true,
-      space_after_headers: true,
+      space_after_headers: true
     }
 
     renderer = HTML.new(options)
     # renderer = Redcarpet::Render::HTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
-    rendered_text = markdown.render(text || '').gsub('../../images/', 'https://raw.githubusercontent.com/gazeldx/leetcode-solutions/main/images/')
+    rendered_text = markdown.render(text || "").gsub("../../images/", "https://raw.githubusercontent.com/gazeldx/leetcode-solutions/main/images/")
 
-    click_to_view_answer = params[:locale] == 'zh' ? '点击查看答案' : 'Click to view the answer'
+    click_to_view_answer = params[:locale] == "zh" ? "点击查看答案" : "Click to view the answer"
 
     while rendered_text.scan(/markdetail/).size >= 2
-      rendered_text.sub!('markdetail', "<details><summary>#{click_to_view_answer}</summary><p>").sub!('markdetail', '</p></details>')
+      rendered_text.sub!("markdetail", "<details><summary>#{click_to_view_answer}</summary><p>").sub!("markdetail", "</p></details>")
     end
 
     rendered_text.html_safe
