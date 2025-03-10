@@ -31,7 +31,7 @@
           <div class="col">
             <h3 class="title mb-1"><a class="text-link" href="<%= post_path(post) %>"><%= post.title %></a></h3>
             <div class="meta mb-1">
-              <span class="date"><%= t(:published_at) %> <%= time_ago_in_words(post.created_at) %></span>
+              <span class="date"><%= t(:posted_at) %> <%= time_ago_in_words(post.created_at) %></span>
               <span class="time"><%= post.content.size / 200 %> min read</span>
               <span class="comment">
                 <a class="text-link" href="#">8 comments</a>
@@ -46,9 +46,7 @@
     <% end %>
 
     <nav class="blog-nav nav nav-justified my-5">
-      <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-      <a class="nav-link-next nav-item nav-link rounded" href="#">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+      <a class="nav-link-next nav-item nav-link rounded" href="<%= about_path %>">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
     </nav>
-
   </div>
 </section>

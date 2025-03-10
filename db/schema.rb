@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema[8.0].define(version: 2025_03_05_085424) do
   create_table "posts", force: :cascade do |t|
+    t.integer "key", null: false
+    t.string "permalink", null: false
     t.string "title", null: false
     t.string "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_posts_on_key", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|

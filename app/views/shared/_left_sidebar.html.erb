@@ -14,7 +14,7 @@
 
         <div class="bio mb-3">
           <%= t(:brief_personal_introduction) %><br>
-          <a href="about.html"><%= t(:find_more_about_me) %></a>
+          <a href="<%= about_path %>"><%= t(:find_more_about_me) %></a>
         </div>
 
         <ul class="social-list list-inline py-3 mx-auto">
@@ -35,7 +35,7 @@
 <!--          <a class="nav-link <%#= controller_name == 'posts' && action_name == 'show' ? 'active' : nil %>" href="<%#= post_path %>"><i class="fas fa-bookmark fa-fw me-2"></i>Blog Post</a>-->
 <!--        </li>-->
         <li class="nav-item">
-          <a class="nav-link" href="about.html"><i class="fas fa-user fa-fw me-2"></i>About Me</a>
+          <a class="nav-link" href="<%= about_path %>"><i class="fas fa-user fa-fw me-2"></i>About Me</a>
         </li>
       </ul>
 

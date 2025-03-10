@@ -22,6 +22,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def about
+    @post = Post.where(permalink: "/about").first
+
+    if @post.nil?
+      @post = Post.new(
+        content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog-posts/published/about_me.md`, then `$ git commit` and `$ git push`.",
+        created_at: Time.now
+      )
+    end
+  end
+
   # def new
   #   @post = Post.new
   # end
@@ -60,6 +71,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.expect(post: [ :title, :content ])
+      params.expect(post: [ :permalink, :title, :content ])
     end
 end

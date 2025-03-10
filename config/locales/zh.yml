@@ -10,7 +10,7 @@ zh:
   subscribe: "订阅"
   subscribe_to_receive_email: "欢迎光临我的博客。通过邮件订阅，不再错过我的最新文章！"
 
-  published_at: "发布于"
+  posted_at: "发布于"
 
   # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
   datetime:

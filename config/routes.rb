@@ -18,8 +18,12 @@
 #                                          PUT    /passwords/:token(.:format)                                                                       passwords#update
 #                                          DELETE /passwords/:token(.:format)                                                                       passwords#destroy
 #                                    posts GET    /posts(.:format)                                                                                  posts#index
+#                                edit_post GET    /posts/:id/edit(.:format)                                                                         posts#edit
 #                                     post GET    /posts/:id(.:format)                                                                              posts#show
+#                                          PATCH  /posts/:id(.:format)                                                                              posts#update
+#                                          PUT    /posts/:id(.:format)                                                                              posts#update
 #                                     root GET    /                                                                                                 posts#index
+#                                    about GET    /about(.:format)                                                                                  posts#about
 #                       rails_health_check GET    /up(.:format)                                                                                     rails/health#show
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
@@ -54,6 +58,8 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index show edit update]
   root "posts#index"
+  get "about" => "posts#about", as: :about
+
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
