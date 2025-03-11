@@ -22,6 +22,10 @@ class Post < ApplicationRecord
 
   before_validation :cleanup_title, :ensure_permalink, :ensure_key
 
+  def path
+    "#{permalink}-#{key}"
+  end
+
   private
     # TODO: Remove `""`
     def cleanup_title
@@ -34,13 +38,17 @@ class Post < ApplicationRecord
       if permanent_link.blank? || permanent_link == "/"
         self.permalink = generate_permalink
       else
+        if permanent_link[0] != "/"
+          permanent_link = "/" + permanent_link
+        end
+
         self.permalink = permanent_link
       end
     end
 
     def generate_permalink
       # TODO: Remove all invalid chars
-      CGI.escape(title.downcase.split(" ").join("-"))
+      "/" + CGI.escape(title.downcase.split(" ").join("-"))
     end
 
     def ensure_key

@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
-  resources :posts, only: %i[index show edit update]
+  resources :posts, only: %i[new create index show edit update]
   root "posts#index"
   get "about" => "posts#about", as: :about
 
@@ -68,4 +68,7 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
+  # This line needs to be placed at the end
+  get ":permalink-:key" => "posts#show"
 end

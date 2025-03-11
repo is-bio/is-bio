@@ -1,13 +1,37 @@
 class PostsController < ApplicationController
   allow_unauthenticated_access
 
-  before_action :set_post, only: %i[ show edit update ]
+  before_action :set_post, only: %i[ edit update ]
+
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.new(post_params)
+
+    if @post.save
+      redirect_to root_path, notice: "Post was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 
   def index
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc)
   end
 
   def show
+    key = params.expect(:key)
+
+    if key.blank?
+      raise_404
+    end
+
+    @post = Post.where(key: key).first!
+
+    @post_older = Post.where("created_at < ?", @post.created_at).order(created_at: :desc).first
+    @post_newer = Post.where("created_at > ?", @post.created_at).order(:created_at).first
   end
 
   def edit
@@ -27,31 +51,11 @@ class PostsController < ApplicationController
 
     if @post.nil?
       @post = Post.new(
-        content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog-posts/published/about_me.md`, then `$ git commit` and `$ git push`.",
+        content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog-posts/published/about.md`, then `$ git commit` and `$ git push`.",
         created_at: Time.now
       )
     end
   end
-
-  # def new
-  #   @post = Post.new
-  # end
-  #
-
-  # POST /posts
-  # def create
-  #   @post = Post.new(post_params)
-  #
-  #   respond_to do |format|
-  #     if @post.save
-  #       format.html { redirect_to @post, notice: "Post was successfully created." }
-  #       format.json { render :show, status: :created, location: @post }
-  #     else
-  #       format.html { render :new, status: :unprocessable_entity }
-  #       format.json { render json: @post.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
 
   # DELETE /posts/1
   # def destroy
