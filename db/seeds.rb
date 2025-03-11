@@ -3,12 +3,11 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 
-name = "Your Name"
 email = "your_email@example.com"
 password = "ChangeToYourPassword"
 User.create!(
-  name: name,
   email_address: email,
   password: password,
   password_confirmation: password
 )
+puts "The administrator user '#{email}' was created successfully."
