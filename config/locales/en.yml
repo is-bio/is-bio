@@ -1,15 +1,15 @@
 en:
+  author_name: "Lane Zhang"
   blog_name: "Lane Zhang's Blog"
   headline: "Lane Zhang's Blog - A Programmer's Soliloquy"
   brief_personal_introduction: "Hi, my name is Lane Zhang. Let the readers know what unique value you can bring to him/her here."
-  author: "Lane Zhang"
 
   find_more_about_me: "Find out more about me"
   get_in_touch: "Get in Touch"
 
   subscribe: "Subscribe"
   subscribe_to_receive_email: "Welcome to my blog. Subscribe via email to never miss my latest posts!"
-
+  author: "Author"
   posted_at: "Posted"
 
   # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale

@@ -17,14 +17,19 @@
 #                                          PATCH  /passwords/:token(.:format)                                                                       passwords#update
 #                                          PUT    /passwords/:token(.:format)                                                                       passwords#update
 #                                          DELETE /passwords/:token(.:format)                                                                       passwords#destroy
+#                               admin_root GET    /admin(.:format)                                                                                  admin/main#root
+#                              admin_posts GET    /admin/posts(.:format)                                                                            admin/posts#index
+#                                          POST   /admin/posts(.:format)                                                                            admin/posts#create
+#                           new_admin_post GET    /admin/posts/new(.:format)                                                                        admin/posts#new
+#                          edit_admin_post GET    /admin/posts/:id/edit(.:format)                                                                   admin/posts#edit
+#                               admin_post PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
+#                                          PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
 #                                    posts GET    /posts(.:format)                                                                                  posts#index
-#                                edit_post GET    /posts/:id/edit(.:format)                                                                         posts#edit
 #                                     post GET    /posts/:id(.:format)                                                                              posts#show
-#                                          PATCH  /posts/:id(.:format)                                                                              posts#update
-#                                          PUT    /posts/:id(.:format)                                                                              posts#update
 #                                     root GET    /                                                                                                 posts#index
 #                                    about GET    /about(.:format)                                                                                  posts#about
 #                       rails_health_check GET    /up(.:format)                                                                                     rails/health#show
+#                                          GET    /:permalink-:key(.:format)                                                                        posts#show
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
 #        turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh
@@ -56,7 +61,13 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
-  resources :posts, only: %i[new create index show edit update]
+  namespace :admin do
+    root to: "main#root"
+
+    resources :posts, only: %i[new create index edit update]
+  end
+
+  resources :posts, only: %i[index show]
   root "posts#index"
   get "about" => "posts#about", as: :about
 

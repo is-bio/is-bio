@@ -28,14 +28,26 @@
       </div>
 
       <ul class="navbar-nav flex-column text-start">
+        <% if authenticated? %>
+          <li class="nav-item">
+            <a class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>" href="<%= admin_root_path %>">
+              <i class="fas fa-home fa-fw me-2"></i>Admin
+            </a>
+          </li>
+        <% end %>
+
         <li class="nav-item">
-          <a class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>" href="<%= root_path %>"><i class="fas fa-home fa-fw me-2"></i>Blog Home</a>
+          <a class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>" href="<%= root_path %>">
+            <i class="fas fa-home fa-fw me-2"></i>Blog Home
+          </a>
         </li>
 <!--        <li class="nav-item">-->
 <!--          <a class="nav-link <%#= controller_name == 'posts' && action_name == 'show' ? 'active' : nil %>" href="<%#= post_path %>"><i class="fas fa-bookmark fa-fw me-2"></i>Blog Post</a>-->
 <!--        </li>-->
         <li class="nav-item">
-          <a class="nav-link" href="<%= about_path %>"><i class="fas fa-user fa-fw me-2"></i>About Me</a>
+          <a class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>" href="<%= about_path %>">
+            <i class="fas fa-user fa-fw me-2"></i>About Me
+          </a>
         </li>
       </ul>
 

@@ -7,10 +7,8 @@
       <% if title.present? %>
         <%= title %> -
       <% end %>
-       <%= t(:blog_name) %>
+       Admin
     </title>
-    <meta name="description" content="<%= t(:headline) %>" />
-    <meta name="author" content="<%= t(:author_name) %>" />
 
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -20,14 +18,10 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "rouge-theme-molokai.css", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "theme-1.css", "data-turbo-track": "reload" %>

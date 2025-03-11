@@ -1,15 +1,15 @@
 zh:
+  author_name: "张健"
   blog_name: "张健的博客"
   headline: "张健的博客 - 一个程序员的自白"
   brief_personal_introduction: "嗨，我是张健。这里介绍下自己，说出自己能为读者带来什么独特的价值。如：我是一名全栈工程师，如果你想学 Web 开发，找我就对了！"
-  author: "张健"
 
   find_more_about_me: "进一步了解我"
   get_in_touch: "快联系我吧！"
 
   subscribe: "订阅"
   subscribe_to_receive_email: "欢迎光临我的博客。通过邮件订阅，不再错过我的最新文章！"
-
+  author: "作者"
   posted_at: "发布于"
 
   # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale

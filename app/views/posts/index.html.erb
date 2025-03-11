@@ -29,6 +29,9 @@
               <span class="comment">
                 <a class="text-link" href="#">8 comments</a>
               </span>
+              <span>
+                <a class="text-link" href="<%= edit_admin_post_path(post) %>">Edit (only you can)</a>
+              </span>
             </div>
             <div class="intro"><%= post.content[..250] %>...</div>
             <a class="text-link" href="<%= post.path %>">Read more &rarr;</a>
@@ -43,7 +46,7 @@
 
     <% if authenticated? %>
       <div>
-        <a href="<%= new_post_path %>">
+        <a href="<%= new_admin_post_path %>">
           <button type="button" class="btn btn-primary">Create a Post</button>
         </a>
       </div>
