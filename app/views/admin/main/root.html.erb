@@ -3,3 +3,5 @@
 </p>
 
 <%= link_to "Posts", posts_path %>
+
+<%= button_to "Log out", session_path, method: :delete, class: "btn btn-primary my-2" if authenticated? %>
