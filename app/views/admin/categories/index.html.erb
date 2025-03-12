@@ -1,0 +1,14 @@
+<% content_for :title, "Categories" %>
+
+<h1>Categories</h1>
+
+<div>
+  <% @categories.each do |category| %>
+    <div id="<%= dom_id category %>">
+      <%= category.id %>
+      <%= category.name %>
+      <%= category.parent_id %>
+      <%= category.parent&.name %>
+    </div>
+  <% end %>
+</div>

@@ -43,13 +43,5 @@
     <nav class="blog-nav nav nav-justified my-5">
       <a class="nav-link-next nav-item nav-link rounded" href="<%= about_path %>">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
     </nav>
-
-    <% if authenticated? %>
-      <div>
-        <a href="<%= new_admin_post_path %>">
-          <button type="button" class="btn btn-primary">Create a Post</button>
-        </a>
-      </div>
-    <% end %>
   </div>
 </section>

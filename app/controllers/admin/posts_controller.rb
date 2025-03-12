@@ -3,6 +3,17 @@ class Admin::PostsController < Admin::BaseController
 
   def new
     @post = Post.new
+    @categories = Category.includes(:parent).where.not(parent_id: nil).map do |category|
+      [
+        "#{category.parent.name} - #{category.name}",
+        category.id
+      ]
+    end
+    @categories = [ Category::DRAFTS_ID, Category::PUBLISHED_ID ].map do |category_id|
+      Category.find(category_id)
+    end.map do |category|
+      [ category.name, category.id ]
+    end + @categories
   end
 
   def create

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_12_065242) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_12_123229) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "parent_id"
@@ -24,6 +24,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_065242) do
     t.string "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id", default: 2, null: false
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["key"], name: "index_posts_on_key", unique: true
   end
 
@@ -52,5 +54,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_065242) do
   end
 
   add_foreign_key "categories", "categories", column: "parent_id"
+  add_foreign_key "posts", "categories"
   add_foreign_key "sessions", "users"
 end

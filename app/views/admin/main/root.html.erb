@@ -2,6 +2,16 @@
   Welcome, admin user!
 </p>
 
-<%= link_to "Posts", posts_path %>
+<%= link_to "Drafts", posts_path %>&nbsp;&nbsp;
+
+<%= link_to "Published", posts_path %>&nbsp;&nbsp;
+
+<%= link_to "Categories", admin_categories_path %>
+
+<div>
+  <a href="<%= new_admin_post_path %>">
+    <button type="button" class="btn btn-primary">Create a Post</button>
+  </a>
+</div>
 
 <%= button_to "Log out", session_path, method: :delete, class: "btn btn-primary my-2" if authenticated? %>

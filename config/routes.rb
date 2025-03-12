@@ -18,8 +18,7 @@
 #                                          PUT    /passwords/:token(.:format)                                                                       passwords#update
 #                                          DELETE /passwords/:token(.:format)                                                                       passwords#destroy
 #                               admin_root GET    /admin(.:format)                                                                                  admin/main#root
-#                              admin_posts GET    /admin/posts(.:format)                                                                            admin/posts#index
-#                                          POST   /admin/posts(.:format)                                                                            admin/posts#create
+#                              admin_posts POST   /admin/posts(.:format)                                                                            admin/posts#create
 #                           new_admin_post GET    /admin/posts/new(.:format)                                                                        admin/posts#new
 #                          edit_admin_post GET    /admin/posts/:id/edit(.:format)                                                                   admin/posts#edit
 #                               admin_post PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
@@ -66,12 +65,13 @@ Rails.application.routes.draw do
 
     resources :posts, only: %i[new create edit update]
 
-
+    resources :categories, only: :index
   end
 
   resources :posts, only: %i[index show]
   root "posts#index"
   get "about" => "posts#about", as: :about
+  get "category/:name-:id" => "categories#show", as: :category
 
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

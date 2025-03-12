@@ -31,6 +31,7 @@ puts "The administrator user '#{email}' was created successfully. You can use th
   threads_username
   snapchat_username
   stackoverflow_profile_url
+  leetcode_profile_url
   quora_profile_url
   qq
   douyin_identifier

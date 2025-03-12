@@ -26,6 +26,11 @@
   </div>
 
   <div>
+    <%= form.label :category, style: "display: block" %>
+    <%= form.select :category, options_for_select(@categories) %>
+  </div>
+
+  <div>
     <%= form.label :content, style: "display: block" %>
     <%= form.text_area :content, cols: 80, rows: 30 %>
   </div>

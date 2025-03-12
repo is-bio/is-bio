@@ -2,19 +2,27 @@
 #
 # Table name: posts
 #
-#  id         :integer          not null, primary key
-#  content    :string           not null
-#  key        :integer          not null
-#  permalink  :string           not null
-#  title      :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  content     :string           not null
+#  key         :integer          not null
+#  permalink   :string           not null
+#  title       :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :integer          default(2), not null
 #
 # Indexes
 #
-#  index_posts_on_key  (key) UNIQUE
+#  index_posts_on_category_id  (category_id)
+#  index_posts_on_key          (key) UNIQUE
+#
+# Foreign Keys
+#
+#  category_id  (category_id => categories.id)
 #
 class Post < ApplicationRecord
+  belongs_to :category
+
   validates :key, presence: true, uniqueness: true
   validates :permalink, presence: true
   validates :title, presence: true
