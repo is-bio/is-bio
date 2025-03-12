@@ -12,6 +12,11 @@ zh:
   author: "作者"
   posted_at: "发布于"
 
+  email: "电子邮箱"
+  wechat_id: "微信号"
+  linkedin_profile_url: "领英URL"
+  github_username: "GitHub 用户名"
+
   # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
   datetime:
     distance_in_words:

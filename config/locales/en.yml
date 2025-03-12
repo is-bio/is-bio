@@ -12,6 +12,11 @@ en:
   author: "Author"
   posted_at: "Posted"
 
+  email: "Email"
+  wechat_id: "WeChat ID"
+  linkedin_profile_url: "LinkedIn profile URL"
+  github_username: "GitHub Username"
+
   # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
   datetime:
     distance_in_words:
