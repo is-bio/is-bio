@@ -1,26 +1,29 @@
 class Admin::PostsController < Admin::BaseController
   before_action :set_post, only: %i[ edit update ]
+  before_action :set_category_options, only: %i[ new create ]
 
   def new
     @post = Post.new
-    @categories = Category.includes(:parent).where.not(parent_id: nil).map do |category|
+    @category_options = Category.all.map do |category|
       [
-        "#{category.parent.name} - #{category.name}",
+        "#{category.has_parent? ? "#{category.parent.name} - " : nil }#{category.name}",
         category.id
       ]
     end
-    @categories = [ Category::DRAFTS_ID, Category::PUBLISHED_ID ].map do |category_id|
-      Category.find(category_id)
-    end.map do |category|
-      [ category.name, category.id ]
-    end + @categories
   end
 
   def create
     @post = Post.new(post_params)
 
+    @category_options = Category.all.map do |category|
+      [
+        "#{category.has_parent? ? "#{category.parent.name} - " : nil }#{category.name}",
+        category.id
+      ]
+    end
+
     if @post.save
-      redirect_to admin_root_path, notice: "Post was successfully created."
+      redirect_to @post.path
     else
       render :new, status: :unprocessable_entity
     end
@@ -54,8 +57,17 @@ class Admin::PostsController < Admin::BaseController
       @post = Post.find(params.expect(:id))
     end
 
+    def set_category_options
+      @category_options = Category.all.map do |category|
+        [
+          "#{category.has_parent? ? "#{category.parent.name} - " : nil }#{category.name}",
+          category.id
+        ]
+      end
+    end
+
     # Only allow a list of trusted parameters through.
     def post_params
-      params.expect(post: [ :permalink, :title, :content ])
+      params.expect(post: [ :permalink, :title, :content, :category_id ])
     end
 end

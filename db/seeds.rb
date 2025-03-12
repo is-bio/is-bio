@@ -45,11 +45,11 @@ puts "The administrator user '#{email}' was created successfully. You can use th
 end
 puts "Table 'settings' data inserted."
 
-Category.where(id: Category::PUBLISHED_ID).first_or_create! do |category|
+Category.where(id: Category::ID_PUBLISHED).first_or_create! do |category|
   category.name = "published"
 end
 
-Category.where(id: Category::DRAFTS_ID).first_or_create! do |category|
+Category.where(id: Category::ID_DRAFTS).first_or_create! do |category|
   category.name = "drafts"
 end
 puts "Table 'categories' data inserted."

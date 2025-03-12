@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_12_123229) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_12_165424) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "parent_id"
-    t.index ["parent_id"], name: "index_categories_on_parent_id"
+    t.string "ancestry", null: false, collation: "BINARY"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "category_id", null: false
     t.integer "key", null: false
     t.string "permalink", null: false
     t.string "title", null: false
     t.string "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id", default: 2, null: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["key"], name: "index_posts_on_key", unique: true
   end
@@ -53,7 +53,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_123229) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
-  add_foreign_key "categories", "categories", column: "parent_id"
   add_foreign_key "posts", "categories"
   add_foreign_key "sessions", "users"
 end

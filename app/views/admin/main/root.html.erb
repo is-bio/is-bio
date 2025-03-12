@@ -2,11 +2,10 @@
   Welcome, admin user!
 </p>
 
-<%= link_to "Drafts", posts_path %>&nbsp;&nbsp;
-
-<%= link_to "Published", posts_path %>&nbsp;&nbsp;
-
 <%= link_to "Categories", admin_categories_path %>
+<br>
+<%= link_to @category_drafts.name, @category_drafts.path %>&nbsp;&nbsp;
+<%= link_to @category_published.name, @category_published.path %>
 
 <div>
   <a href="<%= new_admin_post_path %>">

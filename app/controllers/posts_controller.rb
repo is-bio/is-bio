@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   allow_unauthenticated_access
 
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.includes(:category).published.order(created_at: :desc)
   end
 
   def show
@@ -12,14 +12,17 @@ class PostsController < ApplicationController
       raise_404
     end
 
-    @post = Post.where(key: key).first!
+    if authenticated?
+      @post = Post.where(key: key).first!
+    else
+      @post = Post.published.where(key: key).first!
+    end
 
-    @post_older = Post.where("created_at < ?", @post.created_at).order(created_at: :desc).first
-    @post_newer = Post.where("created_at > ?", @post.created_at).order(:created_at).first
+    @post_older = Post.published.where("created_at < ?", @post.created_at).order(created_at: :desc).first
+    @post_newer = Post.published.where("created_at > ?", @post.created_at).order(:created_at).first
   end
 
   def about
-    puts controller_name, action_name
     @post = Post.where(permalink: "/about").first
 
     if @post.nil?

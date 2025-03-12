@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.0.2"
+gem "rails", "~> 8.0.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft", "1.1.0"
 # Use sqlite3 as the database for Active Record
@@ -35,18 +35,20 @@ gem "bootsnap", "1.18.4", require: false
 gem "kamal", "2.5.3", require: false
 
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
-gem "thruster", "0.1.12", require: false
+gem "thruster", "~> 0.1.11", require: false
 
-gem "redcarpet", "3.6.1" # Process markdown to html
-gem "rouge", "4.5.1" # Highlight code
+gem "redcarpet", "~> 3.6.0" # Process markdown to html
+gem "rouge", "~> 4.5.1" # Highlight code
+
+gem "ancestry", "~> 4.3.3" # Handle 'categories' which have 'parent' and 'children'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "annotaterb", "4.14.0"
+  gem "annotaterb", "4.13.0"
 
-  gem "rspec-rails", "~> 7.1.1"
+  gem "rspec-rails", "~> 7.0.2"
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

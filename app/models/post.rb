@@ -30,6 +30,8 @@ class Post < ApplicationRecord
 
   before_validation :cleanup_title, :ensure_permalink, :ensure_key
 
+  scope :published, -> { where(category_id: Category::ID_PUBLISHED) }
+
   def path
     "#{permalink}-#{key}"
   end

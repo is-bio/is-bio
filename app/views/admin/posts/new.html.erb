@@ -26,8 +26,8 @@
   </div>
 
   <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.select :category, options_for_select(@categories) %>
+    <%= form.label :category_id, style: "display: block" %>
+    <%= form.select :category_id, options_for_select(@category_options, Category::ID_DRAFTS) %>
   </div>
 
   <div>
@@ -39,9 +39,3 @@
     <%= form.submit %>
   </div>
 <% end %>
-
-<br>
-
-<div>
-  <%= link_to "Back to posts", admin_posts_path %>
-</div>

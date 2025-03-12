@@ -6,7 +6,7 @@
   <% @categories.each do |category| %>
     <div id="<%= dom_id category %>">
       <%= category.id %>
-      <%= category.name %>
+      <%= link_to category.name, category.path %>
       <%= category.parent_id %>
       <%= category.parent&.name %>
     </div>
