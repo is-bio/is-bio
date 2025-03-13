@@ -28,7 +28,10 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
 
-  before_validation :cleanup_title, :ensure_permalink, :ensure_key
+  validate :permalink_starts_with
+
+  before_validation :cleanup_title, :ensure_permalink
+  before_validation :ensure_key, on: :create
 
   scope :published, -> { where(category_id: Category::ID_PUBLISHED) }
 
@@ -37,6 +40,13 @@ class Post < ApplicationRecord
   end
 
   private
+
+    def permalink_starts_with
+      unless permalink.start_with?("/")
+        errors.add :permalink, 'should starting with "/"'
+      end
+    end
+
     # TODO: Remove `""`
     def cleanup_title
       self.title = (title || "").strip
