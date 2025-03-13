@@ -11,17 +11,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="my-2">
+    <%= form.label :permalink %>
+    <%= form.text_field :permalink, class: "form-control", placeholder: "If it is empty or \"/\", it will be automatically generated according to the Title" %>
   </div>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
+  <div class="my-2">
+    <%= form.label :title, class: "required" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :category_id, class: "d-block required" %>
+    <%= form.select :category_id, options_for_select(@category_options, post.category_id) %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :content, class: "d-block required" %>
     <%= form.text_area :content, cols: 80, rows: 30 %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="my-2">
+    <%= form.submit nil, class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,26 +1,13 @@
 class Admin::PostsController < Admin::BaseController
   before_action :set_post, only: %i[ edit update ]
-  before_action :set_category_options, only: %i[ new create ]
+  before_action :set_category_options, only: %i[ new create edit update ]
 
   def new
     @post = Post.new
-    @category_options = Category.all.map do |category|
-      [
-        "#{category.has_parent? ? "#{category.parent.name} - " : nil }#{category.name}",
-        category.id
-      ]
-    end
   end
 
   def create
     @post = Post.new(post_params)
-
-    @category_options = Category.all.map do |category|
-      [
-        "#{category.has_parent? ? "#{category.parent.name} - " : nil }#{category.name}",
-        category.id
-      ]
-    end
 
     if @post.save
       redirect_to @post.path

@@ -18,6 +18,10 @@ class PostsController < ApplicationController
       @post = Post.published.where(key: key).first!
     end
 
+    if @post.permalink != "/#{CGI.escape(params.expect(:permalink))}"
+      redirect_to @post.path, status: :moved_permanently
+    end
+
     @post_older = Post.published.where("created_at < ?", @post.created_at).order(created_at: :desc).first
     @post_newer = Post.published.where("created_at > ?", @post.created_at).order(:created_at).first
   end

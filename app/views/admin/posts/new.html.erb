@@ -1,41 +1,45 @@
 <% content_for :title, "New post" %>
 
-<h1>New post</h1>
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <h5 class="mb-3">New post</h5>
 
-<%= form_with(model: [:admin, @post]) do |form| %>
-  <% if @post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <%= form_with(model: [:admin, @post]) do |form| %>
+      <% if @post.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-        <% @post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @post.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.label :permalink, style: "display: block" %>
-    <%= form.text_field :permalink %>
+      <div class="my-2">
+        <%= form.label :permalink %>
+        <%= form.text_field :permalink, class: "form-control", placeholder: "If it is empty or \"/\", it will be automatically generated according to the Title" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :title, class: "required" %>
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :category_id, class: "d-block required" %>
+        <%= form.select :category_id, options_for_select(@category_options, Category::ID_DRAFTS) %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :content, class: "d-block required" %>
+        <%= form.text_area :content, cols: 80, rows: 30 %>
+      </div>
+
+      <div class="my-2">
+        <%= form.submit nil, class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :category_id, style: "display: block" %>
-    <%= form.select :category_id, options_for_select(@category_options, Category::ID_DRAFTS) %>
-  </div>
-
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content, cols: 80, rows: 30 %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</section>

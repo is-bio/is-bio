@@ -1,13 +1,17 @@
-<% content_for :title, "Editing post" %>
+<% content_for :title, "Edit post" %>
 
-<p style="color: green"><%= notice %></p>
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <% if notice.present? %>
+      <p style="color: green"><%= notice %></p>
+    <% end %>
 
-<h1>Editing post</h1>
+    <h5 class="mb-3">Edit post</h5>
 
-<%= render "form", post: @post %>
+    <%= render "form", post: @post %>
 
-<br>
-
-<div>
-  <%= link_to "Show this post", @post.path %>
-</div>
+    <div>
+      <%= link_to "Show this post", @post.path, target: "_blank" %>
+    </div>
+  </div>
+</section>
