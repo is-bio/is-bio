@@ -67,7 +67,7 @@ Rails.application.routes.draw do
 
     resources :categories, only: :index
 
-    resources :settings, only: :index
+    resources :settings, only: [ :index, :edit, :update ]
   end
 
   resources :posts, only: %i[index show]

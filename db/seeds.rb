@@ -36,6 +36,7 @@ puts "The administrator user '#{email}' was created successfully. You can use th
   qq
   douyin_identifier
   kuaishou_profile_url
+  weibo_nickname
   weibo_profile_id
   zhihu_profile_url
   line_id
