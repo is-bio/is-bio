@@ -1,7 +1,7 @@
 <section class="px-3 py-5 p-md-5">
   <div class="container single-col-max-width">
     <p>
-      Welcome, admin user!
+      Welcome, administrator <%= Current.session.user.email_address %>!
     </p>
 
     <%= link_to "Categories", admin_categories_path %>
