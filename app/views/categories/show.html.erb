@@ -31,14 +31,18 @@
               </span>
 
               <% if authenticated? %>
-                <% if [ Category::ID_DRAFTS, Category::ID_PUBLISHED ].include?(post.category_id) %>
-                  <span>
-                    <a class="text-link" href="<%= post.category.path %>"><%= post.category.name %></a>
-                  </span>
-                <% end %>
+                <span>
+                  <a class="text-link" href="<%= post.category.path %>"><%= post.category.name.titleize %></a>
+                </span>
                 <span>
                   <a class="text-link" href="<%= edit_admin_post_path(post) %>">Edit</a>
                 </span>
+              <% else %>
+                <% unless [ Category::ID_DRAFTS, Category::ID_PUBLISHED ].include?(post.category_id) %>
+                  <span>
+                    <a class="text-link" href="<%= post.category.path %>"><%= post.category.name.titleize %></a>
+                  </span>
+                <% end %>
               <% end %>
             </div>
             <div class="intro"><%= post.content[..250] %>...</div>
