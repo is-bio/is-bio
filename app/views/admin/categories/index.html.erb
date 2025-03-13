@@ -1,14 +1,34 @@
 <% content_for :title, "Categories" %>
 
-<h1>Categories</h1>
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <h5 class="mb-3">Categories</h5>
 
-<div>
-  <% @categories.each do |category| %>
-    <div id="<%= dom_id category %>">
-      <%= category.id %>
-      <%= link_to category.name, category.path %>
-      <%= category.parent_id %>
-      <%= category.parent&.name %>
-    </div>
-  <% end %>
-</div>
+    <table class="table table-striped my-5">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Parent Directory</th>
+          <th>Subdirectories</th>
+          <th>Posts</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <th><%= category.id %></th>
+          <td><%= link_to category.name, category.path, target: "_blank" %></td>
+          <td>
+            <%= category.parent_id %>&nbsp;
+            <%= category.parent&.name || "None" %>
+          </td>
+          <td><%= category.child_ids.size %></td>
+          <td><%= category.posts.size %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
