@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
     category_id = params.expect(:id)
     category = Category.find(category_id)
 
-    if category.name != params.expect(:name)
+    if category.url_safe_name != CGI.escape(params.expect(:name))
       redirect_to category.path, status: :moved_permanently
     end
 

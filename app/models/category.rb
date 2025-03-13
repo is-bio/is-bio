@@ -19,13 +19,15 @@ class Category < ApplicationRecord
   ID_DRAFTS = 2.freeze
 
   has_ancestry
-  # has_many :children, class_name: "Category", foreign_key: "parent_id"
-  # belongs_to :parent, class_name: "Category", foreign_key: "parent_id", optional: true
   has_many :posts, dependent: :restrict_with_exception
 
   validates :name, presence: true
 
   def path
-    "/category/#{name}-#{id}"
+    "/category/#{url_safe_name}-#{id}"
+  end
+
+  def url_safe_name
+    CGI.escape(name.downcase.split(" ").join("-"))
   end
 end
