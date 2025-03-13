@@ -23,6 +23,8 @@ class Category < ApplicationRecord
 
   validates :name, presence: true
 
+  scope :published_ids, -> { find(ID_PUBLISHED).descendant_ids << ID_PUBLISHED }
+
   def path
     "/category/#{url_safe_name}-#{id}"
   end
