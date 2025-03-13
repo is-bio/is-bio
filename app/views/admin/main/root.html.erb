@@ -4,6 +4,9 @@
       Welcome, administrator <%= Current.session.user.email_address %>!
     </p>
 
+    <%= link_to "Settings", admin_settings_path %>
+    <br>
+    <br>
     <%= link_to "Categories", admin_categories_path %>
 
     <div class="mt-3">

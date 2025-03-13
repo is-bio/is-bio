@@ -1,0 +1,27 @@
+<% content_for :title, "Settings" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <h5>Settings</h5>
+
+    <table class="table table-striped my-4">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Key</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @settings.each do |setting| %>
+        <tr>
+          <th><%= setting.id %></th>
+          <td><%= setting.key %></td>
+          <td><%= setting.value %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -66,6 +66,8 @@ Rails.application.routes.draw do
     resources :posts, only: %i[new create edit update]
 
     resources :categories, only: :index
+
+    resources :settings, only: :index
   end
 
   resources :posts, only: %i[index show]
