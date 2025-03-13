@@ -31,7 +31,7 @@
         <% if authenticated? %>
           <li class="nav-item">
             <a class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>" href="<%= admin_root_path %>">
-              <i class="fas fa-home fa-fw me-2"></i>Admin
+              <i class="fas fa-dashboard fa-fw me-2"></i>Admin
             </a>
           </li>
         <% end %>
