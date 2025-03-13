@@ -46,7 +46,7 @@ gem "ancestry", "~> 4.3.3" # Handle 'categories' which have 'parent' and 'childr
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "annotaterb", "4.13.0"
+  gem "annotaterb", "4.14.0"
 
   gem "rspec-rails", "~> 7.0.2"
 
