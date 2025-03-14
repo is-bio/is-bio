@@ -18,11 +18,15 @@
         </div>
 
         <ul class="social-list list-inline py-3 mx-auto">
-          <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
-          <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+          <% Setting.where.not(value: nil).each_with_index do |setting, i| %>
+            <li class="list-inline-item <%= i >= 5 && i % 5 == 0 ? 'mt-2' : nil %>">
+              <% if setting.compatible_target_url.present? %>
+                <a href="<%= setting.compatible_target_url %>" target="_blank"><i class="<%= setting.icon_name %>"></i></a>
+              <% else %>
+                <a href="javascript:void(0)" role="button" data-bs-toggle="popover" data-bs-placement="top" title="<%= setting.key.titleize %>" data-bs-content="<%= setting.value %>"><i class="<%= setting.icon_name %>"></i></a>
+              <% end %>
+            </li>
+          <% end %>
         </ul>
         <hr>
       </div>
@@ -41,9 +45,7 @@
             <i class="fas fa-home fa-fw me-2"></i>Blog Home
           </a>
         </li>
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link <%#= controller_name == 'posts' && action_name == 'show' ? 'active' : nil %>" href="<%#= post_path %>"><i class="fas fa-bookmark fa-fw me-2"></i>Blog Post</a>-->
-<!--        </li>-->
+
         <li class="nav-item">
           <a class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>" href="<%= about_path %>">
             <i class="fas fa-user fa-fw me-2"></i>About Me

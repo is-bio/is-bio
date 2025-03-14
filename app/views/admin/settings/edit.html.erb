@@ -28,7 +28,14 @@
 
       <div class="my-2">
         <%= form.label :value %>
-        <%= form.text_field :value, class: "form-control" %>
+        <%= form.text_field :value, class: "form-control value_text_field" %>
+        <% if @setting.target_url? %>
+          <span>
+            <%= @setting.target_url_base %><span id="value_target"><%= @setting.value %></span>
+          </span>
+        <% elsif @setting.target_url_example.present? %>
+          <span>Example: <%= @setting.target_url_example %></span>
+        <% end %>
       </div>
 
       <div class="mt-4">
@@ -37,3 +44,22 @@
     <% end %>
   </div>
 </section>
+
+<% if @setting.target_url? %>
+  <script>
+    document.addEventListener('turbo:load', pageLoaded);
+
+    function pageLoaded() {
+      const valueTextField = document.querySelector('.value_text_field');
+
+      if (valueTextField) {
+        valueTextField.addEventListener('input', () => {
+          const valueTarget = document.querySelector('#value_target')
+          if (valueTarget) {
+            valueTarget.textContent = valueTextField.value;
+          }
+        });
+      }
+    }
+  </script>
+<% end %>

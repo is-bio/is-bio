@@ -14,28 +14,29 @@ puts "The administrator user '#{email}' was created successfully. You can use th
 
 %w[
   email
+  github_username
+  linkedin_profile_url
   phone_number
   website_url
   blog_url
-  github_username
-  linkedin_profile_url
   wechat_id
   x_username
   tiktok_username
   youtube_channel_handle
-  instagram_username
   facebook_username
+  instagram_username
   messenger_username
   whatsapp_account
   telegram_username
-  threads_username
   snapchat_username
+  threads_username
   stackoverflow_profile_url
   leetcode_profile_url
   quora_profile_url
   qq
   douyin_identifier
   kuaishou_profile_url
+  weixin_mp_name
   weibo_nickname
   weibo_profile_id
   zhihu_profile_url
