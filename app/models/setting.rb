@@ -117,6 +117,8 @@ class Setting < ApplicationRecord
       "fab fa-github"
     when "wechat_id"
       "fab fa-weixin"
+    when "weixin_mp_name"
+      "fab fa-weixin"
     when "x_username"
       "fab fa-twitter"
     when "tiktok_username"
