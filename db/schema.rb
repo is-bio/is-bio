@@ -22,7 +22,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_165424) do
     t.integer "key", null: false
     t.string "permalink", null: false
     t.string "title", null: false
-    t.string "content", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_posts_on_category_id"
