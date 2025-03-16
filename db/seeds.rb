@@ -43,9 +43,9 @@ puts "The administrator user '#{email}' was created successfully. You can use th
   line_id
   kakaotalk_id
 ].each_with_index do |key, i|
-  Setting.where(id: i + 1, key: key).first_or_create!
+  SocialMediaAccount.where(id: i + 1, key: key).first_or_create!
 end
-puts "Table 'settings' data inserted."
+puts "Table 'social_media_accounts' data inserted."
 
 Category.where(id: Category::ID_PUBLISHED).first_or_create! do |category|
   category.name = "published"

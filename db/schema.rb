@@ -38,11 +38,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_165424) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "settings", force: :cascade do |t|
+  create_table "social_media_accounts", force: :cascade do |t|
     t.string "key", null: false
     t.string "value"
     t.datetime "updated_at"
-    t.index ["key"], name: "index_settings_on_key", unique: true
+    t.index ["key"], name: "index_social_media_accounts_on_key", unique: true
   end
 
   create_table "users", force: :cascade do |t|

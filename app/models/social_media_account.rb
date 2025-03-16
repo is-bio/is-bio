@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: settings
+# Table name: social_media_accounts
 #
 #  id         :integer          not null, primary key
 #  key        :string           not null
@@ -11,7 +11,7 @@
 #
 #  index_settings_on_key  (key) UNIQUE
 #
-class Setting < ApplicationRecord
+class SocialMediaAccount < ApplicationRecord
   validates :key, presence: true, uniqueness: true, format: { with: /\A[a-z_0-9]+\z/, message: 'is invalid! Only lowercase letters, numbers and "_" are valid characters.' }
 
   validate :value_valid?
@@ -53,6 +53,8 @@ class Setting < ApplicationRecord
       "https://www.facebook.com/#{value}"
     when "instagram_username"
       "https://www.instagram.com/#{value}"
+    when "pinterest_username"
+      "https://www.pinterest.com/#{value}"
     when "threads_username"
       "https://www.threads.net/@#{value}"
     when "telegram_username"
@@ -137,6 +139,8 @@ class Setting < ApplicationRecord
       "fab fa-telegram"
     when "snapchat_username"
       "fab fa-snapchat"
+    when "pinterest_username"
+      "fab fa-pinterest"
     when "threads_username"
       "fa fa-mars-double" # not correct
     when "douyin_identifier"
@@ -200,7 +204,7 @@ class Setting < ApplicationRecord
       end
     end
 
-    if %w[wechat_id x_username tiktok_username youtube_channel_handle instagram_username facebook_username messenger_username whatsapp_account telegram_username threads_username snapchat_username douyin_identifier line_id kakaotalk_id].include?(key)
+    if %w[wechat_id x_username tiktok_username youtube_channel_handle instagram_username facebook_username messenger_username whatsapp_account telegram_username threads_username snapchat_username douyin_identifier pinterest_username line_id kakaotalk_id].include?(key)
       unless /\A[a-zA-Z0-9._\-]+\z/.match?(value)
         errors.add :value, "is invalid!"
       end

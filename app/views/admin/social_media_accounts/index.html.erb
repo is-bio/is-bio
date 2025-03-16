@@ -1,10 +1,10 @@
-<% content_for :title, "Settings" %>
+<% content_for :title, "Social media account" %>
 
 <section class="px-3 py-5 p-md-5">
   <div class="container single-col-max-width">
     <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
 
-    <h5>Settings</h5>
+    <h5>Social media accounts</h5>
 
     <table class="table table-striped my-4">
       <thead>
@@ -17,12 +17,12 @@
       </thead>
 
       <tbody>
-      <% @settings.each do |setting| %>
+      <% @social_media_accounts.each do |account| %>
         <tr>
-          <th><%= setting.id %></th>
-          <td><%= setting.key %></td>
-          <td><%= setting.value %></td>
-          <td><a class="text-link" href="<%= edit_admin_setting_path(setting) %>">Edit</a></td>
+          <th><%= account.id %></th>
+          <td><%= account.key %></td>
+          <td><%= account.value %></td>
+          <td><a class="text-link" href="<%= edit_admin_social_media_account_path(account) %>">Edit</a></td>
         </tr>
       <% end %>
       </tbody>

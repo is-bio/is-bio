@@ -1,4 +1,4 @@
-<% content_for :title, "Edit setting" %>
+<% content_for :title, "Edit social media account" %>
 
 <section class="px-3 py-5 p-md-5">
   <div class="container single-col-max-width">
@@ -6,15 +6,15 @@
       <p style="color: green"><%= notice %></p>
     <% end %>
 
-    <h5 class="mb-3">Edit setting</h5>
+    <h5 class="mb-3">Edit social media account</h5>
 
-    <%= form_with(model: [:admin, @setting]) do |form| %>
-      <% if @setting.errors.any? %>
+    <%= form_with(model: [:admin, @social_media_account]) do |form| %>
+      <% if @social_media_account.errors.any? %>
         <div style="color: red">
-          <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+          <h2><%= pluralize(@social_media_account.errors.count, "error") %> prohibited this social media account from being saved:</h2>
 
           <ul>
-            <% @setting.errors.each do |error| %>
+            <% @social_media_account.errors.each do |error| %>
               <li><%= error.full_message %></li>
             <% end %>
           </ul>
@@ -29,12 +29,12 @@
       <div class="my-2">
         <%= form.label :value %>
         <%= form.text_field :value, class: "form-control value_text_field" %>
-        <% if @setting.target_url? %>
+        <% if @social_media_account.target_url? %>
           <span>
-            <%= @setting.target_url_base %><span id="value_target"><%= @setting.value %></span>
+            <%= @social_media_account.target_url_base %><span id="value_target"><%= @social_media_account.value %></span>
           </span>
-        <% elsif @setting.target_url_example.present? %>
-          <span>Example: <%= @setting.target_url_example %></span>
+        <% elsif @social_media_account.target_url_example.present? %>
+          <span>Example: <%= @social_media_account.target_url_example %></span>
         <% end %>
       </div>
 
@@ -45,7 +45,7 @@
   </div>
 </section>
 
-<% if @setting.target_url? %>
+<% if @social_media_account.target_url? %>
   <script>
     document.addEventListener('turbo:load', pageLoaded);
 
