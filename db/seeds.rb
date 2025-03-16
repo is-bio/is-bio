@@ -29,6 +29,7 @@ puts "The administrator user '#{email}' was created successfully. You can use th
   whatsapp_account
   telegram_username
   snapchat_username
+  pinterest_username
   threads_username
   stackoverflow_profile_url
   leetcode_profile_url
