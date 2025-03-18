@@ -23,6 +23,11 @@
 #                          edit_admin_post GET    /admin/posts/:id/edit(.:format)                                                                   admin/posts#edit
 #                               admin_post PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
 #                                          PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
+#                         admin_categories GET    /admin/categories(.:format)                                                                       admin/categories#index
+#              admin_social_media_accounts GET    /admin/social_media_accounts(.:format)                                                            admin/social_media_accounts#index
+#          edit_admin_social_media_account GET    /admin/social_media_accounts/:id/edit(.:format)                                                   admin/social_media_accounts#edit
+#               admin_social_media_account PATCH  /admin/social_media_accounts/:id(.:format)                                                        admin/social_media_accounts#update
+#                                          PUT    /admin/social_media_accounts/:id(.:format)                                                        admin/social_media_accounts#update
 #                admin_github_app_settings GET    /admin/github_app_settings(.:format)                                                              admin/github_app_settings#index
 #            edit_admin_github_app_setting GET    /admin/github_app_settings/:id/edit(.:format)                                                     admin/github_app_settings#edit
 #                 admin_github_app_setting PATCH  /admin/github_app_settings/:id(.:format)                                                          admin/github_app_settings#update
@@ -31,6 +36,7 @@
 #                                     post GET    /posts/:id(.:format)                                                                              posts#show
 #                                     root GET    /                                                                                                 posts#index
 #                                    about GET    /about(.:format)                                                                                  posts#about
+#                                          GET    /category/:name-:id(.:format)                                                                     categories#show
 #                       rails_health_check GET    /up(.:format)                                                                                     rails/health#show
 #                                          GET    /:permalink-:key(.:format)                                                                        posts#show
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede

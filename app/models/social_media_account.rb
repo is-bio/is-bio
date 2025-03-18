@@ -9,7 +9,7 @@
 #
 # Indexes
 #
-#  index_settings_on_key  (key) UNIQUE
+#  index_social_media_accounts_on_key  (key) UNIQUE
 #
 class SocialMediaAccount < ApplicationRecord
   validates :key, presence: true, uniqueness: true, format: { with: /\A[a-z_0-9]+\z/, message: 'is invalid! Only lowercase letters, numbers and "_" are valid characters.' }

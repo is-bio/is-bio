@@ -2,17 +2,13 @@
 #
 # Table name: categories
 #
-#  id        :integer          not null, primary key
-#  name      :string           not null
-#  parent_id :integer
+#  id       :integer          not null, primary key
+#  ancestry :string           not null
+#  name     :string           not null
 #
 # Indexes
 #
-#  index_categories_on_parent_id  (parent_id)
-#
-# Foreign Keys
-#
-#  parent_id  (parent_id => categories.id)
+#  index_categories_on_ancestry  (ancestry)
 #
 class Category < ApplicationRecord
   ID_PUBLISHED = 1.freeze

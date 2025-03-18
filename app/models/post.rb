@@ -3,13 +3,13 @@
 # Table name: posts
 #
 #  id          :integer          not null, primary key
-#  content     :string           not null
+#  content     :text             not null
 #  key         :integer          not null
 #  permalink   :string           not null
 #  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  category_id :integer          default(2), not null
+#  category_id :integer          not null
 #
 # Indexes
 #
