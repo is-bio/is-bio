@@ -28,6 +28,10 @@
 #          edit_admin_social_media_account GET    /admin/social_media_accounts/:id/edit(.:format)                                                   admin/social_media_accounts#edit
 #               admin_social_media_account PATCH  /admin/social_media_accounts/:id(.:format)                                                        admin/social_media_accounts#update
 #                                          PUT    /admin/social_media_accounts/:id(.:format)                                                        admin/social_media_accounts#update
+#                           admin_settings GET    /admin/settings(.:format)                                                                         admin/settings#index
+#                       edit_admin_setting GET    /admin/settings/:id/edit(.:format)                                                                admin/settings#edit
+#                            admin_setting PATCH  /admin/settings/:id(.:format)                                                                     admin/settings#update
+#                                          PUT    /admin/settings/:id(.:format)                                                                     admin/settings#update
 #                admin_github_app_settings GET    /admin/github_app_settings(.:format)                                                              admin/github_app_settings#index
 #            edit_admin_github_app_setting GET    /admin/github_app_settings/:id/edit(.:format)                                                     admin/github_app_settings#edit
 #                 admin_github_app_setting PATCH  /admin/github_app_settings/:id(.:format)                                                          admin/github_app_settings#update
@@ -78,6 +82,8 @@ Rails.application.routes.draw do
     resources :categories, only: :index
 
     resources :social_media_accounts, only: [ :index, :edit, :update ]
+
+    resources :settings, only: [ :index, :edit, :update ]
 
     resources :github_app_settings, only: [ :index, :edit, :update ]
   end

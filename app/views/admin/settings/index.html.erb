@@ -1,0 +1,31 @@
+<% content_for :title, "Setting" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+
+    <h5>Settings</h5>
+
+    <table class="table table-striped my-4">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Key</th>
+          <th>Value</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @settings.each do |setting| %>
+        <tr>
+          <th><%= setting.id %></th>
+          <td><%= setting.key %></td>
+          <td><%= setting.value %></td>
+          <td><a class="text-link" href="<%= edit_admin_setting_path(setting) %>">Edit</a></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

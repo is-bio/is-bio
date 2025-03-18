@@ -9,6 +9,8 @@ User.where(
 ).first_or_create! do |user|
   user.password = password
   user.password_confirmation = password
+puts "The administrator user '#{email}' was created successfully. You can use this email to log in."
+
 %w[
   app_id
   public_link
@@ -17,8 +19,12 @@ User.where(
 end
 puts "Table 'github_app_settings' data inserted."
 
+%w[
+  github_username
+].each_with_index do |key, i|
+  Setting.where(id: i + 1, key: key).first_or_create!
 end
-puts "The administrator user '#{email}' was created successfully. You can use this email to log in."
+puts "Table 'settings' data inserted."
 
 %w[
   email
