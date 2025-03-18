@@ -9,7 +9,6 @@ User.where(
 ).first_or_create! do |user|
   user.password = password
   user.password_confirmation = password
-# 'private_key' is not used yet.
 %w[
   app_id
   public_link

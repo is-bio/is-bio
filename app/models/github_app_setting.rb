@@ -26,12 +26,6 @@ class GithubAppSetting < ApplicationRecord
       end
     end
 
-    # if key == "private_key"
-    #   if value.blank?
-    #     errors.add :value, I18n.t("errors.messages.blank")
-    #   end
-    # end
-
     if key == "public_link"
       unless value.blank? || URI::DEFAULT_PARSER.make_regexp(%w[http https]).match?(value)
         errors.add :value, "is invalid! Please enter a valid #{key.titleize} URL."
