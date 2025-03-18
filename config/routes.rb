@@ -2,6 +2,7 @@
 #
 #                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
 #                                                 /assets                                                                                           Propshaft::Server
+#                     api_v1_github_events POST   /api/v1/github-events(.:format)                                                                   api/v1/github_events#handle {:format=>:json}
 #                              new_session GET    /session/new(.:format)                                                                            sessions#new
 #                             edit_session GET    /session/edit(.:format)                                                                           sessions#edit
 #                                  session GET    /session(.:format)                                                                                sessions#show
@@ -71,6 +72,14 @@
 #                     rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                                    active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
+  namespace :api do
+    defaults({ format: :json }) do
+      namespace :v1 do
+        post "github-events" => "github_events#handle"
+      end
+    end
+  end
+
   resource :session
   resources :passwords, param: :token
 
