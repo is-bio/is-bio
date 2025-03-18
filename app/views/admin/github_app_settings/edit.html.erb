@@ -1,0 +1,46 @@
+<% content_for :title, "Edit GitHub App setting" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <% if notice.present? %>
+      <p style="color: green"><%= notice %></p>
+    <% end %>
+
+    <h5 class="mb-3">Edit GitHub App setting</h5>
+
+    <%= form_with(model: [:admin, @github_app_setting]) do |form| %>
+      <% if @github_app_setting.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@github_app_setting.errors.count, "error") %> prohibited this GitHub App setting from being saved:</h2>
+
+          <ul>
+            <% @github_app_setting.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-2">
+        <%= form.label :key, class: "required" %>
+        <%= form.text_field :key, class: "form-control", readonly: true %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :value, class: "d-block #{@github_app_setting.key == 'public_link' ? nil : 'required' }" %>
+        <% if @github_app_setting.key == "private_key" %>
+          <%= form.text_area :value, placeholder: "Run '$ cat xxx.private-key.pem' to see it", cols: 80, rows: 20, value: nil %>
+        <% else %>
+          <%= form.text_field :value, class: "form-control" %>
+          <% if @github_app_setting.key == "public_link" %>
+            <span>For display only, not for logic.</span>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit nil, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -23,6 +23,10 @@
 #                          edit_admin_post GET    /admin/posts/:id/edit(.:format)                                                                   admin/posts#edit
 #                               admin_post PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
 #                                          PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
+#                admin_github_app_settings GET    /admin/github_app_settings(.:format)                                                              admin/github_app_settings#index
+#            edit_admin_github_app_setting GET    /admin/github_app_settings/:id/edit(.:format)                                                     admin/github_app_settings#edit
+#                 admin_github_app_setting PATCH  /admin/github_app_settings/:id(.:format)                                                          admin/github_app_settings#update
+#                                          PUT    /admin/github_app_settings/:id(.:format)                                                          admin/github_app_settings#update
 #                                    posts GET    /posts(.:format)                                                                                  posts#index
 #                                     post GET    /posts/:id(.:format)                                                                              posts#show
 #                                     root GET    /                                                                                                 posts#index
@@ -68,6 +72,8 @@ Rails.application.routes.draw do
     resources :categories, only: :index
 
     resources :social_media_accounts, only: [ :index, :edit, :update ]
+
+    resources :github_app_settings, only: [ :index, :edit, :update ]
   end
 
   resources :posts, only: %i[index show]

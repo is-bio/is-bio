@@ -9,6 +9,15 @@ User.where(
 ).first_or_create! do |user|
   user.password = password
   user.password_confirmation = password
+# 'private_key' is not used yet.
+%w[
+  app_id
+  public_link
+].each_with_index do |key, i|
+  GithubAppSetting.where(id: i + 1, key: key).first_or_create!
+end
+puts "Table 'github_app_settings' data inserted."
+
 end
 puts "The administrator user '#{email}' was created successfully. You can use this email to log in."
 

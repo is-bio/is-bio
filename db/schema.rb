@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_12_165424) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_16_100752) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
     t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
+
+  create_table "github_app_settings", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "value"
+    t.datetime "updated_at"
+    t.index ["key"], name: "index_github_app_settings_on_key", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
