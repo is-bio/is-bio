@@ -17,7 +17,7 @@ class GithubAppSetting < ApplicationRecord
 
   before_validation :cleanup_value
 
-  private
+private
 
   def value_valid?
     if key == "app_id"

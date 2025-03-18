@@ -16,13 +16,13 @@ class Admin::SocialMediaAccountsController < Admin::BaseController
     end
   end
 
-  private
+private
 
-    def set_social_media_account
-      @social_media_account = SocialMediaAccount.find(params.expect(:id))
-    end
+  def set_social_media_account
+    @social_media_account = SocialMediaAccount.find(params.expect(:id))
+  end
 
-    def social_media_account_params
-      params.expect(social_media_account: [ :key, :value ])
-    end
+  def social_media_account_params
+    params.expect(social_media_account: [ :key, :value ])
+  end
 end

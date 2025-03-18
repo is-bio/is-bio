@@ -154,7 +154,7 @@ class SocialMediaAccount < ApplicationRecord
     end
   end
 
-  private
+private
 
   # noinspection RubyNilAnalysis
   def cleanup_value
