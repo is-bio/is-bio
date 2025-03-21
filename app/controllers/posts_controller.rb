@@ -2,28 +2,28 @@ class PostsController < ApplicationController
   allow_unauthenticated_access
 
   def index
-    @posts = Post.includes(:category).published.order(created_at: :desc)
+    @posts = Post.includes(:category).published.order(published_at: :desc)
   end
 
   def show
-    key = params.expect(:key)
+    id = params.expect(:id)
 
-    if key.blank?
+    if id.blank?
       raise_404
     end
 
     if authenticated?
-      @post = Post.where(key: key).first!
+      @post = Post.find(id)
     else
-      @post = Post.published.where(key: key).first!
+      @post = Post.published.find(id)
     end
 
     if @post.permalink != "/#{CGI.escape(params.expect(:permalink))}"
       redirect_to @post.path, status: :moved_permanently
     end
 
-    @post_older = Post.published.where("created_at < ?", @post.created_at).order(created_at: :desc).first
-    @post_newer = Post.published.where("created_at > ?", @post.created_at).order(:created_at).first
+    @post_older = Post.published.where("published_at < ?", @post.published_at).order(published_at: :desc).first
+    @post_newer = Post.published.where("published_at > ?", @post.published_at).order(:published_at).first
   end
 
   def about
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     if @post.nil?
       @post = Post.new(
         content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog-posts/published/about.md`, then `$ git commit` and `$ git push`.",
-        created_at: Time.now
+        published_at: Time.now
       )
     end
   end

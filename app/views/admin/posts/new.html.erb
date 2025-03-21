@@ -18,6 +18,11 @@
       <% end %>
 
       <div class="my-2">
+        <%= form.label :id %>
+        <%= form.text_field :id, class: "form-control", placeholder: "When empty, the system will automatically generate a value" %>
+      </div>
+
+      <div class="my-2">
         <%= form.label :permalink %>
         <%= form.text_field :permalink, class: "form-control", placeholder: "If it is empty or \"/\", it will be automatically generated according to the Title" %>
       </div>
@@ -27,14 +32,19 @@
         <%= form.text_field :title, class: "form-control" %>
       </div>
 
+      <div>
+        <%= form.label :published_at, class: "d-block required" %>
+        <%= form.text_field :published_at, size: 30 %>
+      </div>
+
       <div class="my-2">
         <%= form.label :category_id, class: "d-block required" %>
         <%= form.select :category_id, options_for_select(@category_options, Category::ID_DRAFTS) %>
       </div>
 
       <div class="my-2">
-        <%= form.label :content, class: "d-block required" %>
-        <%= form.text_area :content, cols: 80, rows: 30 %>
+        <%= form.label :content, class: "d-block" %>
+        <%= form.text_area :content, cols: 90, rows: 30 %>
       </div>
 
       <div class="my-2">

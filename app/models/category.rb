@@ -15,6 +15,7 @@ class Category < ApplicationRecord
   ID_DRAFTS = 2.freeze
 
   has_ancestry
+
   has_many :posts, dependent: :restrict_with_exception
 
   validates :name, presence: true

@@ -43,7 +43,7 @@
 #                                    about GET    /about(.:format)                                                                                  posts#about
 #                                          GET    /category/:name-:id(.:format)                                                                     categories#show
 #                       rails_health_check GET    /up(.:format)                                                                                     rails/health#show
-#                                          GET    /:permalink-:key(.:format)                                                                        posts#show
+#                                          GET    /:permalink-:id(.:format)                                                                         posts#show
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
 #        turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh
@@ -111,5 +111,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # This line needs to be placed at the end
-  get ":permalink-:key" => "posts#show"
+  get ":permalink-:id" => "posts#show"
 end

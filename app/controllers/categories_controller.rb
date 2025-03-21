@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
 
     category_ids = category.descendant_ids << category_id
 
-    @posts = Post.includes(:category).where(category_id: category_ids).order(created_at: :desc)
+    @posts = Post.includes(:category).where(category_id: category_ids).order(published_at: :desc)
 
     unless authenticated?
       @posts = @posts.published

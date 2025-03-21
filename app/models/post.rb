@@ -2,19 +2,17 @@
 #
 # Table name: posts
 #
-#  id          :integer          not null, primary key
-#  content     :text             not null
-#  key         :integer          not null
-#  permalink   :string           not null
-#  title       :string           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  category_id :integer          not null
+#  id           :string           not null, primary key
+#  content      :text
+#  permalink    :string           not null
+#  published_at :datetime         not null
+#  title        :string           not null
+#  updated_at   :datetime
+#  category_id  :integer          not null
 #
 # Indexes
 #
 #  index_posts_on_category_id  (category_id)
-#  index_posts_on_key          (key) UNIQUE
 #
 # Foreign Keys
 #
@@ -23,20 +21,21 @@
 class Post < ApplicationRecord
   belongs_to :category
 
-  validates :key, presence: true, uniqueness: true
   validates :permalink, presence: true
   validates :title, presence: true
-  validates :content, presence: true
+  validates :published_at, presence: true
 
   validate :permalink_starts_with
 
   before_validation :cleanup_title, :ensure_permalink
-  before_validation :ensure_key, on: :create
+  before_validation :ensure_id, on: :create
 
   scope :published, -> { where(category_id: Category.published_ids) }
 
   def path
-    "#{permalink}-#{key}"
+    "#{permalink}-#{id}"
+  end
+
   end
 
 private
@@ -71,26 +70,27 @@ private
     "/" + CGI.escape(title.downcase.split(" ").join("-"))
   end
 
-  def ensure_key
-    new_key = generate_key
+  def ensure_id
+    if id.present?
+      return
+    end
+
+    new_id = generate_id
 
     10.times do
-      if self.class.where(key: new_key).exists?
-        new_key = generate_key
+      if self.class.find_by(id: new_id).present?
+        new_id = generate_id
         next
       end
 
       break
     end
 
-    self.key = new_key
+    self.id = new_id
   end
 
-  def generate_key
-    if self.class.count >= 2000
-      Random.rand(99999)
-    else
-      Random.rand(9999)
-    end
+  def generate_id
+    chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+    3.times.map { chars.sample }.join
   end
 end

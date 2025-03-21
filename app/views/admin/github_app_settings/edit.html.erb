@@ -30,7 +30,7 @@
         <%= form.label :value, class: "d-block #{@github_app_setting.key == 'public_link' ? nil : 'required' }" %>
         <%= form.text_field :value, class: "form-control" %>
         <% if @github_app_setting.key == "public_link" %>
-          <span>For display only, not for logic.</span>
+          <span>For display only, not for logic. The URL format is like https://github.com/apps/yourappname</span>
         <% end %>
       </div>
 

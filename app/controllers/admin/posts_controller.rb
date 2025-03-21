@@ -3,7 +3,7 @@ class Admin::PostsController < Admin::BaseController
   before_action :set_category_options, only: %i[ new create edit update ]
 
   def new
-    @post = Post.new
+    @post = Post.new(published_at: Time.now)
   end
 
   def create
@@ -22,7 +22,7 @@ class Admin::PostsController < Admin::BaseController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: "Post was successfully updated."
+      redirect_to @post.path, notice: "Post was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -56,6 +56,6 @@ private
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.expect(post: [ :permalink, :title, :content, :category_id ])
+    params.expect(post: [ :id, :permalink, :title, :content, :category_id, :published_at ])
   end
 end

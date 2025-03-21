@@ -24,16 +24,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_18_084552) do
     t.index ["key"], name: "index_github_app_settings_on_key", unique: true
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", id: :string, force: :cascade do |t|
     t.integer "category_id", null: false
-    t.integer "key", null: false
     t.string "permalink", null: false
     t.string "title", null: false
-    t.text "content", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text "content"
+    t.datetime "published_at", null: false
+    t.datetime "updated_at"
     t.index ["category_id"], name: "index_posts_on_category_id"
-    t.index ["key"], name: "index_posts_on_key", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|
