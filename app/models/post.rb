@@ -18,6 +18,7 @@
 #
 #  category_id  (category_id => categories.id)
 #
+# noinspection RubyMismatchedArgumentType
 class Post < ApplicationRecord
   belongs_to :category
 
@@ -36,6 +37,42 @@ class Post < ApplicationRecord
     "#{permalink}-#{id}"
   end
 
+  def self.create_from_file_contents!(filename, contents)
+    metadata = YAML.load(contents)
+    id = metadata["id"]
+    title = metadata["title"]
+    date = metadata["date"]
+
+    unless id.present? && title.present?
+      return
+    end
+
+    match = /---.*?---(.*)/m.match(contents)
+    if match.nil?
+      content = nil
+    else
+      content = match[1].strip
+    end
+
+    post = Post.find_by(id: id)
+    category = Category.prepared_category(filename)
+
+    if post.nil?
+      Post.create!(
+        id: id,
+        category: category,
+        title: title,
+        published_at: date,
+        content: content
+      )
+    else
+      post.update!(
+        category: category,
+        title: title,
+        published_at: date,
+        content: content
+      )
+    end
   end
 
 private
@@ -51,6 +88,7 @@ private
     self.title = (title || "").strip
   end
 
+  # TODO: Should not contain `/` in the middle?
   def ensure_permalink
     permanent_link = (permalink || "").strip
 

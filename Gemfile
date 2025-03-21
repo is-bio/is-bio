@@ -42,6 +42,14 @@ gem "rouge", "~> 4.5.1" # Highlight code
 
 gem "ancestry", "~> 4.3.3" # Handle 'categories' which have 'parent' and 'children'
 
+gem "faraday", "~> 2.12.2"
+
+gem "delayed_job_active_record", "~> 4.1.11"
+
+gem "daemons", "~> 1.4.1"
+
+gem "safe_yaml", "~> 1.0.5"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

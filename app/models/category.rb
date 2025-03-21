@@ -21,6 +21,50 @@ class Category < ApplicationRecord
   validates :name, presence: true
 
   scope :published_ids, -> { find(ID_PUBLISHED).descendant_ids << ID_PUBLISHED }
+  scope :published_root, -> { find(ID_PUBLISHED) }
+  scope :drafts_root, -> { find(ID_DRAFTS) }
+
+  def self.should_sync?(filename)
+    filename.start_with?("published/") || filename.start_with?("drafts/")
+  end
+
+  # TODO: consider `status`. Delete empty categories.
+  def self.prepared_category(filename)
+    unless should_sync?(filename)
+      return
+    end
+
+    published = false
+
+    if filename.start_with?("published/")
+      filename.sub!("published/", "")
+      published = true
+    else
+      filename.sub!("drafts/", "")
+    end
+
+    category = nil
+    parent = published ? published_root : drafts_root
+    category_names = filename.split("/")[...-1]
+    category_names.each_with_index do |category_name, i|
+      if i > 0
+        parent = category
+      end
+
+      category = parent.children.where(
+        name: standardized_category_name(category_name),
+      ).first_or_create!
+    end
+
+    category || parent
+  end
+
+  def self.standardized_category_name(category_name)
+    words = category_name.split.join("_").gsub("-", "_").split("_")
+
+    # Capitalize the first letter of each word while preserving the rest
+    words.map { |word| word[0].upcase + word[1..-1] }.join("_")
+  end
 
   def path
     "/category/#{url_safe_name}-#{id}"
