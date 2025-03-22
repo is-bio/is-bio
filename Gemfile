@@ -56,6 +56,7 @@ gem "safe_yaml", "~> 1.0.5"
 group :development, :test do
   gem "annotaterb", "4.14.0"
 
+  gem "factory_bot_rails", "~> 6.4.4"
   gem "rspec-rails", "~> 7.1.1"
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

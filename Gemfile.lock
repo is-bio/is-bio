@@ -120,6 +120,11 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    factory_bot (6.5.1)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
     faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -415,6 +420,7 @@ DEPENDENCIES
   daemons (~> 1.4.1)
   debug
   delayed_job_active_record (~> 4.1.11)
+  factory_bot_rails (~> 6.4.4)
   faraday (~> 2.12.2)
   importmap-rails (= 2.1.0)
   jbuilder (= 2.13.0)
