@@ -36,4 +36,6 @@ class PostsController < ApplicationController
       )
     end
   end
+
+  # TODO: In creation or modification, make sure if permalink is empty, or /, we generate from title.
 end
