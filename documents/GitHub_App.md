@@ -1,4 +1,4 @@
-# BlogOnRails GitHub App
+# RailsMarkdownBlog GitHub App
 
 If you want to automatically update your blog after executing the `git push` command, you need to install your GitHub App first. Only in this way can GitHub push the `git push` events to this platform.
 With the guidance of this article, you can create a GitHub App for you to install it.
@@ -12,7 +12,7 @@ For `QA` or `Prodction` env, the situation are similar. You just need to change 
 Refer to [create-a-github-app](https://docs.github.com/en/developers/apps/setting-up-your-development-environment-to-create-a-github-app#step-2-register-a-new-github-app).
 
 - Visit https://github.com/settings/apps , click `New GitHub App` button.
-- Fill `GitHub App name` with `BlogOnRails dev`.
+- Fill `GitHub App name` with `RailsMarkdownBlog dev`.
 - Fill `desscription` with this:
 
 	Install this app on your `markdown-blog` repository, so that when you `git push`, we will be notified and update your blog.
@@ -26,7 +26,7 @@ This paragraph is **only for local debugging** and is not necessary in a product
 Install `ngrok` and configure it well. Then do this:
 
 ```shell
-cd /path/to/BlogOnRails
+cd /path/to/rails-markdown-blog
 ngrok http http://localhost:3000 # You will get a base URL like: https://<a-subdomain-string-for-your-site>.ngrok-free.app
 ```
 
@@ -49,7 +49,7 @@ Add `config.hosts << "<a-subdomain-string-for-your-site>.ngrok-free.app"` to `co
 - For `Where can this GitHub App be installed?`, choose `Any account`.
 - Click `Create GitHub App`.
 
-## Connect GitHub App to BlogOnRails
+## Connect GitHub App to RailsMarkdownBlog
 
 Visit https://your-domain.com/admin/github_app_settings , then
 
