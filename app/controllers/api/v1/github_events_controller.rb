@@ -13,6 +13,7 @@ class Api::V1::GithubEventsController < Api::V1::BaseController
 
     body["files"].each do |file|
       if Category.should_sync?(file["filename"])
+        RetrieveGithubFileJob.perform_later(file)
       end
     end
   end

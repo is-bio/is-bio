@@ -25,7 +25,6 @@ class Post < ApplicationRecord
   validates :permalink, presence: true
   validates :title, presence: true
   validates :published_at, presence: true
-
   validate :permalink_starts_with
 
   before_validation :cleanup_title, :ensure_permalink
@@ -38,7 +37,8 @@ class Post < ApplicationRecord
   end
 
   def self.create_from_file_contents!(filename, contents)
-    metadata = YAML.load(contents)
+    metadata = YAML.load(contents) || {}
+
     id = metadata["id"]
     title = metadata["title"]
     date = metadata["date"]
