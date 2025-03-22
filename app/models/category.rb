@@ -20,9 +20,37 @@ class Category < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :published_ids, -> { find(ID_PUBLISHED).descendant_ids << ID_PUBLISHED }
-  scope :published_root, -> { find(ID_PUBLISHED) }
-  scope :drafts_root, -> { find(ID_DRAFTS) }
+  def self.published_ids
+    find(ID_PUBLISHED).descendant_ids << ID_PUBLISHED
+  end
+
+  def self.published_root
+    find(ID_PUBLISHED)
+  end
+
+  def self.drafts_root
+    find(ID_DRAFTS)
+  end
+
+  def self.find_by_name(name)
+    find(ID_PUBLISHED).descendants.each do |category|
+      if category.path_name == name
+        return category
+      end
+    end
+
+    nil
+  end
+
+  def self.find_by_name_from_drafts(name)
+    find(ID_DRAFTS).descendants.each do |category|
+      if category.path_name == name
+        return category
+      end
+    end
+
+    nil
+  end
 
   def self.should_sync?(filename)
     filename.start_with?("published/") || filename.start_with?("drafts/")
@@ -60,17 +88,29 @@ class Category < ApplicationRecord
   end
 
   def self.standardized_category_name(category_name)
-    words = category_name.split.join("_").gsub("-", "_").split("_")
+    words = category_name.split.join("-").gsub("_", "-").split("-")
 
     # Capitalize the first letter of each word while preserving the rest
-    words.map { |word| word[0].upcase + word[1..-1] }.join("_")
+    words.map { |word| word[0].upcase + word[1..-1] }.join("-")
   end
 
   def path
-    "/category/#{url_safe_name}-#{id}"
+    if id == Category::ID_PUBLISHED
+      return "/categories"
+    end
+
+    if id == Category::ID_DRAFTS
+      return "/drafts"
+    end
+
+    if Category.drafts_root.descendant_ids.include?(id)
+      return "/drafts/#{path_name}"
+    end
+
+    "/category/#{path_name}"
   end
 
-  def url_safe_name
-    CGI.escape(name.downcase.split(" ").join("-"))
+  def path_name
+    CGI.escape(name.downcase)
   end
 end

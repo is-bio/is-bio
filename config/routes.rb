@@ -41,7 +41,11 @@
 #                                     post GET    /posts/:id(.:format)                                                                              posts#show
 #                                     root GET    /                                                                                                 posts#index
 #                                    about GET    /about(.:format)                                                                                  posts#about
-#                                          GET    /category/:name-:id(.:format)                                                                     categories#show
+#                               categories GET    /categories(.:format)                                                                             categories#index
+#                                 category GET    /category(.:format)                                                                               categories#index
+#                                          GET    /category/:name(.:format)                                                                         categories#show
+#                                   drafts GET    /drafts(.:format)                                                                                 categories#drafts_index
+#                                          GET    /drafts/:name(.:format)                                                                           categories#drafts_show
 #                       rails_health_check GET    /up(.:format)                                                                                     rails/health#show
 #                                          GET    /:permalink-:id(.:format)                                                                         posts#show
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
@@ -100,7 +104,12 @@ Rails.application.routes.draw do
   resources :posts, only: %i[index show]
   root "posts#index"
   get "about" => "posts#about", as: :about
-  get "category/:name-:id" => "categories#show"
+
+  resources :categories, only: :index
+  get "category" => "categories#index"
+  get "category/:name" => "categories#show"
+  get "drafts" => "categories#drafts_index", as: :drafts
+  get "drafts/:name" => "categories#drafts_show"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
