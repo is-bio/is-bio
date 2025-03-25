@@ -27,7 +27,7 @@ class Post < ApplicationRecord
   validates :published_at, presence: true
   validate :permalink_starts_with
 
-  before_validation :cleanup_title, :ensure_permalink
+  before_validation :cleanup_columns, :ensure_permalink
   before_validation :ensure_id, on: :create
 
   scope :published, -> { where(category_id: Category.published_ids) }
@@ -84,8 +84,9 @@ private
   end
 
   # TODO: Remove `""`
-  def cleanup_title
+  def cleanup_columns
     self.title = (title || "").strip
+    self.content = (content || "").strip
   end
 
   # TODO: Should not contain `/` in the middle?
