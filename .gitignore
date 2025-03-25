@@ -50,3 +50,9 @@ _themes/DevBlog-Theme
 app/javascript/src/fontawesome/js
 app/stylesheets
 
+# Clacky-related configuration
+.1024*
+!.1024
+.breakpoints
+log/*.log
+tmp/
