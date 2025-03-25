@@ -9,6 +9,7 @@ User.where(
 ).first_or_create! do |user|
   user.password = password
   user.password_confirmation = password
+end
 puts "The administrator user '#{email}' was created successfully. You can use this email to log in."
 
 %w[
