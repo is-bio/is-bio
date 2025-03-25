@@ -29,3 +29,7 @@ Run:
 cd ./_themes # if not in this folder
 sh install-theme-devblog.sh
 ```
+
+## Run tests
+
+Run `bundle exec rspec spec`.

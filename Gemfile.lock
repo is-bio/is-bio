@@ -119,6 +119,8 @@ GEM
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
+    faker (3.4.1)
+      i18n (>= 1.8.11, < 2)
     faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -248,6 +250,10 @@ GEM
       activesupport (= 8.0.2)
       bundler (>= 1.15.0)
       railties (= 8.0.2)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -413,6 +419,7 @@ DEPENDENCIES
   capybara
   debug
   factory_bot_rails (~> 6.4.4)
+  faker (~> 3.4.1)
   faraday (~> 2.12.2)
   importmap-rails (= 2.1.0)
   jbuilder (= 2.13.0)
@@ -420,6 +427,7 @@ DEPENDENCIES
   propshaft (= 1.1.0)
   puma (= 6.6.0)
   rails (~> 8.0.2)
+  rails-controller-testing (~> 1.0.5)
   redcarpet (~> 3.6.1)
   rouge (~> 4.5.1)
   rspec-rails (~> 7.1.1)
