@@ -13,7 +13,7 @@ RSpec.describe PostsController, type: :request do
     expect(response).to render_template(:index)
   end
 
-  describe 'GET #show' do
+  describe "GET #show" do
     it "render" do
       get "/this-is-the-post-title-#{post.id}"
       expect(response).to render_template(:show)
@@ -26,8 +26,8 @@ RSpec.describe PostsController, type: :request do
     end
   end
 
-  describe 'GET #about' do
-    context 'when about page exists' do
+  describe "GET #about" do
+    context "when about page exists" do
       it "renders the about page" do
         get "/about"
         expect(response).to render_template(:about)
@@ -36,7 +36,7 @@ RSpec.describe PostsController, type: :request do
       end
     end
 
-    context 'when about page does not exist' do
+    context "when about page does not exist" do
       before do
         post_about.destroy!
       end
