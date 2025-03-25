@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe CategoriesController, type: :request do
   let(:category) { create(:category, name: "Test-Category") }
-  let!(:first_post) { create(:post, title: "First Post", category: category) }
-  let!(:second_post) { create(:post, title: "Second Post", category: category) }
+  let!(:post1) { create(:post, title: "First Post", category: category) }
+  let!(:post2) { create(:post, title: "Second Post", category: category) }
 
   describe "GET #show" do
     context "when category exists" do
@@ -14,15 +14,15 @@ RSpec.describe CategoriesController, type: :request do
       it "renders the show template" do
         get "/category/#{category.path_name}"
         expect(response).to render_template(:show)
-        expect(response.body).to include(first_post.title)
-        expect(response.body).to include(second_post.title)
+        expect(response.body).to include(post1.title)
+        expect(response.body).to include(post2.title)
         expect(response.body).to include(category.name.titleize)
       end
 
       it "displays all posts from the category" do
         get "/category/#{category.path_name}"
-        expect(response.body).to include(first_post.path)
-        expect(response.body).to include(second_post.path)
+        expect(response.body).to include(post1.path)
+        expect(response.body).to include(post2.path)
       end
     end
 
@@ -48,9 +48,9 @@ RSpec.describe CategoriesController, type: :request do
       it "renders the show template" do
         get "/drafts/#{category.path_name}"
         expect(response).to render_template(:show)
-        expect(response.body).to include(first_post.title)
-        expect(response.body).to include(second_post.title)
-        expect(response.body).to include(first_post.path)
+        expect(response.body).to include(post1.title)
+        expect(response.body).to include(post2.title)
+        expect(response.body).to include(post1.path)
       end
     end
 

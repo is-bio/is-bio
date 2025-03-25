@@ -23,7 +23,7 @@ protected
     end
   end
 
-  def raise_404(message = "Not Found.")
+  def raise_404(message = "Not Found")
     raise ActionController::RoutingError.new(message)
   end
 end
