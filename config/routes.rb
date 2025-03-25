@@ -38,7 +38,6 @@
 #                 admin_github_app_setting PATCH  /admin/github_app_settings/:id(.:format)                                                          admin/github_app_settings#update
 #                                          PUT    /admin/github_app_settings/:id(.:format)                                                          admin/github_app_settings#update
 #                                    posts GET    /posts(.:format)                                                                                  posts#index
-#                                     post GET    /posts/:id(.:format)                                                                              posts#show
 #                                     root GET    /                                                                                                 posts#index
 #                                    about GET    /about(.:format)                                                                                  posts#about
 #                               categories GET    /categories(.:format)                                                                             categories#index
@@ -101,7 +100,7 @@ Rails.application.routes.draw do
     resources :github_app_settings, only: [ :index, :edit, :update ]
   end
 
-  resources :posts, only: %i[index show]
+  resources :posts, only: [ :index ]
   root "posts#index"
   get "about" => "posts#about", as: :about
 
