@@ -2,15 +2,16 @@
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
-email = "change_to_your_email@example.com"
-password = "ChangeToYourPassword_ChangeToYourPassword_ChangeToYourPassword_ChangeToYourPassword"
-User.where(
-  email_address: email
-).first_or_create! do |user|
-  user.password = password
-  user.password_confirmation = password
-end
-puts "The administrator user '#{email}' was created successfully. You can use this email to log in."
+# Uncomment the bellow code to create the administrator user.
+# email = "change_to_your_email@example.com"
+# password = "ChangeToYourPassword_ChangeToYourPassword_ChangeToYourPassword_ChangeToYourPassword"
+# User.where(
+#   email_address: email
+# ).first_or_create! do |user|
+#   user.password = password
+#   user.password_confirmation = password
+# end
+# puts "The administrator user '#{email}' was created successfully. You can use this email to log in."
 
 %w[
   app_id
