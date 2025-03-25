@@ -9,7 +9,7 @@ RSpec.describe PostsController, type: :request do
     expect(response).to render_template(:index)
     expect(response.body).to include("Next")
 
-    get "/posts"
+    get '/posts'
     expect(response).to render_template(:index)
   end
 

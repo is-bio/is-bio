@@ -13,10 +13,10 @@
 require "rails_helper"
 
 RSpec.describe Category, type: :model do
-  let!(:category) { create(:category, name: "Ruby-On-Rails") }
+  describe "#path_name" do
+    context "when name is capitalized" do
+      let!(:category) { create(:category, name: "Ruby-On-Rails") }
 
-  context "#path_name" do
-    context 'downcased' do
       it { expect(category.path_name).to eq("ruby-on-rails") }
     end
   end
