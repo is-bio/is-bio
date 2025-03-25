@@ -2,10 +2,8 @@ require "rails_helper"
 
 RSpec.describe CategoriesController, type: :request do
   let(:category) { create(:category, name: "Test-Category") }
-  # rubocop:disable RSpec/LetSetup
   let!(:first_post) { create(:post, title: "First Post", category: category) }
   let!(:second_post) { create(:post, title: "Second Post", category: category) }
-  # rubocop:enable RSpec/LetSetup
 
   describe "GET #show" do
     context "when category exists" do
