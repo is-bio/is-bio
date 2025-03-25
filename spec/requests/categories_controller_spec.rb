@@ -31,10 +31,9 @@ RSpec.describe CategoriesController, type: :request do
         allow(Category).to receive(:find_by_name).with("non-existent").and_return(nil)
       end
 
-      it "raises a routing error (404)" do
-        expect {
-          get "/category/non-existent"
-        }.to raise_error(ActionController::RoutingError)
+      it "returns a not found status" do
+        get "/category/non-existent"
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -59,10 +58,9 @@ RSpec.describe CategoriesController, type: :request do
         allow(Category).to receive(:find_by_name_from_drafts).with("non-existent").and_return(nil)
       end
 
-      it "raises a routing error (404)" do
-        expect {
-          get "/drafts/non-existent"
-        }.to raise_error(ActionController::RoutingError)
+      it "returns a not found status" do
+        get "/drafts/non-existent"
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
