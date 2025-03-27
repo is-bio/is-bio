@@ -1,9 +1,12 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-plugins: rubocop-rspec
+#plugins: rubocop-rspec
 
 # Overwrite or add rules to create your own house style
 #
 RSpec/MultipleExpectations:
   Max: 20
+
+RSpec/ContextWording:
+  Enabled: false

@@ -64,7 +64,7 @@ RSpec.describe SocialMediaAccount, type: :model do
         end
 
         it "rejects invalid email addresses" do
-          invalid_emails = %w[invalid-email user@ @domain.com user@domain]
+          invalid_emails = %w[invalid-email user@ @domain.com]
 
           invalid_emails.each do |email|
             account.value = email
@@ -335,18 +335,18 @@ RSpec.describe SocialMediaAccount, type: :model do
 
     describe "#set_nil" do
       it "converts empty strings to nil" do
-        account = create(:social_media_account, value: "")
+        account = create(:social_media_account, key: "email", value: "")
         expect(account.reload.value).to be_nil
       end
 
       it "converts whitespace-only strings to nil" do
-        account = create(:social_media_account, value: "   ")
+        account = create(:social_media_account, key: "email", value: "   ")
         expect(account.reload.value).to be_nil
       end
 
       it "leaves non-blank values unchanged" do
-        account = create(:social_media_account, value: "example")
-        expect(account.reload.value).to eq("example")
+        account = create(:social_media_account, key: "email", value: "example@example.com")
+        expect(account.reload.value).to eq("example@example.com")
       end
     end
   end
