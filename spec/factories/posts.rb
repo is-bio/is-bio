@@ -24,11 +24,46 @@ FactoryBot.define do
     title { Faker::Lorem.words(number: 8).join.titleize }
     category_id { Category::ID_PUBLISHED }
     published_at { Time.current }
-  end
+    permalink { "/#{Faker::Lorem.words(number: 3).join('-').downcase}" }
+    content { "# Sample Post\n\nThis is a sample markdown content for testing purposes.\n\n- List item 1\n- List item 2\n\n```ruby\nputs 'Hello world'\n```" }
 
-  trait :drafts do
-    after :build do |post|
-      post.category_id = Category::ID_DRAFTS
+    trait :published do
+      category_id { Category::ID_PUBLISHED }
+    end
+
+    trait :drafts do
+      category_id { Category::ID_DRAFTS }
+    end
+
+    # Not used yet
+    trait :with_content do
+      content do
+        <<~MARKDOWN
+          # #{Faker::Lorem.sentence}
+
+          #{Faker::Lorem.paragraph(sentence_count: 3)}
+
+          ## #{Faker::Lorem.sentence}
+
+          #{Faker::Lorem.paragraph(sentence_count: 2)}
+
+          - #{Faker::Lorem.sentence}
+          - #{Faker::Lorem.sentence}
+          - #{Faker::Lorem.sentence}
+
+          ### Code Sample
+
+          ```ruby
+          class Sample
+            def hello
+              puts "Hello world!"
+            end
+          end
+          ```
+
+          #{Faker::Lorem.paragraph(sentence_count: 3)}
+        MARKDOWN
+      end
     end
   end
 end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe PostsController, type: :request do
-  let!(:post) { create(:post, title: "This is the Post Title") }
+  let!(:post) { create(:post, title: "This is the Post Title", permalink: "/") }
   let!(:post_about) { create(:post, permalink: "/about", title: "About Me") }
 
   it "GET /index" do
@@ -32,7 +32,7 @@ RSpec.describe PostsController, type: :request do
         get "/about"
         expect(response).to render_template(:about)
         expect(response.body).to include("About Me")
-        expect(response.body).to include(post_about.content) if post_about.content.present?
+        expect(response.body).to include("Sample Post") if post_about.content.present?
       end
     end
 
