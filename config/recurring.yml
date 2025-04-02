@@ -1,3 +1,9 @@
+production:
+  remove_empty_directories:
+    class: RemoveEmptyDirectoriesJob
+    schedule: every day
+
+
 # production:
 #   periodic_cleanup:
 #     class: CleanSoftDeletedRecordsJob
