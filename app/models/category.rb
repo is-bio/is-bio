@@ -10,6 +10,7 @@
 #
 #  index_categories_on_ancestry  (ancestry)
 #
+# noinspection ALL
 class Category < ApplicationRecord
   ID_PUBLISHED = 1.freeze
   ID_DRAFTS = 2.freeze
@@ -74,10 +75,13 @@ class Category < ApplicationRecord
     category = nil
     parent = published ? published_root : drafts_root
     category_names = filename.split("/")[...-1]
+
     category_names.each_with_index do |category_name, i|
       if i > 0
         parent = category
       end
+
+      parent.children.reload # Notice: Must have this line to prevent multiple background jobs from creating the same category twice.
 
       category = parent.children.where(
         name: standardized_category_name(category_name),
