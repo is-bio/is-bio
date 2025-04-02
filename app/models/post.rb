@@ -4,6 +4,7 @@
 #
 #  id           :string           not null, primary key
 #  content      :text
+#  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
 #  title        :string           not null
@@ -20,10 +21,12 @@
 #
 # noinspection RubyMismatchedArgumentType
 class Post < ApplicationRecord
+  DEFAULT_TITLE = "No Title"
+
   belongs_to :category
+  # has_many :comments # TODO: should not delete comments if 'id' changed or post deleted.
 
   validates :permalink, presence: true
-  validates :title, presence: true
   validates :published_at, presence: true
   validate :permalink_starts_with
 
@@ -36,14 +39,20 @@ class Post < ApplicationRecord
     "#{permalink}-#{id}"
   end
 
-  def self.create_from_file_contents!(filename, contents)
+  def self.sync_from_file_contents!(status, filename, contents)
     metadata = YAML.load(contents) || {}
 
     id = metadata["id"]
     title = metadata["title"]
     date = metadata["date"]
 
-    unless id.present? && title.present?
+    unless id.present?
+      if status == "modified"
+        post = Post.find_by(filename: filename)
+        if post.present?
+          post.destroy!
+        end
+      end
       return
     end
 
@@ -57,8 +66,34 @@ class Post < ApplicationRecord
     post = Post.find_by(id: id)
     category = Category.prepared_category(filename)
 
+    if status == "renamed"
+      if post.present?
+        post.update!(
+          filename: filename,
+          category: category,
+        )
+        return
+      end
+    end
+
     if post.nil?
+      if status == "modified"
+        post = Post.find_by(filename: filename)
+        if post.present?
+          post.update!(
+            id: id,
+            filename: filename,
+            category: category,
+            title: title,
+            published_at: date,
+            content: content
+          )
+          return
+        end
+      end
+
       Post.create!(
+        filename: filename,
         id: id,
         category: category,
         title: title,
@@ -67,6 +102,7 @@ class Post < ApplicationRecord
       )
     else
       post.update!(
+        filename: filename,
         category: category,
         title: title,
         published_at: date,
@@ -85,7 +121,8 @@ private
 
   # TODO: Remove `""`
   def cleanup_columns
-    self.title = (title || "").strip
+    title = (self.title || "").strip
+    self.title = title.blank? ? DEFAULT_TITLE : title
     self.content = (content || "").strip
   end
 
@@ -106,7 +143,7 @@ private
 
   def generate_permalink
     # TODO: Remove all invalid chars
-    "/" + CGI.escape(title.downcase.split(" ").join("-"))
+    "/" + CGI.escape(title.to_s.downcase.split(" ").join("-")[...255])
   end
 
   def ensure_id

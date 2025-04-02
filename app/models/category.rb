@@ -57,7 +57,6 @@ class Category < ApplicationRecord
     filename.start_with?("published/") || filename.start_with?("drafts/")
   end
 
-  # TODO: consider `status`. Delete empty categories.
   def self.prepared_category(filename)
     unless should_sync?(filename)
       return

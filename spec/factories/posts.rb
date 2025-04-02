@@ -4,6 +4,7 @@
 #
 #  id           :string           not null, primary key
 #  content      :text
+#  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
 #  title        :string           not null

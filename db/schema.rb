@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_18_084552) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_02_184238) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -27,10 +27,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_18_084552) do
   create_table "posts", id: :string, force: :cascade do |t|
     t.integer "category_id", null: false
     t.string "permalink", null: false
-    t.string "title", null: false
+    t.text "title"
     t.text "content"
     t.datetime "published_at", null: false
     t.datetime "updated_at"
+    t.text "filename"
     t.index ["category_id"], name: "index_posts_on_category_id"
   end
 

@@ -4,6 +4,7 @@
 #
 #  id           :string           not null, primary key
 #  content      :text
+#  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
 #  title        :string           not null
@@ -25,12 +26,6 @@ RSpec.describe Post, type: :model do
     it "is valid with valid attributes" do
       post = build(:post, permalink: "/sample-permalink")
       expect(post).to be_valid
-    end
-
-    it "requires a title" do
-      post = build(:post, title: nil, permalink: "/sample-permalink")
-      expect(post).not_to be_valid
-      expect(post.errors[:title]).to include("can't be blank")
     end
 
     it "requires a permalink" do
@@ -83,8 +78,8 @@ RSpec.describe Post, type: :model do
 
       it "handles nil title" do
         post = build(:post, title: nil, permalink: "/test")
-        post.validate # Will fail validation but should handle nil title
-        expect(post.title).to eq("")
+        post.validate
+        expect(post.title).to eq("No Title")
       end
     end
 
@@ -148,6 +143,7 @@ RSpec.describe Post, type: :model do
           title: Test Post
           date: 2023-01-01
           ---
+
           This is the content of the post.
         YAML
       end
@@ -168,7 +164,7 @@ RSpec.describe Post, type: :model do
           allow(Category).to receive(:prepared_category).and_return(category)
 
           expect {
-            Post.create_from_file_contents!("published/file.md", valid_yaml)
+            Post.sync_from_file_contents!("added", "published/file.md", valid_yaml)
           }.to change { Post.count }.by(1)
         end
 
@@ -178,7 +174,7 @@ RSpec.describe Post, type: :model do
           allow(Category).to receive(:prepared_category).and_return(category)
 
           expect {
-            Post.create_from_file_contents!("published/file.md", valid_yaml)
+            Post.sync_from_file_contents!("modified", "published/file.md", valid_yaml)
           }.not_to change { Post.count }
 
           existing_post.reload
@@ -191,7 +187,7 @@ RSpec.describe Post, type: :model do
           allow(Category).to receive(:prepared_category).and_return(category)
 
           allow(Post).to receive(:create!)
-          Post.create_from_file_contents!("path/to/file.md", valid_yaml)
+          Post.sync_from_file_contents!("added", "path/to/file.md", valid_yaml)
 
           expect(Post).to have_received(:create!).with(
             hash_including(content: "This is the content of the post.")
@@ -202,7 +198,7 @@ RSpec.describe Post, type: :model do
       context "with invalid file contents" do
         it "returns nil when ID is missing" do
           expect {
-            Post.create_from_file_contents!("published/file.md", invalid_yaml)
+            Post.sync_from_file_contents!("added", "published/file.md", invalid_yaml)
           }.not_to change { Post.count }
         end
       end

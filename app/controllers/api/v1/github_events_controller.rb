@@ -7,12 +7,13 @@ class Api::V1::GithubEventsController < Api::V1::BaseController
   # TODO: 'repository.private' rejected?
 
   def handle
-    before = params.expect(:before)
-    after = params.expect(:after)
-    body = GithubClient.new.compare(before, after).body
+    body = GithubClient.new.compare(
+      params.expect(:before),
+      params.expect(:after)
+    ).body
 
     body["files"].each do |file|
-      if Category.should_sync?(file["filename"])
+      if Category.should_sync?(file["filename"]) || Category.should_sync?(file["previous_filename"])
         RetrieveGithubFileJob.perform_later(file)
       end
     end
