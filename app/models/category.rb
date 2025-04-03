@@ -54,6 +54,7 @@ class Category < ApplicationRecord
   end
 
   def self.should_sync?(filename)
+    filename ||= ""
     filename.start_with?("published/") || filename.start_with?("drafts/")
   end
 
