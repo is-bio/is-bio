@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 
     if @post.nil?
       @post = Post.new(
-        content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog-posts/published/about.md`, then `$ git commit` and `$ git push`.",
+        content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog/published/about.md`, then `$ git commit` and `$ git push`.",
         published_at: Time.current
       )
     end
