@@ -119,7 +119,7 @@ GEM
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
-    faker (3.4.1)
+    faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
@@ -422,7 +422,7 @@ DEPENDENCIES
   capybara
   debug
   factory_bot_rails (~> 6.4.4)
-  faker (~> 3.4.1)
+  faker (~> 3.5.1)
   faraday (~> 2.12.2)
   importmap-rails (= 2.1.0)
   jbuilder (= 2.13.0)
