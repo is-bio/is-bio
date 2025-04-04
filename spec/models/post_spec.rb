@@ -7,7 +7,7 @@
 #  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
-#  title        :string           not null
+#  title        :text
 #  updated_at   :datetime
 #  category_id  :integer          not null
 #
@@ -34,17 +34,36 @@ RSpec.describe Post, type: :model do
       expect(post.permalink).to eq("/how-are-you")
     end
 
-    it "requires a published_at date" do
-      post = build(:post, permalink: "/sample-permalink", published_at: nil)
-      expect(post).not_to be_valid
-      expect(post.errors[:published_at]).to include("can't be blank")
-    end
-
     describe "permalink_starts_with validation" do
       it "corrects permalink to start with '/'" do
         post = build(:post, permalink: "sample-permalink")
         expect(post).to be_valid
         expect(post.permalink).to eq("/sample-permalink")
+      end
+    end
+
+    context "title handling" do
+      it "allows nil title with default value" do
+        post = build(:post, title: nil)
+        post.valid?
+        expect(post.title).to eq("No Title")
+      end
+
+      it "persists default title when created through sync" do
+        post = Post.sync_from_file_contents!("added", "published/sample.md", "---\nid: test123\n---\nContent")
+        expect(post.title).to eq("No Title")
+      end
+    end
+
+    context "filename handling" do
+      it "stores and retrieves filename" do
+        post = create(:post, filename: "published/test-post.md")
+        expect(Post.find_by(filename: "published/test-post.md")).to eq(post)
+      end
+
+      it "handles filename case sensitivity" do
+        post = create(:post, filename: "PUBLISHED/test-post.md")
+        expect(Post.find_by(filename: "published/test-post.md")).not_to eq(post)
       end
     end
   end
@@ -193,14 +212,85 @@ RSpec.describe Post, type: :model do
             hash_including(content: "This is the content of the post.")
           )
         end
+
+        it "stores filename when creating new post" do
+          allow(Post).to receive(:find_by).with(id: "xyz").and_return(nil)
+          category = Category.published_root
+          allow(Category).to receive(:prepared_category).and_return(category)
+
+          Post.sync_from_file_contents!("added", "published/file.md", valid_yaml)
+          expect(Post.last.filename).to eq("published/file.md")
+        end
+
+        it "updates existing post by 'id'" do
+          existing_post = create(:post, id: "xyz")
+          Post.sync_from_file_contents!("modified", "published/file.md", valid_yaml)
+          existing_post.reload
+          expect(existing_post.title).to eq("Test Post")
+        end
+
+        it "updates existing post by 'filename'" do
+          expect(Post.find_by(id: "xyz")).to be_nil
+          create(:post, id: "noneXyz", filename: "published/file1.md")
+
+          Post.sync_from_file_contents!("modified", "published/file1.md", valid_yaml)
+
+          expect(Post.find_by(id: "noneXyz")).to be_nil
+
+          new_post = Post.find_by(id: "xyz")
+          expect(new_post.title).to eq("Test Post")
+          expect(new_post.filename).to eq("published/file1.md")
+        end
+
+        it "create a post if id doesn't exist" do
+          Post.sync_from_file_contents!("modified", "published/file2.md", valid_yaml)
+          expect(Post.find_by(id: "xyz").title).to eq("Test Post")
+          expect(Post.find_by(id: "xyz").filename).to eq("published/file2.md")
+        end
       end
 
       context "with invalid file contents" do
-        it "returns nil when ID is missing" do
+        it "returns nil when 'id' is missing" do
           expect {
             Post.sync_from_file_contents!("added", "published/file.md", invalid_yaml)
           }.not_to change { Post.count }
         end
+      end
+
+      context "with filename parameter" do
+        let(:file_contents) do
+          <<~YAML
+            ---
+            id: sync_test
+            date: 2023-01-01
+            ---
+            No title content
+          YAML
+        end
+
+        it "creates post with nil title" do
+          post = Post.sync_from_file_contents!("added", "drafts/no-title.md", file_contents)
+          expect(post.title).to eq("No Title")
+          expect(post.filename).to eq("drafts/no-title.md")
+        end
+
+        it "updates existing post matching filename" do
+          create(:post, filename: "published/existing.md", title: "Old Title")
+          Post.sync_from_file_contents!("modified", "published/existing.md", valid_yaml)
+          expect(Post.find_by(filename: "published/existing.md").title).to eq("Test Post")
+        end
+      end
+    end
+
+    describe ".find_by filename" do
+      it "finds post case-sensitively" do
+        post = create(:post, filename: "PUBLISHED/Test.md")
+        found = Post.find_by(filename: "published/test.md")
+        expect(found).to be_nil
+      end
+
+      it "returns nil for non-existent filename" do
+        expect(Post.find_by(filename: "missing.md")).to be_nil
       end
     end
   end

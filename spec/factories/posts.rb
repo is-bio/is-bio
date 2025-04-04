@@ -7,7 +7,7 @@
 #  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
-#  title        :string           not null
+#  title        :text
 #  updated_at   :datetime
 #  category_id  :integer          not null
 #
@@ -21,8 +21,9 @@
 #
 FactoryBot.define do
   factory :post do
+    filename { "published/#{Faker::Lorem.words(number: 3).join('-').downcase}" }
     id { Faker::Lorem.characters(number: 4) }
-    title { Faker::Lorem.words(number: 8).join.titleize }
+    title { Faker::Lorem.words(number: 8).join(" ").titleize }
     category_id { Category::ID_PUBLISHED }
     published_at { Time.current }
     permalink { "/#{Faker::Lorem.words(number: 3).join('-').downcase}" }

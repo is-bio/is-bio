@@ -4,6 +4,7 @@ class RetrieveGithubFileJob < ApplicationJob
   def perform(*args)
     file = args[0]
     filename = file["filename"]
+    status = file["status"]
 
     if status == "renamed"
       previous_filename = file["previous_filename"]
