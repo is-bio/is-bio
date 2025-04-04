@@ -11,11 +11,44 @@ zh:
   subscribe_to_receive_email: "欢迎光临我的博客。通过邮件订阅，不再错过我的最新文章！"
   author: "作者"
   posted_at: "发布于"
+  enter_email: "请输入邮箱"
 
   email: "电子邮箱"
   wechat_id: "微信号"
   linkedin_profile_url: "领英URL"
   github_username: "GitHub 用户名"
+
+  # Subscription related translations
+  subscription:
+    success:
+      created: "请查收邮件以确认您的订阅。"
+      confirmed: "您的订阅已确认。感谢您的订阅！"
+    error:
+      invalid_token: "无效或已过期的确认链接。"
+      email_format: "不是有效的电子邮件地址"
+      email_exists: "已经订阅过了"
+    button:
+      submit: "订阅"
+      subscribing: "订阅中..."
+    label:
+      email: "请输入您的电子邮件地址"
+    confirmation:
+      subject: "确认您的订阅"
+      instructions: "感谢您的订阅。请点击下方链接确认您的订阅："
+      button: "确认订阅"
+      expiration_notice: "此链接将在7天后失效。"
+    notification:
+      pending: "您已成功订阅。请查收邮件以确认您的订阅。"
+      success: "感谢您的订阅！当有新内容发布时，您将收到更新通知。"
+
+  # ActiveRecord errors
+  activerecord:
+    errors:
+      models:
+        email_subscriber:
+          attributes:
+            email:
+              taken: "该邮箱已被订阅，请使用其他邮箱"
 
   # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
   datetime:
@@ -24,7 +57,7 @@ zh:
       about_x_months: "%{count}个月前"
       about_x_years: "%{count}年前"
       almost_x_years: "%{count}年前"
-      half_a_minute: 半分钟前
+      half_a_minute: "半分钟前"
       less_than_x_seconds: "%{count}秒前"
       less_than_x_minutes: "%{count}分钟前"
       over_x_years: "%{count}年前"

@@ -10,10 +10,10 @@ class SubscriptionsController < ApplicationController
 
       respond_to do |format|
         format.html do
-          flash[:success] = "Please check your email to confirm your subscription."
+          flash[:success] = t("subscription.success.created")
           redirect_back(fallback_location: root_path)
         end
-        format.json { render json: { status: "success", message: "Please check your email to confirm your subscription." }, status: :created }
+        format.json { render json: { status: "success", message: t("subscription.success.created") }, status: :created }
       end
     else
       respond_to do |format|
@@ -30,10 +30,10 @@ class SubscriptionsController < ApplicationController
     @subscriber = EmailSubscriber.find_by(token: params[:token])
 
     if @subscriber && @subscriber.confirm_subscription(params[:token])
-      flash[:success] = "Your subscription has been confirmed. Thank you for subscribing!"
+      flash[:success] = t("subscription.success.confirmed")
       redirect_to root_path
     else
-      flash[:error] = "Invalid or expired confirmation link."
+      flash[:error] = t("subscription.error.invalid_token")
       redirect_to root_path
     end
   end
