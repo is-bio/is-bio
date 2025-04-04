@@ -154,7 +154,7 @@ RSpec.describe Post, type: :model do
   end
 
   describe "class methods" do
-    describe ".create_from_file_contents!" do
+    describe ".sync_from_file_contents!" do
       let(:valid_yaml) do
         <<~YAML
           ---
@@ -247,6 +247,30 @@ RSpec.describe Post, type: :model do
           expect(Post.find_by(id: "xyz").title).to eq("Test Post")
           expect(Post.find_by(id: "xyz").filename).to eq("published/file2.md")
         end
+
+        context "status is 'rename'" do
+          it "update the 'filename' and category if post exist" do
+            existing_post = create(:post, id: "xyz", filename: "published/old_filename.md")
+            old_content = existing_post.content
+
+            Post.sync_from_file_contents!("renamed", "drafts/new_filename.md", valid_yaml)
+
+            existing_post.reload
+            expect(existing_post.filename).to eq("drafts/new_filename.md")
+            expect(existing_post.category).to eq(Category.drafts_root)
+            expect(existing_post.content).to eq(old_content)
+          end
+
+          it "create a post if post doesn't exist" do
+            expect(Post.find_by(id: "xyz")).to be_nil
+
+            expect {
+              Post.sync_from_file_contents!("renamed", "drafts/new_filename.md", valid_yaml)
+            }.to change { Post.count }.by(1)
+
+            expect(Post.find_by(id: "xyz").title).to eq("Test Post")
+          end
+        end
       end
 
       context "with invalid file contents" do
@@ -254,6 +278,14 @@ RSpec.describe Post, type: :model do
           expect {
             Post.sync_from_file_contents!("added", "published/file.md", invalid_yaml)
           }.not_to change { Post.count }
+        end
+
+        it "deletes the post by filename if 'modified'" do
+          create(:post, filename: "published/file4.md")
+
+          expect {
+            Post.sync_from_file_contents!("modified", "published/file4.md", invalid_yaml)
+          }.to change { Post.count }.by(-1)
         end
       end
 
