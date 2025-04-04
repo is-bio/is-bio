@@ -18,28 +18,19 @@ en:
   linkedin_profile_url: "LinkedIn profile URL"
   github_username: "GitHub Username"
 
-  # Subscription related translations
   subscription:
     success:
-      created: "Please check your email to confirm your subscription."
-      confirmed: "Your subscription has been confirmed. Thank you for subscribing!"
-    error:
-      invalid_token: "Invalid or expired confirmation link."
-      email_format: "is not a valid email address"
-      email_exists: "has already been subscribed"
-    button:
-      submit: "Subscribe"
-      subscribing: "Subscribing..."
-    label:
-      email: "Enter your email address"
-    confirmation:
-      subject: "Confirm your subscription"
-      instructions: "Thank you for subscribing. Please confirm your subscription by clicking the link below:"
-      button: "Confirm Subscription"
-      expiration_notice: "This link will expire in 7 days."
-    notification:
-      pending: "You have successfully subscribed. Please check your email to confirm your subscription."
-      success: "Thank you for subscribing! You will now receive updates when new content is published."
+      created: "We have sent a subscription confirmation email to your email address. Please check your email and click the confirmation link to complete your subscription!"
+#      confirmed: "Your subscription has been confirmed. Thank you for subscribing!"
+
+  activerecord:
+    errors:
+      models:
+        email_subscriber:
+          attributes:
+            email:
+              already_confirmed: "subscription has already been confirmed, you will receive updates for new articles!"
+              pending_confirmation: "subscription has been registered, but not yet confirmed! Please check and click the confirmation email to complete the subscription!"
 
   # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
   datetime:

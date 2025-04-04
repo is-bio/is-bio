@@ -15,8 +15,9 @@
 #
 class EmailSubscriber < ApplicationRecord
   validates :email, presence: true,
-            uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email address" }
+
+  validate :check_existing_subscription
 
   before_create :generate_token
 
@@ -42,5 +43,16 @@ class EmailSubscriber < ApplicationRecord
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64(32)
+  end
+
+  def check_existing_subscription
+    existing = EmailSubscriber.find_by(email: email)
+    return unless existing
+
+    if existing.confirmed
+      errors.add(:email, :already_confirmed)
+    else
+      errors.add(:email, :pending_confirmation)
+    end
   end
 end

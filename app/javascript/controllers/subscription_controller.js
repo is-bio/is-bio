@@ -108,20 +108,4 @@ export default class extends Controller {
     }
     errorMessage.classList.remove("d-none");
   }
-
-  resetForm() {
-    const form = this.element;
-    form.reset();
-
-    const emailInput = form.querySelector("#subscription_email");
-    emailInput.classList.remove("is-valid", "is-invalid");
-
-    const errorElement = document.getElementById("email-error");
-    errorElement.textContent = "";
-
-    const successMessage = document.getElementById("subscription-success");
-    const errorMessage = document.getElementById("subscription-error");
-    successMessage.classList.add("d-none");
-    errorMessage.classList.add("d-none");
-  }
 }
