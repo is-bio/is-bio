@@ -63,6 +63,7 @@ class Category < ApplicationRecord
       return
     end
 
+    filename = filename.clone
     published = false
 
     if filename.start_with?("published/")
