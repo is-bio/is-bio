@@ -3,7 +3,7 @@ class Admin::PostsController < Admin::BaseController
   before_action :set_category_options, only: %i[ new create edit update ]
 
   def new
-    @post = Post.new(published_at: Time.now)
+    @post = Post.new(published_at: Time.current)
   end
 
   def create
