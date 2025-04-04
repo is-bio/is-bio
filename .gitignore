@@ -56,3 +56,4 @@ app/stylesheets
 .breakpoints
 log/*.log
 tmp/
+coverage
