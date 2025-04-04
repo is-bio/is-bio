@@ -4,13 +4,25 @@
   </div>
 
   <div class="single-form-max-width pt-3 mx-auto">
-    <form class="signup-form row g-2 g-lg-2 align-items-center">
+    <form id="subscription-form" class="signup-form row g-2 g-lg-2 align-items-center" data-remote="true" action="<%= subscriptions_path %>" method="post" data-controller="subscription">
+      <%= csrf_meta_tags %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
       <div class="col-12 col-md-9">
-        <input type="email" name="semail" class="form-control me-md-1 semail" placeholder="Enter email">
+        <input type="email" name="subscription[email]" id="subscription_email" class="form-control me-md-1" placeholder="<%= t(:enter_email) %>" required data-action="input->subscription#validateEmail">
+        <div class="invalid-feedback" id="email-error"></div>
       </div>
 
       <div class="col-12 col-md-2">
-        <button type="submit" class="btn btn-primary"><%= t(:subscribe) %></button>
+        <button type="submit" class="btn btn-primary" data-action="subscription#submit">
+          <span class="button-text"><%= t(:subscribe) %></span>
+          <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="col-12 mt-2">
+        <div class="alert alert-success d-none" role="alert" id="subscription-success"></div>
+        <div class="alert alert-danger d-none" role="alert" id="subscription-error"></div>
       </div>
     </form>
   </div>

@@ -444,7 +444,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   rubocop-rspec
   safe_yaml (~> 1.0.5)
-  selenium-webdriver
+  selenium-webdriver (= 4.30.1)
   simplecov
   solid_cable (= 3.0.7)
   solid_cache (= 1.0.7)

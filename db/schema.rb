@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_02_184238) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_04_173046) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
     t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
+
+  create_table "email_subscribers", force: :cascade do |t|
+    t.string "email", null: false
+    t.boolean "confirmed", default: false
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_email_subscribers_on_email", unique: true
   end
 
   create_table "github_app_settings", force: :cascade do |t|
