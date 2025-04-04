@@ -7,7 +7,7 @@
 #  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
-#  title        :string           not null
+#  title        :text
 #  updated_at   :datetime
 #  category_id  :integer          not null
 #
@@ -31,7 +31,7 @@ class Post < ApplicationRecord
   validate :permalink_starts_with
 
   before_validation :cleanup_columns, :ensure_permalink
-  before_validation :ensure_id, on: :create
+  before_validation :ensure_id, :ensure_published_at, on: :create
 
   scope :published, -> { where(category_id: Category.published_ids) }
 
@@ -168,5 +168,11 @@ private
   def generate_id
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
     3.times.map { chars.sample }.join
+  end
+
+  def ensure_published_at
+    if published_at.blank?
+      self.published_at = Time.current
+    end
   end
 end
