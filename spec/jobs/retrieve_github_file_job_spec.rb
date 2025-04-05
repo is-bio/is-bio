@@ -67,11 +67,17 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
 
       context "when status is 'renamed'" do
         context "when renamed file is no longer a markdown file" do
-          let(:file) { { "filename" => "published/test-post.txt", "status" => "renamed", "previous_filename" => "published/test-post.md" } }
+          let(:file) {
+            {
+              "status" => "renamed",
+              "filename" => "published/test-post.txt",
+              "previous_filename" => "published/tesT-post.md"
+            }
+          }
           let(:post) { instance_double(Post) }
 
           it "deletes the post" do
-            allow(Post).to receive(:find_by).with(filename: "published/test-post.md").and_return(post)
+            allow(Post).to receive(:find_by).with(filename: "published/tesT-post.md").and_return(post)
             expect(post).to receive(:destroy!)
 
             RetrieveGithubFileJob.perform_now(file)

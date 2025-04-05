@@ -38,7 +38,7 @@ private
 
   def markdown_file?(filename)
     accepted_extensions = %w[markdown md]
-    filename.downcase!
+    filename = filename.downcase
 
     accepted_extensions.map { |extension| ".#{extension}" }.any? do |extension|
       filename.end_with?(extension)
