@@ -53,13 +53,13 @@ class Category < ApplicationRecord
     nil
   end
 
-  def self.should_sync?(filename)
+  def self.published_or_drafts_directory?(filename)
     filename ||= ""
     filename.start_with?("published/") || filename.start_with?("drafts/")
   end
 
   def self.prepared_category(filename)
-    unless should_sync?(filename)
+    unless published_or_drafts_directory?(filename)
       return
     end
 

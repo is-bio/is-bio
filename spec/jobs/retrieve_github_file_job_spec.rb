@@ -89,8 +89,8 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
           let(:post) { instance_double(Post) }
 
           before do
-            allow(Category).to receive(:should_sync?).with("published/test-post.md").and_return(true)
-            allow(Category).to receive(:should_sync?).with("other/test-post.md").and_return(false)
+            allow(Category).to receive(:published_or_drafts_directory?).with("published/test-post.md").and_return(true)
+            allow(Category).to receive(:published_or_drafts_directory?).with("other/test-post.md").and_return(false)
           end
 
           it "deletes the post" do
@@ -110,8 +110,8 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
           } }
 
           before do
-            allow(Category).to receive(:should_sync?).with("drafts/old-name.md").and_return(true)
-            allow(Category).to receive(:should_sync?).with("published/new-name.md").and_return(true)
+            allow(Category).to receive(:published_or_drafts_directory?).with("drafts/old-name.md").and_return(true)
+            allow(Category).to receive(:published_or_drafts_directory?).with("published/new-name.md").and_return(true)
           end
 
           it "syncs the post with the new filename" do

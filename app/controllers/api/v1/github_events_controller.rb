@@ -13,7 +13,7 @@ class Api::V1::GithubEventsController < Api::V1::BaseController
     ).body
 
     body["files"].each do |file|
-      if Category.should_sync?(file["filename"]) || Category.should_sync?(file["previous_filename"])
+      if Category.published_or_drafts_directory?(file["filename"]) || Category.published_or_drafts_directory?(file["previous_filename"])
         RetrieveGithubFileJob.perform_later(file)
       end
     end
