@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe RetrieveGithubFileJob, type: :job do
+RSpec.describe SyncMarkdownFileJob, type: :job do
   describe "#perform" do
     let(:github_client) { instance_double(GithubClient) }
     let(:file_response) { instance_double(Faraday::Response, body: "content") }
@@ -24,7 +24,7 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
           expect(github_client).to receive(:file_contents).with(file["contents_url"]).and_return(file_response)
           expect(Post).to receive(:sync_from_file_contents!).with("added", "published/test-post.md", "content")
 
-          RetrieveGithubFileJob.perform_now(file)
+          SyncMarkdownFileJob.perform_now(file)
         end
       end
 
@@ -41,7 +41,7 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
           expect(github_client).to receive(:file_contents).with(file["contents_url"]).and_return(file_response)
           expect(Post).to receive(:sync_from_file_contents!).with("modified", "published/test-post.md", "content")
 
-          RetrieveGithubFileJob.perform_now(file)
+          SyncMarkdownFileJob.perform_now(file)
         end
       end
 
@@ -53,14 +53,14 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
           allow(Post).to receive(:find_by).with(filename: "published/test-post.md").and_return(post)
           expect(post).to receive(:destroy!)
 
-          RetrieveGithubFileJob.perform_now(file)
+          SyncMarkdownFileJob.perform_now(file)
         end
 
         it "handles case when post is not found" do
           allow(Post).to receive(:find_by).with(filename: "published/test-post.md").and_return(nil)
 
           expect {
-            RetrieveGithubFileJob.perform_now(file)
+            SyncMarkdownFileJob.perform_now(file)
           }.not_to raise_error
         end
       end
@@ -80,7 +80,7 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
             allow(Post).to receive(:find_by).with(filename: "published/tesT-post.md").and_return(post)
             expect(post).to receive(:destroy!)
 
-            RetrieveGithubFileJob.perform_now(file)
+            SyncMarkdownFileJob.perform_now(file)
           end
         end
 
@@ -97,7 +97,7 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
             allow(Post).to receive(:find_by).with(filename: "published/test-post.md").and_return(post)
             expect(post).to receive(:destroy!)
 
-            RetrieveGithubFileJob.perform_now(file)
+            SyncMarkdownFileJob.perform_now(file)
           end
         end
 
@@ -118,7 +118,7 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
             expect(github_client).to receive(:file_contents).with(file["contents_url"]).and_return(file_response)
             expect(Post).to receive(:sync_from_file_contents!).with("renamed", "published/new-name.md", "content")
 
-            RetrieveGithubFileJob.perform_now(file)
+            SyncMarkdownFileJob.perform_now(file)
           end
         end
       end
@@ -131,7 +131,7 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
         expect(github_client).not_to receive(:file_contents)
         expect(Post).not_to receive(:sync_from_file_contents!)
 
-        RetrieveGithubFileJob.perform_now(file)
+        SyncMarkdownFileJob.perform_now(file)
       end
     end
 
@@ -143,14 +143,14 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
         expect(github_client).to receive(:file_contents).with("url1").and_return(file_response)
         expect(Post).to receive(:sync_from_file_contents!)
 
-        RetrieveGithubFileJob.perform_now(file_md)
+        SyncMarkdownFileJob.perform_now(file_md)
       end
 
       it "processes .markdown files" do
         expect(github_client).to receive(:file_contents).with("url2").and_return(file_response)
         expect(Post).to receive(:sync_from_file_contents!)
 
-        RetrieveGithubFileJob.perform_now(file_markdown)
+        SyncMarkdownFileJob.perform_now(file_markdown)
       end
     end
 
@@ -161,13 +161,13 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
         expect(github_client).to receive(:file_contents).with("url").and_return(file_response)
         expect(Post).to receive(:sync_from_file_contents!)
 
-        RetrieveGithubFileJob.perform_now(file)
+        SyncMarkdownFileJob.perform_now(file)
       end
     end
   end
 
   describe "#markdown_file?" do
-    let(:job) { RetrieveGithubFileJob.new }
+    let(:job) { SyncMarkdownFileJob.new }
 
     it "identifies .md files as markdown" do
       expect(job.send(:markdown_file?, "test.md")).to be true
@@ -193,8 +193,8 @@ RSpec.describe RetrieveGithubFileJob, type: :job do
 
     it "enqueues with the default queue" do
       expect {
-        RetrieveGithubFileJob.perform_later(file)
-      }.to have_enqueued_job(RetrieveGithubFileJob)
+        SyncMarkdownFileJob.perform_later(file)
+      }.to have_enqueued_job(SyncMarkdownFileJob)
              .with(file)
              .on_queue("default")
     end

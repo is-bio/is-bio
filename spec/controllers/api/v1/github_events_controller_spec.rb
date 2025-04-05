@@ -41,13 +41,13 @@ RSpec.describe Api::V1::GithubEventsController, type: :controller do
   describe "#handle" do
     context "when files are modified in published or drafts directories" do
       it "enqueues jobs for relevant files" do
-        expect(RetrieveGithubFileJob).to receive(:perform_later).with(
+        expect(SyncMarkdownFileJob).to receive(:perform_later).with(
           { "filename" => "published/test-post.md", "status" => "added" }
         )
-        expect(RetrieveGithubFileJob).to receive(:perform_later).with(
+        expect(SyncMarkdownFileJob).to receive(:perform_later).with(
           { "filename" => "drafts/draft-post.md", "status" => "modified" }
         )
-        expect(RetrieveGithubFileJob).to receive(:perform_later).with({
+        expect(SyncMarkdownFileJob).to receive(:perform_later).with({
           "filename" => "published/renamed-post.md",
           "status" => "renamed",
           "previous_filename" => "published/old-name.md"
@@ -57,7 +57,7 @@ RSpec.describe Api::V1::GithubEventsController, type: :controller do
       end
 
       it "does not enqueue jobs for files in other directories" do
-        expect(RetrieveGithubFileJob).not_to receive(:perform_later).with(
+        expect(SyncMarkdownFileJob).not_to receive(:perform_later).with(
           { "filename" => "other/ignored-file.md", "status" => "modified" }
         )
 
@@ -83,7 +83,7 @@ RSpec.describe Api::V1::GithubEventsController, type: :controller do
       }
 
       it "does not enqueue any jobs" do
-        expect(RetrieveGithubFileJob).not_to receive(:perform_later)
+        expect(SyncMarkdownFileJob).not_to receive(:perform_later)
 
         post :handle
       end

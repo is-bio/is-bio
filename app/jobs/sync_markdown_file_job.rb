@@ -1,4 +1,4 @@
-class RetrieveGithubFileJob < ApplicationJob
+class SyncMarkdownFileJob < ApplicationJob
   queue_as :default
 
   def perform(*args)

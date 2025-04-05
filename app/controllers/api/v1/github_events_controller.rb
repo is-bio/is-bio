@@ -17,7 +17,8 @@ class Api::V1::GithubEventsController < Api::V1::BaseController
       previous_filename = file["previous_filename"]
 
       if Directory.published_or_drafts?(filename) || Directory.published_or_drafts?(previous_filename)
-        RetrieveGithubFileJob.perform_later(file)
+        SyncMarkdownFileJob.perform_later(file)
+      end
       end
     end
   end
