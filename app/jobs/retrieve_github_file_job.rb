@@ -9,7 +9,7 @@ class RetrieveGithubFileJob < ApplicationJob
     if status == "renamed"
       previous_filename = file["previous_filename"]
       if (markdown_file?(previous_filename) && !markdown_file?(filename)) ||
-        Category.published_or_drafts_directory?(previous_filename) && !Category.published_or_drafts_directory?(filename)
+        Directory.published_or_drafts?(previous_filename) && !Directory.published_or_drafts?(filename)
         post = Post.find_by(filename: previous_filename)
         if post.present?
           post.destroy!

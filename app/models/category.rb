@@ -53,13 +53,8 @@ class Category < ApplicationRecord
     nil
   end
 
-  def self.published_or_drafts_directory?(filename)
-    filename ||= ""
-    filename.start_with?("published/") || filename.start_with?("drafts/")
-  end
-
   def self.prepared_category(filename)
-    unless published_or_drafts_directory?(filename)
+    unless Directory.published_or_drafts?(filename)
       return
     end
 

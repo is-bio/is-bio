@@ -13,7 +13,10 @@ class Api::V1::GithubEventsController < Api::V1::BaseController
     ).body
 
     body["files"].each do |file|
-      if Category.published_or_drafts_directory?(file["filename"]) || Category.published_or_drafts_directory?(file["previous_filename"])
+      filename = file["filename"]
+      previous_filename = file["previous_filename"]
+
+      if Directory.published_or_drafts?(filename) || Directory.published_or_drafts?(previous_filename)
         RetrieveGithubFileJob.perform_later(file)
       end
     end
