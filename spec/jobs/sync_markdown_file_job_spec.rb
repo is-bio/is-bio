@@ -104,9 +104,10 @@ RSpec.describe SyncMarkdownFileJob, type: :job do
         context "when both filenames are valid markdown files in syncable directories" do
           let(:file) { {
             "filename" => "published/new-name.md",
-            "status" => "renamed",
             "previous_filename" => "drafts/old-name.md",
-            "contents_url" => "https://api.github.com/repos/user/repo/contents/new-name.md"
+            "status" => "renamed",
+            "changes" => 0,
+            "contents_url" => "https://api.github.com/repos/user/repo/contents/published/new-name.md"
           } }
 
           before do
@@ -114,11 +115,26 @@ RSpec.describe SyncMarkdownFileJob, type: :job do
             allow(Directory).to receive(:published_or_drafts?).with("published/new-name.md").and_return(true)
           end
 
-          it "syncs the post with the new filename" do
-            expect(github_client).to receive(:file_contents).with(file["contents_url"]).and_return(file_response)
-            expect(Post).to receive(:sync_from_file_contents!).with("renamed", "published/new-name.md", "content")
+          context "pure rename" do
+            it "syncs the post with the new filename" do
+              expect(github_client).to receive(:file_contents).with(file["contents_url"]).and_return(file_response)
+              expect(Post).to receive(:sync_from_file_contents!).with("renamed", "published/new-name.md", "content")
 
-            SyncMarkdownFileJob.perform_now(file)
+              SyncMarkdownFileJob.perform_now(file)
+            end
+          end
+
+          context "rename and update content" do
+            before do
+              file["changes"] = 2
+            end
+
+            it "syncs the post with the new filename" do
+              expect(github_client).to receive(:file_contents).with(file["contents_url"]).and_return(file_response)
+              expect(Post).to receive(:sync_from_file_contents!).with("renamed_and_modified", "published/new-name.md", "content")
+
+              SyncMarkdownFileJob.perform_now(file)
+            end
           end
         end
       end

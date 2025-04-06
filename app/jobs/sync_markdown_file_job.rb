@@ -31,7 +31,12 @@ class SyncMarkdownFileJob < ApplicationJob
     end
 
     contents = GithubClient.new.file_contents(file["contents_url"]).body
-    Post.sync_from_file_contents!(file["status"], filename, contents)
+
+    if status == "renamed" && file["changes"] != 0
+      status = "renamed_and_modified"
+    end
+
+    Post.sync_from_file_contents!(status, filename, contents)
   end
 
 private

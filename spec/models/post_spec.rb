@@ -271,6 +271,31 @@ RSpec.describe Post, type: :model do
             expect(Post.find_by(id: "xyz").title).to eq("Test Post")
           end
         end
+
+        context "status is 'rename_and_modified'" do
+          it "update post if post exist" do
+            existing_post = create(:post, id: "xyz", filename: "drafts/old_filename.md")
+            old_content = existing_post.content
+
+            Post.sync_from_file_contents!("renamed_and_modified", "published/new_filename.md", valid_yaml)
+
+            existing_post.reload
+            expect(existing_post.filename).to eq("published/new_filename.md")
+            expect(existing_post.category).to eq(Category.published_root)
+            expect(existing_post.content).not_to eq(old_content)
+            expect(existing_post.content).to eq("This is the content of the post.")
+          end
+
+          it "create a post if post doesn't exist" do
+            expect(Post.find_by(id: "xyz")).to be_nil
+
+            expect {
+              Post.sync_from_file_contents!("renamed_and_modified", "drafts/new_filename.md", valid_yaml)
+            }.to change { Post.count }.by(1)
+
+            expect(Post.find_by(id: "xyz").title).to eq("Test Post")
+          end
+        end
       end
 
       context "with invalid file contents" do
@@ -316,7 +341,7 @@ RSpec.describe Post, type: :model do
 
     describe ".find_by filename" do
       it "finds post case-sensitively" do
-        post = create(:post, filename: "PUBLISHED/Test.md")
+        create(:post, filename: "PUBLISHED/Test.md")
         found = Post.find_by(filename: "published/test.md")
         expect(found).to be_nil
       end
