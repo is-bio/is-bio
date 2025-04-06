@@ -105,6 +105,7 @@ Rails.application.routes.draw do
   resources :posts, only: [ :index ]
   root "posts#index"
   get "about" => "posts#about", as: :about
+  get "hire" => "posts#hire", as: :hire
 
   resources :categories, only: :index
   get "category" => "categories#index"

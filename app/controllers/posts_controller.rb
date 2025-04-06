@@ -31,11 +31,22 @@ class PostsController < ApplicationController
 
     if @post.nil?
       @post = Post.new(
-        content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog/published/about.md`, then `$ git commit` and `$ git push`.",
+        content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog/published/about.md`, then `$ git push`.",
         published_at: Time.current
       )
     end
   end
 
-  # TODO: In creation or modification, make sure if permalink is empty, or /, we generate from title.
+  def hire
+    @post = Post.where(permalink: "/hire").first
+
+    if @post.nil?
+      @post = Post.new(
+        content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog/published/hire.md`, then `$ git push`.",
+        published_at: Time.current
+      )
+    end
+
+    render :about
+  end
 end
