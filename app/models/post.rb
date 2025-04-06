@@ -7,6 +7,7 @@
 #  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
+#  thumbnail    :string
 #  title        :text
 #  updated_at   :datetime
 #  category_id  :integer          not null
@@ -45,6 +46,7 @@ class Post < ApplicationRecord
     id = metadata["id"]
     title = metadata["title"]
     date = metadata["date"]
+    thumbnail = metadata["thumbnail"]
 
     unless id.present?
       if status == "modified"
@@ -80,14 +82,20 @@ class Post < ApplicationRecord
       if status == "modified"
         post = Post.find_by(filename: filename)
         if post.present?
-          post.update!(
+          attributes = {
             id: id,
             filename: filename,
             category: category,
             title: title,
-            published_at: date,
+            thumbnail: thumbnail,
             content: content
-          )
+          }
+          begin
+            attributes.merge!(published_at: date.to_datetime)
+          rescue
+            # Do nothing
+          end
+          post.update!(attributes)
           return
         end
       end
@@ -98,20 +106,27 @@ class Post < ApplicationRecord
         category: category,
         title: title,
         published_at: date,
+        thumbnail: thumbnail,
         content: content
       )
     else
-      post.update!(
+      attributes = {
         filename: filename,
         category: category,
         title: title,
-        published_at: date,
+        thumbnail: thumbnail,
         content: content
-      )
+      }
+      begin
+        attributes.merge!(published_at: date.to_datetime)
+      rescue
+        # Do nothing
+      end
+      post.update!(attributes)
     end
   end
 
-private
+  private
 
   def permalink_starts_with
     unless permalink.start_with?("/")
@@ -123,7 +138,14 @@ private
   def cleanup_columns
     title = (self.title || "").strip
     self.title = title.blank? ? DEFAULT_TITLE : title
-    self.content = (content || "").strip
+    if self.content.nil?
+      self.content = ""
+    end
+    self.content.strip!
+
+    if self.thumbnail.blank?
+      self.thumbnail = nil
+    end
   end
 
   # TODO: Should not contain `/` in the middle?
@@ -171,8 +193,15 @@ private
   end
 
   def ensure_published_at
-    if published_at.blank?
-      self.published_at = Time.current
-    end
+    self.published_at =
+      if published_at.blank?
+        Time.current
+      else
+        begin
+          self.published_at.to_datetime
+        rescue
+          Time.current
+        end
+      end
   end
 end

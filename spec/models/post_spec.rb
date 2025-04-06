@@ -7,6 +7,7 @@
 #  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
+#  thumbnail    :string
 #  title        :text
 #  updated_at   :datetime
 #  category_id  :integer          not null
@@ -160,7 +161,8 @@ RSpec.describe Post, type: :model do
           ---
           id: xyz
           title: Test Post
-          date: 2023-01-01
+          date: 2023-01-05 15:12:37
+          thumbnail: thumbnail1.jpg
           ---
 
           This is the content of the post.
@@ -176,21 +178,31 @@ RSpec.describe Post, type: :model do
         YAML
       end
 
-      context "with valid file contents" do
-        it "creates a new post if ID doesn't exist" do
-          allow(Post).to receive(:find_by).with(id: "xyz").and_return(nil)
-          category = Category.published_root
-          allow(Category).to receive(:prepared_category).and_return(category)
+      let(:invalid_date_yaml) do
+        <<~YAML
+          ---
+          id: xyz
+          title: Invalid Date Post
+          date: af
+          ---
+          This is the content of an invalid date post.
+        YAML
+      end
 
+      context "with valid file contents" do
+        it "creates a new post if 'id' doesn't exist" do
           expect {
             Post.sync_from_file_contents!("added", "published/file.md", valid_yaml)
           }.to change { Post.count }.by(1)
+          post = Post.find_by(id: "xyz")
+          expect(post.title).to eq("Test Post")
+          expect(post.published_at).to eq("2023-01-05 15:12:37".to_datetime)
+          expect(post.thumbnail).to eq("thumbnail1.jpg")
+          expect(post.content).to eq("This is the content of the post.")
         end
 
-        it "updates an existing post if ID exists" do
+        it "updates an existing post if 'id' exists" do
           existing_post = create(:post, id: "xyz", title: "Old Title")
-          category = Category.published_root
-          allow(Category).to receive(:prepared_category).and_return(category)
 
           expect {
             Post.sync_from_file_contents!("modified", "published/file.md", valid_yaml)
@@ -198,19 +210,9 @@ RSpec.describe Post, type: :model do
 
           existing_post.reload
           expect(existing_post.title).to eq("Test Post")
-        end
-
-        it "extracts content correctly" do
-          allow(Post).to receive(:find_by).with(id: "xyz").and_return(nil)
-          category = instance_double(Category)
-          allow(Category).to receive(:prepared_category).and_return(category)
-
-          allow(Post).to receive(:create!)
-          Post.sync_from_file_contents!("added", "path/to/file.md", valid_yaml)
-
-          expect(Post).to have_received(:create!).with(
-            hash_including(content: "This is the content of the post.")
-          )
+          expect(existing_post.published_at).to eq("2023-01-05 15:12:37".to_datetime)
+          expect(existing_post.thumbnail).to eq("thumbnail1.jpg")
+          expect(existing_post.content).to eq("This is the content of the post.")
         end
 
         it "stores filename when creating new post" do
@@ -240,6 +242,9 @@ RSpec.describe Post, type: :model do
           new_post = Post.find_by(id: "xyz")
           expect(new_post.title).to eq("Test Post")
           expect(new_post.filename).to eq("published/file1.md")
+          expect(new_post.published_at).to eq("2023-01-05 15:12:37".to_datetime)
+          expect(new_post.thumbnail).to eq("thumbnail1.jpg")
+          expect(new_post.content).to eq("This is the content of the post.")
         end
 
         it "create a post if id doesn't exist" do
@@ -311,6 +316,28 @@ RSpec.describe Post, type: :model do
           expect {
             Post.sync_from_file_contents!("modified", "published/file4.md", invalid_yaml)
           }.to change { Post.count }.by(-1)
+        end
+      end
+
+      context "with invalid date" do
+        it "create a new post" do
+          expect {
+            Post.sync_from_file_contents!("added", "published/file4.md", invalid_date_yaml)
+          }.to change { Post.count }.by(1)
+          expect(Post.find_by(id: "xyz").title).to eq("Invalid Date Post")
+          expect(Post.find_by(id: "xyz").published_at).to be_within(1.minute).of(Time.current)
+        end
+
+        %w[modified added].each do |status|
+          it "update a post but not change the published_at when '#{status}'" do
+            create(:post, id: "xyz", published_at: Time.current - 5.days)
+            expect {
+              Post.sync_from_file_contents!(status, "published/file4.md", invalid_date_yaml)
+            }.not_to change { Post.count }
+            post = Post.find_by(id: "xyz")
+            expect(post.title).to eq("Invalid Date Post")
+            expect(post.published_at).to be_within(1.minute).of(Time.current - 5.days)
+          end
         end
       end
 

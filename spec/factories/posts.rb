@@ -7,6 +7,7 @@
 #  filename     :text
 #  permalink    :string           not null
 #  published_at :datetime         not null
+#  thumbnail    :string
 #  title        :text
 #  updated_at   :datetime
 #  category_id  :integer          not null
@@ -58,7 +59,7 @@ FactoryBot.define do
           ```ruby
           class Sample
             def hello
-              puts "Hello world!"
+              "Hello world!"
             end
           end
           ```
