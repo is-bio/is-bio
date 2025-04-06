@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  allow_unauthenticated_access
+  allow_unauthenticated_access only: %i[ index show ]
 
   def index
   end

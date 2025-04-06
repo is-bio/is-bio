@@ -25,6 +25,10 @@ class Category < ApplicationRecord
     find(ID_PUBLISHED).descendant_ids << ID_PUBLISHED
   end
 
+  def self.drafts_ids
+    find(ID_DRAFTS).descendant_ids << ID_DRAFTS
+  end
+
   def self.published_root
     find(ID_PUBLISHED)
   end
@@ -34,7 +38,7 @@ class Category < ApplicationRecord
   end
 
   def self.find_by_name(name)
-    find(ID_PUBLISHED).descendants.each do |category|
+    where(id: published_ids).each do |category|
       if category.path_name == name
         return category
       end
@@ -44,7 +48,7 @@ class Category < ApplicationRecord
   end
 
   def self.find_by_name_from_drafts(name)
-    find(ID_DRAFTS).descendants.each do |category|
+    where(id: drafts_ids).each do |category|
       if category.path_name == name
         return category
       end
@@ -95,15 +99,15 @@ class Category < ApplicationRecord
   end
 
   def path
-    if id == Category::ID_PUBLISHED
-      return "/categories"
-    end
+    # if id == Category::ID_PUBLISHED
+    #   return "/categories"
+    # end
+    #
+    # if id == Category::ID_DRAFTS
+    #   return "/drafts"
+    # end
 
-    if id == Category::ID_DRAFTS
-      return "/drafts"
-    end
-
-    if Category.drafts_root.descendant_ids.include?(id)
+    if Category.drafts_ids.include?(id)
       return "/drafts/#{path_name}"
     end
 
