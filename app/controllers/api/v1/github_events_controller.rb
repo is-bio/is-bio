@@ -19,6 +19,10 @@ class Api::V1::GithubEventsController < Api::V1::BaseController
       if Directory.published_or_drafts?(filename) || Directory.published_or_drafts?(previous_filename)
         SyncMarkdownFileJob.perform_later(file)
       end
+
+      if Directory.images?(filename) || Directory.images?(previous_filename)
+        SyncImageJob.perform_later(file)
+      end
       end
     end
   end
