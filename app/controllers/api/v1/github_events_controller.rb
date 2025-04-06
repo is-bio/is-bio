@@ -23,6 +23,9 @@ class Api::V1::GithubEventsController < Api::V1::BaseController
       if Directory.images?(filename) || Directory.images?(previous_filename)
         SyncImageJob.perform_later(file)
       end
+
+      if Directory.files?(filename) || Directory.files?(previous_filename)
+        SyncFileJob.perform_later(file)
       end
     end
   end

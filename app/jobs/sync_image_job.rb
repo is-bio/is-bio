@@ -34,25 +34,16 @@ class SyncImageJob < ApplicationJob
 
 private
 
-  def ensure_directory_exists(filepath)
-    dir_path = File.dirname(filepath)
-    FileUtils.mkdir_p(dir_path) unless File.directory?(dir_path)
-  end
+  include FileHelper
 
   def remove_image_and_thumbnail(filename)
-    if File.exist?(target_filename(filename))
-      File.delete(target_filename(filename))
-    end
+    remove_target_file(filename)
 
     thumb_path = thumbnail_filename(target_filename(filename))
 
     if File.exist?(thumb_path)
       File.delete(thumb_path)
     end
-  end
-
-  def target_filename(filename)
-    "#{Rails.root}/public/#{filename}"
   end
 
   def thumbnail_filename(filename)
