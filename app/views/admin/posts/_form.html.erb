@@ -41,6 +41,11 @@
     <%= form.text_area :content, cols: 90, rows: 30 %>
   </div>
 
+  <div class="my-2">
+    <%= form.label :thumbnail %>
+    <%= form.text_field :thumbnail, class: "form-control" %>
+  </div>
+
   <div class="mt-4">
     <%= form.submit nil, class: "btn btn-primary" %>
   </div>

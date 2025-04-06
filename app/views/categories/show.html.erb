@@ -14,11 +14,11 @@
 
 <section class="blog-list px-3 py-5 p-md-5">
   <div class="container single-col-max-width">
-    <% @posts.each_with_index do |post, i| %>
+    <% @posts.each do |post| %>
       <div class="item mb-5">
         <div class="row g-3 g-xl-0">
           <div class="col-2 col-xl-3">
-            <%= image_tag "blog/blog-post-thumb-#{i + 1}.jpg", class: "img-fluid post-thumb" %>
+            <%= display_thumbnail(post.thumbnail) %>
           </div>
 
           <div class="col">

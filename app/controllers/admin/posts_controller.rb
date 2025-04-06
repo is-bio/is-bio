@@ -56,6 +56,6 @@ private
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.expect(post: [ :id, :permalink, :title, :content, :category_id, :published_at ])
+    params.expect(post: [ :id, :permalink, :title, :content, :category_id, :published_at, :thumbnail ])
   end
 end
