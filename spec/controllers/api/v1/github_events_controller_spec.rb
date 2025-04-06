@@ -10,8 +10,11 @@ RSpec.describe Api::V1::GithubEventsController, type: :controller do
         "files" => [
           { "filename" => "published/test-post.md", "status" => "added" },
           { "filename" => "drafts/draft-post.md", "status" => "modified" },
-          { "filename" => "other/ignored-file.md", "status" => "modified" },
-          { "filename" => "published/renamed-post.md", "status" => "renamed", "previous_filename" => "published/old-name.md" }
+          { "filename" => "images/header.jpg", "status" => "added" },
+          { "filename" => "assets/images/logo.png", "status" => "modified" },
+          { "filename" => "images/updated-photo.jpg", "status" => "renamed", "previous_filename" => "images/old-photo.jpg" },
+          { "filename" => "docs/readme.txt", "status" => "modified" },
+          { "filename" => "images/banner.JPG", "status" => "added" }
         ]
       }
     )
@@ -41,24 +44,41 @@ RSpec.describe Api::V1::GithubEventsController, type: :controller do
   describe "#handle" do
     context "when files are modified in published or drafts directories" do
       it "enqueues jobs for relevant files" do
+        # Markdown files
         expect(SyncMarkdownFileJob).to receive(:perform_later).with(
           { "filename" => "published/test-post.md", "status" => "added" }
         )
         expect(SyncMarkdownFileJob).to receive(:perform_later).with(
           { "filename" => "drafts/draft-post.md", "status" => "modified" }
         )
-        expect(SyncMarkdownFileJob).to receive(:perform_later).with({
-          "filename" => "published/renamed-post.md",
-          "status" => "renamed",
-          "previous_filename" => "published/old-name.md"
-        })
+
+        # Image files
+        expect(SyncImageJob).to receive(:perform_later).with(
+          { "filename" => "images/header.jpg", "status" => "added" }
+        )
+        expect(SyncImageJob).not_to receive(:perform_later).with(
+          { "filename" => "assets/images/logo.png", "status" => "modified" }
+        )
+        expect(SyncImageJob).to receive(:perform_later).with(
+          {
+            "filename" => "images/updated-photo.jpg",
+            "status" => "renamed",
+            "previous_filename" => "images/old-photo.jpg"
+          }
+        )
+        expect(SyncImageJob).to receive(:perform_later).with(
+          { "filename" => "images/banner.JPG", "status" => "added" }
+        )
 
         post :handle
       end
 
       it "does not enqueue jobs for files in other directories" do
         expect(SyncMarkdownFileJob).not_to receive(:perform_later).with(
-          { "filename" => "other/ignored-file.md", "status" => "modified" }
+          { "filename" => "docs/readme.txt", "status" => "modified" }
+        )
+        expect(SyncImageJob).not_to receive(:perform_later).with(
+          { "filename" => "docs/readme.txt", "status" => "modified" }
         )
 
         post :handle
@@ -87,6 +107,13 @@ RSpec.describe Api::V1::GithubEventsController, type: :controller do
 
         post :handle
       end
+    end
+
+    it "enqueues both markdown and image jobs when present" do
+      expect(SyncMarkdownFileJob).to receive(:perform_later).at_least(:once)
+      expect(SyncImageJob).to receive(:perform_later).at_least(:once)
+
+      post :handle
     end
   end
 

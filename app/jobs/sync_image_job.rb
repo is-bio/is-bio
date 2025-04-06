@@ -7,10 +7,9 @@ class SyncImageJob < ApplicationJob
     status = file["status"]
 
     if status == "renamed"
-      previous_filename = file["previous_filename"]
-      if (image_file?(previous_filename) && !image_file?(filename)) ||
-        Directory.images?(previous_filename) && !Directory.images?(filename)
-        remove_image_and_thumbnail(previous_filename)
+      remove_image_and_thumbnail(file["previous_filename"])
+
+      unless Directory.images?(filename)
         return
       end
     end
@@ -41,9 +40,15 @@ private
   end
 
   def remove_image_and_thumbnail(filename)
-    File.delete(target_filename(filename)) if File.exist?(target_filename(filename))
+    if File.exist?(target_filename(filename))
+      File.delete(target_filename(filename))
+    end
+
     thumb_path = thumbnail_filename(target_filename(filename))
-    File.delete(thumb_path) if File.exist?(thumb_path)
+
+    if File.exist?(thumb_path)
+      File.delete(thumb_path)
+    end
   end
 
   def target_filename(filename)
