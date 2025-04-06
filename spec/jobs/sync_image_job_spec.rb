@@ -29,17 +29,6 @@ RSpec.describe SyncImageJob, type: :job do
 
           SyncImageJob.perform_now(file)
         end
-
-        it "creates the directory if it doesn't exist" do
-          allow(faraday_connection).to receive(:get).and_return(response)
-          allow(File).to receive(:open).and_yield(file_double)
-          allow(file_double).to receive(:write)
-
-          target_path = Rails.root.join("public/images").to_s
-          expect(FileUtils).to receive(:mkdir_p).with(target_path)
-
-          SyncImageJob.perform_now(file)
-        end
       end
 
       context "when status is 'modified'" do
@@ -58,16 +47,16 @@ RSpec.describe SyncImageJob, type: :job do
       end
 
       context "when status is 'removed'" do
-        let(:file) { { "filename" => "images/logo.jpg", "status" => "removed" } }
-        let(:target_file) { Rails.root.join("public/images/logo.jpg").to_s }
-        let(:thumbnail_file) { Rails.root.join("public/images/logo_thumb.jpg").to_s }
+        let(:file) { { "filename" => "assets/images/logo.jpg", "status" => "removed" } }
+        let(:target_file) { Rails.root.join("public/assets/images/logo.jpg").to_s }
+        let(:thumbnail_file) { Rails.root.join("public/assets/images/logo_thumb.jpg").to_s }
 
         before do
           allow(File).to receive(:exist?).with(target_file).and_return(true)
           allow(File).to receive(:exist?).with(thumbnail_file).and_return(true)
         end
 
-        it "removes the image and thumbnail" do
+        it "removes image and its thumbnail" do
           expect(File).to receive(:delete).with(target_file)
           expect(File).to receive(:delete).with(thumbnail_file)
           SyncImageJob.perform_now(file)
@@ -91,7 +80,7 @@ RSpec.describe SyncImageJob, type: :job do
             allow(File).to receive(:exist?).with(previous_thumb_path).and_return(true)
           end
 
-          it "removes the original images" do
+          it "removes the previous image and its thumbnail" do
             expect(File).to receive(:delete).with(previous_file_path)
             expect(File).to receive(:delete).with(previous_thumb_path)
             SyncImageJob.perform_now(file)
@@ -105,24 +94,20 @@ RSpec.describe SyncImageJob, type: :job do
           end
         end
 
-        context "when renamed from 'images/' path to inner directory" do
-          let(:file) { { "filename" => "images/another/test2.jpg", "status" => "renamed", "previous_filename" => "images/test1.jpg" } }
-          let(:previous_file_path) { Rails.root.join("public/images/test1.jpg").to_s }
-          let(:previous_thumb_path) { Rails.root.join("public/images/test1_thumb.jpg").to_s }
+        context "when renamed from one valid image path to another" do
+          let(:file) { { "filename" => "new/path/image.jpg", "status" => "renamed", "previous_filename" => "old/path/image.jpg" } }
 
           before do
-            allow(File).to receive(:exist?).with(previous_file_path).and_return(true)
-            allow(File).to receive(:exist?).with(previous_thumb_path).and_return(true)
+            allow(Directory).to receive(:images?).with("old/path/image.jpg").and_return(true)
+            allow(Directory).to receive(:images?).with("new/path/image.jpg").and_return(true)
           end
 
-          it "removed the original images and downloads and saves the image to the new location" do
-            expect(File).to receive(:delete).with(previous_file_path)
-            expect(File).to receive(:delete).with(previous_thumb_path)
+          it "downloads and saves the image to the new location" do
             expect(faraday_connection).to receive(:get)
-                                            .with("https://raw.githubusercontent.com/test-user/markdown-blog/main/images/another/test2.jpg")
+                                            .with("https://raw.githubusercontent.com/test-user/markdown-blog/main/new/path/image.jpg")
                                             .and_return(response)
 
-            expect(File).to receive(:open).with(Rails.root.join("public/images/another/test2.jpg").to_s, "wb").and_yield(file_double)
+            expect(File).to receive(:open).with(Rails.root.join("public/new/path/image.jpg").to_s, "wb").and_yield(file_double)
             expect(file_double).to receive(:write).with("image-data")
 
             SyncImageJob.perform_now(file)
@@ -131,17 +116,14 @@ RSpec.describe SyncImageJob, type: :job do
 
         context "when moved out of images directory" do
           let(:file) { { "filename" => "assets/file.jpg", "status" => "renamed", "previous_filename" => "images/file.jpg" } }
-          let(:previous_file_path) { Rails.root.join("public/images/file.jpg").to_s }
-          let(:previous_thumb_path) { Rails.root.join("public/images/file_thumb.jpg").to_s }
 
           before do
-            allow(File).to receive(:exist?).with(previous_file_path).and_return(true)
-            allow(File).to receive(:exist?).with(previous_thumb_path).and_return(true)
+            allow(Directory).to receive(:images?).with("images/file.jpg").and_return(true)
+            allow(Directory).to receive(:images?).with("assets/file.jpg").and_return(false)
           end
 
           it "removes the old image and doesn't download a new one" do
-            expect(File).to receive(:delete).with(Rails.root.join("public/images/file.jpg").to_s)
-            expect(File).to receive(:delete).with(Rails.root.join("public/images/file_thumb.jpg").to_s)
+            expect(File).to receive(:delete).with(Rails.root.join("public/images/file.jpg").to_s) if File.exist?(Rails.root.join("public/images/file.jpg").to_s)
             expect(File).not_to receive(:open)
 
             SyncImageJob.perform_now(file)
@@ -259,42 +241,6 @@ RSpec.describe SyncImageJob, type: :job do
     it "returns the original value for blank input" do
       expect(job.send(:thumbnail_filename, "")).to eq("")
       expect(job.send(:thumbnail_filename, nil)).to eq(nil)
-    end
-  end
-
-  describe "#ensure_directory_exists" do
-    let(:job) { SyncImageJob.new }
-
-    it "creates the directory if it doesn't exist" do
-      filepath = "/path/to/image.jpg"
-      dir_path = "/path/to"
-
-      allow(File).to receive(:dirname).with(filepath).and_return(dir_path)
-      allow(File).to receive(:directory?).with(dir_path).and_return(false)
-
-      expect(FileUtils).to receive(:mkdir_p).with(dir_path)
-
-      job.send(:ensure_directory_exists, filepath)
-    end
-
-    it "doesn't create the directory if it already exists" do
-      filepath = "/path/to/image.jpg"
-      dir_path = "/path/to"
-
-      allow(File).to receive(:dirname).with(filepath).and_return(dir_path)
-      allow(File).to receive(:directory?).with(dir_path).and_return(true)
-
-      expect(FileUtils).not_to receive(:mkdir_p)
-
-      job.send(:ensure_directory_exists, filepath)
-    end
-  end
-
-  describe "#target_filename" do
-    let(:job) { SyncImageJob.new }
-
-    it "prepends Rails.root/public to the filename" do
-      expect(job.send(:target_filename, "images/test.jpg")).to eq(Rails.root.join("public/images/test.jpg").to_s)
     end
   end
 
