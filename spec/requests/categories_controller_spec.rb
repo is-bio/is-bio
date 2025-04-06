@@ -39,28 +39,41 @@ RSpec.describe CategoriesController, type: :request do
   end
 
   describe "GET #drafts_show" do
-    context "when category exists in drafts" do
-      before do
-        allow(Category).to receive(:find_by_name_from_drafts).with(category.path_name).and_return(category)
-      end
-
-      it "renders the show template" do
+    context "when user is not authenticated" do
+      it "redirects to the login page" do
         get "/drafts/#{category.path_name}"
-        expect(response).to render_template(:show)
-        expect(response.body).to include(post1.title)
-        expect(response.body).to include(post2.title)
-        expect(response.body).to include(post1.path)
+        expect(response).to redirect_to(new_session_path)
       end
     end
 
-    context "when category does not exist in drafts" do
+    describe "when user is authenticated" do
+      let(:user) { create(:user) }
+      let(:session) { create(:session, user: user) }
+
       before do
-        allow(Category).to receive(:find_by_name_from_drafts).with("non-existent").and_return(nil)
+        allow_any_instance_of(CategoriesController).to receive(:authenticated?).and_return(true)
+        allow_any_instance_of(CategoriesController).to receive(:resume_session).and_return(session)
       end
 
-      it "returns a not found status" do
-        get "/drafts/non-existent"
-        expect(response).to have_http_status(:not_found)
+      context "when category exists in drafts" do
+        before do
+          allow(Category).to receive(:find_by_name_from_drafts).with(category.path_name).and_return(category)
+        end
+
+        it "renders the show template" do
+          get "/drafts/#{category.path_name}"
+          expect(response).to render_template(:show)
+          expect(response.body).to include(post1.title)
+          expect(response.body).to include(post2.title)
+          expect(response.body).to include(post1.path)
+        end
+      end
+
+      context "when category does not exist in drafts" do
+        it "returns a not found status" do
+          get "/drafts/non-existent"
+          expect(response).to have_http_status(:not_found)
+        end
       end
     end
   end
