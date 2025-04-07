@@ -1,4 +1,5 @@
 en:
+  # Tip: Search for "John Doe" and replace it with your name.
   author_name: "John Doe"
   blog_name: "John Doe's Blog"
   headline: "John Doe's Blog - A Programmer's Soliloquy"
@@ -34,7 +35,14 @@ en:
   subscription:
     success:
       created: "We have sent a subscription confirmation email to your email address. Please check your email and click the confirmation link to complete your subscription!"
-#      confirmed: "Your subscription has been confirmed. Thank you for subscribing!"
+      confirmed: "Your subscription has been confirmed. You will now receive updates when new content is published."
+    error:
+      invalid_token: "Invalid or expired confirmation link."
+    confirmation:
+      subject: "Confirm your subscription to John Doe's Blog"
+      instructions: "Please confirm your subscription by clicking the link below:"
+      button: "Confirm Subscription"
+      expiration_notice: "This link will not expire."
 
   activerecord:
     errors:

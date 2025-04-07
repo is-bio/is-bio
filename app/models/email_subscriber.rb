@@ -17,14 +17,12 @@ class EmailSubscriber < ApplicationRecord
   validates :email, presence: true,
             format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email address" }
 
-  validate :check_existing_subscription
+  validate :check_existing_subscription, on: :create
 
   before_create :generate_token
 
   scope :confirmed, -> { where(confirmed: true) }
 
-  # Confirms a subscription using the provided token
-  # Returns true if confirmation successful, false otherwise
   def confirm_subscription(token)
     unless self.token == token
       return false

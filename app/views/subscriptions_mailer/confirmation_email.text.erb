@@ -1,0 +1,19 @@
+<%= t(:blog_name) %>
+
+Hello <%= @email_subscriber.email %>,
+
+Thank you for subscribing to <%= t(:blog_name) %>!
+
+<%= t('subscription.confirmation.instructions') %>
+
+To confirm your subscription, please visit the following link:
+<%= @confirmation_url %>
+
+After confirming your subscription, you will start receiving email notifications when new content is published.
+
+<%= t('subscription.confirmation.expiration_notice') %>
+
+---
+© <%= Date.today.year %> <%= t(:blog_name) %>. All rights reserved.
+If you did not request this subscription, please ignore this email or contact us to let us know.
+This email was sent to <%= @email_subscriber.email %>.

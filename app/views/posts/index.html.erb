@@ -1,10 +1,9 @@
 <% content_for :title, "Posts" %>
 
-<% if notice.present? %>
-  <p style="color: green"><%= notice %></p>
-<% end %>
-
 <section class="theme-bg-light py-5">
+  <%= tag.div(flash[:notice], class: "text-center text-success mb-2") if flash[:notice] %>
+  <%= tag.div(flash[:alert], class: "text-center text-danger mb-2") if flash[:alert] %>
+
   <div class="container text-center single-col-max-width">
     <h2 class="heading"><%= t(:headline) %></h2>
 

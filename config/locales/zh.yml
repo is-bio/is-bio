@@ -1,4 +1,5 @@
 zh:
+  # 小技巧：搜索 "张三" 并用你的姓名替换它。
   author_name: "张三"
   blog_name: "张三的博客"
   headline: "张三的博客 - 一个程序员的自白"
@@ -34,7 +35,14 @@ zh:
   subscription:
     success:
       created: "我们已向您的邮箱发送了一封订阅确认邮件。请查收邮件，并点击确认链接完成订阅！"
-#      confirmed: "您的订阅已确认。当有新文章发布时，您将收到邮件通知！"
+      confirmed: "您的订阅已确认。当有新文章发布时，您将收到邮件通知！"
+    error:
+      invalid_token: "无效或已过期的确认链接。"
+      confirmation:
+        subject: "确认订阅张三的博客"
+        instructions: "请点击下方链接确认您的订阅："
+        button: "确认订阅"
+        expiration_notice: "此链接永不过期。"
 
   activerecord:
     errors:

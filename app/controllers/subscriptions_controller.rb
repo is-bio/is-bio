@@ -5,12 +5,12 @@ class SubscriptionsController < ApplicationController
     @subscriber = EmailSubscriber.new(subscription_params)
 
     if @subscriber.save
-      # TODO: Send confirmation email (implementation would be required in a real app)
-      # SubscriptionMailer.confirmation_email(@subscriber).deliver_later
+      # Send confirmation email
+      SubscriptionsMailer.confirmation_email(@subscriber).deliver_later
 
       respond_to do |format|
         format.html do
-          flash[:success] = t("subscription.success.created")
+          flash[:notice] = t("subscription.success.created")
           redirect_back(fallback_location: root_path)
         end
         format.json { render json: { status: "success", message: t("subscription.success.created") }, status: :created }
@@ -18,7 +18,7 @@ class SubscriptionsController < ApplicationController
     else
       respond_to do |format|
         format.html do
-          flash[:error] = @subscriber.errors.full_messages.to_sentence
+          flash[:alert] = @subscriber.errors.full_messages.to_sentence
           redirect_back(fallback_location: root_path)
         end
         format.json { render json: { status: "error", errors: @subscriber.errors.full_messages }, status: :unprocessable_entity }
@@ -30,10 +30,10 @@ class SubscriptionsController < ApplicationController
     @subscriber = EmailSubscriber.find_by(token: params[:token])
 
     if @subscriber && @subscriber.confirm_subscription(params[:token])
-      flash[:success] = t("subscription.success.confirmed")
+      flash[:notice] = t("subscription.success.confirmed")
       redirect_to root_path
     else
-      flash[:error] = t("subscription.error.invalid_token")
+      flash[:alert] = t("subscription.error.invalid_token")
       redirect_to root_path
     end
   end
