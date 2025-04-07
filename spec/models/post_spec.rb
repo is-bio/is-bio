@@ -79,27 +79,75 @@ RSpec.describe Post, type: :model do
   describe "callbacks" do
     describe "#cleanup_columns" do
       it "trims whitespace from title" do
-        post = build(:post, title: "  Sample Title  ", permalink: "/test")
+        post = build(:post, title: "  Sample Title  ")
         post.validate
         expect(post.title).to eq("Sample Title")
       end
 
       it "trims whitespace from content" do
-        post = build(:post, content: "  Sample Content  ", permalink: "/test")
+        post = build(:post, content: "  Sample Content  ")
         post.validate
         expect(post.content).to eq("Sample Content")
       end
 
       it "handles nil content" do
-        post = build(:post, content: nil, permalink: "/test")
+        post = build(:post, content: nil)
         post.validate
         expect(post.content).to eq("")
       end
 
       it "handles nil title" do
-        post = build(:post, title: nil, permalink: "/test")
+        post = build(:post, title: nil)
         post.validate
         expect(post.title).to eq("No Title")
+      end
+
+      it "handles empty title" do
+        post = build(:post, title: "")
+        post.validate
+        expect(post.title).to eq("No Title")
+      end
+
+      it "handles title with only whitespace" do
+        post = build(:post, title: "   ")
+        post.validate
+        expect(post.title).to eq("No Title")
+      end
+
+      it "replaces hyphens with underscores in ID" do
+        post = build(:post, id: "test-id-123")
+        post.validate
+        expect(post.id).to eq("test_id_123")
+      end
+
+      it "uses gsub to replace hyphens with underscores in ID" do
+        post = build(:post, id: "test-id-123")
+        post.validate
+        expect(post.id).to eq("test_id_123")
+      end
+
+      it "preserves ID without hyphens" do
+        post = build(:post, id: "TestId_123")
+        post.validate
+        expect(post.id).to eq("TestId_123")
+      end
+
+      it "sets empty thumbnail to nil" do
+        post = build(:post, thumbnail: "")
+        post.validate
+        expect(post.thumbnail).to be_nil
+      end
+
+      it "sets whitespace-only thumbnail to nil" do
+        post = build(:post, thumbnail: "  ")
+        post.validate
+        expect(post.thumbnail).to be_nil
+      end
+
+      it "preserves non-empty thumbnail" do
+        post = build(:post, thumbnail: "image.jpg")
+        post.validate
+        expect(post.thumbnail).to eq("image.jpg")
       end
     end
 
@@ -132,13 +180,13 @@ RSpec.describe Post, type: :model do
 
     describe "#ensure_id" do
       it "generates an ID if not provided" do
-        post = build(:post, id: nil, permalink: "/test")
+        post = build(:post, id: nil)
         expect { post.validate }.to change { post.id }.from(nil)
         expect(post.id).to match(/^[a-zA-Z0-9]{3}$/)
       end
 
       it "does not change existing ID" do
-        post = build(:post, id: "xyz", permalink: "/test")
+        post = build(:post, id: "xyz")
         expect { post.validate }.not_to change { post.id }
         expect(post.id).to eq("xyz")
       end
@@ -362,6 +410,42 @@ RSpec.describe Post, type: :model do
           create(:post, filename: "published/existing.md", title: "Old Title")
           Post.sync_from_file_contents!("modified", "published/existing.md", valid_yaml)
           expect(Post.find_by(filename: "published/existing.md").title).to eq("Test Post")
+        end
+      end
+
+      context "ID normalization" do
+        let(:hyphenated_id_yaml) do
+          <<~YAML
+            ---
+            id: post-with-hyphens-123
+            title: Test Post
+            date: 2023-01-05 15:12:37
+            ---
+            This is the content of the post.
+          YAML
+        end
+
+        it "normalizes hyphenated IDs to use underscores when creating new posts" do
+          expect {
+            Post.sync_from_file_contents!("added", "published/hyphenated-id.md", hyphenated_id_yaml)
+          }.to change { Post.count }.by(1)
+
+          post = Post.last
+          expect(post.id).to eq("post_with_hyphens_123")
+          expect(post.id).not_to include("-")
+        end
+
+        it "normalizes hyphenated IDs before looking up existing posts" do
+          # First create a post with underscores in ID
+          create(:post, id: "post_with_hyphens_123", title: "Original Post")
+
+          # Then try to update it using a hyphenated ID in the content
+          Post.sync_from_file_contents!("modified", "published/hyphenated-id.md", hyphenated_id_yaml)
+
+          # The post should be found and updated
+          post = Post.find_by(id: "post_with_hyphens_123")
+          expect(post).to be_present
+          expect(post.title).to eq("Test Post")
         end
       end
     end

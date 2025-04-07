@@ -65,6 +65,7 @@ class Post < ApplicationRecord
       content = match[1].strip
     end
 
+    id.gsub!("-", "_")
     post = Post.find_by(id: id)
     category = Category.prepared_category(filename)
 
@@ -136,6 +137,10 @@ class Post < ApplicationRecord
 
   # TODO: Remove `""`
   def cleanup_columns
+    if id.present? && id.include?("-")
+      self.id = id.gsub("-", "_")
+    end
+
     title = (self.title || "").strip
     self.title = title.blank? ? DEFAULT_TITLE : title
     if self.content.nil?
