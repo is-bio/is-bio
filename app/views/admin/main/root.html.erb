@@ -21,12 +21,18 @@
     <%= link_to "GitHub App settings", admin_github_app_settings_path %>
     <br>
     <br>
+    <details>
+      <summary><%= t(:change_profile_avatar) %></summary>
+      The avatar file is in <b>/path/to/rails-markdown-blog/app/assets/images/profile.jpg</b>.
+      <br>
+      Do not rename it, just replace it and execute the command `<b>rails assets:precompile</b>` on the "/path/to/rails-markdown-blog/" directory of the server.
+    </details>
 
 <!--    <div class="mt-3">-->
 <!--      <%#= link_to @category_drafts.name, @category_drafts.path, target: "_blank" %>&nbsp;&nbsp;-->
       <%#= link_to @category_published.name, @category_published.path, target: "_blank" %>
 <!--    </div>-->
-
+    <br>
     <%= button_to t(:log_out), session_path, method: :delete, class: "btn btn-primary my-2" if authenticated? %>
   </div>
 </section>

@@ -23,6 +23,7 @@ en:
   enter_email: "Enter email"
 
   welcome_admin: "Welcome, administrator %{email}!"
+  change_profile_avatar: "Change profile avatar"
   create_a_post: "Create a post"
   log_out: "Log out"
   email: "Email"

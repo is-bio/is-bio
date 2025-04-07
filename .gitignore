@@ -38,7 +38,7 @@
 _themes/DevBlog-Theme
 
 /app/assets/images
-!/app/assets/images/profile.png
+!/app/assets/images/profile.jpg
 /app/assets/stylesheets/theme-1.css
 /app/assets/stylesheets/theme-2.css
 /app/assets/stylesheets/theme-3.css
