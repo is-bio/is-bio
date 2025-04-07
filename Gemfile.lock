@@ -425,7 +425,7 @@ DEPENDENCIES
   annotaterb (= 4.14.0)
   bcrypt (~> 3.1.7)
   bootsnap (= 1.18.4)
-  brakeman
+  brakeman (= 7.0.2)
   capybara
   debug
   factory_bot_rails (~> 6.4.4)
