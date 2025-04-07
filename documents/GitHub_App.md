@@ -26,7 +26,7 @@ This paragraph is **only for local debugging** and is not necessary in a product
 Install `ngrok` and configure it well. Then do this:
 
 ```shell
-cd /path/to/rails-markdown-blog
+cd /path/to/markdown-resume-blog
 ngrok http http://localhost:3000 # You will get a base URL like: https://<a-subdomain-string-for-your-site>.ngrok-free.app
 ```
 

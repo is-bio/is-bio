@@ -23,9 +23,9 @@
     <br>
     <details>
       <summary><%= t(:change_profile_avatar) %></summary>
-      The avatar file is in <b>/path/to/rails-markdown-blog/app/assets/images/profile.jpg</b>.
+      The avatar file is in <b>/path/to/markdown-resume-blog/app/assets/images/profile.jpg</b>.
       <br>
-      Do not rename it, just replace it and execute the command `<b>rails assets:precompile</b>` on the "/path/to/rails-markdown-blog/" directory of the server.
+      Do not rename it, just replace it and execute the command `<b>rails assets:precompile</b>` on the "/path/to/markdown-resume-blog/" directory of the server.
     </details>
     <br>
     <%= button_to t(:log_out), session_path, method: :delete, class: "btn btn-primary my-2" if authenticated? %>

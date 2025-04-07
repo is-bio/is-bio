@@ -40,6 +40,7 @@
 #                                    posts GET    /posts(.:format)                                                                                  posts#index
 #                                     root GET    /                                                                                                 posts#index
 #                                    about GET    /about(.:format)                                                                                  posts#about
+#                                     hire GET    /hire(.:format)                                                                                   posts#hire
 #                               categories GET    /categories(.:format)                                                                             categories#index
 #                                 category GET    /category(.:format)                                                                               categories#index
 #                                          GET    /category/:name(.:format)                                                                         categories#show
