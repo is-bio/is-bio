@@ -5,4 +5,4 @@ cp -R ../_themes/DevBlog-Theme/assets/css/. ../app/assets/stylesheets
 cp ../_themes/DevBlog-Theme/assets/plugins/popper.min.js ../app/javascript/src
 cp ../_themes/DevBlog-Theme/assets/plugins/bootstrap/js/bootstrap.min.js ../app/javascript/src
 
-echo "Copied successfully!"
+echo "The DevBlog-Theme was installed successfully!"

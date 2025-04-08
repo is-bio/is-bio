@@ -1,7 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-
 # Uncomment the bellow code to create the administrator user.
 # email = "change_to_your_email@example.com"
 # password = "ChangeToYourPassword_ChangeToYourPassword_ChangeToYourPassword_ChangeToYourPassword"
@@ -12,6 +8,10 @@
 #   user.password_confirmation = password
 # end
 # puts "The administrator user '#{email}' was created successfully. You can use this email to log in."
+
+# This file should ensure the existence of records required to run the application in every environment (production,
+# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
+# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
 %w[
   app_id
