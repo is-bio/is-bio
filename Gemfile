@@ -28,6 +28,8 @@ gem "solid_cache", "1.0.7"
 gem "solid_queue", "1.1.4"
 gem "solid_cable", "3.0.7"
 
+gem "mission_control-jobs", "1.0.2"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", "1.18.4", require: false
 

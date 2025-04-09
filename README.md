@@ -32,9 +32,9 @@ At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can al
 - I started expecting clients to **pay for my services directly on my blog**!
 - Through the blog, I convey a message to potential customers: I am an expert in web development, algorithms, and game addiction!
 
-# Deploy MarkdownResumeBlog on CentOS 
+# Deploy MarkdownResumeBlog on a server 
 
-If you want to deploy *MarkdownResumeBlog* to a server, please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md).
+If you want to deploy *MarkdownResumeBlog* on a server, please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md).
 
 # Install MarkdownResumeBlog on your local computer
 
@@ -104,11 +104,7 @@ vim db/seeds.rb
 rails db:seed
 ```
 
-Use this email address and password to log in on http://localhost:3000/admin. 
-
-## Send email via SMTP
-
-Read [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md).
+Use this email address and password to log in on http://localhost:3000/admin.
 
 ## Start 'Solid Queue' for processing background jobs
 
@@ -117,9 +113,22 @@ cd /path/to/markdown-resume-blog
 bin/jobs
 ```
 
+## Configure "Mission Control — Jobs"
+
+```shell
+cd /path/to/markdown-resume-blog
+rails mission_control:jobs:authentication:configure
+rm public/assets/.manifest.json
+rails assets:precompile
+```
+
+- First, use email address and password to log in on http://localhost:3000/admin.
+- Second, use this username and password to log in on http://localhost:3000/jobs.
+
+## Send email via SMTP
+
+Read [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md).
+
 ## Run tests
 
 Run `bundle exec rspec spec`.
-
-TODO:
-Add `mission_control-jobs`.
