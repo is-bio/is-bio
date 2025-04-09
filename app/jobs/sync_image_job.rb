@@ -30,6 +30,8 @@ class SyncImageJob < ApplicationJob
     File.open(target_filename(filename), "wb") do |file_|
       file_.write(response.body)
     end
+
+    generate_thumbnail(filename)
   end
 
 private
@@ -46,6 +48,13 @@ private
     end
   end
 
+  def generate_thumbnail(filename)
+    source_path = target_filename(filename)
+    thumb_path = thumbnail_filename(source_path)
+
+    ImageProcessor.generate_thumbnail(source_path, thumb_path)
+  end
+
   def thumbnail_filename(filename)
     return filename if filename.blank?
 
@@ -53,11 +62,11 @@ private
   end
 
   def image_file?(filename)
-    accepted_extensions = %w[jpg jpeg gif png]
-    filename = filename.downcase
+    return false if filename.blank?
 
-    accepted_extensions.map { |extension| ".#{extension}" }.any? do |extension|
-      filename.end_with?(extension)
-    end
+    accepted_extensions = %w[jpg jpeg gif png]
+    ext = File.extname(filename).downcase.delete(".")
+
+    accepted_extensions.include?(ext)
   end
 end

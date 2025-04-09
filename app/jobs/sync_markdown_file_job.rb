@@ -42,11 +42,11 @@ class SyncMarkdownFileJob < ApplicationJob
 private
 
   def markdown_file?(filename)
-    accepted_extensions = %w[markdown md]
-    filename = filename.downcase
+    return false if filename.blank?
 
-    accepted_extensions.map { |extension| ".#{extension}" }.any? do |extension|
-      filename.end_with?(extension)
-    end
+    accepted_extensions = %w[markdown md]
+    ext = File.extname(filename).downcase.delete(".")
+
+    accepted_extensions.include?(ext)
   end
 end

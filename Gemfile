@@ -49,7 +49,8 @@ gem "faraday", "~> 2.13.0"
 gem "safe_yaml", "~> 1.0.5"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+gem "mini_magick", "~> 4.13"
 
 group :development, :test do
   gem "annotaterb", "4.14.0"

@@ -13,6 +13,7 @@ RSpec.describe SyncImageJob, type: :job do
       allow(File).to receive(:directory?).and_return(false)
       allow(FileUtils).to receive(:mkdir_p)
       allow(File).to receive(:exist?).and_return(false)
+      allow(ImageProcessor).to receive(:generate_thumbnail)
     end
 
     context "with image files" do
@@ -65,6 +66,12 @@ RSpec.describe SyncImageJob, type: :job do
         it "doesn't try to download the image" do
           allow(File).to receive(:delete)
           expect(faraday_connection).not_to receive(:get)
+          SyncImageJob.perform_now(file)
+        end
+
+        it "doesn't generate thumbnails" do
+          allow(File).to receive(:delete)
+          expect(ImageProcessor).not_to receive(:generate_thumbnail)
           SyncImageJob.perform_now(file)
         end
       end
@@ -132,12 +139,39 @@ RSpec.describe SyncImageJob, type: :job do
       end
     end
 
+    context "when thumbnail generation is needed" do
+      let(:file) { { "filename" => "images/test.jpg", "status" => "added" } }
+      let(:source_path) { Rails.root.join("public/images/test.jpg").to_s }
+      let(:thumb_path) { Rails.root.join("public/images/test_thumb.jpg").to_s }
+
+      before do
+        allow(faraday_connection).to receive(:get).and_return(response)
+        allow(File).to receive(:open).and_yield(file_double)
+        allow(file_double).to receive(:write)
+      end
+
+      context "for new or modified images" do
+        %w[added modified].each do |status|
+          let(:file) { super().merge("status" => status) }
+
+          it "generates a thumbnail" do
+            expect(ImageProcessor).to receive(:generate_thumbnail)
+                                        .with(source_path, thumb_path)
+                                        .and_return(true)
+
+            SyncImageJob.perform_now(file)
+          end
+        end
+      end
+    end
+
     context "with non-image files" do
       let(:file) { { "filename" => "docs/readme.txt", "status" => "added" } }
 
       it "skips processing" do
         expect(faraday_connection).not_to receive(:get)
         expect(File).not_to receive(:open)
+        expect(ImageProcessor).not_to receive(:generate_thumbnail)
 
         SyncImageJob.perform_now(file)
       end
