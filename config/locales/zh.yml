@@ -27,6 +27,8 @@ zh:
   change_profile_avatar: "更换头像"
   create_a_post: "创建博文"
   log_out: "退出登录"
+  back: "返回"
+
   email: "电子邮箱"
   wechat_id: "微信号"
   linkedin_profile_url: "领英URL"

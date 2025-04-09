@@ -1,0 +1,42 @@
+<% content_for :title, "New Email Subscriber" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <% if notice.present? %>
+      <p style="color: green"><%= notice %></p>
+    <% end %>
+
+    <h5 class="mb-3">New Email Subscriber</h5>
+
+    <%= form_with(model: [:admin, @email_subscriber], url: admin_email_subscribers_path) do |form| %>
+      <% if @email_subscriber.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@email_subscriber.errors.count, "error") %> prohibited this subscriber from being saved:</h2>
+
+          <ul>
+            <% @email_subscriber.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-2">
+        <%= form.label :email, class: "required" %>
+        <%= form.email_field :email, class: "form-control", required: true, placeholder: "example@example.com" %>
+      </div>
+
+      <div class="form-check my-3">
+        <%= form.check_box :confirmed, class: "form-check-input" %>
+        <%= form.label :confirmed, "Confirmed", class: "form-check-label" %>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit "Create Subscriber", class: "btn btn-primary" %>
+        <a href="<%= admin_email_subscribers_path %>">
+          <button type="button" class="btn btn-light ms-2"><%= t(:back) %></button>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</section>

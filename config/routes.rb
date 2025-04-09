@@ -38,6 +38,10 @@
 #            edit_admin_github_app_setting GET    /admin/github_app_settings/:id/edit(.:format)                                                     admin/github_app_settings#edit
 #                 admin_github_app_setting PATCH  /admin/github_app_settings/:id(.:format)                                                          admin/github_app_settings#update
 #                                          PUT    /admin/github_app_settings/:id(.:format)                                                          admin/github_app_settings#update
+#           admin_email_subscribers GET    /admin/email_subscribers(.:format)                                                                       admin/email_subscribers#index
+#        new_admin_email_subscriber GET    /admin/email_subscribers/new(.:format)                                                                   admin/email_subscribers#new
+#             admin_email_subscriber POST   /admin/email_subscribers(.:format)                                                                       admin/email_subscribers#create
+#                                          DELETE /admin/email_subscribers/:id(.:format)                                                               admin/email_subscribers#destroy
 #                                    posts GET    /posts(.:format)                                                                                  posts#index
 #                                     root GET    /                                                                                                 posts#index
 #                                    about GET    /about(.:format)                                                                                  posts#about
@@ -128,6 +132,7 @@ Rails.application.routes.draw do
     resources :settings, only: [ :index, :edit, :update ]
 
     resources :github_app_settings, only: [ :index, :edit, :update ]
+    resources :email_subscribers, only: %i[index new create destroy]
   end
 
   resources :posts, only: [ :index ]

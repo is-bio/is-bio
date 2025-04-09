@@ -27,6 +27,8 @@ en:
   change_profile_avatar: "Change profile avatar"
   create_a_post: "Create a post"
   log_out: "Log out"
+  back: "Back"
+
   email: "Email"
   wechat_id: "WeChat ID"
   linkedin_profile_url: "LinkedIn profile URL"

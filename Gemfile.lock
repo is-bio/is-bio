@@ -444,7 +444,7 @@ DEPENDENCIES
   importmap-rails (= 2.1.0)
   jbuilder (= 2.13.0)
   kamal (= 2.5.3)
-  mission_control-jobs
+  mission_control-jobs (= 1.0.2)
   propshaft (= 1.1.0)
   puma (= 6.6.0)
   rails (~> 8.0.2)
