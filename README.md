@@ -51,8 +51,8 @@ The *MarkdownResumeBlog* is developed based on Ruby version 3.3.x, but other ver
    ```
 
 - Ruby developers use a software version manager to install Ruby.
-    - [ruby-install](https://github.com/postmodern/ruby-install)
     - [ruby-build](https://github.com/rbenv/ruby-build)
+    - [ruby-install](https://github.com/postmodern/ruby-install)
     - [asdf](https://github.com/asdf-vm/asdf)
 
 ## Clone 'markdown-resume-blog' project and install Ruby gems

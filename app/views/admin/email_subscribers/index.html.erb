@@ -20,7 +20,7 @@
         <th>Status</th>
         <th>Created At</th>
         <th>Confirmed At</th>
-        <th>Actions</th>
+        <th style="min-width: 220px">Actions</th>
       </tr>
       </thead>
 
@@ -39,22 +39,36 @@
           <td><%= subscriber.created_at.strftime("%Y-%m-%d %H:%M") %></td>
           <td><%= (subscriber.updated_at - subscriber.created_at).seconds.to_i.abs < 1 ? nil : subscriber.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
           <td>
-            <%= button_to "Delete",
-                        admin_email_subscriber_path(subscriber),
-                        method: :delete,
-                        class: "btn btn-danger btn-sm",
-                        form: {
-                          data: {
-                            turbo_confirm: "Are you sure you want to delete this subscriber?",
-                            turbo_confirm_type: "danger"
-                          }
-                        } %>
+            <div class="d-flex gap-2">
+              <% unless subscriber.confirmed %>
+                <%= button_to "Send Verification",
+                              send_verification_email_admin_email_subscriber_path(subscriber),
+                              method: :post,
+                              class: "btn btn-info btn-sm flex-grow-1",
+                              form: {
+                                data: {
+                                  turbo_confirm: "Are you sure you want to send verification email this subscriber?",
+                                  turbo_confirm_type: "danger"
+                                }
+                              } %>
+              <% end %>
+              <%= button_to "Delete",
+                          admin_email_subscriber_path(subscriber),
+                          method: :delete,
+                          class: "btn btn-danger btn-sm #{'flex-grow-1' if subscriber.confirmed}",
+                          form: {
+                            data: {
+                              turbo_confirm: "Are you sure you want to delete this subscriber?",
+                              turbo_confirm_type: "danger"
+                            }
+                          } %>
+            </div>
           </td>
         </tr>
       <% end %>
       <% unless @email_subscribers.any? %>
         <tr>
-          <td colspan="5" class="text-center">No subscribers found</td>
+          <td colspan="6" class="text-center">No subscribers found</td>
         </tr>
       <% end %>
       </tbody>

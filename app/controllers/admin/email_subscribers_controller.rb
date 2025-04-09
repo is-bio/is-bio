@@ -27,6 +27,23 @@ class Admin::EmailSubscribersController < Admin::BaseController
     end
   end
 
+  def send_verification_email
+    @email_subscriber = EmailSubscriber.find(params.expect(:id))
+
+    if @email_subscriber.confirmed
+      redirect_to admin_email_subscribers_path, alert: "Subscriber is already confirmed."
+      return
+    end
+
+    @email_subscriber.generate_new_token if @email_subscriber.token.blank?
+
+    if SubscriptionsMailer.confirmation_email(@email_subscriber).deliver_later
+      redirect_to admin_email_subscribers_path, notice: "Verification email has been sent to #{@email_subscriber.email}."
+    else
+      redirect_to admin_email_subscribers_path, alert: "Failed to send verification email. Please check failed jobs in #{jobs_url} ."
+    end
+  end
+
   private
 
   def email_subscriber_params
