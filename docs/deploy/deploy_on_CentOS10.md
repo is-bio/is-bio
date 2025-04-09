@@ -78,8 +78,8 @@ EDITOR="vim" bin/rails credentials:edit
 
 ```shell
 cd /srv/markdown-resume-blog
-RAILS_ENV=production rails db:migrate
-RAILS_ENV=production rails db:seed
+RAILS_ENV=production rails db:migrate # The database file is `./storage/development.sqlite3`. Running it has no side effects.
+RAILS_ENV=production rails db:seed # Running it has no side effects.
 ```
 
 ## Install theme
@@ -90,7 +90,7 @@ Please follow [docs/install_theme.md](/docs/install_theme.md) to install it.
 
 ```shell
 cd /srv/markdown-resume-blog
-rails assets:precompile # This needs to be executed whenever any assets are changed.
+rails assets:precompile # This needs to be executed whenever any assets are changed. Running it has no side effects.
 bundle exec puma -w 1 -e production # This is used to test if Rails web server can run well.
 ctrl + c # If it has no error, then press `ctrl + c` to terminate it. Then run:
 # Start Rails web server, the `-w` parameter value here needs to be the same as the number of CPU cores of the server to maximize the web load. You can use `lscpu` to view it.
@@ -108,9 +108,6 @@ firewall-cmd --get-active-zones
 firewall-cmd --zone=public --list-ports
 firewall-cmd --zone=public --list-services
 firewall-cmd --add-port=80/tcp
-
-# Optional. You don't need run this command if you use CloudFlare SSL/TLS encryption default mode `Flexible`.
-firewall-cmd --add-port=443/tcp
 ```
 
 ## Configure Nginx

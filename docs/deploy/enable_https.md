@@ -20,6 +20,8 @@ Then, if you are using CloudFlare, please do:
 #### Use `acme.sh` to auto-renew SSL certificate
 
 ```shell
+firewall-cmd --add-port=443/tcp
+
 yum install cronie -y
 systemctl enable crond.service
 systemctl start crond.service

@@ -77,8 +77,8 @@ EDITOR="vim" bin/rails credentials:edit
 
 ```shell
 cd /path/to/markdown-resume-blog
-RAILS_ENV=production rails db:migrate # The database file is `/storage/development.sqlite3`.
-RAILS_ENV=production rails db:seed
+RAILS_ENV=production rails db:migrate # The database file is `./storage/development.sqlite3`. Running it has no side effects.
+RAILS_ENV=production rails db:seed # Running it has no side effects.
 ```
 
 ## Install theme
@@ -89,7 +89,7 @@ Read [docs/install_theme.md](/docs/install_theme.md).
 
 ```shell
 cd /path/to/markdown-resume-blog
-rails assets:precompile # This needs to be executed whenever any assets are changed.
+rails assets:precompile # This needs to be executed whenever any assets are changed. Running it has no side effects.
 rails s # Start Rails web server.
 ```
 
