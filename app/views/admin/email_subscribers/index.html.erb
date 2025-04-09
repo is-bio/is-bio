@@ -19,6 +19,7 @@
         <th>Email</th>
         <th>Status</th>
         <th>Created At</th>
+        <th>Confirmed At</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -36,6 +37,7 @@
             <% end %>
           </td>
           <td><%= subscriber.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= (subscriber.updated_at - subscriber.created_at).seconds.to_i.abs < 1 ? nil : subscriber.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
           <td>
             <%= button_to "Delete",
                         admin_email_subscriber_path(subscriber),
