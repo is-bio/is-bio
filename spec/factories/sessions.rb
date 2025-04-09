@@ -3,11 +3,11 @@
 # Table name: sessions
 #
 #  id         :integer          not null, primary key
-#  ip_address :string
+#  user_id    :integer          not null
 #  user_agent :string
+#  ip_address :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :integer          not null
 #
 # Indexes
 #
@@ -19,8 +19,8 @@
 #
 FactoryBot.define do
   factory :session do
-    user
+    association :user
+    user_agent { "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)" }
     ip_address { "127.0.0.1" }
-    user_agent { "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" }
   end
-end 
+end
