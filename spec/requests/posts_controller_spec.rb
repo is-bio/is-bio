@@ -15,14 +15,14 @@ RSpec.describe PostsController, type: :request do
 
   describe "GET #show" do
     it "render" do
-      get "/this-is-the-post-title-#{post.id}"
+      get "/this-is-the-post-title-#{post.id2}"
       expect(response).to render_template(:show)
       expect(response.body).to include(post.title)
     end
 
     it "redirect to canonical URL" do
-      get "/non-canonical-path-#{post.id}"
-      expect(response).to redirect_to("/this-is-the-post-title-#{post.id}")
+      get "/non-canonical-path-#{post.id2}"
+      expect(response).to redirect_to("/this-is-the-post-title-#{post.id2}")
     end
   end
 

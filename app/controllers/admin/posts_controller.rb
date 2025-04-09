@@ -28,8 +28,6 @@ class Admin::PostsController < Admin::BaseController
     end
   end
 
-private
-
   # DELETE /posts/1
   # def destroy
   #   @post.destroy!
@@ -40,9 +38,11 @@ private
   #   end
   # end
 
+private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params.expect(:id))
+    @post = Post.find_by!(params.expect(:id))
   end
 
   def set_category_options
@@ -56,6 +56,6 @@ private
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.expect(post: [ :id, :permalink, :title, :content, :category_id, :published_at, :thumbnail ])
+    params.expect(post: [ :id, :id2, :permalink, :title, :content, :category_id, :published_at, :thumbnail ])
   end
 end

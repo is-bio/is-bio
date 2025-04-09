@@ -2,9 +2,10 @@
 #
 # Table name: posts
 #
-#  id           :string           not null, primary key
+#  id           :integer          not null, primary key
 #  content      :text
 #  filename     :text
+#  id2          :string
 #  permalink    :string           not null
 #  published_at :datetime         not null
 #  thumbnail    :string
@@ -15,6 +16,7 @@
 # Indexes
 #
 #  index_posts_on_category_id  (category_id)
+#  index_posts_on_id2          (id2) UNIQUE
 #
 # Foreign Keys
 #
@@ -115,21 +117,21 @@ RSpec.describe Post, type: :model do
       end
 
       it "replaces hyphens with underscores in ID" do
-        post = build(:post, id: "test-id-123")
+        post = build(:post, id2: "test-id-123")
         post.validate
-        expect(post.id).to eq("test_id_123")
+        expect(post.id2).to eq("test_id_123")
       end
 
       it "uses gsub to replace hyphens with underscores in ID" do
-        post = build(:post, id: "test-id-123")
+        post = build(:post, id2: "test-id-123")
         post.validate
-        expect(post.id).to eq("test_id_123")
+        expect(post.id2).to eq("test_id_123")
       end
 
       it "preserves ID without hyphens" do
-        post = build(:post, id: "TestId_123")
+        post = build(:post, id2: "TestId_123")
         post.validate
-        expect(post.id).to eq("TestId_123")
+        expect(post.id2).to eq("TestId_123")
       end
 
       it "sets empty thumbnail to nil" do
@@ -180,15 +182,15 @@ RSpec.describe Post, type: :model do
 
     describe "#ensure_id" do
       it "generates an ID if not provided" do
-        post = build(:post, id: nil)
-        expect { post.validate }.to change { post.id }.from(nil)
-        expect(post.id).to match(/^[a-zA-Z0-9]{3}$/)
+        post = build(:post, id2: nil)
+        expect { post.validate }.to change { post.id2 }.from(nil)
+        expect(post.id2).to match(/^[a-zA-Z0-9]{3}$/)
       end
 
       it "does not change existing ID" do
-        post = build(:post, id: "xyz")
+        post = build(:post, id2: "xyz")
         expect { post.validate }.not_to change { post.id }
-        expect(post.id).to eq("xyz")
+        expect(post.id2).to eq("xyz")
       end
     end
   end
@@ -196,7 +198,7 @@ RSpec.describe Post, type: :model do
   describe "instance methods" do
     describe "#path" do
       it "returns permalink and ID joined with a hyphen" do
-        post = build_stubbed(:post, id: "abc", permalink: "/sample-permalink")
+        post = build_stubbed(:post, id2: "abc", permalink: "/sample-permalink")
         expect(post.path).to eq("/sample-permalink-abc")
       end
     end
@@ -242,7 +244,7 @@ RSpec.describe Post, type: :model do
           expect {
             Post.sync_from_file_contents!("added", "published/file.md", valid_yaml)
           }.to change { Post.count }.by(1)
-          post = Post.find_by(id: "xyz")
+          post = Post.find_by(id2: "xyz")
           expect(post.title).to eq("Test Post")
           expect(post.published_at).to eq("2023-01-05 15:12:37".to_datetime)
           expect(post.thumbnail).to eq("thumbnail1.jpg")
@@ -250,7 +252,7 @@ RSpec.describe Post, type: :model do
         end
 
         it "updates an existing post if 'id' exists" do
-          existing_post = create(:post, id: "xyz", title: "Old Title")
+          existing_post = create(:post, id2: "xyz", title: "Old Title")
 
           expect {
             Post.sync_from_file_contents!("modified", "published/file.md", valid_yaml)
@@ -264,7 +266,7 @@ RSpec.describe Post, type: :model do
         end
 
         it "stores filename when creating new post" do
-          allow(Post).to receive(:find_by).with(id: "xyz").and_return(nil)
+          allow(Post).to receive(:find_by).with(id2: "xyz").and_return(nil)
           category = Category.published_root
           allow(Category).to receive(:prepared_category).and_return(category)
 
@@ -273,21 +275,21 @@ RSpec.describe Post, type: :model do
         end
 
         it "updates existing post by 'id'" do
-          existing_post = create(:post, id: "xyz")
+          existing_post = create(:post, id2: "xyz")
           Post.sync_from_file_contents!("modified", "published/file.md", valid_yaml)
           existing_post.reload
           expect(existing_post.title).to eq("Test Post")
         end
 
         it "updates existing post by 'filename'" do
-          expect(Post.find_by(id: "xyz")).to be_nil
-          create(:post, id: "noneXyz", filename: "published/file1.md")
+          expect(Post.find_by(id2: "xyz")).to be_nil
+          create(:post, id2: "noneXyz", filename: "published/file1.md")
 
           Post.sync_from_file_contents!("modified", "published/file1.md", valid_yaml)
 
-          expect(Post.find_by(id: "noneXyz")).to be_nil
+          expect(Post.find_by(id2: "noneXyz")).to be_nil
 
-          new_post = Post.find_by(id: "xyz")
+          new_post = Post.find_by(id2: "xyz")
           expect(new_post.title).to eq("Test Post")
           expect(new_post.filename).to eq("published/file1.md")
           expect(new_post.published_at).to eq("2023-01-05 15:12:37".to_datetime)
@@ -297,13 +299,13 @@ RSpec.describe Post, type: :model do
 
         it "create a post if id doesn't exist" do
           Post.sync_from_file_contents!("modified", "published/file2.md", valid_yaml)
-          expect(Post.find_by(id: "xyz").title).to eq("Test Post")
-          expect(Post.find_by(id: "xyz").filename).to eq("published/file2.md")
+          expect(Post.find_by(id2: "xyz").title).to eq("Test Post")
+          expect(Post.find_by(id2: "xyz").filename).to eq("published/file2.md")
         end
 
         context "status is 'rename'" do
           it "update the 'filename' and category if post exist" do
-            existing_post = create(:post, id: "xyz", filename: "published/old_filename.md")
+            existing_post = create(:post, id2: "xyz", filename: "published/old_filename.md")
             old_content = existing_post.content
 
             Post.sync_from_file_contents!("renamed", "drafts/new_filename.md", valid_yaml)
@@ -315,19 +317,19 @@ RSpec.describe Post, type: :model do
           end
 
           it "create a post if post doesn't exist" do
-            expect(Post.find_by(id: "xyz")).to be_nil
+            expect(Post.find_by(id2: "xyz")).to be_nil
 
             expect {
               Post.sync_from_file_contents!("renamed", "drafts/new_filename.md", valid_yaml)
             }.to change { Post.count }.by(1)
 
-            expect(Post.find_by(id: "xyz").title).to eq("Test Post")
+            expect(Post.find_by(id2: "xyz").title).to eq("Test Post")
           end
         end
 
         context "status is 'rename_and_modified'" do
           it "update post if post exist" do
-            existing_post = create(:post, id: "xyz", filename: "drafts/old_filename.md")
+            existing_post = create(:post, id2: "xyz", filename: "drafts/old_filename.md")
             old_content = existing_post.content
 
             Post.sync_from_file_contents!("renamed_and_modified", "published/new_filename.md", valid_yaml)
@@ -340,13 +342,13 @@ RSpec.describe Post, type: :model do
           end
 
           it "create a post if post doesn't exist" do
-            expect(Post.find_by(id: "xyz")).to be_nil
+            expect(Post.find_by(id2: "xyz")).to be_nil
 
             expect {
               Post.sync_from_file_contents!("renamed_and_modified", "drafts/new_filename.md", valid_yaml)
             }.to change { Post.count }.by(1)
 
-            expect(Post.find_by(id: "xyz").title).to eq("Test Post")
+            expect(Post.find_by(id2: "xyz").title).to eq("Test Post")
           end
         end
       end
@@ -372,17 +374,17 @@ RSpec.describe Post, type: :model do
           expect {
             Post.sync_from_file_contents!("added", "published/file4.md", invalid_date_yaml)
           }.to change { Post.count }.by(1)
-          expect(Post.find_by(id: "xyz").title).to eq("Invalid Date Post")
-          expect(Post.find_by(id: "xyz").published_at).to be_within(1.minute).of(Time.current)
+          expect(Post.find_by(id2: "xyz").title).to eq("Invalid Date Post")
+          expect(Post.find_by(id2: "xyz").published_at).to be_within(1.minute).of(Time.current)
         end
 
         %w[modified added].each do |status|
           it "update a post but not change the published_at when '#{status}'" do
-            create(:post, id: "xyz", published_at: Time.current - 5.days)
+            create(:post, id2: "xyz", published_at: Time.current - 5.days)
             expect {
               Post.sync_from_file_contents!(status, "published/file4.md", invalid_date_yaml)
             }.not_to change { Post.count }
-            post = Post.find_by(id: "xyz")
+            post = Post.find_by(id2: "xyz")
             expect(post.title).to eq("Invalid Date Post")
             expect(post.published_at).to be_within(1.minute).of(Time.current - 5.days)
           end
@@ -431,19 +433,19 @@ RSpec.describe Post, type: :model do
           }.to change { Post.count }.by(1)
 
           post = Post.last
-          expect(post.id).to eq("post_with_hyphens_123")
-          expect(post.id).not_to include("-")
+          expect(post.id2).to eq("post_with_hyphens_123")
+          expect(post.id2).not_to include("-")
         end
 
         it "normalizes hyphenated IDs before looking up existing posts" do
           # First create a post with underscores in ID
-          create(:post, id: "post_with_hyphens_123", title: "Original Post")
+          create(:post, id2: "post_with_hyphens_123", title: "Original Post")
 
           # Then try to update it using a hyphenated ID in the content
           Post.sync_from_file_contents!("modified", "published/hyphenated-id.md", hyphenated_id_yaml)
 
           # The post should be found and updated
-          post = Post.find_by(id: "post_with_hyphens_123")
+          post = Post.find_by(id2: "post_with_hyphens_123")
           expect(post).to be_present
           expect(post.title).to eq("Test Post")
         end

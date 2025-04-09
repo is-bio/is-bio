@@ -164,5 +164,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # This line needs to be placed at the end
-  get ":permalink-:id" => "posts#show"
+  get ":permalink-:id2" => "posts#show"
 end

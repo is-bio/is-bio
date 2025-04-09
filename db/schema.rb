@@ -33,7 +33,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_06_144617) do
     t.index ["key"], name: "index_github_app_settings_on_key", unique: true
   end
 
-  create_table "posts", id: :string, force: :cascade do |t|
+  create_table "posts", force: :cascade do |t|
+    t.string "id2"
     t.integer "category_id", null: false
     t.string "permalink", null: false
     t.text "title"
@@ -43,6 +44,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_06_144617) do
     t.text "filename"
     t.string "thumbnail"
     t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["id2"], name: "index_posts_on_id2", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|

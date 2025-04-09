@@ -3,9 +3,10 @@
 If you want to automatically update your blog after executing the `git push` command, you need to install your GitHub App first. Only in this way can GitHub push the `git push` events to this platform.
 With the guidance of this article, you can create a GitHub App for you to install it.
 
-This article will assume that you are working on your local `Dev` env.
+This article will assume that you are working on your local `development` env.
+In the development environment, https://your-domain.com below actually refers to http://localhost:3000.
 
-For `QA` or `Prodction` env, the situation are similar. You just need to change some value to meet your needs.
+For `qa` or `prodction` env, the situation are similar. You just need to change some value to meet your needs.
 
 ## Create a GitHub App
 
@@ -58,7 +59,7 @@ Visit https://your-domain.com/admin/github_app_settings , then
 
 ## Test blog syncing feature
 
-- Visit https://github.com/RubyMarkdownBlog/markdown-blog/fork , fork it to your GitHub account.
+- Visit https://github.com/resumeblog/markdown-blog/fork , fork it to your GitHub account.
 
 - Visit https://your-domain.com/admin/settings , then set `github_username` value with your GitHub username. In this GitHub account, make sure there is a repository named `markdown-blog`.
 

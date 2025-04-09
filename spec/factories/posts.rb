@@ -2,9 +2,10 @@
 #
 # Table name: posts
 #
-#  id           :string           not null, primary key
+#  id           :integer          not null, primary key
 #  content      :text
 #  filename     :text
+#  id2          :string
 #  permalink    :string           not null
 #  published_at :datetime         not null
 #  thumbnail    :string
@@ -15,6 +16,7 @@
 # Indexes
 #
 #  index_posts_on_category_id  (category_id)
+#  index_posts_on_id2          (id2) UNIQUE
 #
 # Foreign Keys
 #
@@ -23,7 +25,7 @@
 FactoryBot.define do
   factory :post do
     filename { "published/#{Faker::Lorem.words(number: 3).join('-').downcase}" }
-    id { Faker::Lorem.characters(number: 4) }
+    id2 { Faker::Lorem.characters(number: 4) }
     title { Faker::Lorem.words(number: 8).join(" ").titleize }
     category_id { Category::ID_PUBLISHED }
     published_at { Time.current }

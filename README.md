@@ -18,7 +18,7 @@ At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can al
 2. For those who are not familiar with Jekyll or Hugo, it is even **difficult** to even find a good-looking theme.
     - *MarkdownResumeBlog* currently supports one **beautiful free theme**, and more themes will be added in the future.
 3. Their documentation is a lot of pages long. Who can explain everything in just one page?
-    - *MarkdownResumeBlog* can. For information on how to write a blog using Markdown and Git, read [markdown-blog](https://github.com/RubyMarkdownBlog/markdown-blog) using the *MarkdownResumeBlog* approach.
+    - *MarkdownResumeBlog* can. For information on how to write a blog using Markdown and Git, read [markdown-blog](https://github.com/resumeblog/markdown-blog) using the *MarkdownResumeBlog* approach.
 
 ## Why don’t developers blog much anymore?
 
@@ -124,6 +124,14 @@ rails assets:precompile
 
 - First, use email address and password to log in on http://localhost:3000/admin.
 - Second, use this username and password to log in on http://localhost:3000/jobs.
+
+## Create and install your "GitHub App" to sync local "markdown-blog" repository's markdown files' changes to blog website's posts
+
+Here, the blog website is your local Rails web server. If you [deploy_it_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md), the blog website is your real web server.
+
+Please read [markdown-blog](https://github.com/resumeblog/markdown-blog) if you are not familiar with how to write a blog using Markdown and Git.
+
+Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to complete this step.
 
 ## Send email via SMTP
 

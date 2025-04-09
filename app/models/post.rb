@@ -2,9 +2,10 @@
 #
 # Table name: posts
 #
-#  id           :string           not null, primary key
+#  id           :integer          not null, primary key
 #  content      :text
 #  filename     :text
+#  id2          :string
 #  permalink    :string           not null
 #  published_at :datetime         not null
 #  thumbnail    :string
@@ -15,6 +16,7 @@
 # Indexes
 #
 #  index_posts_on_category_id  (category_id)
+#  index_posts_on_id2          (id2) UNIQUE
 #
 # Foreign Keys
 #
@@ -25,30 +27,30 @@ class Post < ApplicationRecord
   DEFAULT_TITLE = "No Title"
 
   belongs_to :category
-  # has_many :comments # TODO: should not delete comments if 'id' changed or post deleted.
+  # has_many :comments # TODO: should not delete comments if 'id2' changed or post deleted.
 
   validates :permalink, presence: true
   validates :published_at, presence: true
   validate :permalink_starts_with
 
   before_validation :cleanup_columns, :ensure_permalink
-  before_validation :ensure_id, :ensure_published_at, on: :create
+  before_validation :ensure_id2, :ensure_published_at, on: :create
 
   scope :published, -> { where(category_id: Category.published_ids) }
 
   def path
-    "#{permalink}-#{id}"
+    "#{permalink}-#{id2}"
   end
 
   def self.sync_from_file_contents!(status, filename, contents)
     metadata = YAML.load(contents) || {}
 
-    id = metadata["id"]
+    id2 = metadata["id"]
     title = metadata["title"]
     date = metadata["date"]
     thumbnail = metadata["thumbnail"]
 
-    unless id.present?
+    unless id2.present?
       if status == "modified"
         post = Post.find_by(filename: filename)
         if post.present?
@@ -65,8 +67,8 @@ class Post < ApplicationRecord
       content = match[1].strip
     end
 
-    id.gsub!("-", "_")
-    post = Post.find_by(id: id)
+    id2.gsub!("-", "_")
+    post = Post.find_by(id2: id2)
     category = Category.prepared_category(filename)
 
     if status == "renamed"
@@ -84,7 +86,7 @@ class Post < ApplicationRecord
         post = Post.find_by(filename: filename)
         if post.present?
           attributes = {
-            id: id,
+            id2: id2,
             filename: filename,
             category: category,
             title: title,
@@ -103,7 +105,7 @@ class Post < ApplicationRecord
 
       Post.create!(
         filename: filename,
-        id: id,
+        id2: id2,
         category: category,
         title: title,
         published_at: date,
@@ -137,8 +139,8 @@ class Post < ApplicationRecord
 
   # TODO: Remove `""`
   def cleanup_columns
-    if id.present? && id.include?("-")
-      self.id = id.gsub("-", "_")
+    if id2.present? && id2.include?("-")
+      self.id2 = id2.gsub("-", "_")
     end
 
     title = (self.title || "").strip
@@ -173,26 +175,26 @@ class Post < ApplicationRecord
     "/" + CGI.escape(title.to_s.downcase.split(" ").join("-")[...255])
   end
 
-  def ensure_id
-    if id.present?
+  def ensure_id2
+    if id2.present?
       return
     end
 
-    new_id = generate_id
+    new_id2 = generate_id2
 
     10.times do
-      if self.class.find_by(id: new_id).present?
-        new_id = generate_id
+      if self.class.find_by(id2: new_id2).present?
+        new_id2 = generate_id2
         next
       end
 
       break
     end
 
-    self.id = new_id
+    self.id2 = new_id2
   end
 
-  def generate_id
+  def generate_id2
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
     3.times.map { chars.sample }.join
   end

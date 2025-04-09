@@ -4,7 +4,7 @@ This article is about how to install *MarkdownResumeBlog* website on **CentOS 10
 
 ## Apply for a domain name and add DNS A records
 
-The following assumes that your domain name is *yourblog.com*. If you don't have a domain, you can just use `the_server_ip`.
+The following assumes that your domain name is *your-domain.com*. If you don't have a domain, you can just use `the_server_ip`.
 
 Create two DNS A records:
 
@@ -124,15 +124,15 @@ cd /etc/nginx
 cp /srv/markdown-resume-blog/docs/deploy/nginx.conf ./ # Replace the existing file
 cd /etc/nginx/conf.d
 cp /srv/markdown-resume-blog/docs/deploy/blog_nginx.conf ./
-vim blog_nginx.conf # Replace the "yourblog.com" with your actual domain name.
+vim blog_nginx.conf # Replace the "your-domain.com" with your actual domain name.
 
 systemctl enable nginx # Set to start automatically at boot
 systemctl start nginx
 ```
 
-Visit http://yourblog.com, you should see that the web works well.
+Visit http://your-domain.com, you should see that the web works well.
 
-### Troubleshooting
+## Troubleshooting
 
 1. Always make sure that the Rails web server is running!
 
@@ -168,6 +168,45 @@ Visit http://yourblog.com, you should see that the web works well.
 3. If the status code of `assets` (js, css, images, etc.) is *404*.
     - **Clear your browser cache** and refresh the page again.
 
+## Create the Admin User
+
+```shell
+cd /srv/markdown-resume-blog
+vim db/seeds.rb
+# Uncomment the first few lines of code to create the Admin User.
+rails db:seed
+```
+
+Use this email address and password to log in on http://your-domain.com/admin.
+
+## Start 'Solid Queue' for processing background jobs
+
+```shell
+cd /srv/markdown-resume-blog
+bin/jobs
+```
+
+## Configure "Mission Control — Jobs"
+
+```shell
+cd /srv/markdown-resume-blog
+rails mission_control:jobs:authentication:configure
+rails assets:precompile
+```
+
+- First, use email address and password to log in on http://your-domain.com/admin.
+- Second, use this username and password to log in on http://your-domain.com/jobs.
+
+## Create and install your "GitHub App" to sync "markdown-blog" repository's markdown files' changes to your blog website's posts
+
+Please read [markdown-blog](https://github.com/resumeblog/markdown-blog) if you are not familiar with how to write a blog using Markdown and Git.
+
+Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to complete this step.
+
+## Sync "markdown-blog" repository's images' or other files' changes to your blog website's "public/images" or "public/files"
+
+- TODO
+
 ## Support "https" for web
 
 ### Way 1: Use a third-party service such as CloudFlare (recommended)
@@ -176,7 +215,7 @@ This is the most convenient way.
 
 If you use CloudFlare SSL/TLS encryption default mode `Flexible`, you can see "https" has already been supported.
 
-You can visit https://yourblog.com to check it.
+You can visit https://your-domain.com to check it.
 
 ### Way 2: Implement support for "https" yourself
 
@@ -186,7 +225,7 @@ Please read [enable_https](/docs/deploy/enable_https.md).
 
 TODO
 
-### Redirect *.yourblog.com to yourblog.com
+### Redirect *.your-domain.com to your-domain.com
 
 ### Redirect http:// to https://
 

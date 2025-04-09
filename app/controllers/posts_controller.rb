@@ -6,16 +6,16 @@ class PostsController < ApplicationController
   end
 
   def show
-    id = params.expect(:id)
+    id2 = params.expect(:id2)
 
-    if id.blank?
+    if id2.blank?
       raise_404
     end
 
     if authenticated?
-      @post = Post.find(id)
+      @post = Post.find_by!(id2: id2)
     else
-      @post = Post.published.find(id)
+      @post = Post.published.find_by!(id2: id2)
     end
 
     if @post.permalink != "/#{CGI.escape(params.expect(:permalink))}"
