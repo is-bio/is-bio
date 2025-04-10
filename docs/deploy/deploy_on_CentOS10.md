@@ -71,7 +71,8 @@ cd /srv/markdown-resume-blog
 # This file contains all the credentials that need to be set.
 cat config/credentials.yml.example # Set "all" of them with the next command:
 # After saving it, "config/credentials.yml.enc" and "config/master.key" will be created.
-EDITOR="vim" bin/rails credentials:edit # In order for the modified credentials to take effect, you need to restart the Rails web server.
+# In order for the modified credentials to take effect, you need to restart the Rails web server.
+EDITOR="vim" bin/rails credentials:edit
 ```
 
 **All** items shown in `config/credentials.yml.example` need to be set!
@@ -210,16 +211,18 @@ exit # When the ssh session is closed, the processes started during the session 
 ### Troubleshooting
 
 ```shell
-ps -ef|grep jobs # You should see the process running. If you didn't see any process listed, you should start it by reading the instructions above.
+# You should see the process running. If you didn't see any process listed,
+#   you should start it by reading the instructions above.
+ps -ef|grep jobs
 ```
 
-## Create and install your "GitHub App" to sync "markdown-blog" repository's markdown files' changes to your blog website's posts
+## Create and install your "GitHub App" to sync "markdown-blog" repository's files' changes to your blog website
 
 Please read [markdown-blog](https://github.com/resumeblog/markdown-blog) if you are not familiar with how to write a blog using Markdown and Git.
 
 Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to complete this step.
 
-## Sync "markdown-blog" repository's images' or other files' changes to your blog website's "public/images" or "public/files"
+## Automatically generate thumbnails for images
 
 - TODO
 
