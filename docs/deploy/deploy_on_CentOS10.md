@@ -192,6 +192,10 @@ Tasks such as sending emails and automatically generating image thumbnails requi
 
 ```shell
 cd /srv/markdown-resume-blog
+# If there is content output on the screen, it means that some asset files has been rewritten.
+#   You need to restart Rails web server for the changes to take effect.
+rails assets:precompile
+
 bin/jobs # This is used to test if background tasks can run well.
 ctrl + c # If it has no error, press `ctrl + c` to terminate it. Then run:
 nohup bin/jobs & # ./nohup.out is the log file
@@ -248,7 +252,7 @@ RAILS_ENV=production rails db:seed # You don't need to execute it unless the "db
 rails assets:precompile # This needs to be executed whenever any assets are changed.
 ```
 
-Then follow the `## Start Rails web server` section.
+Then follow the `## Start Rails web server` section to restart Rails web server.
 
 ## Database backup
 

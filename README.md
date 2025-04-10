@@ -119,6 +119,8 @@ Tasks such as sending emails and automatically generating image thumbnails requi
 
 ```shell
 cd /path/to/markdown-resume-blog
+rm public/assets/.manifest.json                                                                                                                             11:17:04
+rails assets:precompile
 bin/jobs
 ```
 
