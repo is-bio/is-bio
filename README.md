@@ -1,5 +1,7 @@
 # Enjoy blogging with "Markdown" and "Git". An open source personal blog engine based on Ruby on Rails 8.
 
+Demo website: [Lane Zhang's blog](https://lanezhang.com).
+
 ## How can I write articles locally with Markdown files and publish them with `git push`? 
 
 At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can already meet the above requirements, not perfectly.
