@@ -19,7 +19,7 @@ cd /srv/markdown-resume-blog
 rails assets:precompile
 ```
 
-Then restart the Rails web server.
+Then restart the "Rails web server" to make the changes take effect.
 
 ## Language and I18n
 
@@ -41,4 +41,6 @@ cd /srv/markdown-resume-blog
 vim config/locales/en.yml # or zh.yml
 ```
 
-Then restart the Rails web server to make the changes take effect.
+To make the changes take effect:
+    1. Restart the "Rails web server".
+    2. Restart the "Solid Queue" to handle background jobs.

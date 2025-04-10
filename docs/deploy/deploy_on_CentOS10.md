@@ -104,7 +104,6 @@ exit # When the ssh session is closed, the processes started during the session 
 ```
 
 ## Firewall
-According to https://docs.vultr.com/firewall-quickstart-for-vultr-cloud-servers
 
 ```shell
 firewall-cmd --state
@@ -188,7 +187,7 @@ Use this email address and password to log in on http://your-domain.com/admin.
 
 Please follow the instructions in [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md) to complete this step.
 
-## Start "Solid Queue" for processing background jobs
+## Start "Solid Queue" to handle background jobs
 
 Tasks such as sending emails and automatically generating image thumbnails require background tasks.
 
@@ -207,6 +206,17 @@ exit # When the ssh session is closed, the processes started during the session 
 - First, use email address and password to log in on http://your-domain.com/admin.
 - Second, use this username and password to log in on http://your-domain.com/jobs to see if there are failed tasks.
     - The username and password can be obtained by running `EDITOR="vim" bin/rails credentials:edit`.
+
+### Restart "Solid Queue" to handle background jobs
+
+When the code related to the background task is changed, you need to restart "Solid Queue" for the changes to take effect.
+
+```shell
+ps -ef|grep solid
+kill -9 solid-queue-supervisor_pid
+ps -ef|grep solid # Confirm there is no process listed.
+nohup bin/jobs &
+```
 
 ### Troubleshooting
 
@@ -263,10 +273,15 @@ RAILS_ENV=production rails db:seed # You don't need to execute it unless the "db
 rails assets:precompile # This needs to be executed whenever any assets are changed.
 ```
 
-Then follow the `## Start or restart Rails web server` section to restart Rails web server.
+- Then follow the `## Start or restart Rails web server` section to restart Rails web server.
+- Follow the `### Restart "Solid Queue" to handle background jobs` section to restart "Solid Queue".
 
 ## Database backup
 
 ```shell
 scp root@the_server_ip:/srv/markdown-resume-blog/storage/production.sqlite3 ./ # Run it in your local computer
 ```
+
+## Setting up your website
+
+Read [setup_website.md](/docs/setup_website.md).
