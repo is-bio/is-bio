@@ -133,6 +133,21 @@ Please read [markdown-blog](https://github.com/resumeblog/markdown-blog) if you 
 
 Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to complete this step.
 
+## Sync "markdown-blog" repository's images' or other files' changes to your blog website's "public/images" or "public/files"
+
+This feature is already available.
+
+<details>
+  <summary>Click to view how to automatically generate thumbnails for images</summary>
+  Because we will automatically generate thumbnails for images, you need to install [ImageMagick](https://imagemagick.org/).
+If you don't care about thumbnails when debugging locally, you can skip this step and only install ImageMagick on the server.
+
+```shell
+# Warning: This command may take a long time and download a lot of packages!
+brew install imagemagick
+```
+</details>
+
 ## Send email via SMTP
 
 Read [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md).

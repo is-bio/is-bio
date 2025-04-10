@@ -269,7 +269,7 @@ RSpec.describe SyncImageJob, type: :job do
     end
 
     it "handles paths with multiple dots" do
-      expect(job.send(:thumbnail_filename, "/path/to/image.test.jpg")).to eq("/path/to/image.test_thumb.jpg")
+      expect(job.send(:thumbnail_filename, "/images/image.test.jpg")).to eq("/images/image.test_thumb.jpg")
     end
 
     it "returns the original value for blank input" do

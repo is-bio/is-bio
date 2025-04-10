@@ -13,4 +13,10 @@ module FileHelper
   def target_filename(filename)
     "#{Rails.root}/public/#{filename}"
   end
+
+  def thumbnail_filename(filename)
+    return filename if filename.blank?
+
+    filename.reverse.sub(".", "_thumb.".reverse).reverse
+  end
 end

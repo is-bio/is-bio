@@ -55,12 +55,6 @@ private
     ImageProcessor.generate_thumbnail(source_path, thumb_path)
   end
 
-  def thumbnail_filename(filename)
-    return filename if filename.blank?
-
-    filename.reverse.sub(".", "_thumb.".reverse).reverse
-  end
-
   def image_file?(filename)
     return false if filename.blank?
 
