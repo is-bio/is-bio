@@ -4,30 +4,7 @@
 
 To generate a suitable avatar, you can visit [GitHub profile settings](https://github.com/settings/profile) and click "Edit" to modify the avatar. Finally, save the GitHub avatar locally.
 
-The avatar file is `/srv/markdown-resume-blog/app/assets/images/profile.jpg`.
-
-Do not rename it, just replace it. You can replace it by running
-
-```shell
-scp /path/to/local/computer/profile.jpeg root@the_server_ip:/srv/markdown-resume-blog/app/assets/images/profile.jpg
-```
-
-on your local computer. Then run
-
-```shell
-cd /srv/markdown-resume-blog
-rails assets:precompile
-```
-
-Then restart the Rails web server.
-
-## Language# Setting up your website
-
-## Change profile avatar
-
-To generate a suitable avatar, you can visit [GitHub profile settings](https://github.com/settings/profile) and click "Edit" to modify the avatar. Finally, save the GitHub avatar locally.
-
-The avatar file is `/srv/markdown-resume-blog/app/assets/images/profile.jpg`.
+The avatar file on the server is `/srv/markdown-resume-blog/app/assets/images/profile.jpg`.
 
 Do not rename it, just replace it. You can replace it by running
 
