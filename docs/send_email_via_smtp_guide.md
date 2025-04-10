@@ -96,7 +96,7 @@ echo $APPLICATION_HOST
 
 ## Testing Email Delivery
 
-1. Please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to start Rails web server.
+1. Please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to restart Rails web server.
 2. Please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to start "Solid Queue" process to handle background jobs.
 3. Email the Admin User.
     - Visit http://your-domain.com/admin.

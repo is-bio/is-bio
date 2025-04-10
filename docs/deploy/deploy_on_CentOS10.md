@@ -198,12 +198,19 @@ rails assets:precompile
 
 bin/jobs # This is used to test if background tasks can run well.
 ctrl + c # If it has no error, press `ctrl + c` to terminate it. Then run:
-nohup bin/jobs & # ./nohup.out is the log file
+nohup bin/jobs & # Start it. "/nohup.out" is the log file
+exit # When the ssh session is closed, the processes started during the session will also be terminated. So you should run `exit` in time to avoid the started processes being terminated.
 ```
 
 - First, use email address and password to log in on http://your-domain.com/admin.
 - Second, use this username and password to log in on http://your-domain.com/jobs to see if there are failed tasks.
     - The username and password can be obtained by running `EDITOR="vim" bin/rails credentials:edit`.
+
+### Troubleshooting
+
+```shell
+ps -ef|grep jobs # You should see the process running. If you didn't see any process listed, you should start it by reading the instructions above.
+```
 
 ## Create and install your "GitHub App" to sync "markdown-blog" repository's markdown files' changes to your blog website's posts
 

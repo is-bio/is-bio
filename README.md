@@ -121,7 +121,7 @@ Tasks such as sending emails and automatically generating image thumbnails requi
 cd /path/to/markdown-resume-blog
 rm public/assets/.manifest.json                                                                                                                             11:17:04
 rails assets:precompile
-bin/jobs
+bin/jobs # start it
 ```
 
 - First, use email address and password to log in on http://localhost:3000/admin.
@@ -164,4 +164,6 @@ Run `bundle exec rspec spec`.
 ```shell
 cd /path/to/markdown-resume-blog
 tail -n 200 log/development.log # This is the log of Rails web server
+
+ps -ef|grep jobs # If you are testing background jobs related feature, you can use it to check if the job process is running. If you didn't see any process listed, you can start it by reading the instructions above.
 ```
