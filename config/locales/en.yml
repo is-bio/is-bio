@@ -14,7 +14,7 @@ en:
   newer_post: "Newer Post"
   older_post: "Older Post"
 
-  find_more_about_me: "Find out more about me"
+  find_more_about_me: "More about me"
   get_in_touch: "Hire Me Now!"
 
   subscribe: "Subscribe"
@@ -23,8 +23,8 @@ en:
   posted_at: "Posted"
   enter_email: "Enter email"
 
-  welcome_admin: "Welcome, administrator %{email}!"
-  change_profile_avatar: "Change profile avatar"
+  welcome_admin: "Welcome, administrator %{email}."
+  website_display: "Setting up your website"
   create_a_post: "Create a post"
   log_out: "Log out"
   back: "Back"

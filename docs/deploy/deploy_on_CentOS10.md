@@ -88,11 +88,12 @@ RAILS_ENV=production rails db:seed # Running it has no side effects.
 
 Please follow [docs/install_theme.md](/docs/install_theme.md) to install it.
 
-## Start Rails web server
+## Start or restart Rails web server
 
 ```shell
 cd /srv/markdown-resume-blog
 rails assets:precompile # This needs to be executed whenever any assets are changed. Running it has no side effects.
+pkill -F /var/run/blog.pid # Stop Rails web server. If you haven't started the Rails web server yet, you don't need to run it.
 bundle exec puma -w 1 -e production # This is used to test if Rails web server can run well.
 ctrl + c # If it has no error, press `ctrl + c` to terminate it. Then run:
 # Start Rails web server, the `-w` parameter value here needs to be the same as the number of CPU cores of the server to maximize the web load. You can use `lscpu` to view it.
@@ -259,7 +260,7 @@ RAILS_ENV=production rails db:seed # You don't need to execute it unless the "db
 rails assets:precompile # This needs to be executed whenever any assets are changed.
 ```
 
-Then follow the `## Start Rails web server` section to restart Rails web server.
+Then follow the `## Start or restart Rails web server` section to restart Rails web server.
 
 ## Database backup
 

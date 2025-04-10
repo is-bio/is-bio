@@ -9,6 +9,9 @@
       </a>
     </div>
     <br>
+    <%= link_to t(:website_display), "https://github.com/resumeblog/markdown-resume-blog/tree/main/docs/setup_website.md", "data-turbo": false, target: "_blank" %>
+    <br>
+    <br>
     <%= link_to "Categories", admin_categories_path %>
     <br>
     <br>
@@ -26,13 +29,6 @@
     <br>
     <%= link_to "Jobs", jobs_path, "data-turbo": false, target: "_blank" %>
     <br>
-    <br>
-    <details>
-      <summary><%= t(:change_profile_avatar) %></summary>
-      The avatar file is in <b>/path/to/markdown-resume-blog/app/assets/images/profile.jpg</b>.
-      <br>
-      Do not rename it, just replace it and execute the command `<b>rails assets:precompile</b>` on the "/path/to/markdown-resume-blog/" directory of the server.
-    </details>
     <br>
     <%= button_to t(:log_out), session_path, method: :delete, class: "btn btn-primary my-2" if authenticated? %>
   </div>
