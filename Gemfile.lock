@@ -183,7 +183,9 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
-    mini_magick (4.13.0)
+    mini_magick (5.2.0)
+      benchmark
+      logger
     mini_mime (1.1.5)
     minitest (5.25.5)
     mission_control-jobs (1.0.2)
@@ -460,7 +462,7 @@ DEPENDENCIES
   importmap-rails (= 2.1.0)
   jbuilder (= 2.13.0)
   kamal (= 2.5.3)
-  mini_magick (~> 4.13)
+  mini_magick (~> 5.2)
   mission_control-jobs (= 1.0.2)
   propshaft (= 1.1.0)
   puma (= 6.6.0)

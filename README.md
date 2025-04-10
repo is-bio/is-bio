@@ -1,5 +1,7 @@
 # Enjoy blogging with "Markdown" and "Git". An open source personal blog engine based on Ruby on Rails 8.
 
+Demo website: [Lane Zhang's blog](https://lanezhang.com).
+
 ## How can I write articles locally with Markdown files and publish them with `git push`? 
 
 At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can already meet the above requirements, not perfectly.
@@ -13,12 +15,12 @@ At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can al
     - In *dynamic* blog *MarkdownResumeBlog*, email subscriptions are currently integrated, and in the future, portfolios, comments, likes, reading counts, online payments, etc. will also be supported.
     - Also, you can **add some customized features** to your blog.
     - You might say, what if I don't know how to program in Ruby?
-        - Two years ago, this would be a problem, but now, we have AI, and you can **let AI help you implement some small functions**!
+        - Two years ago, this would be a problem, but now, we have AI, and you can **let AI help you implement some small features**!
         - If there is an error, tell AI and let AI correct it.
 2. For those who are not familiar with Jekyll or Hugo, it is even **difficult** to even find a good-looking theme.
     - *MarkdownResumeBlog* currently supports one **beautiful free theme**, and more themes will be added in the future.
-3. Their documentation is a lot of pages long. Who can explain everything in just one page?
-    - *MarkdownResumeBlog* can. For information on how to write a blog using Markdown and Git, read [markdown-blog](https://github.com/resumeblog/markdown-blog) using the *MarkdownResumeBlog* approach.
+3. Jekyll or Hugo's documentation is a lot of pages long. Who can explain everything in just one page?
+    - *MarkdownResumeBlog* can. For information on how to publish a post using *Markdown* and *Git*, please read [markdown-blog](https://github.com/resumeblog/markdown-blog) using the *MarkdownResumeBlog* approach.
 
 ## Why don’t developers blog much anymore?
 
@@ -28,7 +30,7 @@ At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can al
 
 ## MarkdownResumeBlog: A blog engine focused on bringing value to developers
 
-- You can see [Lane's new blog](https://lane.blog5.com) (based on *MarkdownResumeBlog*) is well-designed.
+- You can see [Lane's new blog](https://lanezhang.com) (based on *MarkdownResumeBlog*) is well-designed.
 - I started expecting clients to **pay for my services directly on my blog**!
 - Through the blog, I convey a message to potential customers: I am an expert in web development, algorithms, and game addiction!
 
@@ -50,7 +52,7 @@ The *MarkdownResumeBlog* is developed based on Ruby version 3.3.x, but other ver
    brew install ruby
    ```
 
-- Ruby developers use a software version manager to install Ruby.
+- Ruby developers use a Ruby version manager to install Ruby.
     - [ruby-build](https://github.com/rbenv/ruby-build)
     - [ruby-install](https://github.com/postmodern/ruby-install)
     - [asdf](https://github.com/asdf-vm/asdf)
@@ -70,7 +72,8 @@ cd /path/to/markdown-resume-blog
 # This file contains all the credentials that need to be set.
 cat config/credentials.yml.example # Set "all" of them with the next command:
 # After saving it, "config/credentials.yml.enc" and "config/master.key" will be created.
-EDITOR="vim" bin/rails credentials:edit # In order for the modified credentials to take effect, you need to restart the Rails web server.
+# In order for the modified credentials to take effect, you need to restart the Rails web server.
+EDITOR="vim" bin/rails credentials:edit
 ```
 
 **All** items shown in `config/credentials.yml.example` need to be set!
@@ -79,8 +82,8 @@ EDITOR="vim" bin/rails credentials:edit # In order for the modified credentials 
 
 ```shell
 cd /path/to/markdown-resume-blog
-RAILS_ENV=production rails db:migrate # The database file is `./storage/development.sqlite3`. Running it has no side effects.
-RAILS_ENV=production rails db:seed # Running it has no side effects.
+rails db:migrate # The database file is `./storage/development.sqlite3`. Running it has no side effects.
+rails db:seed # Running it has no side effects.
 ```
 
 ## Install theme
@@ -120,7 +123,7 @@ Tasks such as sending emails and automatically generating image thumbnails requi
 ```shell
 cd /path/to/markdown-resume-blog
 rm public/assets/.manifest.json                                                                                                                             11:17:04
-rails assets:precompile
+rails assets:precompile # You need to restart Rails web server to make the changes take effect.
 bin/jobs # start it
 ```
 
@@ -128,32 +131,26 @@ bin/jobs # start it
 - Second, use this username and password to log in on http://localhost:3000/jobs to see if there are failed tasks.
     - The username and password can be obtained by running `EDITOR="vim" bin/rails credentials:edit`.
 
-## Create and install your "GitHub App" to sync local "markdown-blog" repository's markdown files' changes to blog website's posts
+## Create and install your "GitHub App" to sync local "markdown-blog" repository's files' changes to blog website
 
-Here, the blog website is your local Rails web server. If you [deploy_it_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md), the blog website is your real web server.
+Here, the blog website is your local Rails web server. If you [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md), the blog website is your real web server.
 
-Please read [markdown-blog](https://github.com/resumeblog/markdown-blog) if you are not familiar with how to write a blog using Markdown and Git.
+Please read [markdown-blog](https://github.com/resumeblog/markdown-blog) if you are not familiar with how to publish a blog using *Markdown* and *Git*.
 
 Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to complete this step.
 
-## Sync "markdown-blog" repository's images' or other files' changes to your blog website's "public/images" or "public/files"
-
-This feature is already available.
+## Automatically generate thumbnails for images
 
 <details>
-  <summary>Click to view how to automatically generate thumbnails for images</summary>
-  Because we will automatically generate thumbnails for images, you need to install [ImageMagick](https://imagemagick.org/).
-If you don't care about thumbnails when debugging locally, you can skip this step and only install ImageMagick on the server.
+  <summary>Click to view</summary>
+  You need to install [ImageMagick](https://imagemagick.org/).<br>
+If you don't care about thumbnails when debugging locally, you can skip this step and only install *ImageMagick* on the server.
 
 ```shell
 # Warning: This command may take a long time and download a lot of packages!
 brew install imagemagick
 ```
 </details>
-
-## Send email via SMTP
-
-Read [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md).
 
 ## Run tests
 
@@ -165,5 +162,11 @@ Run `bundle exec rspec spec`.
 cd /path/to/markdown-resume-blog
 tail -n 200 log/development.log # This is the log of Rails web server
 
-ps -ef|grep jobs # If you are testing background jobs related feature, you can use it to check if the job process is running. If you didn't see any process listed, you can start it by reading the instructions above.
+# If you are testing background jobs related features, you can use it to check if the job process is running.
+# If you didn't see any process listed, you can start it by reading the instructions above.
+ps -ef|grep jobs
 ```
+
+## Setting up your website
+
+Read [setup_website.md](/docs/setup_website.md).

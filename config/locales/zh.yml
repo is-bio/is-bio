@@ -23,8 +23,8 @@ zh:
   posted_at: "发布于"
   enter_email: "请输入邮箱"
 
-  welcome_admin: "欢迎你，管理员%{email}！"
-  change_profile_avatar: "更换头像"
+  welcome_admin: "欢迎你，管理员%{email}。"
+  website_display: "设置你的网站"
   create_a_post: "创建博文"
   log_out: "退出登录"
   back: "返回"

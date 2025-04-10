@@ -71,7 +71,8 @@ cd /srv/markdown-resume-blog
 # This file contains all the credentials that need to be set.
 cat config/credentials.yml.example # Set "all" of them with the next command:
 # After saving it, "config/credentials.yml.enc" and "config/master.key" will be created.
-EDITOR="vim" bin/rails credentials:edit # In order for the modified credentials to take effect, you need to restart the Rails web server.
+# In order for the modified credentials to take effect, you need to restart the Rails web server.
+EDITOR="vim" bin/rails credentials:edit
 ```
 
 **All** items shown in `config/credentials.yml.example` need to be set!
@@ -88,11 +89,12 @@ RAILS_ENV=production rails db:seed # Running it has no side effects.
 
 Please follow [docs/install_theme.md](/docs/install_theme.md) to install it.
 
-## Start Rails web server
+## Start or restart Rails web server
 
 ```shell
 cd /srv/markdown-resume-blog
 rails assets:precompile # This needs to be executed whenever any assets are changed. Running it has no side effects.
+pkill -F /var/run/blog.pid # Stop Rails web server. If you haven't started the Rails web server yet, you don't need to run it.
 bundle exec puma -w 1 -e production # This is used to test if Rails web server can run well.
 ctrl + c # If it has no error, press `ctrl + c` to terminate it. Then run:
 # Start Rails web server, the `-w` parameter value here needs to be the same as the number of CPU cores of the server to maximize the web load. You can use `lscpu` to view it.
@@ -102,7 +104,6 @@ exit # When the ssh session is closed, the processes started during the session 
 ```
 
 ## Firewall
-According to https://docs.vultr.com/firewall-quickstart-for-vultr-cloud-servers
 
 ```shell
 firewall-cmd --state
@@ -186,7 +187,7 @@ Use this email address and password to log in on http://your-domain.com/admin.
 
 Please follow the instructions in [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md) to complete this step.
 
-## Start "Solid Queue" for processing background jobs
+## Start "Solid Queue" to handle background jobs
 
 Tasks such as sending emails and automatically generating image thumbnails require background tasks.
 
@@ -206,19 +207,32 @@ exit # When the ssh session is closed, the processes started during the session 
 - Second, use this username and password to log in on http://your-domain.com/jobs to see if there are failed tasks.
     - The username and password can be obtained by running `EDITOR="vim" bin/rails credentials:edit`.
 
+### Restart "Solid Queue" to handle background jobs
+
+When the code related to the background task is changed, you need to restart "Solid Queue" for the changes to take effect.
+
+```shell
+ps -ef|grep solid
+kill -9 solid-queue-supervisor_pid
+ps -ef|grep solid # Confirm there is no process listed.
+nohup bin/jobs &
+```
+
 ### Troubleshooting
 
 ```shell
-ps -ef|grep jobs # You should see the process running. If you didn't see any process listed, you should start it by reading the instructions above.
+# You should see the process running. If you didn't see any process listed,
+#   you should start it by reading the instructions above.
+ps -ef|grep jobs
 ```
 
-## Create and install your "GitHub App" to sync "markdown-blog" repository's markdown files' changes to your blog website's posts
+## Create and install your "GitHub App" to sync "markdown-blog" repository's files' changes to your blog website
 
 Please read [markdown-blog](https://github.com/resumeblog/markdown-blog) if you are not familiar with how to write a blog using Markdown and Git.
 
 Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to complete this step.
 
-## Sync "markdown-blog" repository's images' or other files' changes to your blog website's "public/images" or "public/files"
+## Automatically generate thumbnails for images
 
 - TODO
 
@@ -259,10 +273,15 @@ RAILS_ENV=production rails db:seed # You don't need to execute it unless the "db
 rails assets:precompile # This needs to be executed whenever any assets are changed.
 ```
 
-Then follow the `## Start Rails web server` section to restart Rails web server.
+- Then follow the `## Start or restart Rails web server` section to restart Rails web server.
+- Follow the `### Restart "Solid Queue" to handle background jobs` section to restart "Solid Queue".
 
 ## Database backup
 
 ```shell
 scp root@the_server_ip:/srv/markdown-resume-blog/storage/production.sqlite3 ./ # Run it in your local computer
 ```
+
+## Setting up your website
+
+Read [setup_website.md](/docs/setup_website.md).
