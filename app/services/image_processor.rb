@@ -43,11 +43,11 @@ class ImageProcessor
       true
     rescue MiniMagick::Error => exception
       Rails.logger.error("==== MiniMagick error generating thumbnail: #{exception.message}")
-      Rails.logger.error(exception.backtrace.join("\n"))
+      Rails.logger.error(Array(exception.backtrace).join("\n"))
       false
     rescue StandardError => exception
       Rails.logger.error("==== Failed to generate thumbnail: #{exception.message}")
-      Rails.logger.error(exception.backtrace.join("\n"))
+      Rails.logger.error(Array(exception.backtrace).join("\n"))
       false
     end
   end
