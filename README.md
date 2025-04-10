@@ -164,7 +164,7 @@ tail -n 200 log/development.log # This is the log of Rails web server
 
 # If you are testing background jobs related features, you can use it to check if the job process is running.
 # If you didn't see any process listed, you can start it by reading the instructions above.
-ps -ef|grep jobs
+ps -ef|grep solid
 ```
 
 ## Setting up your website

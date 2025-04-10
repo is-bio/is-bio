@@ -4,7 +4,7 @@ If you want to automatically update your blog after executing the `git push` com
 With the guidance of this article, you can create a GitHub App for you to install it.
 
 This article will assume that you are working on your local `development` env.
-In the development environment, https://your-domain.com below actually refers to http://localhost:3000.
+In the development environment, https://your-domain.com (should be replaced with your real domain) below actually refers to http://localhost:3000.
 
 For `qa` or `prodction` env, the situation are similar. You just need to change some value to meet your needs.
 
@@ -13,16 +13,16 @@ For `qa` or `prodction` env, the situation are similar. You just need to change 
 Refer to [create-a-github-app](https://docs.github.com/en/developers/apps/setting-up-your-development-environment-to-create-a-github-app#step-2-register-a-new-github-app).
 
 - Visit https://github.com/settings/apps , click `New GitHub App` button.
-- Fill `GitHub App name` with `MarkdownResumeBlog dev`.
+- Fill `GitHub App name` with `Your Name's Blog dev` (or any name you like).
 - Fill `desscription` with this:
 
-	Install this app on your `markdown-blog` repository, so that when you `git push`, we will be notified and update your blog.
+	Install this app on your `markdown-blog` repository, so that when you `git push`, the blog server will be notified and update your blog.
 
-- Fill `Homepage URL`. This is for display purposes only and does not affect business logic.
+- Fill `Homepage URL`. This is for display purposes only and does not affect business logic. E.g., https://your-domain.com.
 
 ### Install and run 'ngrok'
 
-This paragraph is **only for local debugging** and is not necessary in a production environment.
+This paragraph is **only for development environment debugging** and is not necessary in a production environment.
 
 Install `ngrok` and configure it well. Then do this:
 
@@ -35,7 +35,7 @@ Add `config.hosts << "<a-subdomain-string-for-your-site>.ngrok-free.app"` to `co
 
 ### Webhook
 
-- Check the `Active` checkbox.
+- Check the `Active` checkbox (already done by default).
 
 - For `Webhook - Webhook URL`, fill `https://<a-subdomain-string-for-your-site>.ngrok-free.app/api/v1/github-events`.
 
@@ -45,10 +45,12 @@ Add `config.hosts << "<a-subdomain-string-for-your-site>.ngrok-free.app"` to `co
 
 ### Continue setting for GitHub App
 
-- For `Repository permissions`, choose `Access: Read-only` for `Contents`, `Metadata`.
+- Unfold `Repository permissions`, then choose `Access: Read-only` for `Contents` and `Metadata`.
 - For `Subscribe to events`, choose `Push`.
-- For `Where can this GitHub App be installed?`, choose `Any account`.
+- For `Where can this GitHub App be installed?`, choose `Any account` or `Only on this account`.
 - Click `Create GitHub App`.
+
+TODO: Registration successful. You must generate a private key in order to install your GitHub App.
 
 ## Connect GitHub App to MarkdownResumeBlog
 
@@ -56,6 +58,7 @@ Visit https://your-domain.com/admin/github_app_settings , then
 
 - Set `app_id` value with the `App ID` of your GitHub App.
 - Set `public_link` value with the `Public link` of your GitHub App.
+    If your GitHub App is private (Only allow this GitHub App to be installed on your own GitHub account), you don't need to enter it.
 
 ## Test blog syncing feature
 
@@ -65,14 +68,18 @@ Visit https://your-domain.com/admin/github_app_settings , then
 
 - Now you can visit the `Public link` of your GitHub App.
 
-Then install this GitHub App on your `<github_username>/markdown-blog` repository to test the blog syncing feature.
+Then install this GitHub App, choose `Only select repositories` and select `<github_username>/markdown-blog` repository to test the blog syncing feature.
 
-For example, make a small modification to a file in the `published` directory, then `git commit` and `git push`.
+For example, make a copy of `README.md` in the directory `/published` and make some changes to the file. Then `git commit` and `git push`.
 
 - Visit https://your-domain.com/ to see if the article is displayed successfully.
 
 If not, you can go to the GitHub App settings page, click `Advanced`, and check `Recent Deliveries` to see if there is an error.
 
-If there is an error, click on it to view the specific error information. 
+If there is an error, click on it to view the specific error information.
+
+You can click `Redeliver` to send this request again. Or you can make another commit and `git push` to send a new request.
+
+TODO: Image issue.
 
 Enjoy!

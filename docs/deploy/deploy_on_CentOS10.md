@@ -213,9 +213,11 @@ When the code related to the background task is changed, you need to restart "So
 
 ```shell
 ps -ef|grep solid
-kill -9 solid-queue-supervisor_pid
+kill -9 the_solid-queue-supervisor_pid
 ps -ef|grep solid # Confirm there is no process listed.
-nohup bin/jobs &
+nohup bin/jobs & # Start it. "/nohup.out" is the log file.
+ps -ef|grep solid # Confirm that it is started.
+exit # When the ssh session is closed, the processes started during the session will also be terminated. So you should run `exit` in time to avoid the started processes being terminated.
 ```
 
 ### Troubleshooting
@@ -223,7 +225,7 @@ nohup bin/jobs &
 ```shell
 # You should see the process running. If you didn't see any process listed,
 #   you should start it by reading the instructions above.
-ps -ef|grep jobs
+ps -ef|grep solid
 ```
 
 ## Create and install your "GitHub App" to sync "markdown-blog" repository's files' changes to your blog website
@@ -258,7 +260,7 @@ TODO
 
 ### Redirect http:// to https://
 
-## How do I update to the latest version?
+## How to upgrade the website to the latest version.
 
 ```shell
 pkill -F /var/run/blog.pid # Stop Rails web server
@@ -267,7 +269,10 @@ pkill -F /var/run/blog.pid # Stop Rails web server
 #kill -9 the_master_pid # Some workers processes are started by master process, you can kill the master pid.
 
 cd /srv/markdown-resume-blog
-git pull
+git stash
+git pull origin main
+git stash apply
+bundle install
 RAILS_ENV=production rails db:migrate # You don't need to execute it unless there are new migration files added
 RAILS_ENV=production rails db:seed # You don't need to execute it unless the "db/seeds.rb" is changed
 rails assets:precompile # This needs to be executed whenever any assets are changed.
@@ -279,7 +284,8 @@ rails assets:precompile # This needs to be executed whenever any assets are chan
 ## Database backup
 
 ```shell
-scp root@the_server_ip:/srv/markdown-resume-blog/storage/production.sqlite3 ./ # Run it in your local computer
+# Run it in your local computer
+scp root@the_server_ip:/srv/markdown-resume-blog/storage/production.sqlite3 ./
 ```
 
 ## Setting up your website
