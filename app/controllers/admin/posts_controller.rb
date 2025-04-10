@@ -40,9 +40,8 @@ class Admin::PostsController < Admin::BaseController
 
 private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find_by!(params.expect(:id))
+    @post = Post.find(params.expect(:id))
   end
 
   def set_category_options
