@@ -79,98 +79,29 @@ smtp:
 ### Setting Environment Variables
 
 1. `APPLICATION_HOST` (only for *production* environment)
-    - Set this to your application's domain name (e.g., `blog.your-site.com`)
+    - Set this to your application's domain name (e.g., `your-domain.com`)
     - This is used to generate correct URLs in emails
 
-2. `SMTP_ADDRESS` (Only if you are not using *Gmail SMTP Server*, you need to set it up.)
+2. `SMTP_ADDRESS` (Only if you are **not** using *Gmail SMTP Server*, you need to set it up.)
 
 Example:
 
 ```shell
 # Set envs in CentOS 10. If you are using other operating systems, please search for how to set it yourself
-echo 'export APPLICATION_HOST="blog.your-site.com"' >> $HOME/.bashrc
-echo 'export SMTP_ADDRESS="smtp.serveraddress.com"' >> $HOME/.bashrc
+echo 'export APPLICATION_HOST="your-domain.com"' >> $HOME/.bashrc # replace the "your-domain.com"
+echo 'export SMTP_ADDRESS="smtp.serveraddress.com"' >> $HOME/.bashrc # if you are not using Gmail SMTP Server
 exit # Use ssh to log in to the server again to check whether the environment variables have taken effect
 echo $APPLICATION_HOST
 ```
 
 ## Testing Email Delivery
 
-After setting up environment variables, you can test email delivery:
-
-1. Start your Rails server
-2. Start Solid Queue to handle background job: run `bin/jobs`
-3. Create a new subscription through the application form
-4. Check the Rails logs for mail delivery status
-5. Verify that the confirmation email is received
-
-## Troubleshooting
-
-TODO: use the Solid Queue job web portal.
-
-### Common Issues and Solutions
-
-1. **"Authentication failed" errors**
-    - Verify your App Password is correct and hasn't expired
-    - Ensure you're using the App Password, not your regular Google password
-    - Check if you've properly set the environment variables
-
-2. **"Hostname not allowed" errors**
-    - Make sure you have properly set the `domain` in SMTP settings
-    - In development, use "localhost" as the domain
-
-3. **"Connection timed out" errors**
-    - Check your network settings and firewall
-    - Some networks block outgoing SMTP traffic on port 587
-
-4. **No emails being sent**
-    - Verify `config.action_mailer.perform_deliveries = true` is set
-    - Check if ActionMailer is being used correctly in controllers
-
-5. **Invalid recipient address errors**
-    - Ensure email addresses are valid format
-    - Some email addresses may be rejected by Gmail's filters
-
-### Debugging Tips
-
-1. Set `config.action_mailer.raise_delivery_errors = true` (already done)
-2. Monitor your Rails logs for detailed error messages
-3. Use a test mail delivery service like MailCatcher for local development
-4. Check your Gmail account's activity to see if sending attempts are recorded
-
-## Security Considerations and Best Practices
-
-1. **Never commit credentials to version control**
-    - Use environment variables or Rails credentials
-    - Include `.env` files in your `.gitignore`
-
-2. **Regularly rotate your App Passwords**
-    - Delete old App Passwords and create new ones periodically
-    - Update your environment variables when you rotate passwords
-
-3. **Limit permissions**
-    - Use a dedicated Gmail account for your application
-    - Consider using a Google Workspace account for business applications
-
-4. **Rate limits**
-    - Be aware that Gmail has sending limits (typically 500 emails per day for regular accounts)
-    - Implement queuing for bulk emails to avoid rate limiting
-
-5. **Monitor for unauthorized use**
-    - Regularly check your Gmail account's activity for suspicious behavior
-    - Set up alerts for unusual sending patterns
-
-6. **CAN-SPAM compliance**
-    - Include a physical address in your emails
-    - Provide unsubscribe links in all marketing emails
-    - Honor unsubscribe requests promptly
-
-7. **For production use**
-    - Consider using a dedicated email service like SendGrid, Mailgun, or Amazon SES
-    - These services offer better deliverability, analytics, and higher sending limits
-
-## Additional Resources
-
-- [Google Account Help: Sign in with App Passwords](https://support.google.com/accounts/answer/185833)
-- [Rails ActionMailer Documentation](https://guides.rubyonrails.org/action_mailer_basics.html)
-- [Email Deliverability Best Practices](https://www.sparkpost.com/resources/email-deliverability-guide/)
+1. Please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to start Rails web server.
+2. Please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to start "Solid Queue" process to handle background jobs.
+3. Email the Admin User.
+    - Visit http://your-domain.com/admin.
+    - Click "Forgot password?" link.
+    - Enter the Admin User's email and click the button bellow.
+4. Log in http://your-domain.com/admin as the Admin User.
+5. Visit https://lanezhang.com/jobs to see if there are failed jobs.
+6. Verify that the password recovery email is received.

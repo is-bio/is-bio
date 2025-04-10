@@ -68,10 +68,12 @@ bundle install
 ```shell
 cd /path/to/markdown-resume-blog
 # This file contains all the credentials that need to be set.
-cat config/credentials.yml.example # Set them with the next command:
+cat config/credentials.yml.example # Set "all" of them with the next command:
 # After saving it, "config/credentials.yml.enc" and "config/master.key" will be created.
-EDITOR="vim" bin/rails credentials:edit 
+EDITOR="vim" bin/rails credentials:edit # In order for the modified credentials to take effect, you need to restart the Rails web server.
 ```
+
+**All** items shown in `config/credentials.yml.example` need to be set!
 
 ## Prepare SQLite database
 
@@ -102,28 +104,27 @@ cd /path/to/markdown-resume-blog
 vim db/seeds.rb
 # Uncomment the first few lines of code to create the Admin User.
 rails db:seed
+git restore db/seeds.rb
 ```
 
 Use this email address and password to log in on http://localhost:3000/admin.
 
+## Send email via SMTP
+
+Please follow the instructions in [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md) to complete this step.
+
 ## Start 'Solid Queue' for processing background jobs
+
+Tasks such as sending emails and automatically generating image thumbnails require background tasks.
 
 ```shell
 cd /path/to/markdown-resume-blog
 bin/jobs
 ```
 
-## Configure "Mission Control — Jobs"
-
-```shell
-cd /path/to/markdown-resume-blog
-rails mission_control:jobs:authentication:configure
-rm public/assets/.manifest.json
-rails assets:precompile
-```
-
 - First, use email address and password to log in on http://localhost:3000/admin.
 - Second, use this username and password to log in on http://localhost:3000/jobs.
+    - The username and password can be obtained by running `EDITOR="vim" bin/rails credentials:edit`.
 
 ## Create and install your "GitHub App" to sync local "markdown-blog" repository's markdown files' changes to blog website's posts
 
