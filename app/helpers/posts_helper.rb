@@ -8,4 +8,8 @@ module PostsHelper
       image_tag "blog/blog-post-thumb-1.jpg", class: "img-fluid post-thumb"
     end
   end
+
+  def first_few_sentences(content)
+    content[..250].gsub("# ", "").gsub("## ", "").gsub("### ", "").gsub("#### ", "").gsub("##### ", "").gsub("###### ", "").gsub("\n\n", ". ")
+  end
 end
