@@ -103,5 +103,5 @@ echo $APPLICATION_HOST
     - Click "Forgot password?" link.
     - Enter the Admin User's email and click the button bellow.
 4. Log in http://your-domain.com/admin as the Admin User.
-5. Visit https://lanezhang.com/jobs to see if there are failed jobs.
+5. Visit http://your-domain.com/jobs to see if there are failed jobs.
 6. Verify that the password recovery email is received.

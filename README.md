@@ -123,7 +123,7 @@ bin/jobs
 ```
 
 - First, use email address and password to log in on http://localhost:3000/admin.
-- Second, use this username and password to log in on http://localhost:3000/jobs.
+- Second, use this username and password to log in on http://localhost:3000/jobs to see if there are failed tasks.
     - The username and password can be obtained by running `EDITOR="vim" bin/rails credentials:edit`.
 
 ## Create and install your "GitHub App" to sync local "markdown-blog" repository's markdown files' changes to blog website's posts
@@ -156,3 +156,10 @@ Read [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md).
 ## Run tests
 
 Run `bundle exec rspec spec`.
+
+## Troubleshooting
+
+```shell
+cd /path/to/markdown-resume-blog
+tail -n 200 log/development.log # This is the log of Rails web server
+```

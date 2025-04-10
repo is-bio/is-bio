@@ -198,7 +198,7 @@ nohup bin/jobs & # ./nohup.out is the log file
 ```
 
 - First, use email address and password to log in on http://your-domain.com/admin.
-- Second, use this username and password to log in on http://your-domain.com/jobs.
+- Second, use this username and password to log in on http://your-domain.com/jobs to see if there are failed tasks.
     - The username and password can be obtained by running `EDITOR="vim" bin/rails credentials:edit`.
 
 ## Create and install your "GitHub App" to sync "markdown-blog" repository's markdown files' changes to your blog website's posts
