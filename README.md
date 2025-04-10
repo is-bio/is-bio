@@ -15,12 +15,12 @@ At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can al
     - In *dynamic* blog *MarkdownResumeBlog*, email subscriptions are currently integrated, and in the future, portfolios, comments, likes, reading counts, online payments, etc. will also be supported.
     - Also, you can **add some customized features** to your blog.
     - You might say, what if I don't know how to program in Ruby?
-        - Two years ago, this would be a problem, but now, we have AI, and you can **let AI help you implement some small functions**!
+        - Two years ago, this would be a problem, but now, we have AI, and you can **let AI help you implement some small features**!
         - If there is an error, tell AI and let AI correct it.
 2. For those who are not familiar with Jekyll or Hugo, it is even **difficult** to even find a good-looking theme.
     - *MarkdownResumeBlog* currently supports one **beautiful free theme**, and more themes will be added in the future.
-3. Their documentation is a lot of pages long. Who can explain everything in just one page?
-    - *MarkdownResumeBlog* can. For information on how to write a blog using Markdown and Git, read [markdown-blog](https://github.com/resumeblog/markdown-blog) using the *MarkdownResumeBlog* approach.
+3. Jekyll or Hugo's documentation is a lot of pages long. Who can explain everything in just one page?
+    - *MarkdownResumeBlog* can. For information on how to publish a post using *Markdown* and *Git*, please read [markdown-blog](https://github.com/resumeblog/markdown-blog) using the *MarkdownResumeBlog* approach.
 
 ## Why don’t developers blog much anymore?
 
@@ -30,7 +30,7 @@ At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can al
 
 ## MarkdownResumeBlog: A blog engine focused on bringing value to developers
 
-- You can see [Lane's new blog](https://lane.blog5.com) (based on *MarkdownResumeBlog*) is well-designed.
+- You can see [Lane's new blog](https://lanezhang.com) (based on *MarkdownResumeBlog*) is well-designed.
 - I started expecting clients to **pay for my services directly on my blog**!
 - Through the blog, I convey a message to potential customers: I am an expert in web development, algorithms, and game addiction!
 
