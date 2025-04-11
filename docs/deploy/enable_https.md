@@ -10,7 +10,7 @@ If you use CloudFlare SSL/TLS encryption default mode `Flexible`, you can see "h
 
 ### Way 2: Implement support for "https" yourself
 
-First, confirm that http://yourblog.com is accessible and there are no problems.
+First, confirm that http://your-domain.com is accessible and there are no problems.
 
 Then, if you are using CloudFlare, please do:
     - Click `SSL/TLS` -> `Configure`.
@@ -34,21 +34,21 @@ exit
 ssh root@the_server_ip
 
 acme.sh --set-default-ca --server letsencrypt
-acme.sh --issue -d yourblog.com -d www.yourblog.com -w /srv/markdown-resume-blog/public # Replace the "yourblog.com" with your actual domain name.
+acme.sh --issue -d your-domain.com -d www.your-domain.com -w /srv/markdown-resume-blog/public # Replace the "your-domain.com" with your actual domain name.
 ```
 
-If you get an error message `yourblog.com: Invalid status. Verification error details: 2606:4700:3030::ac43:9171: Invalid response from http://yourblog.com/.well-known/acme-challenge/pffchpZxkQd3vm5TcBO3L-ifnGEAzsbzl7OmUDxg_H4: 404`,
+If you get an error message `your-domain.com: Invalid status. Verification error details: 2606:4700:3030::ac43:9171: Invalid response from http://your-domain.com/.well-known/acme-challenge/pffchpZxkQd3vm5TcBO3L-ifnGEAzsbzl7OmUDxg_H4: 404`,
 that means your web server or nginx are not running properly. Read [docs/deploy/deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to fix it. Then you can run it again.
 
 ```shell
 mkdir /etc/nginx/ssl_key_cert
-acme.sh --install-cert -d yourblog.com --key-file /etc/nginx/ssl_key_cert/key.pem --fullchain-file /etc/nginx/ssl_key_cert/cert.pem --reloadcmd "service nginx force-reload"
+acme.sh --install-cert -d your-domain.com --key-file /etc/nginx/ssl_key_cert/key.pem --fullchain-file /etc/nginx/ssl_key_cert/cert.pem --reloadcmd "service nginx force-reload"
 ```
 
-Copy the contents of [blog_nginx_https.conf](/docs/deploy/blog_nginx_https.conf) to `/etc/nginx/conf.d/blog_nginx.conf` and replace `yourblog.com` to your real domain.
+Copy the contents of [blog_nginx_https.conf](/docs/deploy/blog_nginx_https.conf) to `/etc/nginx/conf.d/blog_nginx.conf` and replace `your-domain.com` to your real domain.
 
 ```shell
 systemctl restart nginx 
 ```
 
-Visit https://www.yourblog.com, https://yourblog.com, http://www.yourblog.com or http://yourblog.com to test it.
+Visit https://www.your-domain.com, https://your-domain.com, http://www.your-domain.com or http://your-domain.com to test it.
