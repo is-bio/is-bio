@@ -1,5 +1,5 @@
 class Admin::PostsController < Admin::BaseController
-  before_action :set_post, only: %i[ edit update ]
+  before_action :set_post, only: %i[ edit update destroy ]
   before_action :set_category_options, only: %i[ new create edit update ]
 
   def new
@@ -29,14 +29,11 @@ class Admin::PostsController < Admin::BaseController
   end
 
   # DELETE /posts/1
-  # def destroy
-  #   @post.destroy!
-  #
-  #   respond_to do |format|
-  #     format.html { redirect_to posts_path, status: :see_other, notice: "Post was successfully destroyed." }
-  #     format.json { head :no_content }
-  #   end
-  # end
+  def destroy
+    @post.destroy!
+
+    redirect_to root_path, status: :see_other, notice: "Post was successfully destroyed."
+  end
 
 private
 

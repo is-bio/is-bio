@@ -124,7 +124,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "main#root"
 
-    resources :posts, only: %i[new create edit update]
+    resources :posts, only: [ :new, :create, :edit, :update, :destroy ]
 
     resources :categories, only: :index
 
