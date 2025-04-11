@@ -6,7 +6,7 @@
       <h2 class="title mb-2"><%= @post.title %></h2>
       <div class="meta mb-3">
         <span class="date"><%= t(:posted_at) %> <%= time_ago_in_words(@post.published_at) %></span>
-        <span class="time"><%= @post.content.size / 200 %> <%= t(:min_read) %></span>
+        <span class="time"><%= (@post.content || "").size / 200 %> <%= t(:min_read) %></span>
       </div>
     </header>
 

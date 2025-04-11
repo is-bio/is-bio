@@ -10,6 +10,6 @@ module PostsHelper
   end
 
   def first_few_sentences(content)
-    content[..250].gsub("# ", "").gsub("## ", "").gsub("### ", "").gsub("#### ", "").gsub("##### ", "").gsub("###### ", "").gsub("\n\n", ". ")
+    (content || "")[..250].gsub("# ", "").gsub("## ", "").gsub("### ", "").gsub("#### ", "").gsub("##### ", "").gsub("###### ", "").gsub("\n\n", ". ")
   end
 end
