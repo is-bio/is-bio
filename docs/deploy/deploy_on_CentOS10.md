@@ -18,6 +18,12 @@ Create two DNS A records:
    - Name: @
    - IPv4 address: the_server_ip
 
+Now you have to decide which server to install *MarkdownResumeBlog* on.
+
+If you have limited budget and already have an underutilized server, you can install *MarkdownResumeBlog* on that server.
+
+**Port 80 can be shared by multiple websites without conflicts.**
+
 ## Login to server via SSH
 
 ```shell
@@ -68,8 +74,10 @@ echo $RAILS_ENV # check whether the environment variables have taken effect
 
 ```shell
 cd /srv/markdown-resume-blog
+
 # This file contains all the credentials that need to be set.
 cat config/credentials.yml.example # Set "all" of them with the next command:
+
 # After saving it, "config/credentials.yml.enc" and "config/master.key" will be created.
 # In order for the modified credentials to take effect, you need to restart the Rails web server.
 EDITOR="vim" bin/rails credentials:edit
@@ -111,8 +119,10 @@ firewall-cmd --get-active-zones
 firewall-cmd --zone=public --list-ports
 firewall-cmd --zone=public --list-services
 
-# This step is the key. If you restarted the server, you have to run it again!
+# This step is critical.  
 firewall-cmd --add-port=80/tcp
+firewall-cmd --runtime-to-permanent
+firewall-cmd --reload
 ```
 
 ## Configure Nginx
@@ -132,6 +142,7 @@ cd /etc/nginx/conf.d
 cp /srv/markdown-resume-blog/docs/deploy/blog_nginx.conf ./
 vim blog_nginx.conf # Replace the "your-domain.com" with your actual domain name.
 
+nginx -t # Check whether the configuration is correct.
 systemctl enable nginx # Set to start automatically at boot
 systemctl start nginx
 ```
@@ -179,7 +190,6 @@ Visit http://your-domain.com, you should see that the web works well.
 These steps need to be done again.
 
 ```shell
-firewall-cmd --add-port=80/tcp
 setsebool -P httpd_can_network_connect 1
 sudo setenforce 0
 systemctl restart nginx
@@ -268,11 +278,17 @@ Please read [enable_https](/docs/deploy/enable_https.md).
 
 ## Redirections
 
-TODO
-
-### Redirect *.your-domain.com to your-domain.com
+In CloudFlare dashboard, click `Rules`.
 
 ### Redirect http:// to https://
+
+- `Rule templates` > Choose template `Redirect from HTTP to HTTPS` > `Create a Rule`.
+- Don't need to change anything, just click `Deploy`.
+
+### Redirect www.your-domain.com to your-domain.com
+
+- `Rule templates` > Choose template `Redirect from WWW to Root` > `Create a Rule`.
+- Don't need to change anything, just click `Deploy`.
 
 ## How to upgrade the website to the latest version.
 
