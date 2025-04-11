@@ -20,7 +20,7 @@ Refer to [create-a-github-app](https://docs.github.com/en/developers/apps/settin
 
 - Fill `Homepage URL`. This is for display purposes only and does not affect business logic. E.g., https://your-domain.com.
 
-### Install and run 'ngrok'
+### Install and run 'ngrok' (development environment only)
 
 This paragraph is **only for development environment debugging** and is not necessary in a production environment.
 
@@ -60,7 +60,7 @@ Visit https://your-domain.com/admin/github_app_settings , then
 - Set `public_link` value with the `Public link` of your GitHub App.
     If your GitHub App is private (Only allow this GitHub App to be installed on your own GitHub account), you don't need to enter it.
 
-## Test blog synchronization feature
+## Test posts (Markdown files) synchronization feature
 
 - Visit https://github.com/resumeblog/markdown-blog/fork , fork it to your GitHub account.
 
@@ -83,18 +83,20 @@ You can click `Redeliver` to send this request again. Or you can make another co
 ### Test the image synchronization and thumbnail automatic generation features
 
 You noticed that the thumbnail of the first post was not displaying correctly, so let's fix that.
-    - Rename the `/images/example_1.jpg` in `markdown-blog` repository to `/images/example_2.jpg`
-    - Then in your *first post* you have just created, set `thumbnail: example_2.jpg`.
-    - `git commit` and `git push`.
-    - Refresh https://your-domain.com/. You should see the thumbnail. 
+
+- Rename the `/images/example_1.jpg` in `markdown-blog` repository to `/images/example_2.jpg`
+- Then in your *first post* you have just created, set `thumbnail: example_2.jpg`.
+- `git commit` and `git push`.
+- Refresh https://your-domain.com/. You should see the thumbnail. 
 
 ### Test the file synchronization
 
-- Rename `/files/empty_example.pdf` to `/files/empty_example_2.pdf`
-- Then in your *first post*, add `[empty example PDF 2](/files/empty_example_2.pdf)` to the contents.
-- By the way, add this to the contents too:
+- Rename `/files/empty_example.pdf` to `/files/empty_example_2.pdf`.
+- Then open your *first post* markdown file, add the below to the contents:
 
     ```
+    [empty example PDF 2](/files/empty_example_2.pdf)
+
     ![example_2.jpg](/images/example_2.jpg)
 
     ![example_2.jpg](../images/example_2.jpg)
