@@ -81,8 +81,8 @@ EDITOR="vim" bin/rails credentials:edit
 
 ```shell
 cd /srv/markdown-resume-blog
-RAILS_ENV=production rails db:migrate # The database file is `./storage/development.sqlite3`. Running it has no side effects.
-RAILS_ENV=production rails db:seed # Running it has no side effects.
+rails db:migrate # The database file is `./storage/development.sqlite3`. Running it has no side effects.
+rails db:seed # Running it has no side effects.
 ```
 
 ## Install theme
@@ -110,6 +110,8 @@ firewall-cmd --state
 firewall-cmd --get-active-zones
 firewall-cmd --zone=public --list-ports
 firewall-cmd --zone=public --list-services
+
+# This step is the key. If you restarted the server, you have to run it again!
 firewall-cmd --add-port=80/tcp
 ```
 
@@ -120,6 +122,7 @@ sudo su
 dnf install -y nginx
 
 # For `SELinux` only. To solve the problem https://stackoverflow.com/questions/23948527/13-permission-denied-while-connecting-to-upstreamnginx
+# If you restarted the server, you have to run this two lines again!
 setsebool -P httpd_can_network_connect 1
 sudo setenforce 0
 
@@ -170,6 +173,17 @@ Visit http://your-domain.com, you should see that the web works well.
 
 3. If the status code of `assets` (js, css, images, etc.) is *404*.
     - **Clear your browser cache** and refresh the page again.
+
+### If you have restarted the server machine
+
+These steps need to be done again.
+
+```shell
+firewall-cmd --add-port=80/tcp
+setsebool -P httpd_can_network_connect 1
+sudo setenforce 0
+systemctl restart nginx
+```
 
 ## Create the Admin User
 
@@ -273,8 +287,8 @@ git stash
 git pull origin main
 git stash apply
 bundle install
-RAILS_ENV=production rails db:migrate # You don't need to execute it unless there are new migration files added
-RAILS_ENV=production rails db:seed # You don't need to execute it unless the "db/seeds.rb" is changed
+rails db:migrate # You can skip this step if no new migration files added. Running it has no side effects. 
+rails db:seed # You can skip this step if `db/seeds.rb` is not changed. Running it has no side effects.
 rails assets:precompile # This needs to be executed whenever any assets are changed.
 ```
 
