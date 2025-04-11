@@ -46,6 +46,7 @@ class Post < ApplicationRecord
     metadata = YAML.load(contents) || {}
 
     id2 = metadata["id"]
+    permalink = metadata["permalink"]
     title = metadata["title"]
     date = metadata["date"]
     thumbnail = metadata["thumbnail"]
@@ -77,7 +78,7 @@ class Post < ApplicationRecord
           filename: filename,
           category: category,
         )
-        return
+        return post
       end
     end
 
@@ -87,6 +88,7 @@ class Post < ApplicationRecord
         if post.present?
           attributes = {
             id2: id2,
+            permalink: permalink,
             filename: filename,
             category: category,
             title: title,
@@ -99,23 +101,26 @@ class Post < ApplicationRecord
             # Do nothing
           end
           post.update!(attributes)
-          return
+          return post
         end
       end
 
-      Post.create!(
+      post = Post.create!(
         filename: filename,
         id2: id2,
         category: category,
+        permalink: permalink,
         title: title,
         published_at: date,
         thumbnail: thumbnail,
         content: content
       )
+      post
     else
       attributes = {
         filename: filename,
         category: category,
+        permalink: permalink,
         title: title,
         thumbnail: thumbnail,
         content: content
@@ -126,6 +131,7 @@ class Post < ApplicationRecord
         # Do nothing
       end
       post.update!(attributes)
+      post
     end
   end
 
@@ -162,6 +168,11 @@ class Post < ApplicationRecord
     if permanent_link.blank? || permanent_link == "/"
       self.permalink = generate_permalink
     else
+      # Remove all invalid characters, only allow letters, digits, underscore, hyphen and space
+      permanent_link = permanent_link.gsub(/[^a-zA-Z0-9_\s-]/, "")
+      # Replace spaces and underscores with hyphens
+      permanent_link = permanent_link.gsub(/[\s_]+/, "-")
+
       if permanent_link[0] != "/"
         permanent_link = "/" + permanent_link
       end
@@ -171,8 +182,10 @@ class Post < ApplicationRecord
   end
 
   def generate_permalink
-    # TODO: Remove all invalid chars
-    "/" + CGI.escape(title.to_s.downcase.split(" ").join("-")[...255])
+    # Remove all invalid characters, only allow letters, digits, underscore, hyphen and space
+    sanitized = title.to_s.gsub(/[^a-zA-Z0-9_\s-]/, "").strip
+    # Replace spaces and underscores with hyphens and limit length
+    "/" + sanitized.gsub(/[\s_]+/, "-").downcase[...255]
   end
 
   def ensure_id2
