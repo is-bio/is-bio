@@ -60,7 +60,7 @@ Visit https://your-domain.com/admin/github_app_settings , then
 - Set `public_link` value with the `Public link` of your GitHub App.
     If your GitHub App is private (Only allow this GitHub App to be installed on your own GitHub account), you don't need to enter it.
 
-## Test blog syncing feature
+## Test blog synchronization feature
 
 - Visit https://github.com/resumeblog/markdown-blog/fork , fork it to your GitHub account.
 
@@ -72,7 +72,7 @@ Then install this GitHub App, choose `Only select repositories` and select `<git
 
 For example, make a copy of `README.md` in the directory `/published` and make some changes to the file. Then `git commit` and `git push`.
 
-- Visit https://your-domain.com/ to see if the article is displayed successfully.
+- Visit https://your-domain.com/ to see if the article is displayed successfully. You should see your **first post** published on your blog site.
 
 If not, you can go to the GitHub App settings page, click `Advanced`, and check `Recent Deliveries` to see if there is an error.
 
@@ -80,6 +80,26 @@ If there is an error, click on it to view the specific error information.
 
 You can click `Redeliver` to send this request again. Or you can make another commit and `git push` to send a new request.
 
-TODO: Image issue.
+### Test the image synchronization and thumbnail automatic generation features
 
-Enjoy!
+You noticed that the thumbnail of the first post was not displaying correctly, so let's fix that.
+    - Rename the `/images/example_1.jpg` in `markdown-blog` repository to `/images/example_2.jpg`
+    - Then in your *first post* you have just created, set `thumbnail: example_2.jpg`.
+    - `git commit` and `git push`.
+    - Refresh https://your-domain.com/. You should see the thumbnail. 
+
+### Test the file synchronization
+
+- Rename `/files/empty_example.pdf` to `/files/empty_example_2.pdf`
+- Then in your *first post*, add `[empty example PDF 2](/files/empty_example_2.pdf)` to the contents.
+- By the way, add this to the contents too:
+
+    ```
+    ![example_2.jpg](/images/example_2.jpg)
+
+    ![example_2.jpg](../images/example_2.jpg)
+    ```
+- `git commit` and `git push`.
+- Click on the link to the first post, and you should see the pdf and the two images appear correctly. 
+
+Enjoy blogging with *Markdown* and *Git*!

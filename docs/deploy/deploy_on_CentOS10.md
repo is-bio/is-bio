@@ -85,6 +85,8 @@ EDITOR="vim" bin/rails credentials:edit
 
 **All** items shown in `config/credentials.yml.example` need to be set!
 
+If you are still not sure how to set some items, you can use the default values in `config/credentials.yml.example` first, and then set the values correctly according to the relevant instructions when you find that the relevant functions do not work.
+
 ## Prepare SQLite database
 
 ```shell
@@ -197,10 +199,15 @@ systemctl restart nginx
 
 ## Create the Admin User
 
+
 ```shell
 cd /srv/markdown-resume-blog
 vim db/seeds.rb
-# Uncomment the first few lines of code to create the Admin User.
+```
+
+Uncomment the first few lines of code to create the Admin User.
+
+```shell
 rails db:seed
 git restore db/seeds.rb
 ```
@@ -238,7 +245,7 @@ When the code related to the background task is changed, you need to restart "So
 ```shell
 ps -ef|grep solid
 kill -9 the_solid-queue-supervisor_pid
-ps -ef|grep solid # Confirm there is no process listed.
+ps -ef|grep solid # Confirm there is no related process listed.
 nohup bin/jobs & # Start it. "/nohup.out" is the log file.
 ps -ef|grep solid # Confirm that it is started.
 exit # When the ssh session is closed, the processes started during the session will also be terminated. So you should run `exit` in time to avoid the started processes being terminated.
@@ -260,11 +267,20 @@ Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to comple
 
 ## Automatically generate thumbnails for images
 
-- TODO
+We use [ImageMagick](https://imagemagick.org/) to generate thumbnails for images.
+
+```shell
+cd /usr/local/sbin
+curl -O https://imagemagick.org/archive/binaries/magick
+chmod 755 magick
+exit 
+
+magick -version # To test if it has been installed successfully.
+```
 
 ## Support "https" for web
 
-### Way 1: Use a third-party service such as CloudFlare (recommended)
+### Way 1: Use a third-party service such as CloudFlare (Recommended)
 
 This is the most convenient way.
 
@@ -289,6 +305,10 @@ In CloudFlare dashboard, click `Rules`.
 
 - `Rule templates` > Choose template `Redirect from WWW to Root` > `Create a Rule`.
 - Don't need to change anything, just click `Deploy`.
+
+## Setting up your website
+
+Read [setup_website.md](/docs/setup_website.md).
 
 ## How to upgrade the website to the latest version.
 
@@ -317,7 +337,3 @@ rails assets:precompile # This needs to be executed whenever any assets are chan
 # Run it in your local computer
 scp root@the_server_ip:/srv/markdown-resume-blog/storage/production.sqlite3 ./
 ```
-
-## Setting up your website
-
-Read [setup_website.md](/docs/setup_website.md).

@@ -97,11 +97,12 @@ echo $APPLICATION_HOST
 ## Testing Email Delivery
 
 1. Please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to restart Rails web server.
-2. Please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to start "Solid Queue" process to handle background jobs.
+2. Please read [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to start (or restart) "Solid Queue" process to handle background jobs.
 3. Email the Admin User.
     - Visit http://your-domain.com/admin.
     - Click "Forgot password?" link.
     - Enter the Admin User's email and click the button bellow.
 4. Log in http://your-domain.com/admin as the Admin User.
 5. Visit http://your-domain.com/jobs to see if there are failed jobs.
+    - If there are failed jobs, read the "Error information" to fix the error.
 6. Verify that the password recovery email is received.

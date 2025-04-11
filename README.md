@@ -86,6 +86,8 @@ EDITOR="vim" bin/rails credentials:edit
 
 **All** items shown in `config/credentials.yml.example` need to be set!
 
+If you are still not sure how to set some items, you can use the default values in `config/credentials.yml.example` first, and then set the values correctly according to the relevant instructions when you find that the relevant functions do not work.
+
 ## Prepare SQLite database
 
 ```shell
@@ -113,7 +115,11 @@ Visit http://localhost:3000/.
 ```shell
 cd /path/to/markdown-resume-blog
 vim db/seeds.rb
-# Uncomment the first few lines of code to create the Admin User.
+```
+
+Uncomment the first few lines of code to create the Admin User.
+
+```shell
 rails db:seed
 git restore db/seeds.rb
 ```
