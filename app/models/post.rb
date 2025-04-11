@@ -32,6 +32,7 @@ class Post < ApplicationRecord
   validates :permalink, presence: true
   validates :published_at, presence: true
   validate :permalink_starts_with
+  validate :id2_format
 
   before_validation :cleanup_columns, :ensure_permalink
   before_validation :ensure_id2, :ensure_published_at, on: :create
@@ -45,7 +46,7 @@ class Post < ApplicationRecord
   def self.sync_from_file_contents!(status, filename, contents)
     metadata = YAML.load(contents) || {}
 
-    id2 = metadata["id"]
+    id2 = (metadata["id"] || "").strip
     permalink = metadata["permalink"]
     title = metadata["title"]
     date = metadata["date"]
@@ -69,6 +70,11 @@ class Post < ApplicationRecord
     end
 
     id2.gsub!("-", "_")
+
+    unless id2.match?(/\A[a-zA-Z0-9_]+\z/)
+      return
+    end
+
     post = Post.find_by(id2: id2)
     category = Category.prepared_category(filename)
 
@@ -136,6 +142,12 @@ class Post < ApplicationRecord
   end
 
   private
+
+  def id2_format
+    if id2.present? && !id2.match?(/\A[a-zA-Z0-9_]+\z/)
+      errors.add :id2, 'is invalid! Only letters, numbers and "_" are valid characters.'
+    end
+  end
 
   def permalink_starts_with
     unless permalink.start_with?("/")

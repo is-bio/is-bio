@@ -37,6 +37,35 @@ RSpec.describe Post, type: :model do
       expect(post.permalink).to eq("/how-are-you")
     end
 
+    describe "#id2_format validation" do
+      it "allows letters, numbers and underscores" do
+        post = build(:post, id2: "abc123_XYZ")
+        expect(post).to be_valid
+      end
+
+      it "rejects special characters" do
+        post = build(:post, id2: "abc!@#")
+        expect(post).not_to be_valid
+        expect(post.errors[:id2]).to include('is invalid! Only letters, numbers and "_" are valid characters.')
+      end
+
+      it "hyphens are replaced with '_'" do
+        post = build(:post, id2: "abc-123")
+        expect(post).to be_valid
+      end
+
+      it "rejects spaces" do
+        post = build(:post, id2: "abc 123")
+        expect(post).not_to be_valid
+        expect(post.errors[:id2]).to include('is invalid! Only letters, numbers and "_" are valid characters.')
+      end
+
+      it "allows empty id2 on create (will be generated)" do
+        post = build(:post, id2: nil)
+        expect(post).to be_valid
+      end
+    end
+
     describe "#permalink_starts_with validation" do
       it "corrects permalink to start with '/'" do
         post = build(:post, permalink: "sample-permalink")
