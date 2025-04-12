@@ -220,7 +220,7 @@ Please follow the instructions in [docs/send_email_via_smtp_guide.md](/docs/send
 
 ## Start "Solid Queue" to handle background jobs
 
-Tasks such as sending emails and automatically generating image thumbnails require background tasks.
+Blog posts, images, files synchronization, sending emails, generating thumbnails, etc. all require background tasks to be started!
 
 ```shell
 cd /srv/markdown-resume-blog
@@ -245,7 +245,7 @@ When the code related to the background task is changed, you need to restart "So
 ```shell
 ps -ef|grep solid
 kill -9 the_solid-queue-supervisor_pid
-ps -ef|grep solid # Confirm there is no related process listed.
+ps -ef|grep solid # Verify that there are no related processes listed.
 nohup bin/jobs & # Start it. "/nohup.out" is the log file.
 ps -ef|grep solid # Confirm that it is started.
 exit # When the ssh session is closed, the processes started during the session will also be terminated. So you should run `exit` in time to avoid the started processes being terminated.

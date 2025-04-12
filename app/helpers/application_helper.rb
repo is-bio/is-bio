@@ -25,7 +25,7 @@ module ApplicationHelper
     # renderer = Redcarpet::Render::HTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
-    rendered_text = markdown.render(text || "").gsub("../../images/", "https://raw.githubusercontent.com/gazeldx/leetcode-solutions/main/images/")
+    rendered_text = markdown.render(text || "").gsub("<img src=", "<img style=\"max-width: 100%\" src=")
 
     click_to_view_answer = params[:locale] == "zh" ? "点击查看答案" : "Click to view the answer"
 

@@ -60,6 +60,12 @@ Visit https://your-domain.com/admin/github_app_settings , then
 - Set `public_link` value with the `Public link` of your GitHub App.
     If your GitHub App is private (Only allow this GitHub App to be installed on your own GitHub account), you don't need to enter it.
 
+## Start "Solid Queue" to handle background jobs (Must Do)
+
+Blog posts, images, files synchronization, sending emails, generating thumbnails, etc. all require background tasks to be started!
+
+Please read relevant content of [README.md](/README.md) or [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to start it.
+
 ## Test posts (Markdown files) synchronization feature
 
 - Visit https://github.com/resumeblog/markdown-blog/fork , fork it to your GitHub account.
@@ -87,7 +93,7 @@ You noticed that the thumbnail of the first post was not displaying correctly, s
 - Rename the `/images/example_1.jpg` in `markdown-blog` repository to `/images/example_2.jpg`
 - Then in your *first post* you have just created, set `thumbnail: example_2.jpg`.
 - `git commit` and `git push`.
-- Refresh https://your-domain.com/. You should see the thumbnail. 
+- Refresh https://your-domain.com/. You should see the thumbnail.
 
 ### Test the file synchronization
 
@@ -103,5 +109,11 @@ You noticed that the thumbnail of the first post was not displaying correctly, s
     ```
 - `git commit` and `git push`.
 - Click on the link to the first post, and you should see the pdf and the two images appear correctly. 
+
+#### The image was modified, but it did not refresh on the page.
+
+- You can check the file modification time and size under `/srv/markdown-resume-blog/public/images`. If there is no problem, it is the image cache problem.
+- Clear your browser's cache.
+- If you use a CDN service such as CloudFlare, you also need to manually clear the CDN cache.
 
 Enjoy blogging with *Markdown* and *Git*!

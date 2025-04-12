@@ -131,9 +131,9 @@ Use this email address and password to log in on http://localhost:3000/admin.
 
 Please follow the instructions in [docs/send_email_via_smtp_guide.md](/docs/send_email_via_smtp_guide.md) to complete this step.
 
-## Start 'Solid Queue' for processing background jobs
+## Start "Solid Queue" to handle background jobs
 
-Tasks such as sending emails and automatically generating image thumbnails require background tasks.
+Blog posts, images, files synchronization, sending emails, generating thumbnails, etc. all require background tasks to be started!
 
 ```shell
 cd /path/to/markdown-resume-blog
