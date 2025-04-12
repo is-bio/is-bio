@@ -1,6 +1,6 @@
 # Enjoy blogging with "Markdown" and "Git". An open source personal blog engine based on Ruby on Rails 8.
 
-Demo website: [Lane Zhang's blog](https://lanezhang.com).
+Demo website: [Zhang Jian's blog](https://zhangjian.blog).
 
 ## How can I write articles locally with Markdown files and publish them with `git push`? 
 
@@ -34,11 +34,11 @@ So your cost increase may be **zero**.
 
 - After using [GitHub Pages](https://pages.github.com/) (based on Jekyll), they **rarely** write blogs. Why?
 - IMO, ordinary blog systems can **no longer create much value for bloggers**! Those blogs are not designed to bring value to bloggers.
-- Take myself as an example, my GitHub Pages' [Lane's old blog](https://gazeldx.github.io/) is not sexy at all, so I can't get excited about writing.
+- Take myself as an example, my GitHub Pages' [Zhang Jian's old blog](https://gazeldx.github.io/) is not sexy at all, so I can't get excited about writing.
 
 ## MarkdownResumeBlog: A blog engine focused on bringing value to developers
 
-- You can see [Lane's new blog](https://lanezhang.com) (based on *MarkdownResumeBlog*) is well-designed.
+- You can see [Zhang Jian's new blog](https://zhangjian.blog) (based on *MarkdownResumeBlog*) is well-designed.
 - I started expecting clients to **pay for my services directly on my blog**!
 - Through the blog, I convey a message to potential customers: I am an expert in web development, algorithms, and game addiction!
 
