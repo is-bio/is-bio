@@ -120,6 +120,18 @@ RSpec.describe Post, type: :model do
         expect(post).to be_valid
         expect(post.permalink).to eq("/Hello-World-123")
       end
+
+      it "replaces multiple consecutive hyphens with a single hyphen" do
+        post = build(:post, permalink: "/Hello---World--Test")
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/Hello-World-Test")
+      end
+
+      it "handles multiple consecutive hyphens with spaces and underscores" do
+        post = build(:post, permalink: "/Hello---World__Test")
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/Hello-World-Test")
+      end
     end
 
     describe "permalink generation" do
@@ -164,6 +176,18 @@ RSpec.describe Post, type: :model do
         post = build(:post, title: long_title, permalink: nil)
         expect(post).to be_valid
         expect(post.permalink.length).to be <= 256
+      end
+
+      it "replaces multiple consecutive hyphens with a single hyphen" do
+        post = build(:post, title: "Hello---World--Test", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world-test")
+      end
+
+      it "handles multiple consecutive hyphens with spaces and underscores" do
+        post = build(:post, title: "Hello---World__Test", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world-test")
       end
     end
 

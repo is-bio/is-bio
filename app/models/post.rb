@@ -184,6 +184,8 @@ class Post < ApplicationRecord
       permanent_link = permanent_link.gsub(/[^a-zA-Z0-9_\s-]/, "")
       # Replace spaces and underscores with hyphens
       permanent_link = permanent_link.gsub(/[\s_]+/, "-")
+      # Replace multiple consecutive hyphens with a single hyphen
+      permanent_link = permanent_link.gsub(/-+/, "-")
 
       if permanent_link[0] != "/"
         permanent_link = "/" + permanent_link
@@ -197,7 +199,9 @@ class Post < ApplicationRecord
     # Remove all invalid characters, only allow letters, digits, underscore, hyphen and space
     sanitized = title.to_s.gsub(/[^a-zA-Z0-9_\s-]/, "").strip
     # Replace spaces and underscores with hyphens and limit length
-    "/" + sanitized.gsub(/[\s_]+/, "-").downcase[...255]
+    result = "/" + sanitized.gsub(/[\s_]+/, "-").downcase[...255]
+    # Replace multiple consecutive hyphens with a single hyphen
+    result.gsub(/-+/, "-")
   end
 
   def ensure_id2
