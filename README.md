@@ -21,6 +21,7 @@ At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can al
     - *MarkdownResumeBlog* currently supports one **beautiful free theme**, and more themes will be added in the future.
 3. Jekyll or Hugo's documentation is a lot of pages long. Who can explain everything in just one page?
     - *MarkdownResumeBlog* can. For information on how to publish a post using *Markdown* and *Git*, please read [markdown-blog](https://github.com/resumeblog/markdown-blog) using the *MarkdownResumeBlog* approach.
+4. A blog post can be translated into multiple languages and displayed on the blog. This feature is currently not supported by any blog engine. However, *MarkdownResumeBlog* will soon support it, allowing your articles to reach global users.
 
 ## What is the cost of using *MarkdownResumeBlog*?
 
