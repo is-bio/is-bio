@@ -173,35 +173,51 @@ class Post < ApplicationRecord
     end
   end
 
-  # TODO: Should not contain `/` in the middle?
   def ensure_permalink
-    permanent_link = (permalink || "").strip
+    perma_link = (permalink || "").strip
 
-    if permanent_link.blank? || permanent_link == "/"
+    if perma_link.blank? || perma_link == "/"
       self.permalink = generate_permalink
     else
-      # Remove all invalid characters, only allow letters, digits, underscore, hyphen and space
-      permanent_link = permanent_link.gsub(/[^a-zA-Z0-9_\s-]/, "")
-      # Replace spaces and underscores with hyphens
-      permanent_link = permanent_link.gsub(/[\s_]+/, "-")
-      # Replace multiple consecutive hyphens with a single hyphen
-      permanent_link = permanent_link.gsub(/-+/, "-")
-
-      if permanent_link[0] != "/"
-        permanent_link = "/" + permanent_link
+      # Remove the first '/' if it starts with '/'
+      if perma_link.start_with?("/")
+        perma_link = perma_link[1..]
       end
 
-      self.permalink = permanent_link
+      # Replace special characters with hyphens while preserving case
+      perma_link.gsub!(/[^a-zA-Z0-9\-]/, "-")
+
+      self.permalink = refined_permalink(perma_link)
     end
   end
 
   def generate_permalink
-    # Remove all invalid characters, only allow letters, digits, underscore, hyphen and space
-    sanitized = title.to_s.gsub(/[^a-zA-Z0-9_\s-]/, "").strip
-    # Replace spaces and underscores with hyphens and limit length
-    result = "/" + sanitized.gsub(/[\s_]+/, "-").downcase[...255]
+    return "/" if title.blank?
+
+    refined_permalink(
+      title.downcase.gsub(/[^a-z0-9]/, "-") # Convert to lowercase and replace other characters with hyphens
+    )
+  end
+
+  def refined_permalink(permalink)
     # Replace multiple consecutive hyphens with a single hyphen
-    result.gsub(/-+/, "-")
+    permalink = permalink.gsub(/-+/, "-")
+
+    # Remove the starting and trailing hyphen
+    permalink.chomp!("-")
+    if permalink.start_with?("-")
+      permalink.sub!("-", "/")
+    end
+
+    unless permalink.start_with?("/")
+      permalink = "/#{permalink}"
+    end
+
+    if permalink.length > 255
+      permalink = permalink[0..254]
+    end
+
+    permalink
   end
 
   def ensure_id2

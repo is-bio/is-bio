@@ -132,6 +132,36 @@ RSpec.describe Post, type: :model do
         expect(post).to be_valid
         expect(post.permalink).to eq("/Hello-World-Test")
       end
+
+      it "removes leading slash before processing" do
+        post = build(:post, permalink: "/Hello/World")
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/Hello-World")
+      end
+
+      it "preserves valid slashes in permalink" do
+        post = build(:post, permalink: "Hello/World/Test")
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/Hello-World-Test")
+      end
+
+      it "handles multiple consecutive slashes" do
+        post = build(:post, permalink: "Hello//World///Test")
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/Hello-World-Test")
+      end
+
+      it "handles mixed slashes and spaces" do
+        post = build(:post, permalink: "Hello / World / Test")
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/Hello-World-Test")
+      end
+
+      it "handles mixed slashes and underscores" do
+        post = build(:post, permalink: "Hello_/World_/Test")
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/Hello-World-Test")
+      end
     end
 
     describe "permalink generation" do
@@ -188,6 +218,60 @@ RSpec.describe Post, type: :model do
         post = build(:post, title: "Hello---World__Test", permalink: nil)
         expect(post).to be_valid
         expect(post.permalink).to eq("/hello-world-test")
+      end
+
+      it "handles slashes in title" do
+        post = build(:post, title: "Hello/World/Test", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world-test")
+      end
+
+      it "handles multiple consecutive slashes in title" do
+        post = build(:post, title: "Hello//World///Test", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world-test")
+      end
+
+      it "handles mixed slashes and spaces in title" do
+        post = build(:post, title: "Hello / World / Test", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world-test")
+      end
+
+      it "handles mixed slashes and underscores in title" do
+        post = build(:post, title: "Hello_/World_/Test", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world-test")
+      end
+
+      it "replaces special characters with hyphens" do
+        post = build(:post, title: "Hello!@#World$%^Test", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world-test")
+      end
+
+      it "handles multiple special characters" do
+        post = build(:post, title: "Hello!@#$%^&*()World", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world")
+      end
+
+      it "handles mixed special characters and spaces" do
+        post = build(:post, title: "Hello! @ World # Test", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world-test")
+      end
+
+      it "handles special characters at the beginning and end" do
+        post = build(:post, title: "!Hello World!", permalink: nil)
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/hello-world")
+      end
+
+      it "handles special characters in permalink" do
+        post = build(:post, permalink: "Hello!@#World$%^Test")
+        expect(post).to be_valid
+        expect(post.permalink).to eq("/Hello-World-Test")
       end
     end
 
@@ -643,7 +727,7 @@ RSpec.describe Post, type: :model do
             Content
           YAML
           post = Post.sync_from_file_contents!("added", "published/test.md", contents)
-          expect(post.permalink).to eq("/CustomPermalink")
+          expect(post.permalink).to eq("/Custom-Permalink")
         end
 
         it "handles whitespace in provided permalink" do
