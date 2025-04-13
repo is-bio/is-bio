@@ -31,6 +31,11 @@ class Locale < ApplicationRecord
 
   validate :english_name_and_name_are_unique_across_records
 
+  def self.available_except_current
+    available_locale_keys = I18n.available_locales - [ I18n.locale ]
+    where(key: available_locale_keys.map(&:to_s))
+  end
+
   private
 
   def english_name_and_name_are_unique_across_records
