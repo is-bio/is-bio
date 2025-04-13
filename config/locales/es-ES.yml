@@ -1,0 +1,97 @@
+es-ES:
+  # Consejo: Busca "John Doe" y reemplázalo con tu nombre.
+  author_name: "John Doe"
+  blog_name: "Blog de John Doe"
+  headline: "Blog de John Doe - El soliloquio de un programador"
+  brief_personal_introduction: "Hola, me llamo John Doe. Aquí puedes contar a los lectores qué valor único puedes aportar."
+  blog_home: "Inicio del Blog"
+  about_me: "Sobre Mí"
+  admin: "Administrador"
+  read_more: "Leer más"
+  min_read: "min de lectura"
+  previous_page: "Anterior"
+  next_page: "Siguiente"
+  newer_post: "Artículo Más Reciente"
+  older_post: "Artículo Más Antiguo"
+
+  find_more_about_me: "Más sobre mí"
+  get_in_touch: "¡Contrátame ahora!"
+
+  subscribe: "Suscribir"
+  subscribe_to_receive_email: "¡Suscríbete por correo para no perderte mis últimos artículos!"
+  author: "Autor"
+  posted_at: "Publicado"
+  enter_email: "Introduce email"
+
+  welcome_admin: "Bienvenido, administrador %{email}."
+  website_display: "Configuración de tu sitio web"
+  create_a_post: "Crear un artículo"
+  log_out: "Cerrar sesión"
+  back: "Volver"
+
+  email: "Email"
+  wechat_id: "ID de WeChat"
+  linkedin_profile_url: "URL de perfil de LinkedIn"
+  github_username: "Nombre de usuario de GitHub"
+
+  subscription:
+    success:
+      created: "Hemos enviado un correo de confirmación a tu dirección de email. ¡Por favor, revisa tu correo y haz clic en el enlace de confirmación para completar tu suscripción!"
+      confirmed: "Tu suscripción ha sido confirmada. Ahora recibirás actualizaciones cuando se publique nuevo contenido."
+    error:
+      invalid_token: "Enlace de confirmación inválido o caducado."
+    confirmation:
+      subject: "Confirma tu suscripción al Blog de John Doe"
+      instructions: "Por favor, confirma tu suscripción haciendo clic en el enlace siguiente:"
+      button: "Confirmar Suscripción"
+      expiration_notice: "Este enlace no caducará."
+
+  activerecord:
+    errors:
+      models:
+        email_subscriber:
+          attributes:
+            email:
+              already_confirmed: "la suscripción ya ha sido confirmada, ¡recibirás actualizaciones para nuevos artículos!"
+              pending_confirmation: "la suscripción ha sido registrada, ¡pero aún no ha sido confirmada! Por favor, revisa y haz clic en el correo de confirmación para completar la suscripción."
+
+  # Más información en https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "hace %{count} hora"
+        other: "hace %{count} horas"
+      about_x_months:
+        one: "hace %{count} mes"
+        other: "hace %{count} meses"
+      about_x_years:
+        one: "hace %{count} año"
+        other: "hace %{count} años"
+      almost_x_years:
+        one: "casi %{count} año"
+        other: "casi %{count} años"
+      half_a_minute: "hace medio minuto"
+      less_than_x_seconds:
+        one: "menos de %{count} segundo"
+        other: "menos de %{count} segundos"
+      less_than_x_minutes:
+        one: "menos de un minuto"
+        other: "menos de %{count} minutos"
+      over_x_years:
+        one: "más de %{count} año"
+        other: "más de %{count} años"
+      x_seconds:
+        one: "hace %{count} segundo"
+        other: "hace %{count} segundos"
+      x_minutes:
+        one: "hace %{count} minuto"
+        other: "hace %{count} minutos"
+      x_days:
+        one: "hace %{count} día"
+        other: "hace %{count} días"
+      x_months:
+        one: "hace %{count} mes"
+        other: "hace %{count} meses"
+      x_years:
+        one: "hace %{count} año"
+        other: "hace %{count} años"

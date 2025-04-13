@@ -1,0 +1,97 @@
+pt-BR:
+  # Dica: Procure por "John Doe" e substitua pelo seu nome.
+  author_name: "John Doe"
+  blog_name: "Blog do John Doe"
+  headline: "Blog do John Doe - O Solilóquio de um Programador"
+  brief_personal_introduction: "Olá, meu nome é John Doe. Conte aos leitores que valor único você pode trazer para eles aqui."
+  blog_home: "Início do Blog"
+  about_me: "Sobre Mim"
+  admin: "Admin"
+  read_more: "Leia mais"
+  min_read: "min de leitura"
+  previous_page: "Anterior"
+  next_page: "Próximo"
+  newer_post: "Artigo Mais Recente"
+  older_post: "Artigo Mais Antigo"
+
+  find_more_about_me: "Mais sobre mim"
+  get_in_touch: "Contrate-me Agora!"
+
+  subscribe: "Inscrever-se"
+  subscribe_to_receive_email: "Inscreva-se por e-mail para não perder minhas últimas postagens!"
+  author: "Autor"
+  posted_at: "Publicado"
+  enter_email: "Digite seu e-mail"
+
+  welcome_admin: "Bem-vindo, administrador %{email}."
+  website_display: "Configurando seu site"
+  create_a_post: "Criar uma postagem"
+  log_out: "Sair"
+  back: "Voltar"
+
+  email: "E-mail"
+  wechat_id: "ID do WeChat"
+  linkedin_profile_url: "URL do perfil do LinkedIn"
+  github_username: "Nome de usuário do GitHub"
+
+  subscription:
+    success:
+      created: "Enviamos um e-mail de confirmação para o seu endereço. Por favor, verifique seu e-mail e clique no link de confirmação para completar sua inscrição!"
+      confirmed: "Sua inscrição foi confirmada. Agora você receberá atualizações quando novo conteúdo for publicado."
+    error:
+      invalid_token: "Link de confirmação inválido ou expirado."
+    confirmation:
+      subject: "Confirme sua inscrição no Blog do John Doe"
+      instructions: "Por favor, confirme sua inscrição clicando no link abaixo:"
+      button: "Confirmar Inscrição"
+      expiration_notice: "Este link não irá expirar."
+
+  activerecord:
+    errors:
+      models:
+        email_subscriber:
+          attributes:
+            email:
+              already_confirmed: "a inscrição já foi confirmada, você receberá atualizações para novos artigos!"
+              pending_confirmation: "a inscrição foi registrada, mas ainda não foi confirmada! Por favor, verifique e clique no e-mail de confirmação para completar a inscrição!"
+
+  # Mais informações em https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "há cerca de %{count} hora"
+        other: "há cerca de %{count} horas"
+      about_x_months:
+        one: "há cerca de %{count} mês"
+        other: "há cerca de %{count} meses"
+      about_x_years:
+        one: "há cerca de %{count} ano"
+        other: "há cerca de %{count} anos"
+      almost_x_years:
+        one: "quase %{count} ano"
+        other: "quase %{count} anos"
+      half_a_minute: "meio minuto atrás"
+      less_than_x_seconds:
+        one: "menos de %{count} segundo"
+        other: "menos de %{count} segundos"
+      less_than_x_minutes:
+        one: "menos de um minuto"
+        other: "menos de %{count} minutos"
+      over_x_years:
+        one: "mais de %{count} ano"
+        other: "mais de %{count} anos"
+      x_seconds:
+        one: "%{count} segundo atrás"
+        other: "%{count} segundos atrás"
+      x_minutes:
+        one: "%{count} minuto atrás"
+        other: "%{count} minutos atrás"
+      x_days:
+        one: "%{count} dia atrás"
+        other: "%{count} dias atrás"
+      x_months:
+        one: "%{count} mês atrás"
+        other: "%{count} meses atrás"
+      x_years:
+        one: "%{count} ano atrás"
+        other: "%{count} anos atrás"

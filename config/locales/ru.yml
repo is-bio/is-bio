@@ -1,0 +1,121 @@
+ru:
+  # Совет: Найдите "John Doe" и замените его своим именем.
+  author_name: "John Doe"
+  blog_name: "Блог John Doe"
+  headline: "Блог John Doe - Монолог программиста"
+  brief_personal_introduction: "Привет, меня зовут John Doe. Расскажите читателям, какую уникальную ценность вы можете им принести."
+  blog_home: "Главная"
+  about_me: "Обо мне"
+  admin: "Админ"
+  read_more: "Читать далее"
+  min_read: "мин. чтения"
+  previous_page: "Предыдущая"
+  next_page: "Следующая"
+  newer_post: "Новая статья"
+  older_post: "Старая статья"
+
+  find_more_about_me: "Подробнее обо мне"
+  get_in_touch: "Наймите меня!"
+
+  subscribe: "Подписаться"
+  subscribe_to_receive_email: "Подпишитесь по электронной почте, чтобы не пропустить мои последние статьи!"
+  author: "Автор"
+  posted_at: "Опубликовано"
+  enter_email: "Введите email"
+
+  welcome_admin: "Добро пожаловать, администратор %{email}."
+  website_display: "Настройка вашего сайта"
+  create_a_post: "Создать статью"
+  log_out: "Выйти"
+  back: "Назад"
+
+  email: "Email"
+  wechat_id: "WeChat ID"
+  linkedin_profile_url: "URL профиля LinkedIn"
+  github_username: "Имя пользователя GitHub"
+
+  subscription:
+    success:
+      created: "Мы отправили письмо с подтверждением подписки на ваш адрес электронной почты. Пожалуйста, проверьте свою почту и нажмите на ссылку подтверждения, чтобы завершить подписку!"
+      confirmed: "Ваша подписка подтверждена. Теперь вы будете получать обновления при публикации нового контента."
+    error:
+      invalid_token: "Недействительная или просроченная ссылка подтверждения."
+    confirmation:
+      subject: "Подтвердите подписку на блог John Doe"
+      instructions: "Пожалуйста, подтвердите свою подписку, нажав на ссылку ниже:"
+      button: "Подтвердить подписку"
+      expiration_notice: "Эта ссылка не истекает."
+
+  activerecord:
+    errors:
+      models:
+        email_subscriber:
+          attributes:
+            email:
+              already_confirmed: "подписка уже подтверждена, вы будете получать обновления для новых статей!"
+              pending_confirmation: "подписка зарегистрирована, но еще не подтверждена! Пожалуйста, проверьте и нажмите на письмо с подтверждением, чтобы завершить подписку!"
+
+  # Дополнительная информация на https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "%{count} час назад"
+        few: "%{count} часа назад"
+        many: "%{count} часов назад"
+        other: "%{count} часов назад"
+      about_x_months:
+        one: "%{count} месяц назад"
+        few: "%{count} месяца назад"
+        many: "%{count} месяцев назад"
+        other: "%{count} месяцев назад"
+      about_x_years:
+        one: "%{count} год назад"
+        few: "%{count} года назад"
+        many: "%{count} лет назад"
+        other: "%{count} лет назад"
+      almost_x_years:
+        one: "почти %{count} год"
+        few: "почти %{count} года"
+        many: "почти %{count} лет"
+        other: "почти %{count} лет"
+      half_a_minute: "полминуты назад"
+      less_than_x_seconds:
+        one: "меньше %{count} секунды"
+        few: "меньше %{count} секунд"
+        many: "меньше %{count} секунд"
+        other: "меньше %{count} секунд"
+      less_than_x_minutes:
+        one: "меньше минуты"
+        few: "меньше %{count} минут"
+        many: "меньше %{count} минут"
+        other: "меньше %{count} минут"
+      over_x_years:
+        one: "больше %{count} года"
+        few: "больше %{count} лет"
+        many: "больше %{count} лет"
+        other: "больше %{count} лет"
+      x_seconds:
+        one: "%{count} секунду назад"
+        few: "%{count} секунды назад"
+        many: "%{count} секунд назад"
+        other: "%{count} секунд назад"
+      x_minutes:
+        one: "%{count} минуту назад"
+        few: "%{count} минуты назад"
+        many: "%{count} минут назад"
+        other: "%{count} минут назад"
+      x_days:
+        one: "%{count} день назад"
+        few: "%{count} дня назад"
+        many: "%{count} дней назад"
+        other: "%{count} дней назад"
+      x_months:
+        one: "%{count} месяц назад"
+        few: "%{count} месяца назад"
+        many: "%{count} месяцев назад"
+        other: "%{count} месяцев назад"
+      x_years:
+        one: "%{count} год назад"
+        few: "%{count} года назад"
+        many: "%{count} лет назад"
+        other: "%{count} лет назад"

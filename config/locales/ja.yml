@@ -1,0 +1,73 @@
+ja:
+  # ヒント：「张三」を検索してあなたの名前に置き換えてください。
+  author_name: "張三"
+  blog_name: "張三のブログ"
+  headline: "張三のブログ - プログラマーの告白"
+  brief_personal_introduction: "こんにちは、張三です。自己紹介をします。読者に独自の価値を提供できることを説明します。例：私はフルスタックエンジニアです。Web開発を学びたいなら、私に相談してください！"
+  blog_home: "ブログホーム"
+  about_me: "プロフィール"
+  admin: "管理者"
+  read_more: "続きを読む"
+  min_read: "分の読書"
+  previous_page: "前のページ"
+  next_page: "次のページ"
+  newer_post: "新しい記事"
+  older_post: "古い記事"
+
+  find_more_about_me: "私についてもっと知る"
+  get_in_touch: "採用してください！"
+
+  subscribe: "購読"
+  subscribe_to_receive_email: "メールで購読して、最新の記事を見逃さないでください！"
+  author: "著者"
+  posted_at: "投稿日"
+  enter_email: "メールアドレスを入力してください"
+
+  welcome_admin: "ようこそ、管理者%{email}さん。"
+  website_display: "ウェブサイトの設定"
+  create_a_post: "記事を作成"
+  log_out: "ログアウト"
+  back: "戻る"
+
+  email: "メールアドレス"
+  wechat_id: "WeChatアカウント"
+  linkedin_profile_url: "LinkedInのURL"
+  github_username: "GitHubユーザー名"
+
+  subscription:
+    success:
+      created: "購読確認メールをお送りしました。メールを確認し、確認リンクをクリックして購読を完了してください！"
+      confirmed: "購読が確認されました。新しい記事が公開されると、メール通知が届きます！"
+    error:
+      invalid_token: "無効または期限切れの確認リンクです。"
+      confirmation:
+        subject: "張三のブログの購読確認"
+        instructions: "下のリンクをクリックして購読を確認してください："
+        button: "購読を確認"
+        expiration_notice: "このリンクは期限切れになりません。"
+
+  activerecord:
+    errors:
+      models:
+        email_subscriber:
+          attributes:
+            email:
+              already_confirmed: "このアドレスは既に購読済みです。新しい記事が公開されると、メール通知が届きます！"
+              pending_confirmation: "購読は登録されましたが、まだ確認されていません！メールを確認し、「確認リンク」をクリックして購読を完了してください！"
+
+  # https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/ja.yml から変更
+  datetime:
+    distance_in_words:
+      about_x_hours: "%{count}時間前"
+      about_x_months: "%{count}ヶ月前"
+      about_x_years: "%{count}年前"
+      almost_x_years: "%{count}年弱前"
+      half_a_minute: "30秒前"
+      less_than_x_seconds: "%{count}秒以内前"
+      less_than_x_minutes: "%{count}分以内前"
+      over_x_years: "%{count}年以上前"
+      x_seconds: "%{count}秒前"
+      x_minutes: "%{count}分前"
+      x_days: "%{count}日前"
+      x_months: "%{count}ヶ月前"
+      x_years: "%{count}年前"
