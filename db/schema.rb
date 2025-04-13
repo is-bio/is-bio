@@ -33,7 +33,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_083858) do
     t.index ["key"], name: "index_github_app_settings_on_key", unique: true
   end
 
-  create_table "locales", id: :string, force: :cascade do |t|
+  create_table "locales", force: :cascade do |t|
+    t.string "key", null: false
     t.string "english_name", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false

@@ -72,3 +72,53 @@ Category.where(id: Category::ID_DRAFTS).first_or_create! do |category|
   category.name = "drafts"
 end
 puts "Table 'categories' data inserted."
+
+[
+  %w[en English English www],
+  %w[zh-CN Chinese 简体中文 cn],
+  %w[ar Arabic العربية ar],
+  %w[bn Bangla বাংলা bn],
+  %w[cs Czech Čeština cz],
+  %w[da Danish Dansk dk],
+  %w[de-DE German Deutsch de],
+  %w[el Greek Ελληνικά gr],
+  %w[es-ES Spanish Español es],
+  %w[fa Persian فارسی fa],
+  %w[fi Finnish Suomi fi],
+  %w[fr-FR French Français fr],
+  %w[hi Hindi हिंदी hi],
+  %w[hu Hungarian Magyar hu],
+  [ "id", "Indonesian", "Bahasa Indonesia", "id" ],
+  %w[it Italian Italiano it],
+  %w[iw-IL Hebrew עברית il],
+  %w[ja Japanese 日本語 jp],
+  %w[ko Korean 한국어 kr],
+  %w[mr-IN Marathi मराठी mr],
+  [ "ms", "Malay", "Bahasa Malaysia", "my" ],
+  %w[nl Dutch Nederlands nl],
+  # %w[no-NO Norwegian Norsk no],
+  %w[pa Punjabi ਪੰਜਾਬੀ pa],
+  %w[pl Polish Polski pl],
+  %w[pt-BR Portuguese Português br],
+  %w[ro Romanian Română ro],
+  %w[ru Russian Русский ru],
+  %w[sv-SE Swedish Svenska se],
+  %w[te Telugu తెలుగు te],
+  %w[th Thai ภาษาไทย th],
+  %w[tl Tagalog Tagalog ph],
+  %w[tr Turkish Türkçe tr],
+  %w[uk Ukrainian Українська ua],
+  %w[vi Vietnamese Tiếng\Việt vn],
+  [ "zh-TW", "Traditional Chinese", "正體中文", "tw" ]
+].each do |item|
+  locale_ = Locale.where(key: item[0]).first_or_create! do |locale|
+    locale.english_name = item[1]
+    locale.name = item[2]
+  end
+
+  Subdomain.where(value: item[3]).first_or_create! do |subdomain|
+    subdomain.locale_id = locale_.id
+  end
+end
+
+puts "Table 'locales' and 'subdomains' data inserted."
