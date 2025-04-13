@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_06_144617) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_13_083858) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -31,6 +31,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_06_144617) do
     t.string "value"
     t.datetime "updated_at"
     t.index ["key"], name: "index_github_app_settings_on_key", unique: true
+  end
+
+  create_table "locales", id: :string, force: :cascade do |t|
+    t.string "english_name", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["english_name"], name: "index_locales_on_english_name", unique: true
+    t.index ["name"], name: "index_locales_on_name", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
@@ -70,6 +79,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_06_144617) do
     t.index ["key"], name: "index_social_media_accounts_on_key", unique: true
   end
 
+  create_table "subdomains", primary_key: "value", id: :string, force: :cascade do |t|
+    t.integer "locale_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["locale_id"], name: "index_subdomains_on_locale_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -80,4 +96,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_06_144617) do
 
   add_foreign_key "posts", "categories"
   add_foreign_key "sessions", "users"
+  add_foreign_key "subdomains", "locales"
 end
