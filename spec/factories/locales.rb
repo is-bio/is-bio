@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :locale do
-    sequence(:key) { |n| "en-#{n}" }
-    sequence(:english_name) { |n| "English #{n}" }
-    sequence(:name) { |n| "English #{n}" }
+    sequence(:key) { |n| "xx-#{format('%03d', n)[0..2].upcase}" }
+    sequence(:english_name) { |n| "Test Language #{n}" }
+    sequence(:name) { |n| "Test Language Value #{n}" }
   end
 end

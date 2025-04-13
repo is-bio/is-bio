@@ -96,7 +96,6 @@ puts "Table 'categories' data inserted."
   %w[mr-IN Marathi मराठी mr],
   [ "ms", "Malay", "Bahasa Malaysia", "my" ],
   %w[nl Dutch Nederlands nl],
-  # %w[no-NO Norwegian Norsk no],
   %w[pa Punjabi ਪੰਜਾਬੀ pa],
   %w[pl Polish Polski pl],
   %w[pt-BR Portuguese Português br],
@@ -110,6 +109,7 @@ puts "Table 'categories' data inserted."
   %w[uk Ukrainian Українська ua],
   %w[vi Vietnamese Tiếng\Việt vn],
   [ "zh-TW", "Traditional Chinese", "正體中文", "tw" ]
+  # %w[no-NO Norwegian Norsk no],
 ].each do |item|
   locale_ = Locale.where(key: item[0]).first_or_create! do |locale|
     locale.english_name = item[1]
