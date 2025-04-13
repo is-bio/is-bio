@@ -32,7 +32,7 @@ module LocaleHelper
     Locale.available_except_current.each do |locale|
       content += content_tag(:li, class: "nav-item") do
         link_to locale_url_for(locale), class: "nav-link" do
-          content_tag(:i, "", class: "fas fa-user fa-fw me-2") + locale.name
+          content_tag(:i, "", class: "fa fa-language fa-fw me-2") + locale.name
         end
       end
     end
