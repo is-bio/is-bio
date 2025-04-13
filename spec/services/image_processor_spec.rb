@@ -23,7 +23,7 @@ RSpec.describe ImageProcessor, type: :service do
       end
 
       it 'generates a thumbnail with correct dimensions' do
-        expect(mock_image).to receive(:resize).with("300x").and_return(mock_image)
+        expect(mock_image).to receive(:resize).with("300x300").and_return(mock_image)
         expect(mock_image).to receive(:format).with("jpg").and_return(mock_image)
         expect(mock_image).to receive(:write).with(target_path)
 
@@ -35,7 +35,7 @@ RSpec.describe ImageProcessor, type: :service do
         error = MiniMagick::Error.new("Test error")
         allow(error).to receive(:backtrace).and_return(["line 1", "line 2"])
         allow(mock_image).to receive(:resize).and_raise(error)
-        
+
         expect(Rails.logger).to receive(:error).with(/MiniMagick error generating thumbnail: Test error/)
         expect(Rails.logger).to receive(:error).with("line 1\nline 2")
 
@@ -50,7 +50,7 @@ RSpec.describe ImageProcessor, type: :service do
       end
 
       it 'uses the png format with compression' do
-        expect(mock_image).to receive(:resize).with("300x").and_return(mock_image)
+        expect(mock_image).to receive(:resize).with("300x300").and_return(mock_image)
         expect(mock_image).to receive(:format).with("png").and_return(mock_image)
         expect(mock_image).to receive(:write).with(target_path)
 
@@ -77,7 +77,7 @@ RSpec.describe ImageProcessor, type: :service do
       end
 
       it 'defaults to JPEG format' do
-        expect(mock_image).to receive(:resize).with("300x").and_return(mock_image)
+        expect(mock_image).to receive(:resize).with("300x300").and_return(mock_image)
         expect(mock_image).to receive(:format).with("jpg").and_return(mock_image)
         expect(mock_image).to receive(:write).with(target_path)
 
@@ -90,7 +90,7 @@ RSpec.describe ImageProcessor, type: :service do
         allow(File).to receive(:extname).with(source_path).and_return('.jpg')
         custom_width = 500
 
-        expect(mock_image).to receive(:resize).with("#{custom_width}x").and_return(mock_image)
+        expect(mock_image).to receive(:resize).with("#{custom_width}x#{custom_width}").and_return(mock_image)
         expect(mock_image).to receive(:format).with("jpg").and_return(mock_image)
         expect(mock_image).to receive(:write).with(target_path)
 
