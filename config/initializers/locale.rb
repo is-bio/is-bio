@@ -6,6 +6,8 @@ I18n.available_locales = [
   # :ja,
   # :ru,
   # :"pt-BR",
+  # :"de-DE",
+  # :"fr-FR",
 ]
 
 # Set default locale to something other than :en

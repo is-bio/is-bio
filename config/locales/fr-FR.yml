@@ -1,0 +1,97 @@
+fr-FR:
+  # Tip: Search for "John Doe" and replace it with your name.
+  author_name: "John Doe"
+  blog_name: "Blog de John Doe"
+  headline: "Blog de John Doe - Soliloque d'un Programmeur"
+  brief_personal_introduction: "Bonjour, je m'appelle John Doe. Faites savoir aux lecteurs quelle valeur unique vous pouvez leur apporter ici."
+  blog_home: "Accueil du Blog"
+  about_me: "À Propos de Moi"
+  admin: "Admin"
+  read_more: "Lire la suite"
+  min_read: "min de lecture"
+  previous_page: "Précédent"
+  next_page: "Suivant"
+  newer_post: "Article Plus Récent"
+  older_post: "Article Plus Ancien"
+
+  find_more_about_me: "En savoir plus sur moi"
+  get_in_touch: "Contactez-Moi Maintenant !"
+
+  subscribe: "S'abonner"
+  subscribe_to_receive_email: "Abonnez-vous par e-mail pour ne jamais manquer mes derniers articles !"
+  author: "Auteur"
+  posted_at: "Publié le"
+  enter_email: "Entrer l'e-mail"
+
+  welcome_admin: "Bienvenue, administrateur %{email}."
+  website_display: "Configuration de votre site web"
+  create_a_post: "Créer un article"
+  log_out: "Se déconnecter"
+  back: "Retour"
+
+  email: "E-mail"
+  wechat_id: "ID WeChat"
+  linkedin_profile_url: "URL du profil LinkedIn"
+  github_username: "Nom d'utilisateur GitHub"
+
+  subscription:
+    success:
+      created: "Nous avons envoyé un e-mail de confirmation d'abonnement à votre adresse e-mail. Veuillez vérifier votre e-mail et cliquer sur le lien de confirmation pour compléter votre abonnement !"
+      confirmed: "Votre abonnement a été confirmé. Vous recevrez maintenant des mises à jour lorsque de nouveaux contenus seront publiés."
+    error:
+      invalid_token: "Lien de confirmation invalide ou expiré."
+    confirmation:
+      subject: "Confirmez votre abonnement au blog de John Doe"
+      instructions: "Veuillez confirmer votre abonnement en cliquant sur le lien ci-dessous :"
+      button: "Confirmer l'Abonnement"
+      expiration_notice: "Ce lien n'expire pas."
+
+  activerecord:
+    errors:
+      models:
+        email_subscriber:
+          attributes:
+            email:
+              already_confirmed: "l'abonnement a déjà été confirmé, vous recevrez des mises à jour pour les nouveaux articles !"
+              pending_confirmation: "l'abonnement a été enregistré, mais n'est pas encore confirmé ! Veuillez vérifier et cliquer sur l'e-mail de confirmation pour compléter l'abonnement !"
+
+  # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "il y a %{count} heure"
+        other: "il y a %{count} heures"
+      about_x_months:
+        one: "il y a %{count} mois"
+        other: "il y a %{count} mois"
+      about_x_years:
+        one: "il y a %{count} an"
+        other: "il y a %{count} ans"
+      almost_x_years:
+        one: "presque %{count} an"
+        other: "presque %{count} ans"
+      half_a_minute: "il y a une demi-minute"
+      less_than_x_seconds:
+        one: "moins d'une seconde"
+        other: "moins de %{count} secondes"
+      less_than_x_minutes:
+        one: "moins d'une minute"
+        other: "moins de %{count} minutes"
+      over_x_years:
+        one: "plus d'un an"
+        other: "plus de %{count} ans"
+      x_seconds:
+        one: "il y a %{count} seconde"
+        other: "il y a %{count} secondes"
+      x_minutes:
+        one: "il y a %{count} minute"
+        other: "il y a %{count} minutes"
+      x_days:
+        one: "il y a %{count} jour"
+        other: "il y a %{count} jours"
+      x_months:
+        one: "il y a %{count} mois"
+        other: "il y a %{count} mois"
+      x_years:
+        one: "il y a %{count} an"
+        other: "il y a %{count} ans" 
