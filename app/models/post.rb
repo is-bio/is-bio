@@ -91,7 +91,7 @@ class Post < ApplicationRecord
     if post.nil?
       if status == "modified"
         post = Post.find_by(filename: filename)
-        if post.present?
+        if post.present? # "id2" changed
           attributes = {
             id2: id2,
             permalink: permalink,

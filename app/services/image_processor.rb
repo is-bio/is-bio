@@ -18,12 +18,12 @@ class ImageProcessor
 
       case File.extname(source_path).downcase
       when ".jpg", ".jpeg"
-        image.resize "#{width}x"
+        image.resize "#{width}x#{width}"
         image.format "jpg"
         # image.quality 80
         image.write target_path
       when ".png"
-        image.resize "#{width}x"
+        image.resize "#{width}x#{width}"
         image.format "png"
         # image.quality 90 # MiniMagick uses quality for compression level in PNGs too
         image.write target_path
@@ -33,7 +33,7 @@ class ImageProcessor
         image.write target_path
       else
         # Default fallback to JPEG for other formats
-        image.resize "#{width}x"
+        image.resize "#{width}x#{width}"
         image.format "jpg"
         # image.quality 80
         image.write target_path
