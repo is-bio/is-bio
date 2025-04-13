@@ -1,4 +1,4 @@
-zh:
+zh-CN:
   # 小技巧：搜索 "张三" 并用你的姓名替换它。
   author_name: "张三"
   blog_name: "张三的博客"
@@ -55,7 +55,7 @@ zh:
               already_confirmed: "地址已成功订阅。当有新文章发布时，您将收到邮件通知！"
               pending_confirmation: "订阅已经登记，但尚未得到您的确认！请查收邮件，并点击“确认链接”完成订阅！"
 
-  # More information at https://github.com/svenfuchs/rails-i18n/tree/master/rails/locale
+  # Changed from https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/zh-CN.yml
   datetime:
     distance_in_words:
       about_x_hours: "%{count}小时前"

@@ -52,6 +52,8 @@ gem "safe_yaml", "~> 1.0.5"
 gem "image_processing", "~> 1.14"
 gem "mini_magick", "~> 5.2"
 
+gem 'rails-i18n', '~> 8.0.0'
+
 group :development, :test do
   gem "annotaterb", "4.14.0"
 
