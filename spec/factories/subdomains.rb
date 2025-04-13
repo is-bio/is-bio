@@ -19,5 +19,30 @@ FactoryBot.define do
   factory :subdomain do
     sequence(:value) { |n| "en#{n}" }
     association :locale
+
+    # Custom trait for hyphenated subdomain linked to English locale
+    trait :en_us_hyphenated do
+      value { "en-us" }
+      association :locale, factory: :locale, key: "en", english_name: "English", name: "English"
+    end
+
+    # Trait for www subdomain linked to English locale
+    trait :www do
+      value { "www" }
+      association :locale, factory: :locale, key: "en", english_name: "English", name: "English"
+    end
+
+    # Trait for creating custom format subdomains
+    trait :custom_format do
+      transient do
+        subdomain_value { "custom" }
+        locale_key { "en" }
+        locale_name { "English" }
+      end
+
+      value { subdomain_value }
+      association :locale, factory: :locale, key: locale_key,
+                  english_name: locale_name, name: locale_name
+    end
   end
-end 
+end

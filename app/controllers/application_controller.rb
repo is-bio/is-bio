@@ -26,7 +26,6 @@ class ApplicationController < ActionController::Base
   #   config.hosts << 'it.application.local:3000'
   def extract_locale_from_subdomain
     subdomain = request.subdomains.first
-    puts "subdomain: #{subdomain}"
 
     if subdomain.present?
       subdomain_record = Subdomain.find_by(value: subdomain)
