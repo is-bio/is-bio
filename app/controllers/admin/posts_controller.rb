@@ -1,6 +1,6 @@
 class Admin::PostsController < Admin::BaseController
   before_action :set_post, only: %i[ edit update destroy ]
-  before_action :set_category_options, only: %i[ new create edit update ]
+  before_action :set_category_options, only: %i[ new edit ]
 
   def new
     @post = Post.new(published_at: Time.current)
@@ -12,6 +12,7 @@ class Admin::PostsController < Admin::BaseController
     if @post.save
       redirect_to @post.path
     else
+      set_category_options
       render :new, status: :unprocessable_entity
     end
   end
@@ -24,6 +25,7 @@ class Admin::PostsController < Admin::BaseController
     if @post.update(post_params)
       redirect_to @post.path, notice: "Post was successfully updated."
     else
+      set_category_options
       render :edit, status: :unprocessable_entity
     end
   end
