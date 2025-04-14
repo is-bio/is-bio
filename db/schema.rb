@@ -91,11 +91,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_14_001251) do
     t.index ["key"], name: "index_social_media_accounts_on_key", unique: true
   end
 
-  create_table "subdomains", primary_key: "value", id: :string, force: :cascade do |t|
+  create_table "subdomains", force: :cascade do |t|
+    t.string "value"
     t.integer "locale_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["locale_id"], name: "index_subdomains_on_locale_id"
+    t.index ["value"], name: "index_subdomains_on_value", unique: true
   end
 
   create_table "users", force: :cascade do |t|
