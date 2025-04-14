@@ -8,8 +8,7 @@ class Admin::TranslationsController < Admin::BaseController
   end
 
   def new
-    locale = Locale.find_by(key: I18n.locale)
-    @translation = @post.translations.new(locale: locale)
+    @translation = @post.translations.new(locale: current_locale)
   end
 
   def create

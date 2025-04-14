@@ -6,8 +6,23 @@ class ApplicationController < ActionController::Base
 
   around_action :switch_locale
 
+  helper_method :default_locale?
+
   def raise_404(message = "Not Found")
     raise ActionController::RoutingError.new(message)
+  end
+
+  def default_locale?
+    I18n.locale == I18n.default_locale
+  end
+
+  def current_locale
+    if @current_locale.nil?
+      @current_locale = Locale.find_by(key: I18n.locale)
+      return @current_locale
+    end
+
+    @current_locale
   end
 
   private

@@ -18,7 +18,7 @@ class Admin::PostsController < Admin::BaseController
   end
 
   def edit
-    unless I18n.locale == I18n.default_locale
+    unless default_locale?
       translation = @post.current_translation
 
       if translation.nil?
