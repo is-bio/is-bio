@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   allow_unauthenticated_access only: %i[index show]
 
+  include TranslatedPosts
+
   def index
   end
 
@@ -15,8 +17,10 @@ class CategoriesController < ApplicationController
       raise_404
     end
 
+    translated_posts
+
     category_ids = category.descendant_ids << category.id
-    @posts = Post.includes(:category).where(category_id: category_ids).order(published_at: :desc)
+    @posts = @posts.includes(:category).where(category_id: category_ids).order(published_at: :desc)
   end
 
   def drafts_show
@@ -26,8 +30,10 @@ class CategoriesController < ApplicationController
       raise_404
     end
 
+    translated_posts
+
     category_ids = category.descendant_ids << category.id
-    @posts = Post.includes(:category).where(category_id: category_ids).order(published_at: :desc)
+    @posts = @posts.includes(:category).where(category_id: category_ids).order(published_at: :desc)
 
     render :show
   end

@@ -1,17 +1,10 @@
 class PostsController < ApplicationController
   allow_unauthenticated_access
 
+  include TranslatedPosts
+
   def index
-    if I18n.locale == I18n.default_locale
-      @posts = Post.all
-    else
-      locale = Locale.find_by(key: I18n.locale)
-      if locale
-        @posts = locale.posts.includes(:translations).where("translations.locale_id = ?", locale.id)
-      else
-        @posts = Post.none
-      end
-    end
+    translated_posts
 
     @posts = @posts.includes(:category).published.order(published_at: :desc)
   end
