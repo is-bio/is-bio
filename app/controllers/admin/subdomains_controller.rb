@@ -21,11 +21,11 @@ class Admin::SubdomainsController < Admin::BaseController
   end
 
   def edit
-    @subdomain = Subdomain.find(params.require(:id))
+    @subdomain = Subdomain.find(params.expect(:id))
   end
 
   def update
-    @subdomain = Subdomain.find(params.require(:id))
+    @subdomain = Subdomain.find(params.expect(:id))
 
     if @subdomain.update(subdomain_params)
       redirect_to admin_subdomains_path, notice: "Subdomain was successfully updated."
@@ -36,7 +36,7 @@ class Admin::SubdomainsController < Admin::BaseController
   end
 
   def destroy
-    @subdomain = Subdomain.find(params.require(:id))
+    @subdomain = Subdomain.find(params.expect(:id))
 
     if @subdomain.destroy
       redirect_to admin_subdomains_path, notice: "Subdomain was successfully deleted."
