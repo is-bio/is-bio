@@ -107,7 +107,7 @@ puts "Table 'categories' data inserted."
   %w[tl Tagalog Tagalog ph],
   %w[tr Turkish Türkçe tr],
   %w[uk Ukrainian Українська ua],
-  %w[vi Vietnamese Tiếng\Việt vn],
+  [ "vi", "Vietnamese", "Tiếng Việt", "vn" ],
   [ "zh-TW", "Traditional Chinese", "正體中文", "tw" ]
   # %w[no-NO Norwegian Norsk no],
 ].each do |item|
