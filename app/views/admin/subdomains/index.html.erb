@@ -1,0 +1,73 @@
+<% content_for :title, "Manage Subdomains" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+    <%= tag.div(flash[:alert], class: "text-danger mb-3") if flash[:alert] %>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h5>Subdomains</h5>
+      <a href="<%= new_admin_subdomain_path %>">
+        <button type="button" class="btn btn-primary btn-sm">Add New Subdomain</button>
+      </a>
+    </div>
+
+    <table class="table table-striped my-4">
+      <thead>
+      <tr>
+        <th>Value</th>
+        <th>Associated Locale</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% if @subdomains.any? %>
+        <% @subdomains.each do |subdomain| %>
+          <tr>
+            <td><code><%= subdomain.value %></code></td>
+            <td>
+              <span class="badge bg-info">
+                <%= subdomain.locale.key %>
+              </span>
+              <%= subdomain.locale.english_name %>&nbsp;
+              <%= subdomain.locale.name %>
+            </td>
+            <td title="<%= subdomain.created_at.strftime("%Y-%m-%d %H:%M:%S") %>"><%= subdomain.created_at.strftime("%Y-%m-%d") %></td>
+            <td>
+              <div class="d-flex gap-2">
+                <a href="<%= edit_admin_subdomain_path(subdomain) %>">
+                  <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                </a>
+
+                <%= button_to "Delete",
+                              admin_subdomain_path(subdomain),
+                              method: :delete,
+                              class: "btn btn-sm btn-danger",
+                              form: {
+                                data: {
+                                  turbo_confirm: "Are you sure you want to delete this subdomain?",
+                                  turbo_confirm_type: "danger"
+                                }
+                              } %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="text-center">No subdomains found</td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div class="mt-4">
+      <h6>Notes:</h6>
+      <ul class="small text-muted">
+        <li>We use subdomains to enable multi-language support for your site.</li>
+      </ul>
+    </div>
+  </div>
+</section>

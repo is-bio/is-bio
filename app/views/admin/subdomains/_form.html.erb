@@ -1,0 +1,38 @@
+<%= form_with(model: [:admin, subdomain]) do |form| %>
+  <% if subdomain.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(subdomain.errors.count, "error") %> prohibited this subdomain from being saved:</h2>
+
+      <ul>
+        <% subdomain.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-2">
+    <%= form.label :value, "Subdomain Value", class: "required" %>
+    <%= form.text_field :value, class: "form-control", required: true %>
+    <div class="form-text text-muted">
+      Format: Only lowercase letters, numbers, and hyphens. Cannot start or end with a hyphen (e.g., 'en', 'fr', 'japan')
+    </div>
+  </div>
+
+  <div class="my-3">
+    <%= form.label :locale_id, "Associated Locale", class: "required" %>
+    <%= form.collection_select :locale_id, @locales, :id, Proc.new { |locale| "#{locale.key}, #{locale.english_name}, #{locale.name}" },
+                               { prompt: "Select a locale" },
+                               { class: "form-select", required: true } %>
+    <div class="form-text text-muted">
+      The locale this subdomain will map to
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <%= form.submit subdomain.persisted? ? "Update Subdomain" : "Create Subdomain", class: "btn btn-primary" %>
+    <a href="<%= admin_subdomains_path %>">
+      <button type="button" class="btn btn-light ms-2"><%= t(:back) %></button>
+    </a>
+  </div>
+<% end %>

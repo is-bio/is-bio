@@ -50,6 +50,13 @@
 #                                      admin_locale PATCH  /admin/locales/:id(.:format)                                                                     admin/locales#update
 #                                                PUT    /admin/locales/:id(.:format)                                                                     admin/locales#update
 #                                                DELETE /admin/locales/:id(.:format)                                                                     admin/locales#destroy
+#                                  admin_subdomains GET    /admin/subdomains(.:format)                                                                      admin/subdomains#index
+#                               new_admin_subdomain GET    /admin/subdomains/new(.:format)                                                                  admin/subdomains#new
+#                                    admin_subdomain POST   /admin/subdomains(.:format)                                                                      admin/subdomains#create
+#                                edit_admin_subdomain GET    /admin/subdomains/:id/edit(.:format)                                                                 admin/subdomains#edit
+#                                     admin_subdomain PATCH  /admin/subdomains/:id(.:format)                                                                      admin/subdomains#update
+#                                                PUT    /admin/subdomains/:id(.:format)                                                                      admin/subdomains#update
+#                                                DELETE /admin/subdomains/:id(.:format)                                                                      admin/subdomains#destroy
 #                                          posts GET    /posts(.:format)                                                                                  posts#index
 #                                           root GET    /                                                                                                 posts#index
 #                                          about GET    /about(.:format)                                                                                  posts#about
@@ -147,6 +154,7 @@ Rails.application.routes.draw do
     end
 
     resources :locales
+    resources :subdomains
   end
 
   resources :posts, only: [ :index ]

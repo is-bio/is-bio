@@ -8,7 +8,7 @@ module LocaleHelper
   def locale_url_for(locale)
     return request.original_url unless locale
 
-    subdomain = locale.subdomains.first
+    subdomain = locale.subdomains.order(:created_at).first
     return request.original_url unless subdomain
 
     uri = URI.parse(request.original_url)
