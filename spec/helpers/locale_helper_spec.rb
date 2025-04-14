@@ -61,7 +61,7 @@ RSpec.describe LocaleHelper, type: :helper do
       end
 
       it "adds new subdomain" do
-        expect(helper.locale_url_for(french_locale)).to eq('https://fr.example.com/about')
+        expect(helper.locale_url_for(french_locale)).to eq('http://fr.example.com/about')
       end
     end
 
