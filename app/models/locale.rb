@@ -18,6 +18,8 @@ class Locale < ApplicationRecord
   # self.primary_key = :id
 
   has_many :subdomains, dependent: :restrict_with_exception
+  has_many :post_variants
+  has_many :posts, through: :post_variants
 
   validates :key,
             presence: true,

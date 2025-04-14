@@ -27,6 +27,10 @@ class Post < ApplicationRecord
   DEFAULT_TITLE = "No Title"
 
   belongs_to :category
+
+  has_many :post_variants, dependent: :destroy
+  has_many :locales, through: :post_variants
+
   # has_many :comments # TODO: should not delete comments if 'id2' changed or post deleted.
 
   validates :permalink, presence: true
@@ -83,7 +87,7 @@ class Post < ApplicationRecord
         post.update!(
           filename: filename,
           category: category,
-        )
+          )
         return post
       end
     end

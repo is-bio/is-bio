@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_13_083858) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_14_001251) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -41,6 +41,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_083858) do
     t.datetime "updated_at", null: false
     t.index ["english_name"], name: "index_locales_on_english_name", unique: true
     t.index ["name"], name: "index_locales_on_name", unique: true
+  end
+
+  create_table "post_variants", force: :cascade do |t|
+    t.integer "post_id_id", null: false
+    t.integer "locale_id_id", null: false
+    t.text "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["locale_id_id"], name: "index_post_variants_on_locale_id_id"
+    t.index ["post_id_id"], name: "index_post_variants_on_post_id_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -95,6 +106,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_13_083858) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "post_variants", "locale_ids"
+  add_foreign_key "post_variants", "post_ids"
   add_foreign_key "posts", "categories"
   add_foreign_key "sessions", "users"
   add_foreign_key "subdomains", "locales"

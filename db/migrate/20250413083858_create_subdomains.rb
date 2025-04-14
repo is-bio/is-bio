@@ -1,4 +1,4 @@
-class CreateSubdomains < ActiveRecord::Migration[7.1]
+class CreateSubdomains < ActiveRecord::Migration[8.0]
   def change
     create_table :subdomains, id: false do |t|
       t.string :value, primary_key: true, null: false

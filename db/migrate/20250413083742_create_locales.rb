@@ -1,4 +1,4 @@
-class CreateLocales < ActiveRecord::Migration[7.1]
+class CreateLocales < ActiveRecord::Migration[8.0]
   def change
     create_table :locales do |t|
       t.string :key, null: false
