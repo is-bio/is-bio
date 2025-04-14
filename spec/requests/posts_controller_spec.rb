@@ -24,6 +24,55 @@ RSpec.describe PostsController, type: :request do
       get "/non-canonical-path-#{post.id2}"
       expect(response).to redirect_to("/this-is-the-post-title-#{post.id2}")
     end
+
+    context "when viewing in a non-default language" do
+      let(:locale) { create(:locale, key: 'es-ES', english_name: 'Spanish', name: 'Español') }
+
+      it "displays original content when no translation exists" do
+        original_locale = I18n.locale
+        I18n.locale = :'es-ES'
+
+        post.update!(content: "Sample content for testing")
+
+        begin
+          allow_any_instance_of(Post).to receive(:current_translation).and_return(nil)
+
+          get "/this-is-the-post-title-#{post.id2}"
+
+          expect(response).to render_template(:show)
+          expect(response.body).to include(post.title)
+          expect(response.body).to include("Sample content for testing")
+        ensure
+          I18n.locale = original_locale
+        end
+      end
+
+      it "displays translated content when translation exists" do
+        translation = create(
+          :translation,
+          post: post,
+          locale: locale,
+          title: "Título traducido",
+          content: "Contenido traducido"
+        )
+
+        original_locale = I18n.locale
+        I18n.locale = :'es-ES'
+
+        begin
+          allow_any_instance_of(Post).to receive(:current_translation).and_return(translation)
+
+          get "/this-is-the-post-title-#{post.id2}"
+
+          expect(response).to render_template(:show)
+          expect(response.body).to include("Título traducido")
+          expect(response.body).to include("Contenido traducido")
+          expect(response.body).not_to include(post.title)
+        ensure
+          I18n.locale = original_locale
+        end
+      end
+    end
   end
 
   describe "GET #about" do

@@ -21,7 +21,6 @@ RSpec.describe Admin::TranslationsController, type: :request do
     end
 
     it 'assigns @translations' do
-      translation # 创建翻译
       get admin_post_translations_path(post_item)
       expect(assigns(:translations)).to include(translation)
     end
@@ -157,34 +156,32 @@ RSpec.describe Admin::TranslationsController, type: :request do
         }
       end
 
-      # 使用环境变量避免修改标题
+      # Using environment variables to avoid modifying the title
       around do |example|
         begin
-          # 保存原始的 Translation#update 方法
+          # Save the original Translation#update method
           original_update = Translation.instance_method(:update)
-          
-          # 替换 Translation#update 方法，使其始终返回 false 表示验证失败
+
+          # Replace Translation#update method to always return false to indicate validation failure
           Translation.define_method(:update) do |*args|
-            # 调用 errors.add 添加错误消息，而不是更新实际的属性
+            # Call errors.add to add error messages, instead of updating the actual attributes
             errors.add(:title, "can't be blank")
             errors.add(:content, "can't be blank")
-            false  # 返回 false 表示更新失败
+            false  # Return false to indicate update failure
           end
-          
+
           example.run
         ensure
-          # 恢复原始的 update 方法
+          # Restore the original update method
           Translation.define_method(:update, original_update)
         end
       end
 
       it 'does not update the translation' do
-        # 设置一个明确的初始标题值
         translation.update_column(:title, "Original Title")
-        
+
         patch admin_post_translation_path(post_item, translation), params: invalid_params
-        
-        # 重新加载翻译对象
+
         translation.reload
         expect(translation.title).to eq("Original Title")
       end
@@ -203,7 +200,7 @@ RSpec.describe Admin::TranslationsController, type: :request do
 
   describe 'DELETE /admin/posts/:post_id/translations/:id' do
     it 'destroys the translation' do
-      translation # 确保翻译已创建
+      translation # Ensure translation is created
       expect {
         delete admin_post_translation_path(post_item, translation)
       }.to change(Translation, :count).by(-1)
