@@ -1,0 +1,79 @@
+<% content_for :title, "Post Translations for #{@post.title}" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+    <%= tag.div(flash[:alert], class: "text-danger mb-3") if flash[:alert] %>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h5 class="mb-1">Translations for: <%= @post.title %></h5>
+        <p class="text-muted mb-0 small"><%= link_to @post.permalink, @post.path, target: "_blank" %></p>
+      </div>
+      <div class="d-flex gap-2">
+        <%= link_to "Back to Edit Post", edit_admin_post_path(@post), class: "btn btn-light btn-sm h-100" %>
+        <%= link_to "Add Translation", new_admin_post_translation_path(@post), class: "btn btn-primary btn-sm h-100" %>
+      </div>
+    </div>
+
+    <table class="table table-striped my-4">
+      <thead>
+      <tr>
+        <th>Locale</th>
+        <th>Title</th>
+        <th>Content Preview</th>
+        <th>Updated At</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% if @translations.any? %>
+        <% @translations.each do |translation| %>
+          <tr>
+            <td>
+              <span class="badge bg-info">
+                <%= translation.locale.key %>
+              </span>
+              <%= translation.locale.name %>
+            </td>
+            <td><%= truncate(translation.title || "", length: 50) %></td>
+            <td><%= truncate(translation.content || "", length: 100) %></td>
+            <td><%= translation.updated_at&.strftime("%Y-%m-%d %H:%M") %></td>
+            <td>
+              <div class="d-flex gap-2">
+                <a href="<%= edit_admin_post_translation_path(@post, translation) %>">
+                  <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                </a>
+
+                <%= button_to "Delete",
+                              admin_post_translation_path(@post, translation),
+                              method: :delete,
+                              class: "btn btn-sm btn-danger",
+                              form: {
+                                data: {
+                                  turbo_confirm: "Are you sure you want to delete this translation?",
+                                  turbo_confirm_type: "danger"
+                                }
+                              } %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="5" class="text-center">No translations found for this post</td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div class="mt-4">
+      <h6>Notes:</h6>
+      <ul class="small text-muted">
+        <li>The original post content is used when a translation is not available</li>
+        <li>Translations are displayed based on the visitor's selected locale (subdomain)</li>
+      </ul>
+    </div>
+  </div>
+</section>

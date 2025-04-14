@@ -1,0 +1,38 @@
+<%= form_with(model: [:admin, @post, translation]) do |form| %>
+  <% if translation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(translation.errors.count, "error") %> prohibited this translation from being saved:</h2>
+
+      <ul>
+        <% translation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-3">
+    <%= form.label :locale_id, "Language", class: "required" %>
+    <%= form.collection_select :locale_id, @available_locales, :id,
+                               lambda { |locale| "#{locale.key} - #{locale.name} (#{locale.english_name})" },
+                               { prompt: "Select a language" },
+                               { class: "form-select", required: true } %>
+  </div>
+
+  <div class="my-3">
+    <%= form.label :title, "Post Title", class: "required" %>
+    <%= form.text_field :title, class: "form-control", required: true, placeholder: "Enter translated title..." %>
+  </div>
+
+  <div class="my-3">
+    <%= form.label :content, "Content", class: "required" %>
+    <%= form.text_area :content, cols: 90, rows: 30, required: true, placeholder: "Enter translated content..." %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.submit translation.persisted? ? "Update Translation" : "Create Translation", class: "btn btn-primary" %>
+    <a href="<%= admin_post_translations_path(@post) %>">
+      <button type="button" class="btn btn-light ms-2"><%= t(:back) %></button>
+    </a>
+  </div>
+<% end %>

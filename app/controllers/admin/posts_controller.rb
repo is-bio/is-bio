@@ -18,6 +18,15 @@ class Admin::PostsController < Admin::BaseController
   end
 
   def edit
+    unless I18n.locale == I18n.default_locale
+      translation = @post.current_translation
+
+      if translation.nil?
+        render :edit
+      else
+        redirect_to edit_admin_post_translation_path(@post, @post.current_translation)
+      end
+    end
   end
 
   # PATCH/PUT /posts/1

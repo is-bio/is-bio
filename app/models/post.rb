@@ -28,8 +28,8 @@ class Post < ApplicationRecord
 
   belongs_to :category
 
-  has_many :post_variants, dependent: :destroy
-  has_many :locales, through: :post_variants
+  has_many :translations, dependent: :destroy
+  has_many :locales, through: :translations
 
   # has_many :comments # TODO: should not delete comments if 'id2' changed or post deleted.
 
@@ -42,10 +42,6 @@ class Post < ApplicationRecord
   before_validation :ensure_id2, :ensure_published_at, on: :create
 
   scope :published, -> { where(category_id: Category.published_ids) }
-
-  def path
-    "#{permalink}-#{id2}"
-  end
 
   def self.sync_from_file_contents!(status, filename, contents)
     metadata = YAML.load(contents) || {}
@@ -143,6 +139,30 @@ class Post < ApplicationRecord
       post.update!(attributes)
       post
     end
+  end
+
+  def self.available_locales
+    available_locale_keys = I18n.available_locales - [ I18n.locale ]
+    where(key: available_locale_keys.map(&:to_s))
+  end
+
+  def path
+    "#{permalink}-#{id2}"
+  end
+
+  def translated!
+    translation = current_translation
+
+    unless translation.nil?
+      self.title = translation.title
+      self.content = translation.content
+    end
+  end
+
+  def current_translation
+    translations.find_by(
+      locale: Locale.find_by(key: I18n.locale)
+    )
   end
 
   private

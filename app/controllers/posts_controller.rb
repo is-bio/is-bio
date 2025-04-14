@@ -2,7 +2,18 @@ class PostsController < ApplicationController
   allow_unauthenticated_access
 
   def index
-    @posts = Post.includes(:category).published.order(published_at: :desc)
+    if I18n.locale == I18n.default_locale
+      @posts = Post.all
+    else
+      locale = Locale.find_by(key: I18n.locale)
+      if locale
+        @posts = locale.posts.includes(:translations).where("translations.locale_id = ?", locale.id)
+      else
+        @posts = Post.none
+      end
+    end
+
+    @posts = @posts.includes(:category).published.order(published_at: :desc)
   end
 
   def show
@@ -24,6 +35,8 @@ class PostsController < ApplicationController
 
     @post_older = Post.published.where("published_at < ?", @post.published_at).order(published_at: :desc).first
     @post_newer = Post.published.where("published_at > ?", @post.published_at).order(:published_at).first
+
+    @post.translated!
   end
 
   def about

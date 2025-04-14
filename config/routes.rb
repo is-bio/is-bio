@@ -20,11 +20,19 @@
 #                                                PUT    /passwords/:token(.:format)                                                                       passwords#update
 #                                                DELETE /passwords/:token(.:format)                                                                       passwords#destroy
 #                                     admin_root GET    /admin(.:format)                                                                                  admin/main#root
+#                        admin_post_translations GET    /admin/posts/:post_id/translations(.:format)                                                      admin/translations#index
+#                                                POST   /admin/posts/:post_id/translations(.:format)                                                      admin/translations#create
+#                     new_admin_post_translation GET    /admin/posts/:post_id/translations/new(.:format)                                                  admin/translations#new
+#                    edit_admin_post_translation GET    /admin/posts/:post_id/translations/:id/edit(.:format)                                             admin/translations#edit
+#                         admin_post_translation PATCH  /admin/posts/:post_id/translations/:id(.:format)                                                  admin/translations#update
+#                                                PUT    /admin/posts/:post_id/translations/:id(.:format)                                                  admin/translations#update
+#                                                DELETE /admin/posts/:post_id/translations/:id(.:format)                                                  admin/translations#destroy
 #                                    admin_posts POST   /admin/posts(.:format)                                                                            admin/posts#create
 #                                 new_admin_post GET    /admin/posts/new(.:format)                                                                        admin/posts#new
 #                                edit_admin_post GET    /admin/posts/:id/edit(.:format)                                                                   admin/posts#edit
 #                                     admin_post PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
 #                                                PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
+#                                                DELETE /admin/posts/:id(.:format)                                                                        admin/posts#destroy
 #                               admin_categories GET    /admin/categories(.:format)                                                                       admin/categories#index
 #                    admin_social_media_accounts GET    /admin/social_media_accounts(.:format)                                                            admin/social_media_accounts#index
 #                edit_admin_social_media_account GET    /admin/social_media_accounts/:id/edit(.:format)                                                   admin/social_media_accounts#edit
@@ -43,20 +51,22 @@
 #                                                POST   /admin/email_subscribers(.:format)                                                                admin/email_subscribers#create
 #                     new_admin_email_subscriber GET    /admin/email_subscribers/new(.:format)                                                            admin/email_subscribers#new
 #                         admin_email_subscriber DELETE /admin/email_subscribers/:id(.:format)                                                            admin/email_subscribers#destroy
-#                                    admin_locales GET    /admin/locales(.:format)                                                                         admin/locales#index
-#                                 new_admin_locale GET    /admin/locales/new(.:format)                                                                     admin/locales#new
-#                                      admin_locale POST   /admin/locales(.:format)                                                                         admin/locales#create
-#                                 edit_admin_locale GET    /admin/locales/:id/edit(.:format)                                                                admin/locales#edit
-#                                      admin_locale PATCH  /admin/locales/:id(.:format)                                                                     admin/locales#update
-#                                                PUT    /admin/locales/:id(.:format)                                                                     admin/locales#update
-#                                                DELETE /admin/locales/:id(.:format)                                                                     admin/locales#destroy
-#                                  admin_subdomains GET    /admin/subdomains(.:format)                                                                      admin/subdomains#index
-#                               new_admin_subdomain GET    /admin/subdomains/new(.:format)                                                                  admin/subdomains#new
-#                                    admin_subdomain POST   /admin/subdomains(.:format)                                                                      admin/subdomains#create
-#                                edit_admin_subdomain GET    /admin/subdomains/:id/edit(.:format)                                                                 admin/subdomains#edit
-#                                     admin_subdomain PATCH  /admin/subdomains/:id(.:format)                                                                      admin/subdomains#update
-#                                                PUT    /admin/subdomains/:id(.:format)                                                                      admin/subdomains#update
-#                                                DELETE /admin/subdomains/:id(.:format)                                                                      admin/subdomains#destroy
+#                                  admin_locales GET    /admin/locales(.:format)                                                                          admin/locales#index
+#                                                POST   /admin/locales(.:format)                                                                          admin/locales#create
+#                               new_admin_locale GET    /admin/locales/new(.:format)                                                                      admin/locales#new
+#                              edit_admin_locale GET    /admin/locales/:id/edit(.:format)                                                                 admin/locales#edit
+#                                   admin_locale GET    /admin/locales/:id(.:format)                                                                      admin/locales#show
+#                                                PATCH  /admin/locales/:id(.:format)                                                                      admin/locales#update
+#                                                PUT    /admin/locales/:id(.:format)                                                                      admin/locales#update
+#                                                DELETE /admin/locales/:id(.:format)                                                                      admin/locales#destroy
+#                               admin_subdomains GET    /admin/subdomains(.:format)                                                                       admin/subdomains#index
+#                                                POST   /admin/subdomains(.:format)                                                                       admin/subdomains#create
+#                            new_admin_subdomain GET    /admin/subdomains/new(.:format)                                                                   admin/subdomains#new
+#                           edit_admin_subdomain GET    /admin/subdomains/:id/edit(.:format)                                                              admin/subdomains#edit
+#                                admin_subdomain GET    /admin/subdomains/:id(.:format)                                                                   admin/subdomains#show
+#                                                PATCH  /admin/subdomains/:id(.:format)                                                                   admin/subdomains#update
+#                                                PUT    /admin/subdomains/:id(.:format)                                                                   admin/subdomains#update
+#                                                DELETE /admin/subdomains/:id(.:format)                                                                   admin/subdomains#destroy
 #                                          posts GET    /posts(.:format)                                                                                  posts#index
 #                                           root GET    /                                                                                                 posts#index
 #                                          about GET    /about(.:format)                                                                                  posts#about
@@ -69,7 +79,7 @@
 #                                  subscriptions POST   /subscriptions(.:format)                                                                          subscriptions#create
 #                           confirm_subscription GET    /subscriptions/confirm/:token(.:format)                                                           subscriptions#confirm
 #                             rails_health_check GET    /up(.:format)                                                                                     rails/health#show
-#                                                GET    /:permalink-:id(.:format)                                                                         posts#show
+#                                                GET    /:permalink-:id2(.:format)                                                                        posts#show
 #               turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #               turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
 #              turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh
@@ -138,7 +148,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "main#root"
 
-    resources :posts, only: [ :new, :create, :edit, :update, :destroy ]
+    resources :posts, only: [ :new, :create, :edit, :update, :destroy ] do
+      resources :translations, only: [ :index, :new, :create, :edit, :update, :destroy ]
+    end
 
     resources :categories, only: :index
 

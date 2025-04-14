@@ -1,0 +1,15 @@
+<% content_for :title, "Add Translation for #{@post.title}" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+    <%= tag.div(flash[:alert], class: "text-danger mb-3") if flash[:alert] %>
+
+    <div class="mb-4">
+      <h5 class="mb-1">Add Translation</h5>
+      <p class="text-muted mb-0">Original Post: <%= link_to @post.title, @post.path, target: "_blank" %></p>
+    </div>
+
+    <%= render "form", translation: @translation %>
+  </div>
+</section>

@@ -18,8 +18,8 @@ class Locale < ApplicationRecord
   # self.primary_key = :id
 
   has_many :subdomains, dependent: :restrict_with_exception
-  has_many :post_variants
-  has_many :posts, through: :post_variants
+  has_many :translations
+  has_many :posts, through: :translations
 
   validates :key,
             presence: true,
@@ -35,7 +35,12 @@ class Locale < ApplicationRecord
 
   def self.available_except_current
     available_locale_keys = I18n.available_locales - [ I18n.locale ]
-    where(key: available_locale_keys.map(&:to_s))
+    where(key: available_locale_keys.map(&:to_s)).order(:id)
+  end
+
+  def self.available_except_default
+    available_locale_keys = I18n.available_locales - [ I18n.default_locale ]
+    where(key: available_locale_keys.map(&:to_s)).order(:id)
   end
 
   private

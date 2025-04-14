@@ -1,6 +1,6 @@
-class CreatePostVariants < ActiveRecord::Migration[8.0]
+class CreateTranslations < ActiveRecord::Migration[8.0]
   def change
-    create_table :post_variants do |t|
+    create_table :translations do |t|
       t.references :post, null: false, foreign_key: true
       t.references :locale, null: false, foreign_key: true
       t.text :title
