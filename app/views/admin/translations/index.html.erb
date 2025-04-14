@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
         <h5 class="mb-1">Translations for: <%= @post.title %></h5>
-        <p class="text-muted mb-0 small"><%= link_to @post.permalink, @post.path, target: "_blank" %></p>
+        <p class="text-muted mb-0 small"><%= link_to @post.path, @post.path, target: "_blank" %></p>
       </div>
       <div class="d-flex gap-2">
         <%= link_to "Back to Edit Post", edit_admin_post_path(@post), class: "btn btn-light btn-sm h-100" %>
