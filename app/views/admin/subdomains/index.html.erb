@@ -15,6 +15,7 @@
     <table class="table table-striped my-4">
       <thead>
       <tr>
+        <th>#</th>
         <th>Value</th>
         <th>Associated Locale</th>
         <th>Created At</th>
@@ -26,6 +27,7 @@
       <% if @subdomains.any? %>
         <% @subdomains.each do |subdomain| %>
           <tr>
+            <td><%= subdomain.id %></td>
             <td><code><%= subdomain.value %></code></td>
             <td>
               <span class="badge bg-info">

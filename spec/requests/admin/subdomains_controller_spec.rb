@@ -3,8 +3,9 @@ require "rails_helper"
 RSpec.describe Admin::SubdomainsController, type: :request do
   let(:user) { create(:user) }
   let(:session) { create(:session, user: user) }
-  let(:locale) { create(:locale) }
-  let(:subdomain) { create(:subdomain, locale: locale) }
+  let(:locale) { Locale.find_or_create_by(key: 'en') }
+  let(:subdomain) { Subdomain.find_or_create_by(locale: locale) }
+  let(:new_locale) { Locale.find_or_create_by(key: 'es') }
 
   before do
     allow_any_instance_of(Admin::BaseController).to receive(:authenticated?).and_return(true)
@@ -103,16 +104,20 @@ RSpec.describe Admin::SubdomainsController, type: :request do
         expect(assigns(:locales)).not_to be_nil
       end
     end
+
+    context "with duplicate value" do
+      let!(:existing) { create(:subdomain, value: "duplicate") }
+
+      it "shows validation error" do
+        post admin_subdomains_path, params: {
+          subdomain: { value: "duplicate", locale_id: locale.id }
+        }
+        expect(response.body).to include("has already been taken")
+      end
+    end
   end
 
   describe "GET /admin/subdomains/:id/edit" do
-    before do
-      # Mock the controller to fix the params.expect typo
-      allow_any_instance_of(Admin::SubdomainsController).to receive(:params).and_return(
-        ActionController::Parameters.new(id: subdomain.value).permit!
-      )
-    end
-
     it "returns http success" do
       get edit_admin_subdomain_path(subdomain)
       expect(response).to have_http_status(:success)
@@ -130,20 +135,11 @@ RSpec.describe Admin::SubdomainsController, type: :request do
   end
 
   describe "PATCH /admin/subdomains/:id" do
-    let(:new_locale) { create(:locale, key: "es") }
-
-    before do
-      # Mock the controller to fix the params.expect typo
-      allow_any_instance_of(Admin::SubdomainsController).to receive(:params).and_return(
-        ActionController::Parameters.new(id: subdomain.value).permit!
-      )
-    end
-
     context "with valid parameters" do
       let(:valid_params) do
         {
           subdomain: {
-            value: "updated",
+            value: "updated-value",
             locale_id: new_locale.id
           }
         }
@@ -152,7 +148,7 @@ RSpec.describe Admin::SubdomainsController, type: :request do
       it "updates the subdomain" do
         patch admin_subdomain_path(subdomain), params: valid_params
         subdomain.reload
-        expect(subdomain.value).to eq("updated")
+        expect(subdomain.value).to eq("updated-value")
         expect(subdomain.locale_id).to eq(new_locale.id)
       end
 
@@ -204,66 +200,60 @@ RSpec.describe Admin::SubdomainsController, type: :request do
   describe "DELETE /admin/subdomains/:id" do
     let!(:subdomain_to_delete) { create(:subdomain) }
 
-    before do
-      # Mock the controller to fix the params.expect typo
-      allow_any_instance_of(Admin::SubdomainsController).to receive(:params).and_return(
-        ActionController::Parameters.new(id: subdomain_to_delete.value).permit!
-      )
-    end
-
     it "destroys the subdomain" do
       expect {
         delete admin_subdomain_path(subdomain_to_delete)
       }.to change(Subdomain, :count).by(-1)
-    end
+      expect(Subdomain.exists?(subdomain_to_delete.id)).to be false
 
-    it "redirects to the subdomains list" do
-      delete admin_subdomain_path(subdomain_to_delete)
-      expect(response).to redirect_to(admin_subdomains_path)
-    end
-
-    it "sets a success flash message" do
-      delete admin_subdomain_path(subdomain_to_delete)
-      expect(flash[:notice]).to eq("Subdomain was successfully deleted.")
-    end
-
-    context "when an error occurs during deletion" do
-      before do
-        allow_any_instance_of(Subdomain).to receive(:destroy).and_raise(StandardError.new("Test error"))
-      end
-
-      it "redirects to the subdomains list with error message" do
+      it "redirects to the subdomains list" do
         delete admin_subdomain_path(subdomain_to_delete)
         expect(response).to redirect_to(admin_subdomains_path)
-        expect(flash[:alert]).to include("Error deleting subdomain")
+      end
+
+      it "sets a success flash message" do
+        delete admin_subdomain_path(subdomain_to_delete)
+        expect(flash[:notice]).to eq("Subdomain was successfully deleted.")
+      end
+
+      context "when an error occurs during deletion" do
+        before do
+          allow_any_instance_of(Subdomain).to receive(:destroy).and_raise(StandardError.new("Test error"))
+        end
+
+        it "redirects to the subdomains list with error message" do
+          delete admin_subdomain_path(subdomain_to_delete)
+          expect(response).to redirect_to(admin_subdomains_path)
+          expect(flash[:alert]).to include("Error deleting subdomain")
+        end
       end
     end
-  end
 
-  context "when not authenticated" do
-    before do
-      allow_any_instance_of(Admin::BaseController).to receive(:authenticated?).and_return(false)
-      allow_any_instance_of(Admin::BaseController).to receive(:resume_session).and_return(nil)
-    end
+    context "when not authenticated" do
+      before do
+        allow_any_instance_of(Admin::BaseController).to receive(:authenticated?).and_return(false)
+        allow_any_instance_of(Admin::BaseController).to receive(:resume_session).and_return(nil)
+      end
 
-    it "redirects to login page when trying to access subdomains index" do
-      get admin_subdomains_path
-      expect(response).to redirect_to(new_session_path)
-    end
+      it "redirects to login page when trying to access subdomains index" do
+        get admin_subdomains_path
+        expect(response).to redirect_to(new_session_path)
+      end
 
-    it "redirects to login page when trying to create a subdomain" do
-      post admin_subdomains_path, params: { subdomain: { value: "test" } }
-      expect(response).to redirect_to(new_session_path)
-    end
+      it "redirects to login page when trying to create a subdomain" do
+        post admin_subdomains_path, params: { subdomain: { value: "test" } }
+        expect(response).to redirect_to(new_session_path)
+      end
 
-    it "redirects to login page when trying to edit a subdomain" do
-      get edit_admin_subdomain_path(subdomain)
-      expect(response).to redirect_to(new_session_path)
-    end
+      it "redirects to login page when trying to edit a subdomain" do
+        get edit_admin_subdomain_path(subdomain)
+        expect(response).to redirect_to(new_session_path)
+      end
 
-    it "redirects to login page when trying to delete a subdomain" do
-      delete admin_subdomain_path(subdomain)
-      expect(response).to redirect_to(new_session_path)
+      it "redirects to login page when trying to delete a subdomain" do
+        delete admin_subdomain_path(subdomain)
+        expect(response).to redirect_to(new_session_path)
+      end
     end
   end
 end

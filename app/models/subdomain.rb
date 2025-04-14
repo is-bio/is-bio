@@ -2,7 +2,8 @@
 #
 # Table name: subdomains
 #
-#  value      :string           not null, primary key
+#  id         :integer          not null, primary key
+#  value      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  locale_id  :integer          not null
@@ -10,14 +11,13 @@
 # Indexes
 #
 #  index_subdomains_on_locale_id  (locale_id)
+#  index_subdomains_on_value      (value) UNIQUE
 #
 # Foreign Keys
 #
 #  locale_id  (locale_id => locales.id)
 #
 class Subdomain < ApplicationRecord
-  self.primary_key = :value
-
   belongs_to :locale
 
   validates :value, presence: true,
