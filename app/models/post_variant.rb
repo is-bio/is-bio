@@ -3,22 +3,22 @@
 # Table name: post_variants
 #
 #  id         :integer          not null, primary key
-#  title      :text
 #  content    :text
+#  title      :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  post_id    :integer          not null
 #  locale_id  :integer          not null
+#  post_id    :integer          not null
 #
 # Indexes
 #
-#  index_post_variants_on_post_id     (post_id)
-#  index_post_variants_on_locale_id   (locale_id)
+#  index_post_variants_on_locale_id  (locale_id)
+#  index_post_variants_on_post_id    (post_id)
 #
 # Foreign Keys
 #
-#  post_id    (post_id => posts.id)
 #  locale_id  (locale_id => locales.id)
+#  post_id    (post_id => posts.id)
 #
 class PostVariant < ApplicationRecord
   belongs_to :post
