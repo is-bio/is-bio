@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_14_001251) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_15_055732) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -87,6 +87,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_14_001251) do
     t.datetime "updated_at", null: false
     t.index ["locale_id"], name: "index_subdomains_on_locale_id"
     t.index ["value"], name: "index_subdomains_on_value", unique: true
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "enabled", default: true, null: false
+    t.boolean "free", default: true, null: false
+    t.integer "color", default: 0, null: false
   end
 
   create_table "translations", force: :cascade do |t|

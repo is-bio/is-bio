@@ -122,3 +122,12 @@ puts "Table 'categories' data inserted."
 end
 
 puts "Table 'locales' and 'subdomains' data inserted."
+
+Theme.where(id: 1).first_or_create! do |theme|
+  theme.name = "DevBlog"
+  theme.free = true
+  theme.enabled = true
+  theme.color = 0
+end
+
+puts "Table 'themes' data inserted."
