@@ -43,6 +43,13 @@
 #                                                POST   /admin/email_subscribers(.:format)                                                                admin/email_subscribers#create
 #                     new_admin_email_subscriber GET    /admin/email_subscribers/new(.:format)                                                            admin/email_subscribers#new
 #                         admin_email_subscriber DELETE /admin/email_subscribers/:id(.:format)                                                            admin/email_subscribers#destroy
+#                                    admin_locales GET    /admin/locales(.:format)                                                                         admin/locales#index
+#                                 new_admin_locale GET    /admin/locales/new(.:format)                                                                     admin/locales#new
+#                                      admin_locale POST   /admin/locales(.:format)                                                                         admin/locales#create
+#                                 edit_admin_locale GET    /admin/locales/:id/edit(.:format)                                                                admin/locales#edit
+#                                      admin_locale PATCH  /admin/locales/:id(.:format)                                                                     admin/locales#update
+#                                                PUT    /admin/locales/:id(.:format)                                                                     admin/locales#update
+#                                                DELETE /admin/locales/:id(.:format)                                                                     admin/locales#destroy
 #                                          posts GET    /posts(.:format)                                                                                  posts#index
 #                                           root GET    /                                                                                                 posts#index
 #                                          about GET    /about(.:format)                                                                                  posts#about
@@ -138,6 +145,8 @@ Rails.application.routes.draw do
         post :send_verification_email
       end
     end
+
+    resources :locales
   end
 
   resources :posts, only: [ :index ]

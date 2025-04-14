@@ -1,0 +1,81 @@
+<% content_for :title, "Manage Locales" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+    <%= tag.div(flash[:alert], class: "text-danger mb-3") if flash[:alert] %>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h5>Available Locales</h5>
+      <a href="<%= new_admin_locale_path %>">
+        <button type="button" class="btn btn-primary btn-sm">Add New Locale</button>
+      </a>
+    </div>
+
+    <table class="table table-striped my-4">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Key</th>
+        <th>English Name</th>
+        <th>Native Name</th>
+        <th>Subdomains</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% if @locales.any? %>
+        <% @locales.each do |locale| %>
+          <tr>
+            <th><%= locale.id %></th>
+            <td><code><%= locale.key %></code></td>
+            <td><%= locale.english_name %></td>
+            <td><%= locale.name %></td>
+            <td>
+              <% if locale.subdomains.any? %>
+                <% locale.subdomains.each do |subdomain| %>
+                  <span class="badge bg-secondary"><%= subdomain.value %></span>
+                <% end %>
+              <% else %>
+                <span class="text-muted">None</span>
+              <% end %>
+            </td>
+            <td>
+              <div class="d-flex gap-2">
+                <a href="<%= edit_admin_locale_path(locale) %>">
+                  <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                </a>
+                <%= button_to "Delete",
+                              admin_locale_path(locale),
+                              method: :delete,
+                              class: "btn btn-sm btn-danger",
+                              form: {
+                                data: {
+                                  turbo_confirm: "Are you sure you want to delete this locale?",
+                                  turbo_confirm_type: "danger"
+                                }
+                              },
+                              disabled: locale.subdomains.any? %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="6" class="text-center">No locales found</td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div class="mt-4">
+      <h6>Notes:</h6>
+      <ul class="small text-muted">
+        <li>In order for I18n to work properly, the "locale_key.yml" file needs to exist in the "config/locales" directory. For example: "config/locales/zh-CN.yml".</li>
+        <li>Modify "I18n.available_locales" and "I18n.default_locale" in "config/initializers/locale.rb" to suit your needs.</li>
+        <li>Locales with associated subdomains cannot be deleted.</li>
+      </ul>
+    </div>
+  </div>
+</section>

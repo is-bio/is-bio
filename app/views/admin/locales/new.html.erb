@@ -1,0 +1,56 @@
+<% content_for :title, "New Locale" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <% if notice.present? %>
+      <p style="color: green"><%= notice %></p>
+    <% end %>
+
+    <h5 class="mb-3">Add New Locale</h5>
+
+    <%= form_with(model: [:admin, @locale], url: admin_locales_path) do |form| %>
+      <% if @locale.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@locale.errors.count, "error") %> prohibited this locale from being saved:</h2>
+
+          <ul>
+            <% @locale.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-2">
+        <%= form.label :key, "Locale Key", class: "required" %>
+        <%= form.text_field :key, class: "form-control", required: true, placeholder: "zh-CN" %>
+        <div class="form-text text-muted">
+          Format: Two or three lowercase letters, optionally followed by a hyphen and 2-3 uppercase letters/numbers (e.g. 'en', 'fr', 'zh-CN')
+        </div>
+      </div>
+
+      <div class="my-3">
+        <%= form.label :english_name, "English Name", class: "required" %>
+        <%= form.text_field :english_name, class: "form-control", required: true, placeholder: "Chinese" %>
+        <div class="form-text text-muted">
+          The name of the language in English
+        </div>
+      </div>
+
+      <div class="my-3">
+        <%= form.label :name, "Native Name", class: "required" %>
+        <%= form.text_field :name, class: "form-control", required: true, placeholder: "中文" %>
+        <div class="form-text text-muted">
+          The name of the language in its native form
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit "Create Locale", class: "btn btn-primary" %>
+        <a href="<%= admin_locales_path %>">
+          <button type="button" class="btn btn-light ms-2"><%= t(:back) %></button>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+<% content_for :title, "Edit Locale" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <% if notice.present? %>
+      <p style="color: green"><%= notice %></p>
+    <% end %>
+
+    <h5 class="mb-3">Edit Locale: <%= @locale.key %></h5>
+
+    <%= render "form", locale: @locale %>
+  </div>
+</section>
