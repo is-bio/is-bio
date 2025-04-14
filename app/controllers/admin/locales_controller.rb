@@ -1,6 +1,6 @@
 class Admin::LocalesController < Admin::BaseController
   def index
-    @locales = Locale.order(:key).all
+    @locales = Locale.includes(:subdomains).order(:key).all
   end
 
   def new
@@ -18,11 +18,11 @@ class Admin::LocalesController < Admin::BaseController
   end
 
   def edit
-    @locale = Locale.find(params.require(:id))
+    @locale = Locale.find(params.expect(:id))
   end
 
   def update
-    @locale = Locale.find(params.require(:id))
+    @locale = Locale.find(params.expect(:id))
 
     if @locale.update(locale_params)
       redirect_to admin_locales_path, notice: "Locale was successfully updated."
@@ -32,7 +32,7 @@ class Admin::LocalesController < Admin::BaseController
   end
 
   def destroy
-    @locale = Locale.find(params.require(:id))
+    @locale = Locale.find(params.expect(:id))
 
     begin
       if @locale.destroy
@@ -48,6 +48,6 @@ class Admin::LocalesController < Admin::BaseController
   private
 
   def locale_params
-    params.require(:locale).permit(:key, :english_name, :name)
+    params.expect(locale: [ :key, :english_name, :name ])
   end
 end
