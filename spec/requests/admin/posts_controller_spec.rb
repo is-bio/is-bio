@@ -77,19 +77,45 @@ RSpec.describe Admin::PostsController, type: :request do
   end
 
   describe 'GET /admin/posts/:id/edit' do
-    it 'returns http success' do
-      get edit_admin_post_path(post_item)
-      expect(response).to have_http_status(:success)
+    context 'when the current locale is the default locale' do
+      it 'renders the edit page' do
+        allow(I18n).to receive(:locale).and_return(I18n.default_locale)
+        get edit_admin_post_path(post_item)
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:edit)
+      end
     end
 
-    it 'assigns the requested post' do
-      get edit_admin_post_path(post_item)
-      expect(assigns(:post)).to eq(post_item)
-    end
+    context 'when the current locale is not the default locale' do
+      let(:non_default_locale) { Locale.find_by(key: 'es-ES') }
 
-    it 'sets the category options' do
-      get edit_admin_post_path(post_item)
-      expect(assigns(:category_options)).not_to be_empty
+      before do
+        allow(I18n).to receive(:locale).and_return(:'es-ES')
+        allow(I18n).to receive(:default_locale).and_return(:en)
+      end
+
+      context 'and there is no translation' do
+        it 'renders the edit page' do
+          allow_any_instance_of(Post).to receive(:current_translation).and_return(nil)
+
+          get edit_admin_post_path(post_item)
+          expect(response).to have_http_status(:success)
+          expect(response).to render_template(:edit)
+        end
+      end
+
+      context 'and there is a translation' do
+        it 'redirects to the translation edit path' do
+          non_default = non_default_locale || create(:locale, key: 'es-ES', english_name: 'Spanish', name: 'Español')
+          translation = create(:translation, post: post_item, locale: non_default)
+
+          allow_any_instance_of(Post).to receive(:current_translation).and_return(translation)
+
+          get edit_admin_post_path(post_item)
+
+          expect(response).to redirect_to(edit_admin_post_translation_path(post_item, translation))
+        end
+      end
     end
   end
 
