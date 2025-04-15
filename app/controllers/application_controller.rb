@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  layout "application" # Should not remove it! Or will cause "Content Missing" issue using "turbo-frame".
+
   include Authentication
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
