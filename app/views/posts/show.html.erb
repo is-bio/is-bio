@@ -1,7 +1,4 @@
-<%= turbo_frame_tag "visitor_frame" do %>
-<turbo-stream action="update" target="page-title">
-  <template><%= title(@post.title) %></template>
-</turbo-stream>
+<% title(@post.title) %>
 
 <article class="blog-post px-3 py-5 p-md-5">
   <%= tag.div(flash[:notice], class: "text-center text-success mb-2") if flash[:notice] %>
@@ -45,4 +42,3 @@
 </article>
 
 <%= javascript_include_tag "pages/post_show" %>
-<% end %>

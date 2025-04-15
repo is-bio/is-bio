@@ -1,7 +1,4 @@
-<%= turbo_frame_tag "visitor_frame" do %>
-<turbo-stream action="update" target="page-title">
-  <template><%= title(t(:blog_home)) %></template>
-</turbo-stream>
+<% title(t(:blog_home)) %>
 
 <section class="theme-bg-light py-5">
   <%= tag.div(flash[:notice], class: "text-center text-success mb-2") if flash[:notice] %>
@@ -60,5 +57,3 @@
     </nav>
   </div>
 </section>
-
-<% end %>

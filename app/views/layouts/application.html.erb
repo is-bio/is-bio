@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title id="page-title">
+    <title>
       <% title = content_for(:title) %>
       <% if title.present? %>
         <%= title %> -
@@ -39,7 +39,9 @@
     <%= render 'shared/left_sidebar' %>
 
     <div class="main-wrapper">
-      <%= yield %>
+      <%= turbo_frame_tag "visitor_frame" do %>
+        <%= yield %>
+      <% end %>
 
       <%= render "shared/footer" %>
     </div>

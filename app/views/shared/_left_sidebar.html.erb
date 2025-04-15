@@ -34,20 +34,29 @@
       <ul class="navbar-nav flex-column text-start">
         <% if authenticated? %>
           <li class="nav-item">
-            <a class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>" href="<%= admin_root_path %>" data-turbo-frame="main_frame" data-turbo-action="advance">
+            <a class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>"
+               href="<%= admin_root_path %>"
+               data-turbo-frame="main_frame" data-turbo-action="advance"
+            >
               <i class="fas fa-dashboard fa-fw me-2"></i><%= t(:admin) %>
             </a>
           </li>
         <% end %>
 
         <li class="nav-item">
-          <a class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>" href="<%= root_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance">
+          <a class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>"
+             href="<%= root_path %>"
+             data-turbo-frame="visitor_frame" data-turbo-action="advance"
+          >
             <i class="fas fa-home fa-fw me-2"></i><%= t(:blog_home) %>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>" href="<%= about_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance">
+          <a class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>"
+             href="<%= about_path %>"
+             data-turbo-frame="visitor_frame" data-turbo-action="advance"
+          >
             <i class="fas fa-user fa-fw me-2"></i><%= t(:about_me) %>
           </a>
         </li>
