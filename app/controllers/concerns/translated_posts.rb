@@ -1,10 +1,4 @@
 module TranslatedPosts
-  extend ActiveSupport::Concern
-
-  included do
-    helper_method :translated_posts
-  end
-
   def translated_posts
     if default_locale?
       @posts = Post.all
