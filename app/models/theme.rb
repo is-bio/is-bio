@@ -2,9 +2,9 @@ class Theme < ApplicationRecord
   COLORS = [ "", "5FCB71", "5BC3D5", "3B7EEB", "5ECCA9", "EEA73B", "5469C9", "5D6BA7", "6C51A4" ].map { |color| "##{color}" }
 
   validates :name, presence: true
-  validates :enabled, presence: true, inclusion: [ true, false ]
-  validates :free, presence: true, inclusion: [ true, false ]
-  validates :color, presence: true, inclusion: (1..8).to_a
+  validates :enabled, inclusion: { in: [ true, false ] }
+  validates :free, inclusion: { in: [ true, false ] }
+  validates :color, inclusion: { in: (1..8).to_a }
   validate :at_least_one_enabled, on: :update, if: -> { enabled_changed? && !enabled? }
 
   after_save :ensure_only_one_enabled, if: -> { enabled? && saved_change_to_enabled? }
