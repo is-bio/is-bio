@@ -18,7 +18,7 @@ class ImageProcessor
 
       case File.extname(source_path).downcase
       when ".jpg", ".jpeg"
-        image.resize_to_fill "#{width}x#{width}^"
+        image.resize "#{width}x#{width}^"
         image.format "jpg"
         # image.quality 80
         image.write target_path
