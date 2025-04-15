@@ -253,6 +253,8 @@ exit # When the ssh session is closed, the processes started during the session 
 
 ### Troubleshooting
 
+Important source code may have been modified, causing problems with background task processing. **Restart** `Solid Queue` and see.
+
 ```shell
 # You should see the process running. If you didn't see any process listed,
 #   you should start it by reading the instructions above.
