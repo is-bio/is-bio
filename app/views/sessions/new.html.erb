@@ -7,7 +7,7 @@
     <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
     <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
-    <%= form_with url: session_path do |form| %>
+    <%= form_with url: session_path, "data-turbo": "false" do |form| %>
       <div class="my-2">
         <%= form.label :email_address %>
         <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "form-control" %>
