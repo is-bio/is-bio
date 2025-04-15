@@ -30,7 +30,7 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "rouge-theme-molokai.css", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "theme-1.css", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "#{theme_file_name}.css", "data-turbo-track": "reload" %>
 
     <%= javascript_importmap_tags %>
   </head>

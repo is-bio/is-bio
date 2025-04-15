@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   around_action :switch_locale
 
-  helper_method :default_locale?
+  helper_method :default_locale?, :theme_file_name
 
   def raise_404(message = "Not Found")
     raise ActionController::RoutingError.new(message)
@@ -23,6 +23,16 @@ class ApplicationController < ActionController::Base
     end
 
     @current_locale
+  end
+
+  def theme_file_name
+    enabled_theme = Theme.enabled
+
+    if enabled_theme.present?
+      return "theme-#{enabled_theme.color}"
+    end
+
+    "theme-1"
   end
 
   private

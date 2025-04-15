@@ -167,6 +167,7 @@ Rails.application.routes.draw do
 
     resources :locales
     resources :subdomains
+    resources :themes, only: [ :index, :edit, :update ]
   end
 
   resources :posts, only: [ :index ]

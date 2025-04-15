@@ -127,7 +127,7 @@ Theme.where(id: 1).first_or_create! do |theme|
   theme.name = "DevBlog"
   theme.free = true
   theme.enabled = true
-  theme.color = 0
+  theme.color = 1
 end
 
 puts "Table 'themes' data inserted."

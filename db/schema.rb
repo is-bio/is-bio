@@ -93,7 +93,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_055732) do
     t.string "name", null: false
     t.boolean "enabled", default: true, null: false
     t.boolean "free", default: true, null: false
-    t.integer "color", default: 0, null: false
+    t.integer "color", default: 1, null: false
   end
 
   create_table "translations", force: :cascade do |t|

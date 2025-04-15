@@ -1,0 +1,52 @@
+<% content_for :title, "Edit Theme Colors" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+    <%= tag.div(flash[:alert], class: "text-danger mb-3") if flash[:alert] %>
+
+    <div class="mb-4">
+      <h5 class="mb-1">Edit Theme: <%= @theme.name %></h5>
+    </div>
+
+    <%= form_with(model: [:admin, @theme]) do |form| %>
+      <% if @theme.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@theme.errors.count, "error") %> prohibited this theme from being saved:</h2>
+
+          <ul>
+            <% @theme.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-3">
+        <%= form.label :color, "Theme Color", class: "required" %>
+        <div class="row color-selector my-2">
+          <% (1..8).each do |color_number| %>
+            <div class="col-md-3 col-6 mb-3">
+              <div class="form-check">
+                <label class="form-check-label d-flex align-items-center">
+                  <%= form.radio_button :color, color_number, class: "form-check-input me-2" %>
+                  <div class="d-flex align-items-center">
+                    <div style="width: 24px; height: 24px; background-color: var(--theme-<%= color_number %>-primary, #<%= Theme::COLORS[color_number] %>); border-radius: 4px; margin-right: 10px;"></div>
+                    Color <%= color_number %>
+                  </div>
+                </label>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit "Update Theme Color", class: "btn btn-primary" %>
+        <a href="<%= admin_themes_path %>">
+          <button type="button" class="btn btn-light ms-2"><%= t(:back) %></button>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</section>
