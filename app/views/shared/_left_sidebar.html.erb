@@ -14,7 +14,7 @@
 
         <div class="bio mb-3">
           <%= t(:brief_personal_introduction) %><br>
-          <a href="<%= about_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance"><%= t(:find_more_about_me) %></a>
+          <a href="<%= about_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance" onclick="updateActiveLink('about-link')"><%= t(:find_more_about_me) %></a>
         </div>
 
         <ul class="social-list list-inline py-3 mx-auto">
