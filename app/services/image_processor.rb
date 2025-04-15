@@ -17,24 +17,21 @@ class ImageProcessor
       image = MiniMagick::Image.open(source_path)
 
       case File.extname(source_path).downcase
-      when ".jpg", ".jpeg"
-        image.resize "#{width}x#{width}^"
-        image.format "jpg"
-        # image.quality 80
-        image.write target_path
       when ".png"
         image.resize "#{width}x#{width}^"
-        image.format "png"
-        # image.quality 90 # MiniMagick uses quality for compression level in PNGs too
+        image.gravity "center"
+        image.extent "#{width}x#{width}"
+        # image.quality 90
         image.write target_path
       when ".gif"
         # image.resize "#{width}x" # For GIF, we might lose animation but maintain format
         image.format "gif"
         image.write target_path
       else
-        # Default fallback to JPEG for other formats
-        image.resize "#{width}x#{width}^"
-        image.format "jpg"
+        # Generate square JPEG thumbnail
+        image.resize "#{width}x#{width}^" # Resize to fill, maintaining aspect ratio
+        image.gravity "center"  # Center the image
+        image.extent "#{width}x#{width}" # Crop to exact dimensions
         # image.quality 80
         image.write target_path
       end
