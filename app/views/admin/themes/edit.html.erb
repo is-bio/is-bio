@@ -31,7 +31,8 @@
                 <label class="form-check-label d-flex align-items-center">
                   <%= form.radio_button :color, color_number, class: "form-check-input me-2" %>
                   <div class="d-flex align-items-center">
-                    <div style="width: 24px; height: 24px; background-color: var(--theme-<%= color_number %>-primary, #<%= Theme::COLORS[color_number] %>); border-radius: 4px; margin-right: 10px;"></div>
+                    <div style="width: 24px; height: 24px; background-color: <%= Theme::COLORS[color_number] %>; border-radius: 4px; margin-right: 10px;">
+                    </div>
                     Color <%= color_number %>
                   </div>
                 </label>

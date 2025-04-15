@@ -29,7 +29,8 @@
             <td><%= theme.name %></td>
             <td>
               <div class="d-flex align-items-center">
-                <div style="width: 24px; height: 24px; background-color: var(--theme-<%= theme.color %>-primary, #<%= Theme::COLORS[theme.color] %>); border-radius: 4px; margin-right: 10px;"></div>
+                <div style="width: 24px; height: 24px; background-color: <%= Theme::COLORS[theme.color] %>; border-radius: 4px; margin-right: 10px;">
+                </div>
                 Color <%= theme.color %>
               </div>
             </td>

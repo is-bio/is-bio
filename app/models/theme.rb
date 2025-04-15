@@ -1,5 +1,5 @@
 class Theme < ApplicationRecord
-  COLORS = [ "", "5FCB71", "5BC3D5", "3B7EEB", "5ECCA9", "EEA73B", "5469C9", "5D6BA7", "6C51A4" ]
+  COLORS = [ "", "5FCB71", "5BC3D5", "3B7EEB", "5ECCA9", "EEA73B", "5469C9", "5D6BA7", "6C51A4" ].map { |color| "##{color}" }
 
   validates :name, presence: true
   validates :enabled, presence: true, inclusion: [ true, false ]
