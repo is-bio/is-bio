@@ -7,7 +7,7 @@ class Theme < ApplicationRecord
   validates :color, inclusion: { in: (1..8).to_a }
   validate :at_least_one_enabled, on: :update, if: -> { enabled_changed? && !enabled? }
 
-  after_save :ensure_only_one_enabled, if: -> { enabled? && saved_change_to_enabled? }
+  after_save :ensure_only_one_enabled, if: -> { enabled? }
 
   def self.enabled
     find_by(enabled: true)
