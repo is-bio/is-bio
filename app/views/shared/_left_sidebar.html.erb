@@ -3,7 +3,7 @@
     <a class="no-text-decoration" href="<%= root_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance"><%= t(:blog_name) %></a>
   </h1>
 
-  <nav class="navbar navbar-expand-lg navbar-dark" >
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -34,9 +34,10 @@
       <ul class="navbar-nav flex-column text-start">
         <% if authenticated? %>
           <li class="nav-item">
-            <a class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>"
+            <a id="admin-link" class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>"
                href="<%= admin_root_path %>"
                data-turbo-frame="main_frame" data-turbo-action="advance"
+               onclick="updateActiveLink('admin-link')"
             >
               <i class="fas fa-dashboard fa-fw me-2"></i><%= t(:admin) %>
             </a>
@@ -44,18 +45,20 @@
         <% end %>
 
         <li class="nav-item">
-          <a class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>"
+          <a id="home-link" class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>"
              href="<%= root_path %>"
              data-turbo-frame="visitor_frame" data-turbo-action="advance"
+             onclick="updateActiveLink('home-link')"
           >
             <i class="fas fa-home fa-fw me-2"></i><%= t(:blog_home) %>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>"
+          <a id="about-link" class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>"
              href="<%= about_path %>"
              data-turbo-frame="visitor_frame" data-turbo-action="advance"
+             onclick="updateActiveLink('about-link')"
           >
             <i class="fas fa-user fa-fw me-2"></i><%= t(:about_me) %>
           </a>
@@ -72,3 +75,16 @@
     </div>
   </nav>
 </header>
+
+<script>
+  // Simple function to handle active link state
+  function updateActiveLink(linkId) {
+    // Remove active class from all nav links
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+
+    // Add active class to clicked link
+    document.getElementById(linkId).classList.add('active');
+  }
+</script>
