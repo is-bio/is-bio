@@ -49,7 +49,7 @@ gem "faraday", "~> 2.13.0"
 gem "safe_yaml", "~> 1.0.5"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.14"
+# gem "image_processing", "~> 1.14"
 gem "mini_magick", "~> 5.2"
 
 gem 'rails-i18n', '~> 8.0.0'

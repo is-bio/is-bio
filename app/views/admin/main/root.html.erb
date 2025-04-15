@@ -27,7 +27,7 @@
     <div data-controller="toggle-settings">
       <button data-toggle-settings-target="button"
               data-action="click->toggle-settings#toggle"
-              class="btn btn-outline-secondary mt-3 mb-3">
+              class="btn btn-outline-secondary my-3">
         Show Settings
       </button>
 
@@ -51,8 +51,6 @@
       </div>
     </div>
 
-    <br>
-    <br>
-    <%= button_to t(:log_out), session_path, method: :delete, class: "btn btn-primary my-2" if authenticated? %>
+    <%= button_to t(:log_out), session_path, method: :delete, class: "btn btn-primary my-3" if authenticated? %>
   </div>
 </section>
