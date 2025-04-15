@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>
+    <title id="page-title">
       <% title = content_for(:title) %>
       <% if title.present? %>
         <%= title %> -
       <% end %>
-       <%= t(:blog_name) %>
+      <%= t(:blog_name) %>
     </title>
     <meta name="description" content="<%= t(:headline) %>" />
     <meta name="author" content="<%= t(:author_name) %>" />

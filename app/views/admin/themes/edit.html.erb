@@ -44,7 +44,7 @@
 
       <div class="mt-4">
         <%= form.submit "Update Theme Color", class: "btn btn-primary" %>
-        <a href="<%= admin_themes_path %>">
+        <a href="<%= admin_themes_path %>" data-turbo-action="advance">
           <button type="button" class="btn btn-light ms-2"><%= t(:back) %></button>
         </a>
       </div>

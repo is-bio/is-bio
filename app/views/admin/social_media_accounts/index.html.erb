@@ -22,7 +22,7 @@
           <th><%= account.id %></th>
           <td><%= account.key %></td>
           <td><%= account.value %></td>
-          <td><a class="text-link" href="<%= edit_admin_social_media_account_path(account) %>">Edit</a></td>
+          <td><a class="text-link" href="<%= edit_admin_social_media_account_path(account) %>" data-turbo-action="advance">Edit</a></td>
         </tr>
       <% end %>
       </tbody>

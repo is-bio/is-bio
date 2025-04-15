@@ -7,7 +7,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h5>Subdomains</h5>
-      <a href="<%= new_admin_subdomain_path %>">
+      <a href="<%= new_admin_subdomain_path %>" data-turbo-action="advance">
         <button type="button" class="btn btn-primary btn-sm">Add New Subdomain</button>
       </a>
     </div>
@@ -39,7 +39,7 @@
             <td title="<%= subdomain.created_at.strftime("%Y-%m-%d %H:%M:%S") %>"><%= subdomain.created_at.strftime("%Y-%m-%d") %></td>
             <td>
               <div class="d-flex gap-2">
-                <a href="<%= edit_admin_subdomain_path(subdomain) %>">
+                <a href="<%= edit_admin_subdomain_path(subdomain) %>" data-turbo-action="advance">
                   <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
                 </a>
 

@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "visitor_frame" do %>
 <% title(@post.title) %>
 
 <article class="blog-post px-3 py-5 p-md-5">
@@ -23,3 +24,4 @@
     <%= javascript_include_tag "pages/post_show" %>
   </div>
 </section>
+<% end %>

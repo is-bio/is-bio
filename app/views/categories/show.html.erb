@@ -1,4 +1,7 @@
-<% content_for :title, "Posts" %>
+<%= turbo_frame_tag "visitor_frame" do %>
+<turbo-stream action="update" target="page-title">
+  <template><%= title(@category.name.titleize) %></template>
+</turbo-stream>
 
 <section class="theme-bg-light py-5">
   <%= tag.div(flash[:notice], class: "text-center text-success mb-2") if flash[:notice] %>
@@ -23,7 +26,11 @@
           </div>
 
           <div class="col">
-            <h3 class="title mb-1"><a class="text-link" href="<%= post.path %>"><%= post.title %></a></h3>
+            <h3 class="title mb-1">
+              <a class="text-link" href="<%= post.path %>" data-turbo-action="advance">
+                <%= post.title %>
+              </a>
+            </h3>
             <div class="meta mb-1">
               <span class="date"><%= t(:posted_at) %> <%= time_ago_in_words(post.published_at) %></span>
               <span class="time"><%= (post.content || "").size / 200 %> <%= t(:min_read) %></span>
@@ -32,24 +39,25 @@
 <!--              </span>-->
 
               <span>
-                <a class="text-link" href="<%= post.category.path %>"><%= post.category.name.titleize %></a>
+                <a class="text-link" href="<%= post.category.path %>" data-turbo-action="advance"><%= post.category.name.titleize %></a>
               </span>
 
               <% if authenticated? %>
                 <span>
-                  <a class="text-link" href="<%= edit_admin_post_path(post) %>">Edit</a>
+                  <a class="text-link" href="<%= edit_admin_post_path(post) %>" data-turbo="false">Edit</a>
                 </span>
               <% end %>
             </div>
             <div class="intro"><%= first_few_sentences(post.content) %>...</div>
-            <a class="text-link" href="<%= post.path %>"><%= t(:read_more) %> &rarr;</a>
+            <a class="text-link" href="<%= post.path %>" data-turbo-action="advance"><%= t(:read_more) %> &rarr;</a>
           </div>
         </div>
       </div>
     <% end %>
 
     <nav class="blog-nav nav nav-justified my-5">
-      <a class="nav-link-next nav-item nav-link rounded" href="<%= about_path %>"><%= t(:next_page) %><i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+      <a class="nav-link-next nav-item nav-link rounded" href="<%= about_path %>" data-turbo-action="advance"><%= t(:next_page) %><i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
     </nav>
   </div>
 </section>
+<% end %>

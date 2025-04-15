@@ -1,6 +1,6 @@
 <header class="header text-center overflow-auto">
   <h1 class="blog-name pt-lg-4 mb-0" id="blog-name">
-    <a class="no-text-decoration" href="<%= root_path %>"><%= t(:blog_name) %></a>
+    <a class="no-text-decoration" href="<%= root_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance"><%= t(:blog_name) %></a>
   </h1>
 
   <nav class="navbar navbar-expand-lg navbar-dark" >
@@ -14,7 +14,7 @@
 
         <div class="bio mb-3">
           <%= t(:brief_personal_introduction) %><br>
-          <a href="<%= about_path %>"><%= t(:find_more_about_me) %></a>
+          <a href="<%= about_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance"><%= t(:find_more_about_me) %></a>
         </div>
 
         <ul class="social-list list-inline py-3 mx-auto">
@@ -34,20 +34,20 @@
       <ul class="navbar-nav flex-column text-start">
         <% if authenticated? %>
           <li class="nav-item">
-            <a class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>" href="<%= admin_root_path %>">
+            <a class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>" href="<%= admin_root_path %>" data-turbo-frame="main_frame" data-turbo-action="advance">
               <i class="fas fa-dashboard fa-fw me-2"></i><%= t(:admin) %>
             </a>
           </li>
         <% end %>
 
         <li class="nav-item">
-          <a class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>" href="<%= root_path %>">
+          <a class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>" href="<%= root_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance">
             <i class="fas fa-home fa-fw me-2"></i><%= t(:blog_home) %>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>" href="<%= about_path %>">
+          <a class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>" href="<%= about_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance">
             <i class="fas fa-user fa-fw me-2"></i><%= t(:about_me) %>
           </a>
         </li>
@@ -56,7 +56,7 @@
       </ul>
 
       <div class="my-2 my-md-3">
-        <a class="btn btn-primary" href="<%= hire_path %>">
+        <a class="btn btn-primary" href="<%= hire_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance">
           <%= t(:get_in_touch) %>
         </a>
       </div>

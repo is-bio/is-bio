@@ -1,4 +1,7 @@
-<% title(@post.title) %>
+<%= turbo_frame_tag "visitor_frame" do %>
+<turbo-stream action="update" target="page-title">
+  <template><%= title(@post.title) %></template>
+</turbo-stream>
 
 <article class="blog-post px-3 py-5 p-md-5">
   <%= tag.div(flash[:notice], class: "text-center text-success mb-2") if flash[:notice] %>
@@ -14,10 +17,10 @@
         <% if authenticated? %>
           <% if [ Category::ID_DRAFTS, Category::ID_PUBLISHED ].include?(@post.category_id) %>
             <span>
-              <a class="text-link" href="<%= @post.category.path %>"><%= @post.category.name %></a>
+              <a class="text-link" href="<%= @post.category.path %>" data-turbo-action="advance"><%= @post.category.name %></a>
             </span>
           <% end %>
-          <span><a class="text-link" href="<%= edit_admin_post_path(@post) %>">Edit</a></span>
+          <span><a class="text-link" href="<%= edit_admin_post_path(@post) %>" data-turbo="false">Edit</a></span>
         <% end %>
       </div>
     </header>
@@ -28,12 +31,12 @@
 
     <nav class="blog-nav nav nav-justified my-5">
       <% if @post_newer.present? %>
-        <a class="nav-link-prev nav-item nav-link rounded-left" href="<%= @post_newer.path %>">
+        <a class="nav-link-prev nav-item nav-link rounded-left" href="<%= @post_newer.path %>" data-turbo-action="advance">
           <%= t(:newer_post) %><i class="arrow-prev fas fa-long-arrow-alt-left"></i>
         </a>
       <% end %>
       <% if @post_older.present? %>
-        <a class="nav-link-next nav-item nav-link rounded-right" href="<%= @post_older.path %>">
+        <a class="nav-link-next nav-item nav-link rounded-right" href="<%= @post_older.path %>" data-turbo-action="advance">
           <%= t(:older_post) %><i class="arrow-next fas fa-long-arrow-alt-right"></i>
         </a>
       <% end %>
@@ -42,3 +45,4 @@
 </article>
 
 <%= javascript_include_tag "pages/post_show" %>
+<% end %>

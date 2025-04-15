@@ -22,7 +22,7 @@
           <th><%= setting.id %></th>
           <td><%= setting.key %></td>
           <td><%= setting.value %></td>
-          <td><a class="text-link" href="<%= edit_admin_setting_path(setting) %>">Edit</a></td>
+          <td><a class="text-link" href="<%= edit_admin_setting_path(setting) %>" data-turbo-action="advance">Edit</a></td>
         </tr>
       <% end %>
       </tbody>

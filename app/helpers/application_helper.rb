@@ -1,6 +1,11 @@
 module ApplicationHelper
   def title(value = nil)
-    content_for(:title, value) if value
+    if value
+      content_for(:title, "#{value} - #{t(:blog_name)}")
+    else
+      content_for(:title, t(:blog_name))
+    end
+
     content_for(:title)
   end
 

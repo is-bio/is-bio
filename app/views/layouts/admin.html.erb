@@ -37,7 +37,9 @@
     <%= render 'shared/left_sidebar' %>
 
     <div class="main-wrapper">
+    <%= turbo_frame_tag "main_frame" do %>
       <%= yield %>
+    <% end %>
 
       <%= render "shared/footer" %>
     </div>

@@ -42,7 +42,7 @@
             <td><%= translation.updated_at&.strftime("%Y-%m-%d %H:%M") %></td>
             <td>
               <div class="d-flex gap-2">
-                <a href="<%= edit_admin_post_translation_path(@post, translation) %>">
+                <a href="<%= edit_admin_post_translation_path(@post, translation) %>" data-turbo-action="advance">
                   <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
                 </a>
 
