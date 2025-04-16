@@ -15,11 +15,17 @@ module LocaleHelper
     host_parts = uri.host.split(".")
 
     if request.subdomains.any?
-      # Replace the first subdomain with the subdomain
-      host_parts[0] = subdomain.value
+      if locale == default_locale
+        host_parts.shift # Remove the first subdomain
+      else
+        # Replace the first subdomain with the subdomain
+        host_parts[0] = subdomain.value
+      end
     else
-      # Add subdomain if there isn't one
-      host_parts.unshift(subdomain.value)
+      unless locale == default_locale
+        # Add subdomain if there isn't one
+        host_parts.unshift(subdomain.value)
+      end
     end
 
     uri.host = host_parts.join(".")

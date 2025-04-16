@@ -6,6 +6,14 @@ RSpec.describe LocaleHelper, type: :helper do
     Locale.delete_all
   end
 
+  # Define the default_locale method for the test context
+  helper do
+    def default_locale
+      Locale.find_by(key: 'en') ||
+        create(:locale, :english, key: "en", english_name: "English_#{SecureRandom.hex(4)}", name: "English_#{SecureRandom.hex(4)}")
+    end
+  end
+
   let(:english_locale) do
     Locale.find_by(key: 'en') ||
       create(:locale, :english, key: "en", english_name: "English_#{SecureRandom.hex(4)}", name: "English_#{SecureRandom.hex(4)}")
@@ -36,10 +44,11 @@ RSpec.describe LocaleHelper, type: :helper do
     context "with subdomain in current URL" do
       before do
         allow(helper).to receive(:request).and_return(
-          double("Request",
-                 original_url: "https://www.example.com/posts/1",
-                 subdomains: [ "www" ],
-                 host: 'www.example.com'
+          double(
+            "Request",
+            original_url: "https://www.example.com/posts/1",
+            subdomains: [ "www" ],
+            host: 'www.example.com'
           )
         )
       end
@@ -140,6 +149,31 @@ RSpec.describe LocaleHelper, type: :helper do
         html = helper.locale_switcher
         expect(html).to have_selector('li.nav-item', count: 2)
       end
+    end
+  end
+
+  describe '#locale_url_for' do
+    let(:default_locale) { Locale.find_by(key: I18n.default_locale) || create(:locale, key: I18n.default_locale) }
+    let(:subdomain) { Subdomain.find_by(locale: default_locale) || create(:subdomain, locale: default_locale) }
+
+    it 'returns the original URL if no locale is provided' do
+      expect(helper.locale_url_for(nil)).to eq(request.original_url)
+    end
+
+    it 'removes the default locale subdomain from URL' do
+      allow(request).to receive(:subdomains).and_return([ subdomain.value ])
+      expect(helper.locale_url_for(default_locale)).not_to include("#{subdomain.value}.")
+    end
+  end
+
+  describe '#locale_switcher' do
+    let(:locale) { Locale.find_by(key: "en") || create(:locale, key: 'en') }
+
+    it 'generates HTML for available locales' do
+      allow(Locale).to receive(:available_except_current).and_return([ locale ])
+      html = helper.locale_switcher
+      expect(html).to include(locale.name)
+      expect(html).to include('fa-language')
     end
   end
 end

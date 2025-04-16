@@ -80,4 +80,19 @@ RSpec.describe ApplicationController, type: :controller do
       end
     end
   end
+
+  let(:locale) { Locale.find_by(key: I18n.default_locale) || create(:locale, key: I18n.default_locale) }
+
+  describe '#default_locale' do
+    it 'returns the locale object for the default locale' do
+      allow(Locale).to receive(:find_by).with(key: I18n.default_locale).and_return(locale)
+      expect(subject.default_locale).to eq(locale)
+    end
+
+    it 'caches the locale object' do
+      allow(Locale).to receive(:find_by).once.with(key: I18n.default_locale).and_return(locale)
+      subject.default_locale
+      expect(subject.default_locale).to eq(locale)
+    end
+  end
 end
