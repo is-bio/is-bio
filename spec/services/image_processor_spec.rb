@@ -15,6 +15,8 @@ RSpec.describe ImageProcessor, type: :service do
       allow(mock_image).to receive(:format).and_return(mock_image)
       allow(mock_image).to receive(:quality).and_return(mock_image)
       allow(mock_image).to receive(:write)
+      allow(mock_image).to receive(:gravity).and_return(mock_image)
+      allow(mock_image).to receive(:extent).and_return(mock_image)
     end
 
     context 'with JPEG images' do
@@ -23,8 +25,9 @@ RSpec.describe ImageProcessor, type: :service do
       end
 
       it 'generates a thumbnail with correct dimensions' do
-        expect(mock_image).to receive(:resize).with("300x300").and_return(mock_image)
-        expect(mock_image).to receive(:format).with("jpg").and_return(mock_image)
+        expect(mock_image).to receive(:resize).with("300x300^").and_return(mock_image)
+        expect(mock_image).to receive(:gravity).with("center").and_return(mock_image)
+        expect(mock_image).to receive(:extent).with("300x300").and_return(mock_image)
         expect(mock_image).to receive(:write).with(target_path)
 
         result = ImageProcessor.generate_thumbnail(source_path, target_path)
@@ -50,8 +53,9 @@ RSpec.describe ImageProcessor, type: :service do
       end
 
       it 'uses the png format with compression' do
-        expect(mock_image).to receive(:resize).with("300x300").and_return(mock_image)
-        expect(mock_image).to receive(:format).with("png").and_return(mock_image)
+        expect(mock_image).to receive(:resize).with("300x300^").and_return(mock_image)
+        expect(mock_image).to receive(:gravity).with("center").and_return(mock_image)
+        expect(mock_image).to receive(:extent).with("300x300").and_return(mock_image)
         expect(mock_image).to receive(:write).with(target_path)
 
         ImageProcessor.generate_thumbnail(source_path, target_path)
@@ -77,8 +81,9 @@ RSpec.describe ImageProcessor, type: :service do
       end
 
       it 'defaults to JPEG format' do
-        expect(mock_image).to receive(:resize).with("300x300").and_return(mock_image)
-        expect(mock_image).to receive(:format).with("jpg").and_return(mock_image)
+        expect(mock_image).to receive(:resize).with("300x300^").and_return(mock_image)
+        expect(mock_image).to receive(:gravity).with("center").and_return(mock_image)
+        expect(mock_image).to receive(:extent).with("300x300").and_return(mock_image)
         expect(mock_image).to receive(:write).with(target_path)
 
         ImageProcessor.generate_thumbnail(source_path, target_path)
@@ -90,8 +95,9 @@ RSpec.describe ImageProcessor, type: :service do
         allow(File).to receive(:extname).with(source_path).and_return('.jpg')
         custom_width = 500
 
-        expect(mock_image).to receive(:resize).with("#{custom_width}x#{custom_width}").and_return(mock_image)
-        expect(mock_image).to receive(:format).with("jpg").and_return(mock_image)
+        expect(mock_image).to receive(:resize).with("#{custom_width}x#{custom_width}^").and_return(mock_image)
+        expect(mock_image).to receive(:gravity).with("center").and_return(mock_image)
+        expect(mock_image).to receive(:extent).with("#{custom_width}x#{custom_width}").and_return(mock_image)
         expect(mock_image).to receive(:write).with(target_path)
 
         ImageProcessor.generate_thumbnail(source_path, target_path, custom_width)

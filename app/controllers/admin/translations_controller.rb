@@ -44,7 +44,6 @@ class Admin::TranslationsController < Admin::BaseController
   private
 
   def set_post
-    puts params.inspect
     @post = Post.find(params.expect(:post_id))
   end
 
