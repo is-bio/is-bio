@@ -150,7 +150,7 @@ RSpec.describe Admin::PostsController, type: :request do
 
       it 'redirects to the post path' do
         patch admin_post_path(post_item), params: valid_params
-        expect(response).to redirect_to(post_item.path)
+        expect(response).to redirect_to(edit_admin_post_path(post_item))
       end
     end
 

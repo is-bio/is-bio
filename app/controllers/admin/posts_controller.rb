@@ -32,7 +32,7 @@ class Admin::PostsController < Admin::BaseController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to @post.path, notice: "Post was successfully updated."
+      redirect_to edit_admin_post_path(@post), notice: "Post was successfully updated."
     else
       set_category_options
       render :edit, status: :unprocessable_entity
