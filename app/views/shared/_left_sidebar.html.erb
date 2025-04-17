@@ -32,6 +32,8 @@
       </div>
 
       <ul class="navbar-nav flex-column text-start">
+        <%= locale_switcher %>
+
         <% if authenticated? %>
           <li class="nav-item">
             <a id="admin-link" class="nav-link <%= controller_name == 'main' && action_name == 'root' ? 'active' : nil %>"
@@ -63,8 +65,6 @@
             <i class="fas fa-user fa-fw me-2"></i><%= t(:about_me) %>
           </a>
         </li>
-
-        <%= locale_switcher %>
       </ul>
 
       <div class="my-2 my-md-3">
