@@ -34,8 +34,8 @@ RSpec.describe SocialMediaAccount, type: :model do
       end
 
       it "validates key format" do
-        valid_keys = %w[test_key key123 valid_key_123]
-        invalid_keys = ["Test-Key", "invalid key", "UPPERCASE", "special!char"]
+        valid_keys = %w[ test_key key123 valid_key_123 ]
+        invalid_keys = [ "Test-Key", "invalid key", "UPPERCASE", "special!char" ]
 
         valid_keys.each do |key|
           account = build(:social_media_account, key: key)
@@ -55,7 +55,7 @@ RSpec.describe SocialMediaAccount, type: :model do
         let(:account) { build(:social_media_account, key: "email") }
 
         it "accepts valid email addresses" do
-          valid_emails = %w[user1493@example.com firstname.lastname@example.co.uk user+tag@domain.com]
+          valid_emails = %w[ user1493@example.com firstname.lastname@example.co.uk user+tag@domain.com ]
 
           valid_emails.each do |email|
             account.value = email
@@ -64,7 +64,7 @@ RSpec.describe SocialMediaAccount, type: :model do
         end
 
         it "rejects invalid email addresses" do
-          invalid_emails = %w[invalid-email user@ @domain.com]
+          invalid_emails = %w[ invalid-email user@ @domain.com ]
 
           invalid_emails.each do |email|
             account.value = email
@@ -78,7 +78,7 @@ RSpec.describe SocialMediaAccount, type: :model do
         let(:account) { build(:social_media_account, key: "phone_number") }
 
         it "accepts valid phone numbers" do
-          valid_numbers = ["+1 123-456-7890", "123-456-7890", "+86 13812345678", "555-555-5555", "(123) 456-7890"]
+          valid_numbers = [ "+1 123-456-7890", "123-456-7890", "+86 13812345678", "555-555-5555", "(123) 456-7890" ]
 
           valid_numbers.each do |number|
             account.value = number
@@ -87,7 +87,7 @@ RSpec.describe SocialMediaAccount, type: :model do
         end
 
         it "rejects invalid phone numbers" do
-          invalid_numbers = ["phone number", "abc-def-ghij", "123.456.7890"]
+          invalid_numbers = [ "phone number", "abc-def-ghij", "123.456.7890" ]
 
           invalid_numbers.each do |number|
             account.value = number
@@ -98,12 +98,12 @@ RSpec.describe SocialMediaAccount, type: :model do
       end
 
       context "URL validation" do
-        %w[website_url blog_url linkedin_profile_url stackoverflow_profile_url leetcode_profile_url quora_profile_url kuaishou_profile_url zhihu_profile_url].each do |url_type|
+        %w[ website_url blog_url linkedin_profile_url stackoverflow_profile_url leetcode_profile_url quora_profile_url kuaishou_profile_url zhihu_profile_url ].each do |url_type|
           context "for #{url_type}" do
             let(:account) { build(:social_media_account, key: url_type) }
 
             it "accepts valid URLs" do
-              valid_urls = ["https://example.com", "http://example.org/path", "https://sub.domain.co.uk/page?param=value"]
+              valid_urls = [ "https://example.com", "http://example.org/path", "https://sub.domain.co.uk/page?param=value" ]
 
               valid_urls.each do |url|
                 account.value = url
@@ -112,7 +112,7 @@ RSpec.describe SocialMediaAccount, type: :model do
             end
 
             it "rejects invalid URLs" do
-              invalid_urls = ["example.com", "www.example.com", "not_a_url"]
+              invalid_urls = [ "example.com", "www.example.com", "not_a_url" ]
 
               invalid_urls.each do |url|
                 account.value = url
@@ -125,12 +125,12 @@ RSpec.describe SocialMediaAccount, type: :model do
       end
 
       context "numeric validation" do
-        %w[qq weibo_profile_id].each do |numeric_type|
+        %w[ qq weibo_profile_id ].each do |numeric_type|
           context "for #{numeric_type}" do
             let(:account) { build(:social_media_account, key: numeric_type) }
 
             it "accepts valid numeric values" do
-              valid_numbers = ["123456", "987654321"]
+              valid_numbers = [ "123456", "987654321" ]
 
               valid_numbers.each do |number|
                 account.value = number
@@ -139,7 +139,7 @@ RSpec.describe SocialMediaAccount, type: :model do
             end
 
             it "rejects non-numeric values" do
-              invalid_numbers = ["123abc", "12.34", "not-a-number"]
+              invalid_numbers = [ "123abc", "12.34", "not-a-number" ]
 
               invalid_numbers.each do |number|
                 account.value = number
@@ -156,7 +156,7 @@ RSpec.describe SocialMediaAccount, type: :model do
           let(:account) { build(:social_media_account, key: "github_username") }
 
           it "accepts valid github usernames" do
-            valid_usernames = ["user", "user-name", "user123"]
+            valid_usernames = [ "user", "user-name", "user123" ]
 
             valid_usernames.each do |username|
               account.value = username
@@ -165,7 +165,7 @@ RSpec.describe SocialMediaAccount, type: :model do
           end
 
           it "rejects invalid github usernames" do
-            invalid_usernames = ["user_name", "User Name", "user@name"]
+            invalid_usernames = [ "user_name", "User Name", "user@name" ]
 
             invalid_usernames.each do |username|
               account.value = username
@@ -175,12 +175,12 @@ RSpec.describe SocialMediaAccount, type: :model do
           end
         end
 
-        %w[x_username tiktok_username youtube_channel_handle instagram_username facebook_username].each do |username_type|
+        %w[ x_username tiktok_username youtube_channel_handle instagram_username facebook_username ].each do |username_type|
           context "for #{username_type}" do
             let(:account) { build(:social_media_account, key: username_type) }
 
             it "accepts valid usernames" do
-              valid_usernames = ["user", "user_name", "user.name", "user123", "user-name"]
+              valid_usernames = [ "user", "user_name", "user.name", "user123", "user-name" ]
 
               valid_usernames.each do |username|
                 account.value = username
@@ -189,7 +189,7 @@ RSpec.describe SocialMediaAccount, type: :model do
             end
 
             it "rejects invalid usernames" do
-              invalid_usernames = ["user name", "user@name", "user#name"]
+              invalid_usernames = [ "user name", "user@name", "user#name" ]
 
               invalid_usernames.each do |username|
                 account.value = username

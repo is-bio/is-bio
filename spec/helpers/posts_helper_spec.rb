@@ -60,4 +60,13 @@ RSpec.describe PostsHelper, type: :helper do
       expect(helper.first_few_sentences(markdown)).to eq("Title. This is a bold paragraph with a link. List item 1 Italic list item")
     end
   end
-end 
+
+  describe '#locale_switcher' do
+    it 'generates HTML for available locales' do
+      allow(Locale).to receive(:available_except_current).and_return([ locale ])
+      html = helper.locale_switcher
+      expect(html).to include(locale.name)
+      expect(html).to include('fa-language')
+    end
+  end
+end

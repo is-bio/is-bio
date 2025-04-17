@@ -22,7 +22,6 @@ RSpec.describe Category, type: :model do
   end
 
   describe ".find_by_name" do
-
     context "when category exists under published root" do
       let!(:subcategory) { create(:category, name: "Technology", parent: Category.published_root) }
       let!(:sub_subcategory) { create(:category, name: "Programming", parent: subcategory) }

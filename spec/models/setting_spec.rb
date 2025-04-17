@@ -34,8 +34,8 @@ RSpec.describe Setting, type: :model do
       end
 
       it "validates key format" do
-        valid_keys = %w[test_key_1 key123_2 valid_key_123_3]
-        invalid_keys = ["Test-Key", "invalid key", "UPPERCASE", "special!char"]
+        valid_keys = %w[ test_key_1 key123_2 valid_key_123_3 ]
+        invalid_keys = [ "Test-Key", "invalid key", "UPPERCASE", "special!char" ]
 
         valid_keys.each do |key|
           setting = build(:setting, key: key)

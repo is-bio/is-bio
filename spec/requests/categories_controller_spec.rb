@@ -63,7 +63,7 @@ RSpec.describe CategoriesController, type: :request do
             original_locale = I18n.locale
 
             # 模拟 I18n 行为
-            allow(I18n).to receive(:available_locales).and_return([:en, :"es-ES", :"fr-FR"])
+            allow(I18n).to receive(:available_locales).and_return([ :en, :"es-ES", :"fr-FR" ])
             allow(I18n).to receive(:locale).and_return(:"es-ES")
             allow(I18n).to receive(:default_locale).and_return(:en)
 
@@ -98,7 +98,7 @@ RSpec.describe CategoriesController, type: :request do
             # Set locale to French
             original_locale = I18n.locale
 
-            allow(I18n).to receive(:available_locales).and_return([:en, :"es-ES", :"fr-FR"])
+            allow(I18n).to receive(:available_locales).and_return([ :en, :"es-ES", :"fr-FR" ])
             allow(I18n).to receive(:locale).and_return(:"fr-FR")
             allow(I18n).to receive(:default_locale).and_return(:en)
 
@@ -133,7 +133,7 @@ RSpec.describe CategoriesController, type: :request do
 
             original_locale = I18n.locale
 
-            allow(I18n).to receive(:available_locales).and_return([:en, :"es-ES", :"fr-FR", :"de-DE"])
+            allow(I18n).to receive(:available_locales).and_return([ :en, :"es-ES", :"fr-FR", :"de-DE" ])
             allow(I18n).to receive(:locale).and_return(:"de-DE")
             allow(I18n).to receive(:default_locale).and_return(:en)
 
@@ -215,7 +215,7 @@ RSpec.describe CategoriesController, type: :request do
             original_locale = I18n.locale
 
             # 模拟 I18n 行为
-            allow(I18n).to receive(:available_locales).and_return([:en, :"es-ES"])
+            allow(I18n).to receive(:available_locales).and_return([ :en, :"es-ES" ])
             allow(I18n).to receive(:locale).and_return(:"es-ES")
             allow(I18n).to receive(:default_locale).and_return(:en)
 

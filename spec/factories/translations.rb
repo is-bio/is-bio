@@ -27,4 +27,4 @@ FactoryBot.define do
     association :post
     association :locale
   end
-end 
+end

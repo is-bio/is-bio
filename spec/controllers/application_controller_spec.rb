@@ -25,7 +25,7 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     context "with hyphenated subdomain" do
-      let(:subdomains) { ['en-us'] }
+      let(:subdomains) { [ 'en-us' ] }
       let(:mock_subdomain) { instance_double(Subdomain, locale: instance_double(Locale, key: 'en')) }
 
       before do
@@ -40,7 +40,7 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     context "with www subdomain" do
-      let(:subdomains) { ['www'] }
+      let(:subdomains) { [ 'www' ] }
       let(:mock_subdomain) { instance_double(Subdomain, locale: instance_double(Locale, key: 'en')) }
 
       before do
@@ -54,7 +54,7 @@ RSpec.describe ApplicationController, type: :controller do
     end
 
     context "with invalid subdomain" do
-      let(:subdomains) { ['invalid'] }
+      let(:subdomains) { [ 'invalid' ] }
       let(:mock_subdomain) { nil }
 
       before do

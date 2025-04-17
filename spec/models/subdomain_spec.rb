@@ -103,4 +103,4 @@ RSpec.describe Subdomain, type: :model do
       expect(subdomain.locale).to eq(locale)
     end
   end
-end 
+end

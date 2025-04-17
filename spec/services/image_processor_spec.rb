@@ -36,7 +36,7 @@ RSpec.describe ImageProcessor, type: :service do
 
       it 'handles errors gracefully' do
         error = MiniMagick::Error.new("Test error")
-        allow(error).to receive(:backtrace).and_return(["line 1", "line 2"])
+        allow(error).to receive(:backtrace).and_return([ "line 1", "line 2" ])
         allow(mock_image).to receive(:resize).and_raise(error)
 
         expect(Rails.logger).to receive(:error).with(/MiniMagick error generating thumbnail: Test error/)
