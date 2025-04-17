@@ -54,7 +54,7 @@ yum info libyaml-devel
 
 ```shell
 cd /srv
-git clone https://github.com/resumeblog/markdown-resume-blog.git
+git clone https://github.com/CoderResume/markdown-resume-blog.git
 cd /srv/markdown-resume-blog
 bundle install
 ```
@@ -263,7 +263,7 @@ ps -ef|grep solid
 
 ## Create and install your "GitHub App" to sync "markdown-blog" repository's files' changes to your blog website
 
-Please read [markdown-blog](https://github.com/resumeblog/markdown-blog) if you are not familiar with how to write a blog using Markdown and Git.
+Please read [markdown-blog](https://github.com/CoderResume/markdown-blog) if you are not familiar with how to write a blog using Markdown and Git.
 
 Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to complete this step.
 

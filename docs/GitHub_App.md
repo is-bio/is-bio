@@ -68,7 +68,7 @@ Please read relevant content of [README.md](/README.md) or [deploy_on_CentOS10.m
 
 ## Test posts (Markdown files) synchronization feature
 
-- Visit https://github.com/resumeblog/markdown-blog/fork , fork it to your GitHub account.
+- Visit https://github.com/CoderResume/markdown-blog/fork , fork it to your GitHub account.
 
 - Visit https://your-domain.com/admin/settings , then set `github_username` value with your GitHub username. In this GitHub account, make sure there is a repository named `markdown-blog`.
 
