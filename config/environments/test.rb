@@ -4,6 +4,16 @@
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+  config.i18n.available_locales = [
+    :en,
+    :"zh-CN",
+    :"es-ES",
+    :ja,
+    :ru,
+    :"pt-BR",
+    :"de-DE",
+    :"fr-FR"
+  ]
   config.i18n.default_locale = :en
 
   # Settings specified here will take precedence over those in config/application.rb.
