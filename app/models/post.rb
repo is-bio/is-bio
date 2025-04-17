@@ -40,6 +40,7 @@ class Post < ApplicationRecord
 
   before_validation :cleanup_columns, :ensure_permalink
   before_validation :ensure_id2, :ensure_published_at, on: :create
+  after_save :ensure_permalink_if_missing
 
   scope :published, -> { where(category_id: Category.published_ids) }
 
@@ -242,6 +243,12 @@ class Post < ApplicationRecord
     end
 
     permalink
+  end
+
+  def ensure_permalink_if_missing
+    if permalink == "/"
+      update_columns(permalink: "/#{id}")
+    end
   end
 
   def ensure_id2

@@ -416,6 +416,27 @@ RSpec.describe Post, type: :model do
         expect(post.id2).to eq("xyz")
       end
     end
+
+    describe "#ensure_permalink_if_missing" do
+      it "sets the permalink to the post ID when permalink is '/' when in creation" do
+        post = create(:post, permalink: "/", title: "中文全部会被移除，不会出现在永久链接里")
+        expect(post.permalink).to eq("/#{post.id}")
+      end
+
+      it "sets the permalink to the post ID when permalink is '/' when updating" do
+        post = create(:post, permalink: "/custom-permalink", title: "中文全部会被移除，不会出现在永久链接里")
+        post.permalink = "/"
+        post.save
+        expect(post.permalink).to eq("/#{post.id}")
+      end
+
+      it "modify the permalink when it is not '/'" do
+        post = create(:post, permalink: "/original-permalink")
+        post.permalink = "/new-permalink"
+        post.save
+        expect(post.permalink).to eq("/new-permalink")
+      end
+    end
   end
 
   describe "instance methods" do
