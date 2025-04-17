@@ -40,11 +40,11 @@ zh-CN:
       confirmed: "您的订阅已确认。当有新文章发布时，您将收到邮件通知！"
     error:
       invalid_token: "无效或已过期的确认链接。"
-      confirmation:
-        subject: "确认订阅张三的博客"
-        instructions: "请点击下方链接确认您的订阅："
-        button: "确认订阅"
-        expiration_notice: "此链接永不过期。"
+    confirmation:
+      subject: "确认订阅张三的博客"
+      instructions: "请点击下方链接确认您的订阅："
+      button: "确认订阅"
+      expiration_notice: "此链接永不过期。"
 
   activerecord:
     errors:

@@ -40,11 +40,11 @@ ja:
       confirmed: "購読が確認されました。新しい記事が公開されると、メール通知が届きます！"
     error:
       invalid_token: "無効または期限切れの確認リンクです。"
-      confirmation:
-        subject: "張三のブログの購読確認"
-        instructions: "下のリンクをクリックして購読を確認してください："
-        button: "購読を確認"
-        expiration_notice: "このリンクは期限切れになりません。"
+    confirmation:
+      subject: "張三のブログの購読確認"
+      instructions: "下のリンクをクリックして購読を確認してください："
+      button: "購読を確認"
+      expiration_notice: "このリンクは期限切れになりません。"
 
   activerecord:
     errors:
