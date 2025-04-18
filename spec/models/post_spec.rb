@@ -437,6 +437,60 @@ RSpec.describe Post, type: :model do
         expect(post.permalink).to eq("/new-permalink")
       end
     end
+
+    describe "#ensure_random_milliseconds" do
+      it "ensures no two posts have the same published_at timestamp" do
+        time = Time.new(2023, 1, 1, 12, 0, 0)
+        post1 = create(:post, published_at: time)
+        post2 = build(:post, published_at: time)
+        post2.save!
+
+        expect(post1.published_at).not_to eq(post2.published_at)
+      end
+
+      it "adds 1 second when detecting a duplicate timestamp" do
+        time = Time.new(2023, 1, 1, 12, 0, 0)
+        post1 = create(:post, published_at: time)
+        post2 = build(:post, published_at: time)
+        post2.save!
+
+        expect(post2.published_at).to eq(time + 1.second)
+      end
+
+      it "doesn't change the timestamp if no duplicate exists" do
+        time1 = Time.new(2023, 1, 1, 12, 0, 0)
+        time2 = Time.new(2023, 1, 1, 12, 0, 1)
+        create(:post, published_at: time1)
+        post2 = build(:post, published_at: time2)
+        post2.save!
+
+        expect(post2.published_at).to eq(time2)
+      end
+
+      it "handles timestamp conflicts when updating a post" do
+        time = Time.new(2023, 1, 1, 12, 0, 0)
+        post1 = create(:post, published_at: time)
+        post2 = create(:post, published_at: time + 2.seconds)
+
+        # Now update post2 to have the same timestamp as post1
+        post2.published_at = time
+        post2.save!
+
+        expect(post2.published_at).to eq(time + 1.second)
+      end
+
+      it "handles multiple timestamp conflicts by adding more seconds" do
+        time = Time.new(2023, 1, 1, 12, 0, 0)
+        post1 = create(:post, published_at: time)
+        post2 = create(:post, published_at: time + 1.second)
+        post3 = build(:post, published_at: time)
+        post3.save!
+
+        # post3 should have its timestamp set to time + 2.seconds
+        # since both time and time + 1.second are already taken
+        expect(post3.published_at).to eq(time + 2.seconds)
+      end
+    end
   end
 
   describe "instance methods" do

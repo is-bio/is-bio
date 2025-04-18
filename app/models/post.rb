@@ -40,6 +40,7 @@ class Post < ApplicationRecord
 
   before_validation :cleanup_columns, :ensure_permalink
   before_validation :ensure_id2, :ensure_published_at, on: :create
+  before_save :ensure_different_published_at
   after_save :ensure_permalink_if_missing
 
   scope :published, -> { where(category_id: Category.published_ids) }
@@ -286,5 +287,22 @@ class Post < ApplicationRecord
           Time.current
         end
       end
+  end
+
+  def ensure_different_published_at
+    return if published_at.nil?
+
+    current_timestamp = published_at
+
+    while Post.where(published_at: current_timestamp)
+              .where.not(id: id.to_i)
+              .exists?
+      # If collision exists, add 1 second and check again
+      current_timestamp += 1.second
+    end
+
+    if current_timestamp != published_at
+      self.published_at = current_timestamp
+    end
   end
 end
