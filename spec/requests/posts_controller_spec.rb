@@ -19,7 +19,7 @@ RSpec.describe PostsController, type: :request do
       expect(response).to render_template(:show)
       expect(response.body).to include(post.title)
     end
-    
+
     it "redirects to canonical URL if permalink doesn't match" do
       get "/blog/non-canonical-path-#{post.id2}"
       expect(response).to redirect_to("/blog/this-is-the-post-title-#{post.id2}")
