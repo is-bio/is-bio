@@ -1,4 +1,4 @@
-# MarkdownResumeBlog GitHub App
+# DeveloperPortfolio GitHub App
 
 If you want to automatically update your blog after executing the `git push` command, you need to install your GitHub App first. Only in this way can GitHub push the `git push` events to this platform.
 With the guidance of this article, you can create a GitHub App for you to install it.
@@ -27,7 +27,7 @@ This paragraph is **only for development environment debugging** and is not nece
 Install `ngrok` and configure it well. Then do this:
 
 ```shell
-cd /path/to/markdown-resume-blog
+cd /path/to/developer-portfolio
 ngrok http http://localhost:3000 # You will get a base URL like: https://<a-subdomain-string-for-your-site>.ngrok-free.app
 ```
 
@@ -52,7 +52,7 @@ Add `config.hosts << "<a-subdomain-string-for-your-site>.ngrok-free.app"` to `co
 
 TODO: Registration successful. You must generate a private key in order to install your GitHub App.
 
-## Connect GitHub App to MarkdownResumeBlog
+## Connect GitHub App to DeveloperPortfolio
 
 Visit https://your-domain.com/admin/github_app_settings , then
 
@@ -68,7 +68,7 @@ Please read relevant content of [README.md](/README.md) or [deploy_on_CentOS10.m
 
 ## Test posts (Markdown files) synchronization feature
 
-- Visit https://github.com/ResumesDev/markdown-blog/fork , fork it to your GitHub account.
+- Visit https://github.com/developer-portfolios/markdown-blog/fork , fork it to your GitHub account.
 
 - Visit https://your-domain.com/admin/settings , then set `github_username` value with your GitHub username. In this GitHub account, make sure there is a repository named `markdown-blog`.
 
@@ -112,7 +112,7 @@ You noticed that the thumbnail of the first post was not displaying correctly, s
 
 #### The image was modified, but it did not refresh on the page.
 
-- You can check the file modification time and size under `/srv/markdown-resume-blog/public/images`. If there is no problem, it is the image cache problem.
+- You can check the file modification time and size under `/srv/developer-portfolio/public/images`. If there is no problem, it is the image cache problem.
 - Clear your browser's cache.
 - If you use a CDN service such as CloudFlare, you also need to manually clear the CDN cache.
 

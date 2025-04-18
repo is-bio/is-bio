@@ -20,7 +20,7 @@ When there is an article update, a push email should be sent to the subscribed u
 
 3. Create an "App Password"
     - Visit https://myaccount.google.com/apppasswords
-    - Enter a name for your app (e.g., "Resume Blog")
+    - Enter a name for your app (e.g., "Developer Portfolio")
     - Click "Create"
     - Google will display a password. **Copy this password immediately** as it will only be shown once. I will refer to it as `your-smtp-password` later.
 
@@ -66,7 +66,7 @@ config.action_mailer.smtp_settings = {
 ### Setup Rails credentials
 
 ```shell
-cd /path/to/markdown-resume-blog
+cd /path/to/developer-portfolio
 EDITOR="vim" bin/rails credentials:edit
 ```
 
