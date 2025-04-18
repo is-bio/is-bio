@@ -14,19 +14,19 @@ RSpec.describe PostsController, type: :request do
   end
 
   describe "GET #show" do
-    it "render" do
-      get "/this-is-the-post-title-#{post.id2}"
+    it "renders the post" do
+      get "/blog/this-is-the-post-title-#{post.id2}"
       expect(response).to render_template(:show)
       expect(response.body).to include(post.title)
     end
-
-    it "redirect to canonical URL" do
-      get "/non-canonical-path-#{post.id2}"
-      expect(response).to redirect_to("/this-is-the-post-title-#{post.id2}")
+    
+    it "redirects to canonical URL if permalink doesn't match" do
+      get "/blog/non-canonical-path-#{post.id2}"
+      expect(response).to redirect_to("/blog/this-is-the-post-title-#{post.id2}")
     end
 
     context "when viewing in a non-default language" do
-      let(:locale) { create(:locale, key: 'es-ES', english_name: 'Spanish', name: 'Español') }
+      let(:locale) { Locale.find_by(key: 'es-ES') || create(:locale, key: 'es-ES', english_name: 'Spanish', name: 'Español') }
 
       it "displays original content when no translation exists" do
         original_locale = I18n.locale
@@ -37,7 +37,7 @@ RSpec.describe PostsController, type: :request do
         begin
           allow_any_instance_of(Post).to receive(:current_translation).and_return(nil)
 
-          get "/this-is-the-post-title-#{post.id2}"
+          get "/blog/this-is-the-post-title-#{post.id2}"
 
           expect(response).to render_template(:show)
           expect(response.body).to include(post.title)
@@ -62,7 +62,7 @@ RSpec.describe PostsController, type: :request do
         begin
           allow_any_instance_of(Post).to receive(:current_translation).and_return(translation)
 
-          get "/this-is-the-post-title-#{post.id2}"
+          get "/blog/this-is-the-post-title-#{post.id2}"
 
           expect(response).to render_template(:show)
           expect(response.body).to include("Título traducido")

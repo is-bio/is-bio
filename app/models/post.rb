@@ -149,7 +149,7 @@ class Post < ApplicationRecord
   end
 
   def path
-    "#{permalink}-#{id2}"
+    "/blog#{permalink}-#{id2}"
   end
 
   def translated!

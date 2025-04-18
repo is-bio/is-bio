@@ -495,9 +495,9 @@ RSpec.describe Post, type: :model do
 
   describe "instance methods" do
     describe "#path" do
-      it "returns permalink and ID joined with a hyphen" do
+      it "returns URL with /blog prefix, permalink and ID joined with a hyphen" do
         post = build_stubbed(:post, id2: "abc", permalink: "/sample-permalink")
-        expect(post.path).to eq("/sample-permalink-abc")
+        expect(post.path).to eq("/blog/sample-permalink-abc")
       end
     end
   end
