@@ -20,7 +20,7 @@ At present, [Jekyll](https://jekyllrb.com/) or [Hugo](https://gohugo.io/) can al
 2. For those who are not familiar with Jekyll or Hugo, it is even **difficult** to even find a good-looking theme.
     - *MarkdownResumeBlog* currently supports one **beautiful free theme**, and more themes will be added in the future.
 3. Jekyll or Hugo's documentation is a lot of pages long. Who can explain everything in just one page?
-    - *MarkdownResumeBlog* can. For information on how to publish a post using *Markdown* and *Git*, please read [markdown-blog](https://github.com/CoderResume/markdown-blog) using the *MarkdownResumeBlog* approach.
+    - *MarkdownResumeBlog* can. For information on how to publish a post using *Markdown* and *Git*, please read [markdown-blog](https://github.com/ResumesDev/markdown-blog) using the *MarkdownResumeBlog* approach.
 4. A blog post can be translated into multiple languages and displayed on the blog. This feature is currently not supported by any blog engine. However, *MarkdownResumeBlog* has already supported it, allowing your articles to reach global users.
 5. For building a personal brand, it is not enough to just have a blog. It is better to have a resume and a portfolio. In fact, a blog is not the most important function, but **a resume and a portfolio are**. In the next version, we will launch the resume function.
 
@@ -70,7 +70,7 @@ The *MarkdownResumeBlog* is developed based on Ruby version 3.3.x, but other ver
 ## Clone 'markdown-resume-blog' project and install Ruby gems
 
 ```shell
-git clone https://github.com/CoderResume/markdown-resume-blog.git
+git clone https://github.com/ResumesDev/markdown-resume-blog.git
 cd /path/to/markdown-resume-blog
 bundle install
 ```
@@ -151,7 +151,7 @@ bin/jobs # start it
 
 Here, the blog website is your local Rails web server. If you [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md), the blog website is your real web server.
 
-Please read [markdown-blog](https://github.com/CoderResume/markdown-blog) if you are not familiar with how to publish a blog using *Markdown* and *Git*.
+Please read [markdown-blog](https://github.com/ResumesDev/markdown-blog) if you are not familiar with how to publish a blog using *Markdown* and *Git*.
 
 Please follow the instructions in [GitHub_App.md](/docs/GitHub_App.md) to complete this step.
 
