@@ -1,4 +1,4 @@
-[中文文档](README_zh.md).
+[中文文档](README_zh.md)
 
 # Enjoy blogging with "Markdown" and "Git". An open source personal blog engine based on Ruby on Rails 8.
 

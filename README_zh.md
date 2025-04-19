@@ -1,4 +1,4 @@
-[English README](README.md).
+[English README](README.md)
 
 # 使用 "Markdown" 和 "Git" 享受博客写作。一个基于 Ruby on Rails 8 的开源个人博客引擎。
 
@@ -44,7 +44,7 @@
 
 - 您可以看到 [张健的新博客](https://zhangjian.blog)（基于 *DeveloperPortfolio*）设计精良。
 - 我开始期望客户**直接在我的博客上为我的服务付费**！
-- 通过博客，我向潜在客户传达了一个信息：我是 Web 开发、算法和游戏成瘾方面的专家！
+- 通过博客，我向潜在客户传达了一个信息：我是 Web 开发、算法和戒断游戏成瘾方面的专家！
 
 # 在服务器上部署 DeveloperPortfolio
 
@@ -118,7 +118,7 @@ rails s # 启动 Rails Web 服务器。
 
 ```shell
 cd /path/to/developer-portfolio
-nvim db/seeds.rb
+vim db/seeds.rb
 ```
 
 取消注释代码的前几行以创建管理员用户。
