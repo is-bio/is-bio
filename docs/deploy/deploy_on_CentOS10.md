@@ -1,3 +1,5 @@
+[中文文档](deploy_on_CentOS10_zh.md)
+
 # DeveloperPortfolio website installation
 
 This article is about how to install *DeveloperPortfolio* website on **CentOS 10 SELinux** (security-enhanced Linux).
@@ -199,7 +201,6 @@ systemctl restart nginx
 
 ## Create the Admin User
 
-
 ```shell
 cd /srv/developer-portfolio
 vim db/seeds.rb
@@ -282,7 +283,7 @@ magick -version # To test if it has been installed successfully.
 
 ## Support "https" for web
 
-### Way 1: Use a third-party service such as CloudFlare (Recommended)
+### Way 1: Use a third-party service such as CloudFlare. Large domain name service providers generally provide this service for free (Recommended)
 
 This is the most convenient way.
 

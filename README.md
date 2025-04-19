@@ -1,3 +1,5 @@
+[中文文档](README_zh.md).
+
 # Enjoy blogging with "Markdown" and "Git". An open source personal blog engine based on Ruby on Rails 8.
 
 Demo website: [Zhang Jian's Blog](https://zhangjian.blog).
@@ -58,9 +60,9 @@ The *DeveloperPortfolio* is developed based on Ruby version 3.3.x, but other ver
 
 - Use Homebrew to install Ruby if you are a casual user and won't be using Ruby frequently.
 
-   ```shell
-   brew install ruby
-   ```
+    ```shell
+    brew install ruby
+    ```
 
 - Ruby developers use a Ruby version manager to install Ruby.
     - [ruby-build](https://github.com/rbenv/ruby-build)
