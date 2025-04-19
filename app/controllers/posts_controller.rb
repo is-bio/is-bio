@@ -40,6 +40,8 @@ class PostsController < ApplicationController
         content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog/published/about.md`, then commit the changes and `$ git push`.",
         published_at: Time.current
       )
+    else
+      @post.translated!
     end
   end
 
@@ -51,6 +53,8 @@ class PostsController < ApplicationController
         content: "There is currently no content to display. \nPlease edit the `/path/to/markdown-blog/published/hire.md`, then commit the changes and `$ git push`.",
         published_at: Time.current
       )
+    else
+      @post.translated!
     end
 
     render :about

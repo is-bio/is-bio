@@ -97,4 +97,66 @@ RSpec.describe PostsController, type: :request do
       end
     end
   end
+
+  describe "GET about" do
+    context "when about page does not exist" do
+      before do
+        allow(Post).to receive(:where).with(permalink: "/about").and_return([])
+      end
+
+      it "creates a default post with instructions" do
+        get "/about"
+        expect(assigns(:post)).to be_a_new(Post)
+        expect(assigns(:post).content).to include("There is currently no content to display")
+        expect(assigns(:post).content).to include("/path/to/markdown-blog/published/about.md")
+      end
+    end
+
+    context "when about page exists" do
+      let(:about_post) { create(:post, permalink: "/about") }
+
+      before do
+        allow(Post).to receive(:where).with(permalink: "/about").and_return([ about_post ])
+        allow(about_post).to receive(:translated!)
+      end
+
+      it "uses the existing post and marks it as translated" do
+        get "/about"
+        expect(assigns(:post)).to eq(about_post)
+        expect(about_post).to have_received(:translated!)
+      end
+    end
+  end
+
+  describe "GET hire" do
+    context "when hire page does not exist" do
+      before do
+        allow(Post).to receive(:where).with(permalink: "/hire").and_return([])
+      end
+
+      it "creates a default post with instructions" do
+        get "/hire"
+        expect(assigns(:post)).to be_a_new(Post)
+        expect(assigns(:post).content).to include("There is currently no content to display")
+        expect(assigns(:post).content).to include("/path/to/markdown-blog/published/hire.md")
+        expect(response).to render_template("about")
+      end
+    end
+
+    context "when hire page exists" do
+      let(:hire_post) { create(:post, permalink: "/hire") }
+
+      before do
+        allow(Post).to receive(:where).with(permalink: "/hire").and_return([ hire_post ])
+        allow(hire_post).to receive(:translated!)
+      end
+
+      it "uses the existing post, marks it as translated, and renders the about template" do
+        get "/hire"
+        expect(assigns(:post)).to eq(hire_post)
+        expect(hire_post).to have_received(:translated!)
+        expect(response).to render_template("about")
+      end
+    end
+  end
 end
