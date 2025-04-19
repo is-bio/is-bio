@@ -251,7 +251,7 @@ nohup bin/jobs & # 启动它。“/nohup.out”是日志文件。
 ps -ef|grep solid # 确认它已启动。
 ```
 
-## 创建并安装您的 "GitHub App" 以将本地 "markdown-blog" 存储库的文件更改同步到博客网站
+## 创建并安装您的 "GitHub App" 以将本地 "markdown-blog" 仓库的文件更改同步到博客网站
 
 在这里，博客网站是您的真实 Web 服务器。
 

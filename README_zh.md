@@ -14,13 +14,13 @@
 
 1. Jekyll 或 Hugo 生成的博客文章是*静态*的，而 *DeveloperPortfolio* 是一个**动态**博客引擎。
     - *静态*博客的功能非常有限。
-    - 在*动态*博客 *DeveloperPortfolio* 中，目前已集成电子邮件订阅功能，未来还将支持作品集、评论、点赞、阅读次数、在线支付等功能。
+    - 在*动态*博客 *DeveloperPortfolio* 中，目前已集成电子邮件订阅功能，未来还将支持简历、作品集、评论、点赞、阅读次数、在线支付等功能。
     - 此外，您还可以为您的博客**添加一些自定义功能**。
     - 您可能会说，如果我不会用 Ruby 编程怎么办？
         - 两年前，这会是个问题，但现在，我们有了 AI，您可以**让 AI 帮助您实现一些小功能**！
         - 如果出现错误，告诉 AI 并让 AI 纠正它。
 2. 对于不熟悉 Jekyll 或 Hugo 的人来说，即使是找到一个好看的主题也很**困难**。
-    - *DeveloperPortfolio* 目前支持一个**漂亮的免费主题**，未来还会添加更多主题。
+    - *DeveloperPortfolio* 目前支持一个**漂亮的免费主题（内含8种色调）**，未来还会添加更多主题。
 3. Jekyll 或 Hugo 的文档长达很多页。谁能在一页内解释清楚所有内容？
     - *DeveloperPortfolio* 可以。有关如何使用 *DeveloperPortfolio* 方法通过 *Markdown* 和 *Git* 发布帖子的信息，请阅读 [markdown-blog](https://github.com/developer-portfolios/markdown-blog)。
 4. 一篇博客文章可以翻译成多种语言并在博客上显示。这个功能目前还没有任何博客引擎支持。然而，*DeveloperPortfolio* 已经支持了，让您的文章能够触达全球用户。
@@ -140,7 +140,7 @@ git restore db/seeds.rb
 
 ```shell
 cd /path/to/developer-portfolio
-rm public/assets/.manifest.json                                                                                                                             11:17:04
+rm public/assets/.manifest.json
 rails assets:precompile # 您需要重新启动 Rails Web 服务器才能使更改生效。
 bin/jobs # 启动它
 ```
@@ -149,7 +149,7 @@ bin/jobs # 启动它
 - 其次，使用此用户名和密码登录 http://localhost:3000/jobs 查看是否有失败的任务。
     - 用户名和密码可以通过运行 `EDITOR="vim" bin/rails credentials:edit` 获取。
 
-## 创建并安装您的 "GitHub App" 以将本地 "markdown-blog" 存储库的文件更改同步到博客网站
+## 创建并安装您的 "GitHub App" 以将本地 "markdown-blog" 仓库的文件更改同步到博客网站
 
 在这里，博客网站是您的本地 Rails Web 服务器。如果您 [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md)，博客网站是您的真实 Web 服务器。
 
