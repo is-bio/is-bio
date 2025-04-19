@@ -60,3 +60,23 @@ app/stylesheets
 log/*.log
 tmp/
 coverage
+
+# Local configuration files
+config/credentials.yml.development
+.ruby-gemset
+.ruby-version.local
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
