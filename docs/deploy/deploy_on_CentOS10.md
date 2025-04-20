@@ -1,8 +1,8 @@
 [中文文档](deploy_on_CentOS10_zh.md)
 
-# DeveloperPortfolioEngine website installation
+# developer-portfolio-engine website installation
 
-This article is about how to install *DeveloperPortfolioEngine* website on **CentOS 10 SELinux** (security-enhanced Linux).
+This article is about how to install *developer-portfolio-engine* website on **CentOS 10 SELinux** (security-enhanced Linux).
 
 ## Apply for a domain name and add DNS A records
 
@@ -20,9 +20,9 @@ Create two DNS A records:
    - Name: @
    - IPv4 address: the_server_ip
 
-Now you have to decide which server to install *DeveloperPortfolioEngine* on.
+Now you have to decide which server to install *developer-portfolio-engine* on.
 
-If you have limited budget and already have an underutilized server, you can install *DeveloperPortfolioEngine* on that server.
+If you have limited budget and already have an underutilized server, you can install *developer-portfolio-engine* on that server.
 
 **Port 80 can be shared by multiple websites without conflicts.**
 

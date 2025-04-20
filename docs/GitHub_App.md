@@ -1,4 +1,4 @@
-# DeveloperPortfolioEngine GitHub App
+# developer-portfolio-engine GitHub App
 
 If you want to automatically update your blog after executing the `git push` command, you need to install your GitHub App first. Only in this way can GitHub push the `git push` events to this platform.
 With the guidance of this article, you can create a GitHub App for you to install it.
@@ -52,7 +52,7 @@ Add `config.hosts << "<a-subdomain-string-for-your-site>.ngrok-free.app"` to `co
 
 TODO: Registration successful. You must generate a private key in order to install your GitHub App.
 
-## Connect GitHub App to DeveloperPortfolioEngine
+## Connect GitHub App to developer-portfolio-engine
 
 Visit https://your-domain.com/admin/github_app_settings , then
 

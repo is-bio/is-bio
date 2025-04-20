@@ -10,29 +10,29 @@
 
 目前，[Jekyll](https://jekyllrb.com/) 或 [Hugo](https://gohugo.io/) 已经可以满足上述要求，但并不完美。
 
-**DeveloperPortfolioEngine** 也可以满足上述要求，但有几点不同。
+**developer-portfolio-engine** 也可以满足上述要求，但有几点不同。
 
-## *DeveloperPortfolioEngine* 在哪些方面比 Jekyll 或 Hugo **更好**？
+## *developer-portfolio-engine* 在哪些方面比 Jekyll 或 Hugo **更好**？
 
-1. Jekyll 或 Hugo 生成的博客文章是*静态*的，而 *DeveloperPortfolioEngine* 是一个**动态**博客引擎。
+1. Jekyll 或 Hugo 生成的博客文章是*静态*的，而 *developer-portfolio-engine* 是一个**动态**博客引擎。
     - *静态*博客的功能非常有限。
-    - 在*动态*博客 *DeveloperPortfolioEngine* 中，目前已集成电子邮件订阅功能，未来还将支持简历、作品集、评论、点赞、阅读次数、在线支付等功能。
+    - 在*动态*博客 *developer-portfolio-engine* 中，目前已集成电子邮件订阅功能，未来还将支持简历、作品集、评论、点赞、阅读次数、在线支付等功能。
     - 此外，您还可以为您的博客**添加一些自定义功能**。
     - 您可能会说，如果我不会用 Ruby 编程怎么办？
         - 两年前，这会是个问题，但现在，我们有了 AI，您可以**让 AI 帮助您实现一些小功能**！
         - 如果出现错误，告诉 AI 并让 AI 纠正它。
 2. 对于不熟悉 Jekyll 或 Hugo 的人来说，即使是找到一个好看的主题也很**困难**。
-    - *DeveloperPortfolioEngine* 目前支持一个**漂亮的免费主题（内含8种色调）**，未来还会添加更多主题。
+    - *developer-portfolio-engine* 目前支持一个**漂亮的免费主题（内含8种色调）**，未来还会添加更多主题。
 3. Jekyll 或 Hugo 的文档长达很多页。谁能在一页内解释清楚所有内容？
-    - *DeveloperPortfolioEngine* 可以。有关如何使用 *DeveloperPortfolioEngine* 方法通过 *Markdown* 和 *Git* 发布帖子的信息，请阅读 [markdown-blog](https://github.com/developer-portfolios/markdown-blog)。
-4. 一篇博客文章可以翻译成多种语言并在博客上显示。这个功能目前还没有任何博客引擎支持。然而，*DeveloperPortfolioEngine* 已经支持了，让您的文章能够触达全球用户。
+    - *developer-portfolio-engine* 可以。有关如何使用 *developer-portfolio-engine* 方法通过 *Markdown* 和 *Git* 发布帖子的信息，请阅读 [markdown-blog](https://github.com/developer-portfolios/markdown-blog)。
+4. 一篇博客文章可以翻译成多种语言并在博客上显示。这个功能目前还没有任何博客引擎支持。然而，*developer-portfolio-engine* 已经支持了，让您的文章能够触达全球用户。
 5. 对于建立个人品牌来说，仅有一个博客是不够的。最好有简历和作品集。事实上，博客并不是最重要的功能，**简历和作品集才是**。在下一个版本中，我们将推出简历功能。
 
-## 使用 *DeveloperPortfolioEngine* 的成本是多少？
+## 使用 *developer-portfolio-engine* 的成本是多少？
 
 许多程序员已经在使用服务器，通常，该服务器并未得到充分利用。
 
-您可以在此服务器上安装 *DeveloperPortfolioEngine*，而无需担心端口 `80/443` 被另一个网站占用。在安装文档中，我已经指出了如何完美解决这个实际不存在的问题。
+您可以在此服务器上安装 *developer-portfolio-engine*，而无需担心端口 `80/443` 被另一个网站占用。在安装文档中，我已经指出了如何完美解决这个实际不存在的问题。
 
 因此，您的成本增加可能是**零**。
 
@@ -42,23 +42,23 @@
 - 在我看来，普通的博客系统**无法再为博主创造太多价值**！那些博客并非旨在为博主带来价值。
 - 以我自己为例，我的 GitHub Pages 的 [张健的旧博客](https://gazeldx.github.io/) 一点也不吸引人，所以我无法兴奋地写作。
 
-## DeveloperPortfolioEngine：一个专注于为开发者带来价值的博客引擎
+## developer-portfolio-engine：一个专注于为开发者带来价值的博客引擎
 
-- 您可以看到 [张健的新博客](https://zhangjian.blog)（基于 *DeveloperPortfolioEngine*）设计精良。
+- 您可以看到 [张健的新博客](https://zhangjian.blog)（基于 *developer-portfolio-engine*）设计精良。
 - 我开始期望客户**直接在我的博客上为我的服务付费**！
 - 通过博客，我向潜在客户传达了一个信息：我是 Web 开发、算法和戒断游戏成瘾方面的专家！
 
-# 在服务器上部署 DeveloperPortfolioEngine
+# 在服务器上部署 developer-portfolio-engine
 
-如果您想在服务器上部署 *DeveloperPortfolioEngine*，请阅读 [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md)。
+如果您想在服务器上部署 *developer-portfolio-engine*，请阅读 [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md)。
 
-# 在本地计算机上安装 DeveloperPortfolioEngine
+# 在本地计算机上安装 developer-portfolio-engine
 
 以下内容主要针对在 *macOS* 本地进行安装。对于其他操作系统，安装过程类似。
 
 ## 安装 Ruby
 
-*DeveloperPortfolioEngine* 是基于 Ruby 3.3.x 版本开发的，但其他版本应该也可以工作。
+*developer-portfolio-engine* 是基于 Ruby 3.3.x 版本开发的，但其他版本应该也可以工作。
 
 - 如果您是临时用户并且不经常使用 Ruby，请使用 Homebrew 安装 Ruby。
 

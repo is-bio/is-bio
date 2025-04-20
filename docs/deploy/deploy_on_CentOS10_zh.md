@@ -1,8 +1,8 @@
 [English document](deploy_on_CentOS10.md)
 
-# 搭建基于 DeveloperPortfolioEngine 的网站
+# 搭建基于 developer-portfolio-engine 的网站
 
-本文介绍如何在 **CentOS 10 SELinux**（安全增强型 Linux）上安装 *DeveloperPortfolioEngine* 网站。
+本文介绍如何在 **CentOS 10 SELinux**（安全增强型 Linux）上安装 *developer-portfolio-engine* 网站。
 
 ## 申请域名并添加 DNS A 记录
 
@@ -20,9 +20,9 @@
     - 名称：@
     - IPv4 地址：服务器IP
 
-现在您需要决定在哪台服务器上安装 *DeveloperPortfolioEngine*。
+现在您需要决定在哪台服务器上安装 *developer-portfolio-engine*。
 
-如果您的预算有限，并且已经有一台未充分利用的服务器，则可以将 *DeveloperPortfolioEngine* 安装在该服务器上。
+如果您的预算有限，并且已经有一台未充分利用的服务器，则可以将 *developer-portfolio-engine* 安装在该服务器上。
 
 **端口 80 可以由多个网站共享而不会产生冲突。**
 
