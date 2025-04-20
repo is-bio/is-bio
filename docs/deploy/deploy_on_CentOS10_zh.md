@@ -1,8 +1,8 @@
 [English document](deploy_on_CentOS10.md)
 
-# 搭建基于 DeveloperPortfolio 的网站
+# 搭建基于 DeveloperPortfolioEngine 的网站
 
-本文介绍如何在 **CentOS 10 SELinux**（安全增强型 Linux）上安装 *DeveloperPortfolio* 网站。
+本文介绍如何在 **CentOS 10 SELinux**（安全增强型 Linux）上安装 *DeveloperPortfolioEngine* 网站。
 
 ## 申请域名并添加 DNS A 记录
 
@@ -20,9 +20,9 @@
     - 名称：@
     - IPv4 地址：服务器IP
 
-现在您需要决定在哪台服务器上安装 *DeveloperPortfolio*。
+现在您需要决定在哪台服务器上安装 *DeveloperPortfolioEngine*。
 
-如果您的预算有限，并且已经有一台未充分利用的服务器，则可以将 *DeveloperPortfolio* 安装在该服务器上。
+如果您的预算有限，并且已经有一台未充分利用的服务器，则可以将 *DeveloperPortfolioEngine* 安装在该服务器上。
 
 **端口 80 可以由多个网站共享而不会产生冲突。**
 
@@ -56,8 +56,8 @@ yum info libyaml-devel
 
 ```shell
 cd /srv
-git clone https://github.com/developer-portfolios/developer-portfolio.git
-cd /srv/developer-portfolio
+git clone https://github.com/developer-portfolios/developer-portfolio-engine.git
+cd /srv/developer-portfolio-engine
 bundle install
 ```
 
@@ -75,7 +75,7 @@ echo $RAILS_ENV # 检查环境变量是否已生效
 ## 设置credentials
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 
 # 此文件包含所有需要设置的credentials。
 cat config/credentials.yml.example # 使用下一个命令设置“所有”credentials：
@@ -92,7 +92,7 @@ EDITOR="vim" bin/rails credentials:edit
 ## 准备 SQLite 数据库
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 rails db:migrate # 数据库文件是 `./storage/development.sqlite3`。运行它没有副作用。
 rails db:seed # 运行它没有副作用。
 ```
@@ -104,7 +104,7 @@ rails db:seed # 运行它没有副作用。
 ## 启动或重启 Rails Web 服务器
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 rails assets:precompile # 每当任何资源发生更改时都需要执行此操作。运行它没有副作用。
 pkill -F /var/run/blog.pid # 停止 Rails Web 服务器。如果尚未启动 Rails Web 服务器，则无需运行此命令。
 bundle exec puma -w 1 -e production # 用于测试 Rails Web 服务器是否可以正常运行。
@@ -141,9 +141,9 @@ setsebool -P httpd_can_network_connect 1
 sudo setenforce 0
 
 cd /etc/nginx
-cp /srv/developer-portfolio/docs/deploy/nginx.conf ./ # 替换现有文件
+cp /srv/developer-portfolio-engine/docs/deploy/nginx.conf ./ # 替换现有文件
 cd /etc/nginx/conf.d
-cp /srv/developer-portfolio/docs/deploy/blog_nginx.conf ./
+cp /srv/developer-portfolio-engine/docs/deploy/blog_nginx.conf ./
 vim blog_nginx.conf # 将 "your-domain.com" 替换为您的实际域名。
 
 nginx -t # 检查配置是否正确。
@@ -202,7 +202,7 @@ systemctl restart nginx
 ## 创建管理员用户
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 vim db/seeds.rb
 ```
 
@@ -224,7 +224,7 @@ git restore db/seeds.rb
 博客文章、图片、文件同步、发送电子邮件、生成缩略图等都需要启动后台任务！
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 # 如果屏幕上有内容输出，则表示某些资源文件已被重写。
 #   您需要重新启动 Rails Web 服务器才能使更改生效。
 rails assets:precompile
@@ -312,7 +312,7 @@ pkill -F /var/run/blog.pid # 停止 Rails Web 服务器
 #ps -ef | grep puma # 您将获得一个与 `cat /var/run/blog.pid` 相同的 pid。
 #kill -9 主进程pid # 一些工作进程是由主进程启动的，您可以终止主进程 pid。
 
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 git stash
 git pull origin main
 git stash apply
@@ -329,5 +329,5 @@ rails assets:precompile # 每当任何资源发生更改时都需要执行此操
 
 ```shell
 # 在您的本地计算机上运行它
-scp root@the_server_ip:/srv/developer-portfolio/storage/production.sqlite3 ./
+scp root@the_server_ip:/srv/developer-portfolio-engine/storage/production.sqlite3 ./
 ```

@@ -1,8 +1,8 @@
 [中文文档](deploy_on_CentOS10_zh.md)
 
-# DeveloperPortfolio website installation
+# DeveloperPortfolioEngine website installation
 
-This article is about how to install *DeveloperPortfolio* website on **CentOS 10 SELinux** (security-enhanced Linux).
+This article is about how to install *DeveloperPortfolioEngine* website on **CentOS 10 SELinux** (security-enhanced Linux).
 
 ## Apply for a domain name and add DNS A records
 
@@ -20,9 +20,9 @@ Create two DNS A records:
    - Name: @
    - IPv4 address: the_server_ip
 
-Now you have to decide which server to install *DeveloperPortfolio* on.
+Now you have to decide which server to install *DeveloperPortfolioEngine* on.
 
-If you have limited budget and already have an underutilized server, you can install *DeveloperPortfolio* on that server.
+If you have limited budget and already have an underutilized server, you can install *DeveloperPortfolioEngine* on that server.
 
 **Port 80 can be shared by multiple websites without conflicts.**
 
@@ -56,8 +56,8 @@ yum info libyaml-devel
 
 ```shell
 cd /srv
-git clone https://github.com/developer-portfolios/developer-portfolio.git
-cd /srv/developer-portfolio
+git clone https://github.com/developer-portfolios/developer-portfolio-engine.git
+cd /srv/developer-portfolio-engine
 bundle install
 ```
 
@@ -75,7 +75,7 @@ echo $RAILS_ENV # check whether the environment variables have taken effect
 ## Set credentials
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 
 # This file contains all the credentials that need to be set.
 cat config/credentials.yml.example # Set "all" of them with the next command:
@@ -92,7 +92,7 @@ If you are still not sure how to set some items, you can use the default values 
 ## Prepare SQLite database
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 rails db:migrate # The database file is `./storage/development.sqlite3`. Running it has no side effects.
 rails db:seed # Running it has no side effects.
 ```
@@ -104,7 +104,7 @@ Please follow [docs/install_theme.md](/docs/install_theme.md) to install it.
 ## Start or restart Rails web server
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 rails assets:precompile # This needs to be executed whenever any assets are changed. Running it has no side effects.
 pkill -F /var/run/blog.pid # Stop Rails web server. If you haven't started the Rails web server yet, you don't need to run it.
 bundle exec puma -w 1 -e production # This is used to test if Rails web server can run well.
@@ -141,9 +141,9 @@ setsebool -P httpd_can_network_connect 1
 sudo setenforce 0
 
 cd /etc/nginx
-cp /srv/developer-portfolio/docs/deploy/nginx.conf ./ # Replace the existing file
+cp /srv/developer-portfolio-engine/docs/deploy/nginx.conf ./ # Replace the existing file
 cd /etc/nginx/conf.d
-cp /srv/developer-portfolio/docs/deploy/blog_nginx.conf ./
+cp /srv/developer-portfolio-engine/docs/deploy/blog_nginx.conf ./
 vim blog_nginx.conf # Replace the "your-domain.com" with your actual domain name.
 
 nginx -t # Check whether the configuration is correct.
@@ -202,7 +202,7 @@ systemctl restart nginx
 ## Create the Admin User
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 vim db/seeds.rb
 ```
 
@@ -224,7 +224,7 @@ Please follow the instructions in [docs/send_email_via_smtp_guide.md](/docs/send
 Blog posts, images, files synchronization, sending emails, generating thumbnails, etc. all require background tasks to be started!
 
 ```shell
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 # If there is content output on the screen, it means that some asset files has been rewritten.
 #   You need to restart Rails web server for the changes to take effect.
 rails assets:precompile
@@ -321,7 +321,7 @@ pkill -F /var/run/blog.pid # Stop Rails web server
 #ps -ef | grep puma # You will get a pid which is the same as `cat /var/run/blog.pid`.
 #kill -9 the_master_pid # Some workers processes are started by master process, you can kill the master pid.
 
-cd /srv/developer-portfolio
+cd /srv/developer-portfolio-engine
 git stash
 git pull origin main
 git stash apply
@@ -338,5 +338,5 @@ rails assets:precompile # This needs to be executed whenever any assets are chan
 
 ```shell
 # Run it in your local computer
-scp root@the_server_ip:/srv/developer-portfolio/storage/production.sqlite3 ./
+scp root@the_server_ip:/srv/developer-portfolio-engine/storage/production.sqlite3 ./
 ```
