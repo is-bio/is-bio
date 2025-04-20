@@ -1,6 +1,6 @@
 [English README](README.md)
 
-# 开发者 Portfolio 引擎 | 免费 themes
+# 开发者作品集引擎 | 免费模板
 
 ## 使用 "Markdown" 和 "Git" 享受博客写作
 
