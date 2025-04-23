@@ -38,7 +38,7 @@ So your cost increase may be **zero**.
 
 ## Why don’t developers blog much anymore?
 
-- After using [GitHub Pages](https://pages.github.com/) (based on Jekyll), they **rarely** write blogs. Why?
+- After using [GitHub Pages](https://pages.github.com/) (powered by Jekyll), they **rarely** write blogs. Why?
 - IMO, ordinary blog systems can **no longer create much value for bloggers**! Those blogs are not designed to bring value to bloggers.
 - Take myself as an example, my GitHub Pages' [Zhang Jian's old blog](https://gazeldx.github.io/) is not sexy at all, so I can't get excited about writing.
 

@@ -143,6 +143,7 @@ sudo setenforce 0
 cd /etc/nginx
 cp /srv/developer-portfolio-engine/docs/deploy/nginx.conf ./ # Replace the existing file
 cd /etc/nginx/conf.d
+cp /srv/developer-portfolio-engine/docs/deploy/default_server.conf ./
 cp /srv/developer-portfolio-engine/docs/deploy/blog_nginx.conf ./
 vim blog_nginx.conf # Replace the "your-domain.com" with your actual domain name.
 
