@@ -23,7 +23,8 @@ module ApplicationHelper
       superscript: true,
       disable_indented_code_blocks: true,
       fenced_code_blocks: true,
-      space_after_headers: true
+      space_after_headers: true,
+      tables: true
     }
 
     renderer = HTML.new(options)
