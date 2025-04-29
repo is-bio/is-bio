@@ -5,9 +5,10 @@
     <title>
       <% title = content_for(:title) %>
       <% if title.present? %>
-        <%= title %> -
+        <%= title %>
+      <% else %>
+        <%= t(:blog_name) %>
       <% end %>
-      <%= t(:blog_name) %>
     </title>
 
     <link rel="canonical" href="<%= url_for(only_path: false, protocol: 'https') %>" />
