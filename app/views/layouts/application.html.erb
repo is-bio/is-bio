@@ -9,6 +9,8 @@
       <% end %>
       <%= t(:blog_name) %>
     </title>
+
+    <link rel="canonical" href="<%= url_for(only_path: false, protocol: 'https') %>" />
     <meta name="description" content="<%= t(:headline) %>" />
     <meta name="author" content="<%= t(:author_name) %>" />
 
