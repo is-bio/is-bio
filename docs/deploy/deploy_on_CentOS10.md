@@ -303,7 +303,9 @@ exit
 magick -version # To test if it has been installed successfully.
 ```
 
-## Support "https" for web
+## Support "https" (TLS/SSL) for web
+
+It is recommended that you enable https because the canonical url of the pages start with "https://".
 
 ### Way 1: Use a third-party service such as CloudFlare. Large domain name service providers generally provide this service for free (Recommended)
 
@@ -313,7 +315,7 @@ If you use CloudFlare SSL/TLS encryption default mode `Flexible`, you can see "h
 
 You can visit https://your-domain.com to check it.
 
-### Way 2: Implement support for "https" yourself
+### Way 2: Implement support for "https" (TLS/SSL) yourself
 
 Please read [enable_https](/docs/deploy/enable_https.md).
 

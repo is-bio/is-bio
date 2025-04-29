@@ -272,7 +272,9 @@ exit
 magick -version # 测试是否已成功安装。
 ```
 
-## 支持网站的 "https"
+## 支持网站的 "https" (TLS/SSL)
+
+推荐你开启 https，因为页面的 canonical url 是用 "https://" 开头的。
 
 ### 方式 1：使用第三方服务，如 CloudFlare 等，大的域名服务商一般会免费提供本服务（推荐）
 
@@ -282,7 +284,7 @@ magick -version # 测试是否已成功安装。
 
 您可以访问 https://your-domain.com 来检查。
 
-### 方式 2：自行实现对 "https" 的支持
+### 方式 2：自行实现对 "https" (TLS/SSL) 的支持
 
 请阅读 [enable_https](/docs/deploy/enable_https.md)。
 
