@@ -11,6 +11,12 @@
     </title>
 
     <link rel="canonical" href="<%= url_for(only_path: false, protocol: 'https') %>" />
+
+    <% I18n.available_locales.each do |locale| %>
+    <link rel="alternate" hreflang="<%= locale.downcase %>" href="<%= locale_url_for(Locale.find_by(key: locale)) %>" />
+    <% end %>
+    <link rel="alternate" hreflang="x-default" href="<%= locale_url_for(default_locale) %>" />
+
     <meta name="description" content="<%= t(:headline) %>" />
     <meta name="author" content="<%= t(:author_name) %>" />
 
