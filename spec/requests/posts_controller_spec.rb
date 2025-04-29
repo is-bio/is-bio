@@ -66,6 +66,19 @@ RSpec.describe PostsController, type: :request do
         expect(response.body).to include("Contenido traducido")
         expect(response.body).not_to include(post.title)
       end
+
+      it "displays no_title and no_content messages when no translation exists" do
+        allow(I18n).to receive(:locale).and_return(:'es-ES')
+        allow_any_instance_of(Post).to receive(:current_translation).and_return(nil)
+
+        get "/blog/this-is-the-post-title-#{post.id2}"
+
+        expect(response).to render_template(:show)
+        expect(response.body).to include("No Title")
+        expect(response.body).to include("No content")
+        expect(response.body).to include("es-ES")
+        expect(response.body).not_to include(post.title)
+      end
     end
   end
 
