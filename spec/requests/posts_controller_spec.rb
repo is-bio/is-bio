@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe PostsController, type: :request do
   let!(:post) { create(:post, title: "This is the Post Title", permalink: "/") }
+  let!(:post2) { create(:post, title: "This is the Post Title 2", permalink: "/") }
   let!(:post_about) { create(:post, permalink: "/about", title: "About Me") }
 
   it "GET /index" do
@@ -82,19 +83,29 @@ RSpec.describe PostsController, type: :request do
       end
 
       it "includes alternate language links only for available translations" do
+        # Ensure necessary Subdomain records exist for the test
+        en_locale = Locale.find_by(key: 'en') || create(:locale, :english)
+        Subdomain.find_or_create_by!(value: 'www', locale: en_locale)
+        es_locale = Locale.find_by(key: 'es-ES') || create(:locale, key: 'es-ES', english_name: "Spanish_#{SecureRandom.hex(4)}", name: "Español_#{SecureRandom.hex(4)}")
+        Subdomain.find_or_create_by!(value: 'es', locale: es_locale)
+        fr_locale = Locale.find_by(key: 'fr-FR') || create(:locale, key: 'fr-FR', english_name: "French_#{SecureRandom.hex(4)}", name: "Français_#{SecureRandom.hex(4)}")
+        Subdomain.find_or_create_by!(value: 'fr', locale: fr_locale)
+        de_locale = Locale.find_by(key: 'de-DE') || create(:locale, key: 'de-DE', english_name: "German_#{SecureRandom.hex(4)}", name: "Deutsch_#{SecureRandom.hex(4)}")
+        # No subdomain for German
+
         # Create translations for different languages
-        es_translation = create(:translation, post: post, locale: locale, title: "Título en español")
-        fr_locale = create(:locale, key: 'fr-FR', english_name: 'French', name: 'Français')
-        fr_translation = create(:translation, post: post, locale: fr_locale, title: "Titre en français")
-        de_locale = create(:locale, key: 'de-DE', english_name: 'German', name: 'Deutsch')
-        # No translation for German
+        es_translation = create(:translation, post: post2, locale: es_locale, title: "Título en español")
+        fr_translation = create(:translation, post: post2, locale: fr_locale, title: "Titre en français")
 
-        get "/blog/this-is-the-post-title-#{post.id2}"
+        get "/blog/this-is-the-post-title-2-#{post2.id2}"
 
-        expect(response.body).to include('hreflang="es-es"')
-        expect(response.body).to include('hreflang="fr-fr"')
+        # Rails sets the default test host to www.example.com for consistency and isolation.
+        # https://github.com/rails/rails/blob/main/actionpack/lib/action_dispatch/testing/integration.rb?spm=a2ty_o01.29997173.0.0.467dc921PZwxwr#L92
+        expect(response.body).to include('rel="canonical" href="https://www.example.com/blog/this-is-the-post-title-2-')
+        expect(response.body).to include('hreflang="es-es" href="http://es.example.com/blog/this-is-the-post-title-2-')
+        expect(response.body).to include('hreflang="fr-fr" href="http://fr.example.com/blog/this-is-the-post-title-2-')
         expect(response.body).not_to include('hreflang="de-de"')
-        expect(response.body).to include('hreflang="x-default"')
+        expect(response.body).to include('hreflang="x-default" href="http://example.com/blog/this-is-the-post-title-2-')
       end
     end
   end
