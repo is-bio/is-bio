@@ -153,11 +153,16 @@ class Post < ApplicationRecord
   end
 
   def translated!
+    return if I18n.locale == I18n.default_locale
+
     translation = current_translation
 
-    unless translation.nil?
+    if translation.present?
       self.title = translation.title
       self.content = translation.content
+    else
+      self.title = I18n.t("post.no_title")
+      self.content = I18n.t("post.no_content", language: I18n.locale.to_s)
     end
   end
 

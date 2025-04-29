@@ -32,7 +32,11 @@ de-DE:
   email: "E-Mail"
   wechat_id: "WeChat-ID"
   linkedin_profile_url: "LinkedIn-Profil-URL"
-  github_username: "GitHub-Benutzername"
+  github_username: "GitHub Benutzername"
+
+  post:
+    no_title: "Kein Titel"
+    no_content: "Kein Inhalt, da der Autor diesen Beitrag noch nicht in '%{language}' übersetzt hat."
 
   subscription:
     success:

@@ -34,6 +34,10 @@ zh-CN:
   linkedin_profile_url: "领英URL"
   github_username: "GitHub 用户名"
 
+  post:
+    no_title: "无标题"
+    no_content: "暂无内容，因为作者尚未将此文章翻译成'%{language}'。"
+
   subscription:
     success:
       created: "我们已向您的邮箱发送了一封订阅确认邮件。请查收邮件，并点击确认链接完成订阅！"

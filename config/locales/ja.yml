@@ -32,7 +32,11 @@ ja:
   email: "メールアドレス"
   wechat_id: "WeChatアカウント"
   linkedin_profile_url: "LinkedInのURL"
-  github_username: "GitHubユーザー名"
+  github_username: "GitHub ユーザー名"
+
+  post:
+    no_title: "タイトルなし"
+    no_content: "コンテンツがありません。著者がまだこの投稿を'%{language}'に翻訳していないためです。"
 
   subscription:
     success:

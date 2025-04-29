@@ -1,0 +1,8 @@
+<% I18n.available_locales.each do |locale_key| %>
+  <% locale = Locale.find_by(key: locale_key) %>
+  <% if locale %>
+    <turbo-stream action="update" target="locale_<%= locale.id %>">
+      <template><%= locale_link(locale) %></template>
+    </turbo-stream>
+  <% end %>
+<% end %>

@@ -34,6 +34,10 @@ fr-FR:
   linkedin_profile_url: "URL du profil LinkedIn"
   github_username: "Nom d'utilisateur GitHub"
 
+  post:
+    no_title: "Sans titre"
+    no_content: "Pas de contenu, car l'auteur n'a pas encore traduit cet article en '%{language}'."
+
   subscription:
     success:
       created: "Nous avons envoyé un e-mail de confirmation d'abonnement à votre adresse e-mail. Veuillez vérifier votre e-mail et cliquer sur le lien de confirmation pour compléter votre abonnement !"
@@ -94,4 +98,4 @@ fr-FR:
         other: "il y a %{count} mois"
       x_years:
         one: "il y a %{count} an"
-        other: "il y a %{count} ans" 
+        other: "il y a %{count} ans"

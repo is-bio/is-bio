@@ -56,21 +56,15 @@ RSpec.describe PostsController, type: :request do
           content: "Contenido traducido"
         )
 
-        original_locale = I18n.locale
-        I18n.locale = :'es-ES'
+        allow(I18n).to receive(:locale).and_return(:'es-ES')
+        allow_any_instance_of(Post).to receive(:current_translation).and_return(translation)
 
-        begin
-          allow_any_instance_of(Post).to receive(:current_translation).and_return(translation)
+        get "/blog/this-is-the-post-title-#{post.id2}"
 
-          get "/blog/this-is-the-post-title-#{post.id2}"
-
-          expect(response).to render_template(:show)
-          expect(response.body).to include("Título traducido")
-          expect(response.body).to include("Contenido traducido")
-          expect(response.body).not_to include(post.title)
-        ensure
-          I18n.locale = original_locale
-        end
+        expect(response).to render_template(:show)
+        expect(response.body).to include("Título traducido")
+        expect(response.body).to include("Contenido traducido")
+        expect(response.body).not_to include(post.title)
       end
     end
   end

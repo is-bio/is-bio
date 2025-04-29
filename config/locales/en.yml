@@ -34,6 +34,10 @@ en:
   linkedin_profile_url: "LinkedIn profile URL"
   github_username: "GitHub Username"
 
+  post:
+    no_title: "No Title"
+    no_content: "No content, because the author has not yet translated this post into '%{language}'."
+
   subscription:
     success:
       created: "We have sent a subscription confirmation email to your email address. Please check your email and click the confirmation link to complete your subscription!"

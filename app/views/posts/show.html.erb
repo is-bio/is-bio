@@ -1,5 +1,7 @@
 <% title(@post.title) %>
 
+<%= render "shared/language_menu_updater" %>
+
 <article class="blog-post px-3 py-5 p-md-5">
   <%= tag.div(flash[:notice], class: "text-center text-success mb-2") if flash[:notice] %>
 

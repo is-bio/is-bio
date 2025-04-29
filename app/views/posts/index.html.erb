@@ -1,5 +1,7 @@
 <% title(t(:blog_home)) %>
 
+<%= render "shared/language_menu_updater" %>
+
 <section class="theme-bg-light py-5">
   <%= tag.div(flash[:notice], class: "text-center text-success mb-2") if flash[:notice] %>
   <%= tag.div(flash[:alert], class: "text-center text-danger mb-2") if flash[:alert] %>
@@ -14,7 +16,7 @@
 <section class="blog-list px-3 py-5 p-md-5">
   <div class="container single-col-max-width">
     <% @posts.each do |post| %>
-      <% post.translated! unless default_locale? %>
+      <% post.translated! %>
 
       <div class="item mb-5">
         <div class="row g-3 g-xl-0">

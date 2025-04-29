@@ -34,6 +34,10 @@ pt-BR:
   linkedin_profile_url: "URL do perfil do LinkedIn"
   github_username: "Nome de usuário do GitHub"
 
+  post:
+    no_title: "Sem título"
+    no_content: "Sem conteúdo, pois o autor ainda não traduziu esta postagem para '%{language}'."
+
   subscription:
     success:
       created: "Enviamos um e-mail de confirmação para o seu endereço. Por favor, verifique seu e-mail e clique no link de confirmação para completar sua inscrição!"
