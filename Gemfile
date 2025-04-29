@@ -40,7 +40,7 @@ gem "kamal", "2.5.3", require: false
 gem "thruster", "~> 0.1.13", require: false
 
 gem "redcarpet", "~> 3.6.1" # Process markdown to html
-gem "rouge", "~> 4.5.1" # Highlight code
+gem "rouge", "~> 4.5.2" # Highlight code
 
 gem "ancestry", "~> 4.3.3" # Handle 'categories' which have 'parent' and 'children'
 
