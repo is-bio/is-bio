@@ -80,6 +80,22 @@ RSpec.describe PostsController, type: :request do
         expect(response.body).to include("es-ES")
         expect(response.body).not_to include(post.title)
       end
+
+      it "includes alternate language links only for available translations" do
+        # Create translations for different languages
+        es_translation = create(:translation, post: post, locale: locale, title: "Título en español")
+        fr_locale = create(:locale, key: 'fr-FR', english_name: 'French', name: 'Français')
+        fr_translation = create(:translation, post: post, locale: fr_locale, title: "Titre en français")
+        de_locale = create(:locale, key: 'de-DE', english_name: 'German', name: 'Deutsch')
+        # No translation for German
+
+        get "/blog/this-is-the-post-title-#{post.id2}"
+
+        expect(response.body).to include('hreflang="es-es"')
+        expect(response.body).to include('hreflang="fr-fr"')
+        expect(response.body).not_to include('hreflang="de-de"')
+        expect(response.body).to include('hreflang="x-default"')
+      end
     end
   end
 
