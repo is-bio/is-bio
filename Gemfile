@@ -59,7 +59,7 @@ group :development, :test do
 
   gem "factory_bot_rails", "~> 6.4.4"
   gem "rails-controller-testing", "~> 1.0.5"
-  gem "rspec-rails", "~> 7.1.1"
+  gem "rspec-rails", "~> 8.0.0"
   gem "faker", "~> 3.5.1"
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
