@@ -313,6 +313,8 @@ This is the most convenient way.
 
 If you use CloudFlare SSL/TLS encryption default mode `Flexible`, you can see "https" has already been supported.
 
+The ".dev" domain is a bit special because it requires the use of TLS. If you use CloudFlare's service, one solution is: `<your-domain>.dev -> SSL/TLS -> Edge Certificates -> Enable "Always Use HTTPS"`.
+
 You can visit https://your-domain.com to check it.
 
 ### Way 2: Implement support for "https" (TLS/SSL) yourself

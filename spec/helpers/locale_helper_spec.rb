@@ -30,89 +30,9 @@ RSpec.describe LocaleHelper, type: :helper do
   end
 
   before do
-    Subdomain.where(value: %w[www fr]).delete_all
-
-    create(:subdomain, :www, locale: english_locale) unless Subdomain.find_by(value: 'www')
-    create(:subdomain, value: 'fr', locale: french_locale) unless Subdomain.find_by(value: 'fr')
-
     english_locale
     french_locale
     german_locale
-  end
-
-  describe "#locale_url_for" do
-    context "with subdomain in current URL" do
-      before do
-        allow(helper).to receive(:request).and_return(
-          double(
-            "Request",
-            original_url: "https://www.example.com/posts/1",
-            subdomains: [ "www" ],
-            host: 'www.example.com'
-          )
-        )
-      end
-
-      it "replaces existing subdomain" do
-        expect(helper.locale_url_for(french_locale)).to eq('https://fr.example.com/posts/1')
-      end
-    end
-
-    context "without subdomain in current URL" do
-      before do
-        allow(helper).to receive(:request).and_return(
-          double("Request",
-                 original_url: 'http://example.com/about',
-                 subdomains: [],
-                 host: 'example.com'
-          )
-        )
-      end
-
-      it "adds new subdomain" do
-        expect(helper.locale_url_for(french_locale)).to eq('http://fr.example.com/about')
-      end
-    end
-
-    context "with query parameters" do
-      before do
-        allow(helper).to receive(:request).and_return(
-          double("Request",
-                 original_url: 'https://www.example.com/search?q=rails',
-                 subdomains: [ 'www' ],
-                 host: 'www.example.com'
-          )
-        )
-      end
-
-      it "preserves query params" do
-        expect(helper.locale_url_for(french_locale)).to eq('https://fr.example.com/search?q=rails')
-      end
-    end
-
-    context "with locale having no subdomain" do
-      before do
-        Subdomain.where(locale_id: german_locale.id).delete_all
-      end
-
-      it "returns original URL" do
-        original = 'http://www.example.com/posts'
-        allow(helper).to receive(:request).and_return(
-          double("Request", original_url: original, subdomains: [ 'www' ], host: 'www.example.com')
-        )
-        expect(helper.locale_url_for(german_locale)).to eq(original)
-      end
-    end
-
-    context "with nil locale" do
-      it "returns original URL" do
-        original = 'http://www.example.com/posts'
-        allow(helper).to receive(:request).and_return(
-          double("Request", original_url: original, subdomains: [ 'www' ], host: 'www.example.com')
-        )
-        expect(helper.locale_url_for(nil)).to eq(original)
-      end
-    end
   end
 
   describe "#locale_switcher" do
@@ -137,9 +57,6 @@ RSpec.describe LocaleHelper, type: :helper do
         spanish_locale = Locale.find_by(key: 'es') ||
           create(:locale_with_key, locale_key: 'es', locale_name: "Español_#{SecureRandom.hex(4)}", locale_english_name: "Spanish_#{SecureRandom.hex(4)}")
 
-        Subdomain.where(value: 'es').delete_all
-        create(:subdomain, value: 'es', locale: spanish_locale)
-
         allow(Locale).to receive(:available_except_current).and_return([ french_locale, spanish_locale ])
 
         allow(helper).to receive(:locale_url_for).with(spanish_locale).and_return('http://es.example.com')
@@ -154,15 +71,9 @@ RSpec.describe LocaleHelper, type: :helper do
 
   describe '#locale_url_for' do
     let(:default_locale) { Locale.find_by(key: I18n.default_locale) || create(:locale, key: I18n.default_locale) }
-    let(:subdomain) { Subdomain.find_by(locale: default_locale) || create(:subdomain, locale: default_locale) }
 
     it 'returns the original URL if no locale is provided' do
       expect(helper.locale_url_for(nil)).to eq(request.original_url)
-    end
-
-    it 'removes the default locale subdomain from URL' do
-      allow(request).to receive(:subdomains).and_return([ subdomain.value ])
-      expect(helper.locale_url_for(default_locale)).not_to include("#{subdomain.value}.")
     end
   end
 

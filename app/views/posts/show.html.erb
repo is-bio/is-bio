@@ -30,12 +30,12 @@
 
     <nav class="blog-nav nav nav-justified my-5">
       <% if @post_newer.present? %>
-        <a class="nav-link-prev nav-item nav-link rounded-left" href="<%= @post_newer.path %>" data-turbo-action="advance">
+        <a class="nav-link-prev nav-item nav-link rounded-left" href="<%= localed(@post_newer.path) %>" data-turbo-action="advance">
           <%= t(:newer_post) %><i class="arrow-prev fas fa-long-arrow-alt-left"></i>
         </a>
       <% end %>
       <% if @post_older.present? %>
-        <a class="nav-link-next nav-item nav-link rounded-right" href="<%= @post_older.path %>" data-turbo-action="advance">
+        <a class="nav-link-next nav-item nav-link rounded-right" href="<%= localed(@post_older.path) %>" data-turbo-action="advance">
           <%= t(:older_post) %><i class="arrow-next fas fa-long-arrow-alt-right"></i>
         </a>
       <% end %>

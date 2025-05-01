@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_15_055732) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_16_142431) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -80,15 +80,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_055732) do
     t.index ["key"], name: "index_social_media_accounts_on_key", unique: true
   end
 
-  create_table "subdomains", force: :cascade do |t|
-    t.string "value"
-    t.integer "locale_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["locale_id"], name: "index_subdomains_on_locale_id"
-    t.index ["value"], name: "index_subdomains_on_value", unique: true
-  end
-
   create_table "themes", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "enabled", default: true, null: false
@@ -117,7 +108,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_055732) do
 
   add_foreign_key "posts", "categories"
   add_foreign_key "sessions", "users"
-  add_foreign_key "subdomains", "locales"
   add_foreign_key "translations", "locales"
   add_foreign_key "translations", "posts"
 end

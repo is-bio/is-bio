@@ -186,18 +186,4 @@ RSpec.describe Locale, type: :model do
       end
     end
   end
-
-  describe "associations" do
-    it "has many subdomains" do
-      locale = create(:locale)
-      subdomain = create(:subdomain, locale: locale)
-      expect(locale.subdomains).to include(subdomain)
-    end
-
-    it "restricts deletion when subdomains exist" do
-      locale = create(:locale)
-      create(:subdomain, locale: locale)
-      expect { locale.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
-    end
-  end
 end

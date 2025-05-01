@@ -17,7 +17,6 @@
 class Locale < ApplicationRecord
   # self.primary_key = :id
 
-  has_many :subdomains, dependent: :restrict_with_exception
   has_many :translations
   has_many :posts, through: :translations
 

@@ -91,7 +91,6 @@ RSpec.describe PostsController, type: :request do
         fr_locale = Locale.find_by(key: 'fr-FR') || create(:locale, key: 'fr-FR', english_name: "French_#{SecureRandom.hex(4)}", name: "Français_#{SecureRandom.hex(4)}")
         Subdomain.find_or_create_by!(value: 'fr', locale: fr_locale)
         de_locale = Locale.find_by(key: 'de-DE') || create(:locale, key: 'de-DE', english_name: "German_#{SecureRandom.hex(4)}", name: "Deutsch_#{SecureRandom.hex(4)}")
-        # No subdomain for German
 
         # Create translations for different languages
         es_translation = create(:translation, post: post2, locale: es_locale, title: "Título en español")

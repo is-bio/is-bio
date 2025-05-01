@@ -1,6 +1,6 @@
 <header class="header text-center overflow-auto">
   <h1 class="blog-name pt-lg-4 mb-0" id="blog-name">
-    <a class="no-text-decoration" href="<%= root_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance"><%= t(:blog_name) %></a>
+    <a class="no-text-decoration" href="<%= localed(root_path) %>" data-turbo-frame="visitor_frame" data-turbo-action="advance"><%= t(:blog_name) %></a>
   </h1>
 
   <nav class="navbar navbar-expand-lg navbar-dark">
@@ -14,7 +14,7 @@
 
         <div class="bio mb-3">
           <%= t(:brief_personal_introduction) %><br>
-          <a href="<%= about_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance" onclick="updateActiveLink('about-link')"><%= t(:find_more_about_me) %></a>
+          <a href="<%= localed(about_path) %>" data-turbo-frame="visitor_frame" data-turbo-action="advance" onclick="updateActiveLink('about-link')"><%= t(:find_more_about_me) %></a>
         </div>
 
         <ul class="social-list list-inline py-3 mx-auto">
@@ -48,7 +48,7 @@
 
         <li class="nav-item">
           <a id="home-link" class="nav-link <%= controller_name == 'posts' && action_name == 'index' ? 'active' : nil %>"
-             href="<%= root_path %>"
+             href="<%= localed(root_path) %>"
              data-turbo-frame="visitor_frame" data-turbo-action="advance"
              onclick="updateActiveLink('home-link')"
           >
@@ -58,7 +58,7 @@
 
         <li class="nav-item">
           <a id="about-link" class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>"
-             href="<%= about_path %>"
+             href="<%= localed(about_path) %>"
              data-turbo-frame="visitor_frame" data-turbo-action="advance"
              onclick="updateActiveLink('about-link')"
           >
@@ -68,7 +68,7 @@
       </ul>
 
       <div class="my-2 my-md-3">
-        <a class="btn btn-primary" href="<%= hire_path %>" data-turbo-frame="visitor_frame" data-turbo-action="advance">
+        <a class="btn btn-primary" href="<%= localed(hire_path) %>" data-turbo-frame="visitor_frame" data-turbo-action="advance">
           <%= t(:get_in_touch) %>
         </a>
       </div>

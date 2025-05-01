@@ -59,27 +59,33 @@
 #                                                PATCH  /admin/locales/:id(.:format)                                                                      admin/locales#update
 #                                                PUT    /admin/locales/:id(.:format)                                                                      admin/locales#update
 #                                                DELETE /admin/locales/:id(.:format)                                                                      admin/locales#destroy
-#                               admin_subdomains GET    /admin/subdomains(.:format)                                                                       admin/subdomains#index
-#                                                POST   /admin/subdomains(.:format)                                                                       admin/subdomains#create
-#                            new_admin_subdomain GET    /admin/subdomains/new(.:format)                                                                   admin/subdomains#new
-#                           edit_admin_subdomain GET    /admin/subdomains/:id/edit(.:format)                                                              admin/subdomains#edit
-#                                admin_subdomain GET    /admin/subdomains/:id(.:format)                                                                   admin/subdomains#show
-#                                                PATCH  /admin/subdomains/:id(.:format)                                                                   admin/subdomains#update
-#                                                PUT    /admin/subdomains/:id(.:format)                                                                   admin/subdomains#update
-#                                                DELETE /admin/subdomains/:id(.:format)                                                                   admin/subdomains#destroy
-#                                          posts GET    /posts(.:format)                                                                                  posts#index
+#                                   admin_themes GET    /admin/themes(.:format)                                                                           admin/themes#index
+#                               edit_admin_theme GET    /admin/themes/:id/edit(.:format)                                                                  admin/themes#edit
+#                                    admin_theme PATCH  /admin/themes/:id(.:format)                                                                       admin/themes#update
+#                                                PUT    /admin/themes/:id(.:format)                                                                       admin/themes#update
+#                                          posts GET    (/:locale)/posts(.:format)                                                                        posts#index {:locale=>/en|zh/}
+#                                    locale_root GET    /(:locale)(.:format)                                                                              posts#index {:locale=>/en|zh/}
+#                                   locale_about GET    (/:locale)/about(.:format)                                                                        posts#about {:locale=>/en|zh/}
+#                                    locale_hire GET    (/:locale)/hire(.:format)                                                                         posts#hire {:locale=>/en|zh/}
+#                               locale_blog_post GET    (/:locale)/blog/:permalink-:id2(.:format)                                                         posts#show {:locale=>/en|zh/}
+#                                     categories GET    (/:locale)/categories(.:format)                                                                   categories#index {:locale=>/en|zh/}
+#                                       category GET    (/:locale)/category(.:format)                                                                     categories#index {:locale=>/en|zh/}
+#                                                GET    (/:locale)/category/:name(.:format)                                                               categories#show {:locale=>/en|zh/}
+#                                  locale_drafts GET    (/:locale)/drafts(.:format)                                                                       categories#drafts_index {:locale=>/en|zh/}
+#                                                GET    (/:locale)/drafts/:name(.:format)                                                                 categories#drafts_show {:locale=>/en|zh/}
+#                                                GET    /posts(.:format)                                                                                  posts#index
 #                                           root GET    /                                                                                                 posts#index
 #                                          about GET    /about(.:format)                                                                                  posts#about
 #                                           hire GET    /hire(.:format)                                                                                   posts#hire
-#                                     categories GET    /categories(.:format)                                                                             categories#index
-#                                       category GET    /category(.:format)                                                                               categories#index
+#                                      blog_post GET    /blog/:permalink-:id2(.:format)                                                                   posts#show
+#                                                GET    /categories(.:format)                                                                             categories#index
+#                                                GET    /category(.:format)                                                                               categories#index
 #                                                GET    /category/:name(.:format)                                                                         categories#show
 #                                         drafts GET    /drafts(.:format)                                                                                 categories#drafts_index
 #                                                GET    /drafts/:name(.:format)                                                                           categories#drafts_show
 #                                  subscriptions POST   /subscriptions(.:format)                                                                          subscriptions#create
 #                           confirm_subscription GET    /subscriptions/confirm/:token(.:format)                                                           subscriptions#confirm
 #                             rails_health_check GET    /up(.:format)                                                                                     rails/health#show
-#                                                GET    /:permalink-:id2(.:format)                                                                        posts#show
 #               turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #               turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
 #              turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh
@@ -166,14 +172,30 @@ Rails.application.routes.draw do
     end
 
     resources :locales
-    resources :subdomains
     resources :themes, only: [ :index, :edit, :update ]
+    resources :resumes
+  end
+
+  # Move to top
+  scope "(:locale)", locale: /#{I18n.available_locales.map(&:downcase).join("|")}/ do
+    resources :posts, only: [ :index ]
+    get "/" => "posts#index", as: :locale_root
+    get "about" => "posts#about", as: :locale_about
+    get "hire" => "posts#hire", as: :locale_hire
+    get "blog/:permalink-:id2" => "posts#show", as: :locale_blog_post
+
+    resources :categories, only: :index
+    get "category" => "categories#index"
+    get "category/:name" => "categories#show"
+    get "drafts" => "categories#drafts_index", as: :locale_drafts
+    get "drafts/:name" => "categories#drafts_show"
   end
 
   resources :posts, only: [ :index ]
   root "posts#index"
   get "about" => "posts#about", as: :about
   get "hire" => "posts#hire", as: :hire
+  get "blog/:permalink-:id2" => "posts#show", as: :blog_post
 
   resources :categories, only: :index
   get "category" => "categories#index"
@@ -192,7 +214,4 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # This line needs to be placed at the end
-  get "blog/:permalink-:id2" => "posts#show", as: :blog_post
 end

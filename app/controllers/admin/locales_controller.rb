@@ -1,6 +1,6 @@
 class Admin::LocalesController < Admin::BaseController
   def index
-    @locales = Locale.includes(:subdomains).order(:key).all
+    @locales = Locale.order(:key).all
   end
 
   def new
@@ -34,14 +34,10 @@ class Admin::LocalesController < Admin::BaseController
   def destroy
     @locale = Locale.find(params.expect(:id))
 
-    begin
-      if @locale.destroy
-        redirect_to admin_locales_path, notice: "Locale was successfully deleted."
-      else
-        redirect_to admin_locales_path, alert: "Failed to delete locale."
-      end
-    rescue ActiveRecord::DeleteRestrictionError => e
-      redirect_to admin_locales_path, alert: "Cannot delete locale because it has associated subdomains."
+    if @locale.destroy
+      redirect_to admin_locales_path, notice: "Locale was successfully deleted."
+    else
+      redirect_to admin_locales_path, alert: "Failed to delete locale."
     end
   end
 

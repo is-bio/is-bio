@@ -187,26 +187,6 @@ RSpec.describe Admin::LocalesController, type: :request do
         expect(flash[:notice]).to eq("Locale was successfully deleted.")
       end
     end
-
-    context "when locale has associated subdomains" do
-      it "does not destroy the locale" do
-        locale_with_subdomain = create(:locale)
-        create(:subdomain, locale: locale_with_subdomain)
-
-        expect {
-          delete admin_locale_path(locale_with_subdomain)
-        }.not_to change(Locale, :count)
-      end
-
-      it "redirects to the locales list with an alert" do
-        locale_with_subdomain = create(:locale)
-        create(:subdomain, locale: locale_with_subdomain)
-
-        delete admin_locale_path(locale_with_subdomain)
-        expect(response).to redirect_to(admin_locales_path)
-        expect(flash[:alert]).to eq("Cannot delete locale because it has associated subdomains.")
-      end
-    end
   end
 
   context "when not authenticated" do

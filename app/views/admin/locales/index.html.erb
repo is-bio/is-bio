@@ -19,7 +19,6 @@
         <th>Key</th>
         <th>English Name</th>
         <th>Native Name</th>
-        <th>Subdomains</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -32,15 +31,6 @@
             <td><code><%= locale.key %></code></td>
             <td><%= locale.english_name %></td>
             <td><%= locale.name %></td>
-            <td>
-              <% if locale.subdomains.any? %>
-                <% locale.subdomains.each do |subdomain| %>
-                  <span class="badge bg-secondary"><%= subdomain.value %></span>
-                <% end %>
-              <% else %>
-                <span class="text-muted">None</span>
-              <% end %>
-            </td>
             <td>
               <div class="d-flex gap-2">
                 <a href="<%= edit_admin_locale_path(locale) %>" data-turbo-action="advance">
@@ -55,8 +45,7 @@
                                   turbo_confirm: "Are you sure you want to delete this locale?",
                                   turbo_confirm_type: "danger"
                                 }
-                              },
-                              disabled: locale.subdomains.any? %>
+                              } %>
               </div>
             </td>
           </tr>
@@ -74,7 +63,6 @@
       <ul class="small text-muted">
         <li>In order for I18n to work properly, the "locale_key.yml" file needs to exist in the "config/locales" directory. For example: "config/locales/zh-CN.yml".</li>
         <li>Modify "I18n.available_locales" and "I18n.default_locale" in "config/initializers/locale.rb" to suit your needs.</li>
-        <li>Locales with associated subdomains cannot be deleted.</li>
       </ul>
     </div>
   </div>

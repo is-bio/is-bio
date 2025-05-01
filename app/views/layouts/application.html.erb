@@ -24,11 +24,11 @@
       <% has_translation = false %>
     <% end %>
     <% if has_translation %>
-    <link rel="alternate" hreflang="<%= locale_key.downcase %>" href="<%= locale_url_for(locale) %>" />
+    <link rel="alternate" hreflang="<%= locale_key.downcase %>" href="<%= url_for(locale: locale.key) %>" />
     <% end %>
   <% end %>
 <% end %>
-    <link rel="alternate" hreflang="x-default" href="<%= locale_url_for(default_locale) %>" />
+    <link rel="alternate" hreflang="x-default" href="<%= url_for(locale: I18n.default_locale) %>" />
 
     <meta name="description" content="<%= t(:headline) %>" />
     <meta name="author" content="<%= t(:author_name) %>" />
