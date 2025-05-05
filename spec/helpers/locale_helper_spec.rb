@@ -1,90 +1,135 @@
 require 'rails_helper'
 
 RSpec.describe LocaleHelper, type: :helper do
-  before(:all) do
-    Subdomain.delete_all
-    Locale.delete_all
-  end
-
-  # Define the default_locale method for the test context
-  helper do
-    def default_locale
-      Locale.find_by(key: 'en') ||
-        create(:locale, :english, key: "en", english_name: "English_#{SecureRandom.hex(4)}", name: "English_#{SecureRandom.hex(4)}")
-    end
-  end
-
-  let(:english_locale) do
-    Locale.find_by(key: 'en') ||
-      create(:locale, :english, key: "en", english_name: "English_#{SecureRandom.hex(4)}", name: "English_#{SecureRandom.hex(4)}")
-  end
-
-  let(:french_locale) do
-    Locale.find_by(key: 'fr') ||
-      create(:locale_with_key, locale_key: 'fr', locale_english_name: "French_#{SecureRandom.hex(4)}", locale_name: "Français_#{SecureRandom.hex(4)}")
-  end
-
-  let(:german_locale) do
-    Locale.find_by(key: 'de') ||
-      create(:locale_with_key, locale_key: 'de', locale_english_name: "German_#{SecureRandom.hex(4)}", locale_name: "Deutsch_#{SecureRandom.hex(4)}")
-  end
+  let(:default_locale) { I18n.default_locale }
 
   before do
-    english_locale
-    french_locale
-    german_locale
+    def helper.default_locale?
+      I18n.locale == I18n.default_locale
+    end
   end
 
-  describe "#locale_switcher" do
-    before do
-      I18n.locale = :en
-      allow(Locale).to receive(:available_except_current).and_return([ french_locale ])
-      allow(helper).to receive(:locale_url_for).with(french_locale).and_return('http://fr.example.com')
-    end
-
-    it "generates links for available locales" do
-      html = helper.locale_switcher
-      expect(html).to have_selector('li.nav-item a.nav-link[href="http://fr.example.com"]', text: french_locale.name)
-    end
-
-    it "includes language icon" do
-      html = helper.locale_switcher
-      expect(html).to have_selector('i.fa-language')
-    end
-
-    context "with multiple locales" do
+  describe '#localed' do
+    context 'when in default locale' do
       before do
-        spanish_locale = Locale.find_by(key: 'es') ||
-          create(:locale_with_key, locale_key: 'es', locale_name: "Español_#{SecureRandom.hex(4)}", locale_english_name: "Spanish_#{SecureRandom.hex(4)}")
-
-        allow(Locale).to receive(:available_except_current).and_return([ french_locale, spanish_locale ])
-
-        allow(helper).to receive(:locale_url_for).with(spanish_locale).and_return('http://es.example.com')
+        allow(helper).to receive(:default_locale?).and_return(true)
       end
 
-      it "generates multiple links" do
-        html = helper.locale_switcher
-        expect(html).to have_selector('li.nav-item', count: 2)
+      it 'returns the path unchanged' do
+        expect(helper.localed('/about')).to eq('/about')
+        expect(helper.localed('/contact')).to eq('/contact')
+      end
+
+      it 'handles empty path' do
+        expect(helper.localed('')).to eq('')
       end
     end
-  end
 
-  describe '#locale_url_for' do
-    let(:default_locale) { Locale.find_by(key: I18n.default_locale) || create(:locale, key: I18n.default_locale) }
+    context 'when in non-default locale' do
+      before do
+        allow(helper).to receive(:default_locale?).and_return(false)
+        allow(I18n).to receive(:locale).and_return(:fr)
+      end
 
-    it 'returns the original URL if no locale is provided' do
-      expect(helper.locale_url_for(nil)).to eq(request.original_url)
+      it 'prepends the locale to the path' do
+        expect(helper.localed('/about')).to eq('/fr/about')
+        expect(helper.localed('/contact')).to eq('/fr/contact')
+      end
+
+      it 'handles root path' do
+        expect(helper.localed('/')).to eq('/fr/')
+      end
+
+      it 'handles empty path' do
+        expect(helper.localed('')).to eq('/fr')
+        expect(helper.localed(nil)).to eq('/fr')
+      end
+
+      context 'with query parameters' do
+        it 'preserves query parameters' do
+          expect(helper.localed('/about?foo=bar')).to eq('/fr/about?foo=bar')
+        end
+      end
     end
   end
 
   describe '#locale_switcher' do
-    let(:locale) { Locale.find_by(key: "en") || create(:locale, key: 'en') }
+    let(:current_locale) { Locale.new(id: 1, key: 'en', name: 'English') }
+    let(:other_locale1) { Locale.new(id: 2, key: 'fr', name: 'Français') }
+    let(:other_locale2) { Locale.new(id: 3, key: 'es', name: 'Español') }
 
-    it 'generates HTML for available locales' do
-      allow(Locale).to receive(:available_except_current).and_return([ locale ])
-      html = helper.locale_switcher
-      expect(html).to include(locale.name)
-      expect(html).to include('fa-language')
+    before do
+      allow(Locale).to receive(:available_except_current).and_return([ other_locale1, other_locale2 ])
+      allow(helper).to receive(:localed_link).with(other_locale1).and_return(%Q(<a href="/fr" class="nav-link">Français</a>).html_safe)
+      allow(helper).to receive(:localed_link).with(other_locale2).and_return(%Q(<a href="/es" class="nav-link">Español</a>).html_safe)
+    end
+
+    it 'generates a list item for each available locale except current' do
+      result = helper.locale_switcher
+      expect(result).to have_css('li.nav-item', count: 2)
+    end
+
+    it 'includes correct IDs for each locale item' do
+      result = helper.locale_switcher
+      expect(result).to have_css('li#locale_2')
+      expect(result).to have_css('li#locale_3')
+    end
+
+    it 'includes the localized links for each locale' do
+      result = helper.locale_switcher
+      puts result.inspect
+      expect(result).to have_css('li#locale_2.nav-item a.nav-link[href="/fr"]', text: 'Français')
+      expect(result).to have_css('li#locale_3.nav-item a.nav-link[href="/es"]', text: 'Español')
+    end
+
+    it 'returns HTML safe content' do
+      expect(helper.locale_switcher).to be_html_safe
+    end
+
+    context 'when there are no other locales available' do
+      before do
+        allow(Locale).to receive(:available_except_current).and_return([])
+      end
+
+      it 'returns empty content' do
+        expect(helper.locale_switcher).to eq(''.html_safe)
+      end
+    end
+  end
+
+  describe '#localed_link' do
+    context 'when linking to the default locale' do
+      let(:locale) { double(key: default_locale.to_s, name: 'English') }
+
+      it 'generates a link without a locale prefix' do
+        allow(helper).to receive(:url_for).and_return('/path')
+        expect(helper).to receive(:url_for).with(locale: nil)
+        helper.localed_link(locale)
+      end
+
+      it 'generates the correct HTML structure' do
+        allow(helper).to receive(:url_for).and_return('/path')
+        result = helper.localed_link(locale)
+        expect(result).to have_css('a.nav-link i.fa-language.fa-fw.me-2')
+        expect(result).to include('English')
+      end
+    end
+
+    context 'when linking to a non-default locale' do
+      let(:locale) { double(key: 'fr', name: 'Français') }
+
+      it 'generates a link with the locale prefix' do
+        allow(helper).to receive(:url_for).and_return("/fr/path")
+        expect(helper).to receive(:url_for).with(locale: "fr")
+        helper.localed_link(locale)
+      end
+
+      it 'generates the correct HTML structure' do
+        allow(helper).to receive(:url_for).and_return("/fr/path")
+        result = helper.localed_link(locale)
+        expect(result).to have_css('a.nav-link i.fa-language.fa-fw.me-2')
+        expect(result).to include('Français')
+      end
     end
   end
 end
