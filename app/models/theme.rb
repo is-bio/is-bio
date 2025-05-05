@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: themes
+#
+#  id      :integer          not null, primary key
+#  color   :integer          default(1), not null
+#  enabled :boolean          default(TRUE), not null
+#  free    :boolean          default(TRUE), not null
+#  name    :string           not null
+#
 class Theme < ApplicationRecord
   COLORS = [ "", "5FCB71", "5BC3D5", "3B7EEB", "5ECCA9", "EEA73B", "5469C9", "5D6BA7", "6C51A4" ].map { |color| "##{color}" }
 

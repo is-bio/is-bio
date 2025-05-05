@@ -19,7 +19,6 @@ require 'rails_helper'
 RSpec.describe Locale, type: :model do
   # Clear data before tests
   before(:all) do
-    Subdomain.delete_all
     Locale.delete_all
   end
 

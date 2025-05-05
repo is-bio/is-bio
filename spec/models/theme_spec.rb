@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: themes
+#
+#  id      :integer          not null, primary key
+#  color   :integer          default(1), not null
+#  enabled :boolean          default(TRUE), not null
+#  free    :boolean          default(TRUE), not null
+#  name    :string           not null
+#
 require 'rails_helper'
 
 RSpec.describe Theme, type: :model do

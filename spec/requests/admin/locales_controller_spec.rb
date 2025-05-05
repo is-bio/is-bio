@@ -50,6 +50,8 @@ RSpec.describe Admin::LocalesController, type: :request do
       end
 
       it "creates a new locale" do
+        Locale.find_by(key: "fr").destroy!
+
         expect {
           post admin_locales_path, params: valid_params
         }.to change(Locale, :count).by(1)
