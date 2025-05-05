@@ -22,10 +22,14 @@ module LocaleHelper
   # Generates link to the current page but with the specified locale path prefix
   def localed_link(locale)
     # Use url_for with the target locale. Routes are scoped.
-    target_path = url_for(locale: locale.key.to_sym == I18n.default_locale ? nil : locale.key)
+    target_path = locale_url_for(locale.key)
 
     link_to target_path, class: "nav-link" do
       content_tag(:i, "", class: "fa fa-language fa-fw me-2") + locale.name
     end
+  end
+
+  def locale_url_for(locale_key)
+    url_for(locale: locale_key.to_sym == I18n.default_locale ? nil : locale_key.downcase)
   end
 end

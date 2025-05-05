@@ -27,11 +27,12 @@ RSpec.describe PostsController, type: :request do
     end
 
     context "when viewing in a non-default language" do
-      let(:locale) { Locale.find_by(key: 'es-ES') || create(:locale, key: 'es-ES', english_name: 'Spanish', name: 'Español') }
+      let(:locale) { Locale.find_by(key: 'es') || create(:locale, key: 'es', english_name: 'Spanish', name: 'Español') }
 
       it "displays original content when no translation exists" do
         original_locale = I18n.locale
-        I18n.locale = :'es-ES'
+        I18n.available_locales = [ :en, :es ]
+        I18n.locale = :es
 
         post.update!(content: "Sample content for testing")
 
@@ -57,7 +58,7 @@ RSpec.describe PostsController, type: :request do
           content: "Contenido traducido"
         )
 
-        allow(I18n).to receive(:locale).and_return(:'es-ES')
+        allow(I18n).to receive(:locale).and_return(:es)
         allow_any_instance_of(Post).to receive(:current_translation).and_return(translation)
 
         get "/blog/this-is-the-post-title-#{post.id2}"
@@ -70,7 +71,7 @@ RSpec.describe PostsController, type: :request do
       end
 
       it "displays no_title and no_content messages when no translation exists" do
-        allow(I18n).to receive(:locale).and_return(:'es-ES')
+        allow(I18n).to receive(:locale).and_return(:es)
         allow_any_instance_of(Post).to receive(:current_translation).and_return(nil)
 
         get "/blog/this-is-the-post-title-#{post.id2}"
@@ -78,33 +79,34 @@ RSpec.describe PostsController, type: :request do
         expect(response).to render_template(:show)
         expect(response.body).to include("noindex, nofollow")
         expect(response.body).to include("No Title").or include("Sin título")
-        expect(response.body).to include("es-ES")
+        expect(response.body).to include("es")
         expect(response.body).not_to include(post.title)
       end
 
       it "includes alternate language links only for available translations" do
-        # Ensure necessary Subdomain records exist for the test
+        I18n.available_locales = [ :en, :es, :fr, :de, :'zh-TW' ]
         en_locale = Locale.find_by(key: 'en') || create(:locale, :english)
-        Subdomain.find_or_create_by!(value: 'www', locale: en_locale)
-        es_locale = Locale.find_by(key: 'es-ES') || create(:locale, key: 'es-ES', english_name: "Spanish_#{SecureRandom.hex(4)}", name: "Español_#{SecureRandom.hex(4)}")
-        Subdomain.find_or_create_by!(value: 'es', locale: es_locale)
-        fr_locale = Locale.find_by(key: 'fr-FR') || create(:locale, key: 'fr-FR', english_name: "French_#{SecureRandom.hex(4)}", name: "Français_#{SecureRandom.hex(4)}")
-        Subdomain.find_or_create_by!(value: 'fr', locale: fr_locale)
-        de_locale = Locale.find_by(key: 'de-DE') || create(:locale, key: 'de-DE', english_name: "German_#{SecureRandom.hex(4)}", name: "Deutsch_#{SecureRandom.hex(4)}")
+        es_locale = Locale.find_by(key: 'es') || create(:locale, key: 'es', english_name: "Spanish_#{SecureRandom.hex(4)}", name: "Español_#{SecureRandom.hex(4)}")
+        fr_locale = Locale.find_by(key: 'fr') || create(:locale, key: 'fr', english_name: "French_#{SecureRandom.hex(4)}", name: "Français_#{SecureRandom.hex(4)}")
+        de_locale = Locale.find_by(key: 'de') || create(:locale, key: 'de', english_name: "German_#{SecureRandom.hex(4)}", name: "Deutsch_#{SecureRandom.hex(4)}")
+        tw_locale = Locale.find_by(key: 'zh-TW') || create(:locale, key: 'zh-TW', english_name: "Traditional Chinese_#{SecureRandom.hex(4)}", name: "正體中文_#{SecureRandom.hex(4)}")
 
         # Create translations for different languages
         es_translation = create(:translation, post: post2, locale: es_locale, title: "Título en español")
         fr_translation = create(:translation, post: post2, locale: fr_locale, title: "Titre en français")
+        tw_translation = create(:translation, post: post2, locale: tw_locale, title: "正體標題")
 
         get "/blog/this-is-the-post-title-2-#{post2.id2}"
 
         # Rails sets the default test host to www.example.com for consistency and isolation.
         # https://github.com/rails/rails/blob/main/actionpack/lib/action_dispatch/testing/integration.rb?spm=a2ty_o01.29997173.0.0.467dc921PZwxwr#L92
         expect(response.body).to include('rel="canonical" href="https://www.example.com/blog/this-is-the-post-title-2-')
-        expect(response.body).to include('hreflang="es-es" href="http://es.example.com/blog/this-is-the-post-title-2-')
-        expect(response.body).to include('hreflang="fr-fr" href="http://fr.example.com/blog/this-is-the-post-title-2-')
-        expect(response.body).not_to include('hreflang="de-de"')
-        expect(response.body).to include('hreflang="x-default" href="http://example.com/blog/this-is-the-post-title-2-')
+        expect(response.body).to include('hreflang="en" href="/blog/this-is-the-post-title-2-')
+        expect(response.body).to include('hreflang="es" href="/es/blog/this-is-the-post-title-2-')
+        expect(response.body).to include('hreflang="fr" href="/fr/blog/this-is-the-post-title-2-')
+        expect(response.body).to include('hreflang="zh-tw" href="/zh-tw/blog/this-is-the-post-title-2-')
+        expect(response.body).not_to include('hreflang="de"')
+        expect(response.body).to include('hreflang="x-default" href="/blog/this-is-the-post-title-2-')
       end
     end
   end

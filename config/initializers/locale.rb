@@ -3,13 +3,13 @@
 # Permitted locales available for the application
 I18n.available_locales = [
   :en,
-  # :"zh-CN",
-  # :"es-ES",
+  # :zh,
+  # :es,
   # :ja,
   # :ru,
-  # :"pt-BR",
-  # :"de-DE",
-  # :"fr-FR",
+  # :pt,
+  # :de,
+  # :fr,
 ]
 
 # Set default locale to something other than :en
@@ -17,4 +17,4 @@ I18n.available_locales = [
 # Therefore, once it is set, it is not recommended to change it.
 # It is recommended to use your native language.
 
-# I18n.default_locale = :"zh-CN"
+# I18n.default_locale = :zh
