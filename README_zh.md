@@ -25,7 +25,7 @@
     - *developer-portfolio-engine* 目前支持一个**漂亮的免费主题（内含8种色调）**，未来还会添加更多主题。
 3. Jekyll 或 Hugo 的文档长达很多页。谁能在一页内解释清楚所有内容？
     - *developer-portfolio-engine* 可以。有关如何使用 *developer-portfolio-engine* 方法通过 *Markdown* 和 *Git* 发布帖子的信息，请阅读 [markdown-blog](https://github.com/developer-portfolios/markdown-blog)。
-4. 一篇博客文章可以翻译成多种语言并在博客上显示。这个功能目前还没有任何博客引擎支持。然而，*developer-portfolio-engine* 已经支持了，让您的文章能够触达全球用户。
+4. 一篇博客文章可以翻译成多种语言并在博客上显示。这个功能目前还没有任何博客引擎支持。然而，*developer-portfolio-engine* 已经支持了，让您的文章能够触达全球用户。八种语言：英语，汉语，西班牙语，德语，法语，葡萄牙语，日语，俄语已经默认支持，其它语言也可以轻松支持。
 5. 对于建立个人品牌来说，仅有一个博客是不够的。最好有简历和作品集。事实上，博客并不是最重要的功能，**简历和作品集才是**。在下一个版本中，我们将推出简历功能。
 
 ## 使用 *developer-portfolio-engine* 的成本是多少？

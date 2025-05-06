@@ -1,4 +1,5 @@
-es-ES:
+# es-ES
+es:
   # Consejo: Busca "John Doe" y reemplázalo con tu nombre.
   author_name: "John Doe"
   blog_name: "Blog de John Doe"

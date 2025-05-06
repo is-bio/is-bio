@@ -1,4 +1,5 @@
-de-DE:
+# de-DE
+de:
   # Tip: Search for "John Doe" and replace it with your name.
   author_name: "John Doe"
   blog_name: "John Does Blog"
@@ -98,4 +99,4 @@ de-DE:
         other: "vor %{count} Monaten"
       x_years:
         one: "vor %{count} Jahr"
-        other: "vor %{count} Jahren" 
+        other: "vor %{count} Jahren"

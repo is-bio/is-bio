@@ -25,7 +25,7 @@ developer-portfolio-engine can also meet the above requirements, yet it is diffe
     - *developer-portfolio-engine* currently supports one **beautiful free theme (8 color options included)**, and more themes will be added in the future.
 3. Jekyll or Hugo's documentation is a lot of pages long. Who can explain everything in just one page?
     - *developer-portfolio-engine* can. For information on how to publish a post using *Markdown* and *Git*, please read [markdown-blog](https://github.com/developer-portfolios/markdown-blog) using the *developer-portfolio-engine* approach.
-4. A blog post can be translated into multiple languages and displayed on the blog. This feature is currently not supported by any blog engine. However, *developer-portfolio-engine* has already supported it, allowing your articles to reach global users.
+4. A blog post can be translated into multiple languages and displayed on the blog. This feature is currently not supported by any blog engine. However, *developer-portfolio-engine* has already supported it, allowing your articles to reach global users. Eight languages: English, Chinese, Spanish, German, French, Portuguese, Japanese, Russian are already supported by default, and other languages can be easily supported.
 5. For building a personal brand, it is not enough to just have a blog. It is better to have a resume and a portfolio. In fact, a blog is not the most important function, but **a resume and a portfolio are**. In the next version, we will launch the resume function.
 
 ## What is the cost of using *developer-portfolio-engine*?
