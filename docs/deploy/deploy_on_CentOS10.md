@@ -255,7 +255,8 @@ exit # When the ssh session is closed, the processes started during the session 
 
 ### Money-saving plan
 
-Because running "Solid Queue" will start several Linux processes, it will consume some memory. So, if you want to update your blog or email a user, you can manually execute:
+Because running "Solid Queue" will start several Linux processes, it will consume some memory.
+If you don't run these processes normally, and only execute them manually when you want to update your blog or send emails to users:
 
 ```shell
 cd /srv/developer-portfolio-engine

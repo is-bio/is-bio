@@ -253,14 +253,14 @@ ps -ef|grep solid # 确认它已启动。
 
 ### 省钱方案
 
-因为运行 "Solid Queue" 会开启几个Linux进程，会消耗掉一些内存。所以，如果你可以在想要更新博客或向用户发送邮件的时候，手动执行:
+因为运行 "Solid Queue" 会开启几个Linux进程，会消耗掉一些内存。如果平时不运行这几个进程，只在想要更新博客或向用户发送邮件的时候，手动执行:
 
 ```shell
 cd /srv/developer-portfolio-engine
 bin/jobs # 执行完成后 ctrl + c 关闭进程
 ```
 
-这样可以节省一些内存消耗（我实测是省约200M），但牺牲了一些便捷性。具体能省多少内存，可以用`top`命名查看，主要关注`MiB Mem : the_number free`。
+就可以节省一些内存消耗（我实测是省约200M），但牺牲了一些便捷性。具体能省多少内存，可以用`top`命名查看，主要关注`MiB Mem : the_number free`。
 
 ## 创建并安装您的 "GitHub App" 以将本地 "markdown-blog" 仓库的文件更改同步到博客网站
 
