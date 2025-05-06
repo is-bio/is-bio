@@ -21,31 +21,10 @@ The following assumes that your domain name is *your-domain.com*. If you don't h
     - Name: @
     - IPv4 address: the_server_ip
 
-2. Record 2
+2. Record 2 (optional)
     - Record type: A
     - Name: www
     - IPv4 address: the_server_ip
-
-If you plan to write your blog in only one or two languages and have no immediate plans to translate it into more languages, just create these two A records.
-
-The convention of this *developer-portfolio-engine* is that the root domain name is used to display the blog content in your main language, and www is used to display the blog content in English.
-If your main language happens to be English, you can do a redirect from `www` to the root domain name (how to do it will be mentioned below).
-
-If you want to publish your blog in three or more languages, you can continue to add A records. For example:
-
-- Record 3
-    - Record type: A
-    - Name: jp
-    - IPv4 address: the_server_ip
-
-Each A record corresponds to one language. Multiple A records can also correspond to the same language. For example:
-
-- Record 4
-    - Record type: A
-    - Name: japanese
-    - IPv4 address: the_server_ip
-
-It is too early to explain it here. Now, you just need to create A records according to your needs.
 
 ## Login to server via SSH
 

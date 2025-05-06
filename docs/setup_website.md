@@ -30,15 +30,14 @@ cd /srv/developer-portfolio-engine
 vim config/initializers/locale.rb # Then restart the Rails web server to make the changes take effect.
 ```
 
-- Currently, the website supports two languages: English and Chinese. The corresponding i18n files are in the `config/locales/` directory.
+- Currently, the website supports 8 major languages. The corresponding i18n files are in the `config/locales/` directory.
 - If you want the website to display in other languages, you can translate `en.yml` into other languages, put it in `config/locales/`, and `vim config/initializers/locale.rb`.
-- Switching languages on the page is not currently supported.
 
 ## Modify the text content displayed on the website
 
 ```shell
 cd /srv/developer-portfolio-engine
-vim config/locales/en.yml # or zh.yml
+vim config/locales/en.yml # or other yml files, like: zh.yml
 ```
 
 To make the changes take effect:
