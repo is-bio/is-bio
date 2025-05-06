@@ -30,13 +30,8 @@ function createHeadingAnchors() {
     });
   });
 
-  if (location.hash) {
-    const targetElement = document.querySelector(location.hash);
-    if (targetElement) {
-      setTimeout(() => {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
+  if (location.href.includes('#')) {
+    window.location.href = location.href; // We have to revisit to jump because the heading id(s) are just created and so the page cannot be positioned to that id.
   }
 }
 
