@@ -253,6 +253,18 @@ ps -ef|grep solid # Confirm that it is started.
 exit # When the ssh session is closed, the processes started during the session will also be terminated. So you should run `exit` in time to avoid the started processes being terminated.
 ```
 
+### Money-saving plan
+
+Because running "Solid Queue" will start several Linux processes, it will consume some memory. So, if you want to update your blog or email a user, you can manually execute:
+
+```shell
+cd /srv/developer-portfolio-engine
+bin/jobs # After the execution is completed, `ctrl + c` to close the process
+```
+
+This can save some memory consumption (I measured that it saved about 200M), but it sacrifices some convenience.
+To see how much memory can be saved, you can use `top` to view it, mainly focusing on `MiB Mem: the_number free`.
+
 ### Troubleshooting
 
 Important source code may have been modified, causing problems with background task processing. **Restart** `Solid Queue` and see.

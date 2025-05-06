@@ -34,7 +34,7 @@ Many programmers already use a server, and usually, that server is not fully uti
 
 You can install *developer-portfolio-engine* on this server without worrying about port `80/443` being used by another website. In the installation document, I have pointed out how to perfectly solve this problem that does not actually exist.
 
-So your cost increase may be **zero**.
+So your cost increase may be only $2/month.
 
 ## Why don’t developers blog much anymore?
 
