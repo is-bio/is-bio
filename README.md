@@ -1,6 +1,6 @@
 [中文文档](README_zh.md)
 
-# A developer portfolio engine | free themes
+# Personal brand website builder (engine)
 
 ## Enjoy blogging with "Markdown" and "Git"
 

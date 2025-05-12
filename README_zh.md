@@ -1,6 +1,6 @@
 [English README](README.md)
 
-# 开发者作品集引擎 | 免费模板
+# 个人品牌网站引擎
 
 ## 使用 "Markdown" 和 "Git" 享受博客写作
 
