@@ -4,18 +4,18 @@
 
 To generate a suitable avatar, you can visit [GitHub profile settings](https://github.com/settings/profile) and click "Edit" to modify the avatar. Finally, save the GitHub avatar locally.
 
-The avatar file on the server is `/srv/developer-portfolio-engine/app/assets/images/profile.jpg`.
+The avatar file on the server is `/srv/personal-brand-website-builder/app/assets/images/profile.jpg`.
 
 Do not rename it, just replace it. You can replace it by running
 
 ```shell
-scp /path/to/local/computer/profile.jpeg root@the_server_ip:/srv/developer-portfolio-engine/app/assets/images/profile.jpg
+scp /path/to/local/computer/profile.jpeg root@the_server_ip:/srv/personal-brand-website-builder/app/assets/images/profile.jpg
 ```
 
 on your local computer. Then run
 
 ```shell
-cd /srv/developer-portfolio-engine
+cd /srv/personal-brand-website-builder
 rails assets:precompile
 ```
 
@@ -26,7 +26,7 @@ Then restart the "Rails web server" to make the changes take effect.
 ### Set "I18n.default_locale"
 
 ```shell
-cd /srv/developer-portfolio-engine
+cd /srv/personal-brand-website-builder
 vim config/initializers/locale.rb # Then restart the Rails web server to make the changes take effect.
 ```
 
@@ -36,7 +36,7 @@ vim config/initializers/locale.rb # Then restart the Rails web server to make th
 ## Modify the text content displayed on the website
 
 ```shell
-cd /srv/developer-portfolio-engine
+cd /srv/personal-brand-website-builder
 vim config/locales/en.yml # or other yml files, like: zh.yml
 ```
 

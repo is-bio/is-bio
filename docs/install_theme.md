@@ -7,7 +7,7 @@
   If your network is not good, you can try `option 2`.
 
     ```shell
-    cd /path/to/developer-portfolio-engine/_themes
+    cd /path/to/personal-brand-website-builder/_themes
     git clone https://github.com/xriley/DevBlog-Theme.git
     ```
 
@@ -22,6 +22,6 @@
 ### Install 'DevBlog' theme
 
 ```shell
-cd /path/to/developer-portfolio-engine/_themes
+cd /path/to/personal-brand-website-builder/_themes
 sh install-theme-devblog.sh
 ```

@@ -66,7 +66,7 @@ config.action_mailer.smtp_settings = {
 ### Setup Rails credentials
 
 ```shell
-cd /path/to/developer-portfolio-engine
+cd /path/to/personal-brand-website-builder
 EDITOR="vim" bin/rails credentials:edit
 ```
 
