@@ -235,7 +235,7 @@ GEM
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
-    psych (5.2.3)
+    psych (5.2.5)
       date
       stringio
     public_suffix (6.0.1)
@@ -361,7 +361,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
-    solid_cable (3.0.7)
+    solid_cable (3.0.8)
       actioncable (>= 7.2)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -467,7 +467,7 @@ DEPENDENCIES
   safe_yaml (~> 1.0.5)
   selenium-webdriver (= 4.32.0)
   simplecov
-  solid_cable (= 3.0.7)
+  solid_cable (= 3.0.8)
   solid_cache (= 1.0.7)
   solid_queue (= 1.1.5)
   sqlite3 (>= 2.1)
