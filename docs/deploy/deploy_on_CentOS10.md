@@ -149,7 +149,7 @@ vim blog_nginx.conf # Replace the "your-domain.com" with your actual domain name
 
 nginx -t # Check whether the configuration is correct.
 systemctl enable nginx # Set to start automatically at boot
-systemctl start nginx
+systemctl start nginx # "systemctl start nginx" is also ok
 ```
 
 Visit http://your-domain.com, you should see that the web works well.

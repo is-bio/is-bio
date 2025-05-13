@@ -12,7 +12,9 @@ Do not rename it, just replace it. You can replace it by running
 scp /path/to/local/computer/profile.jpeg root@the_server_ip:/srv/personal-brand-website-builder/app/assets/images/profile.jpg
 ```
 
-on your local computer. Then run
+on your local computer.
+
+Then on your server, run:
 
 ```shell
 cd /srv/personal-brand-website-builder

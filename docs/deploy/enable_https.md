@@ -8,6 +8,8 @@ This is the most convenient way.
 
 If you use CloudFlare SSL/TLS encryption default mode `Flexible`, you can see "https" has already been supported.
 
+If it is not `Flexible`, you can set it as `Flexible` by clicking `SSL/TLS` -> `Configure`, then choose `Flexible` and click `Save`.
+
 ### Way 2: Implement support for "https" yourself
 
 - Confirm that http://your-domain.com is accessible and there are no problems.

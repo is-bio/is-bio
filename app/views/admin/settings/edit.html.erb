@@ -32,6 +32,10 @@
         <% if @setting.target_url? %>
           <span>
             <%= @setting.target_url_base %><span id="value_target"><%= @setting.value %></span>
+            <% if @setting.key == "github_username" %>
+            <br>
+            <span>Or GitHub organization name.</span>
+            <% end %>
           </span>
         <% end %>
       </div>

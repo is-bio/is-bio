@@ -8,21 +8,17 @@ In the development environment, https://your-domain.com (should be replaced with
 
 For `qa` or `prodction` env, the situation are similar. You just need to change some value to meet your needs.
 
-## Create a GitHub App
+## Create your GitHub App
 
 Refer to [create-a-github-app](https://docs.github.com/en/developers/apps/setting-up-your-development-environment-to-create-a-github-app#step-2-register-a-new-github-app).
 
 - Visit https://github.com/settings/apps , click `New GitHub App` button.
 - Fill `GitHub App name` with `Your Name's Blog dev` (or any name you like).
-- Fill `desscription` with this:
-
-	Install this app on your `markdown-blog` repository, so that when you `git push`, the blog server will be notified and update your blog.
-
 - Fill `Homepage URL`. This is for display purposes only and does not affect business logic. E.g., https://your-domain.com.
 
 ### Install and run 'ngrok' (development environment only)
 
-This paragraph is **only for development environment debugging** and is not necessary in a production environment.
+This paragraph is **only for development environment debugging** and is not necessary in a production environment!
 
 Install `ngrok` and configure it well. Then do this:
 
@@ -41,24 +37,23 @@ Add `config.hosts << "<a-subdomain-string-for-your-site>.ngrok-free.app"` to `co
 
     In production environment, you should fill `https://your-domain.com/api/v1/github-events`.
 
-- For `Webhook - Secret`, you can run `ruby -rsecurerandom -e 'puts SecureRandom.hex(20)'` to generate one and use it.
+- For `Webhook - Secret`, you enter a random string.
 
-### Continue setting for GitHub App
+### Continue setting for your GitHub App
 
 - Unfold `Repository permissions`, then choose `Access: Read-only` for `Contents` and `Metadata`.
 - For `Subscribe to events`, choose `Push`.
 - For `Where can this GitHub App be installed?`, choose `Any account` or `Only on this account`.
 - Click `Create GitHub App`.
 
-TODO: Registration successful. You must generate a private key in order to install your GitHub App.
-
-## Connect GitHub App to personal-brand-website-builder
+## Connect your GitHub App to personal-brand-website-builder
 
 Visit https://your-domain.com/admin/github_app_settings , then
 
 - Set `app_id` value with the `App ID` of your GitHub App.
-- Set `public_link` value with the `Public link` of your GitHub App.
-    If your GitHub App is private (Only allow this GitHub App to be installed on your own GitHub account), you don't need to enter it.
+- Set `public_link` value with the `Public link` of your GitHub App (not required).
+    - If your GitHub App is private (Only allow this GitHub App to be installed on your own GitHub account), you don't need to enter it.
+    - An example of `public_link`: https://github.com/apps/your-awesome-example-app
 
 ## Start "Solid Queue" to handle background jobs (Must Do)
 
@@ -68,19 +63,27 @@ Please read relevant content of [README.md](/README.md) or [deploy_on_CentOS10.m
 
 ## Test posts (Markdown files) synchronization feature
 
+### Fork `markdown-blog` repository and set `github_username`
+
 - Visit https://github.com/PersonalBranding/markdown-blog/fork , fork it to your GitHub account.
 
-- Visit https://your-domain.com/admin/settings , then set `github_username` value with your GitHub username. In this GitHub account, make sure there is a repository named `markdown-blog`.
+- Visit https://your-domain.com/admin/settings , then set `github_username` value with your GitHub username (or organization name). In this GitHub account, make sure there is a repository named `markdown-blog`.
 
-- Now you can visit the `Public link` of your GitHub App.
+### Install your GitHub App to `markdown-blog` repository
 
-Then install this GitHub App, choose `Only select repositories` and select `<github_username>/markdown-blog` repository to test the blog syncing feature.
+- Visit the `Public link` of your GitHub App. An example of `Public link`: https://github.com/apps/your-awesome-example-app
+- Click `Install`.
+- Choose `Only select repositories` and select `<github_username>/markdown-blog` repository to test the blog syncing feature.
+
+### Change a markdown file to test synchronization feature
 
 For example, make a copy of `README.md` in the directory `/published` and make some changes to the file. Then `git commit` and `git push`.
 
 - Visit https://your-domain.com/ to see if the article is displayed successfully. You should see your **first post** published on your blog site.
 
-If not, you can go to the GitHub App settings page, click `Advanced`, and check `Recent Deliveries` to see if there is an error.
+### Troubleshooting
+
+If not, you can go to your GitHub App settings page (e.g., https://github.com/settings/apps/your-awesome-example-app) , click `Advanced`, and check `Recent Deliveries` to see if there is an error.
 
 If there is an error, click on it to view the specific error information.
 
