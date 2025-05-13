@@ -61,6 +61,13 @@ Blog posts, images, files synchronization, sending emails, generating thumbnails
 
 Please read relevant content of [README.md](/README.md) or [deploy_on_CentOS10.md](/docs/deploy/deploy_on_CentOS10.md) to start it.
 
+Or if you are just testing for the first time, you can simply run:
+
+```shell
+cd /path/to/personal-brand-website-builder
+bin/jobs
+```
+
 ## Test posts (Markdown files) synchronization feature
 
 ### Fork `markdown-blog` repository and set `github_username`
