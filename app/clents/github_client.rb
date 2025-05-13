@@ -9,8 +9,8 @@ class GithubClient
     end
   end
 
-  def compare(before, after)
-    @conn.get("#{API_BASE_URL}/repos/gazeldx/markdown-blog/compare/#{before}...#{after}") do |req|
+  def compare(github_username, before, after)
+    @conn.get("#{API_BASE_URL}/repos/#{github_username}/markdown-blog/compare/#{before}...#{after}") do |req|
       req.headers = request_headers
       req.options.timeout = 10
     end

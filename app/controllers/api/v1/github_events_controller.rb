@@ -8,6 +8,7 @@ class Api::V1::GithubEventsController < Api::V1::BaseController
 
   def handle
     body = GithubClient.new.compare(
+      @github_username,
       params.expect(:before),
       params.expect(:after)
     ).body
@@ -54,5 +55,7 @@ private
     if params.expect(repository: {})[:owner][:login] != github_username_setting.value
       raise_404("The repository owner's username does not match the username set in table 'settings'!")
     end
+
+    @github_username = github_username_setting.value
   end
 end
