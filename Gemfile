@@ -57,7 +57,7 @@ gem "rails-i18n", "~> 8.0.0"
 group :development, :test do
   gem "annotaterb", "4.15.0"
 
-  gem "factory_bot_rails", "~> 6.4.4"
+  gem "factory_bot_rails", "~> 6.5.0"
   gem "rails-controller-testing", "~> 1.0.5"
   gem "rspec-rails", "~> 8.0.0"
   gem "faker", "~> 3.5.1"
