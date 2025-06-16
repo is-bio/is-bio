@@ -1,0 +1,70 @@
+<%= form_with(model: [ :admin, @resume ]) do |form| %>
+  <% if @resume.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@resume.errors.count, "error") %> prohibited this resume from being saved:</h2>
+
+      <ul>
+        <% @resume.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-2">
+    <%= form.label :title, class: "required" %>
+    <%= form.text_field :title, class: "form-control", required: true %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :name, class: "required" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :position, class: "required" %>
+    <%= form.text_field :position, class: "form-control", required: true, placeholder: "e.g. Senior Software Developer" %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :email_address, class: "required" %>
+    <%= form.email_field :email_address, class: "form-control", required: true %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :city, class: "required" %>
+    <%= form.text_field :city, class: "form-control", required: true %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :summary, class: "required" %>
+    <%= form.text_area :summary, cols: 90, rows: 30 %>
+  </div>
+
+<!--  <div class="my-2">-->
+    <%#= form.label :phone_number %>
+    <%#= form.telephone_field :phone_number, class: "form-control", placeholder: "e.g. +1 214569974" %>
+<!--  </div>-->
+
+<!--  <div class="my-2">-->
+    <%#= form.label :birth_date %>
+    <%#= form.date_field :birth_date, class: "form-control" %>
+<!--  </div>-->
+
+<!--  <div class="my-2">-->
+    <%#= form.label :height, "Height (cm)" %>
+    <%#= form.number_field :height, class: "form-control", step: "1", min: "120", placeholder: "e.g. 170" %>
+<!--  </div>-->
+
+<!--  <div class="my-2">-->
+    <%#= form.label :weight, "Weight (kg)" %>
+    <%#= form.number_field :weight, class: "form-control", step: "1", min: "25", placeholder: "e.g. 62" %>
+<!--  </div>-->
+
+  <div class="mt-4">
+    <%= form.submit "Save Resume", class: "btn btn-primary" %>
+    <a href="<%= admin_resumes_path %>" data-turbo-action="advance">
+      <button type="button" class="btn btn-light ms-2"><%= t(:back) %></button>
+    </a>
+  </div>
+<% end %>

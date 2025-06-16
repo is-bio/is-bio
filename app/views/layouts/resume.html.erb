@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>
+    <% title = content_for(:title) %>
+    <% if title.present? %>
+      <%= title %>
+    <% else %>
+      <%= t(:resume_name) %>
+    <% end %>
+  </title>
+
+  <% if @resume.present? && @resume.name.blank? %>
+  <meta name="robots" content="noindex, nofollow">
+
+  <% end %>
+  <link rel="canonical" href="<%= url_for(only_path: false, protocol: 'https') %>" />
+
+  <meta name="author" content="<%= @resume.name %>" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= yield :head %>
+
+  <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+  <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+
+  <%# Includes all stylesheet files in app/assets/stylesheets %>
+  <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "devresume.css", "data-turbo-track": "reload" %>
+  <style>
+    #resume_summary p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+
+  <%= javascript_importmap_tags %>
+</head>
+
+<body>
+<div class="main-wrapper">
+  <div class="container px-3 px-lg-5">
+    <article class="resume-wrapper mx-auto theme-bg-light p-5 mb-5 my-5 shadow-lg">
+      <%= yield %>
+    </article>
+  </div>
+
+  <%= render "shared/footer_resume" %>
+</div>
+</body>
+
+<%= javascript_include_tag 'src/fontawesome/js/all.min', defer: 'defer' %>
+<%= javascript_include_tag 'src/popper.min' %>
+<%= javascript_include_tag 'src/bootstrap.min' %>
+<%= javascript_include_tag 'src/initialize_bootstrap' %>
+</html>

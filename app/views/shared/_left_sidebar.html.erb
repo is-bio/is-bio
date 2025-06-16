@@ -57,6 +57,17 @@
         </li>
 
         <li class="nav-item">
+          <a id="resume-link" class="nav-link <%= controller_name == 'resumes' && action_name == 'show' ? 'active' : nil %>"
+             href="<%= localed(resume_path) %>"
+             data-turbo-frame="visitor_frame" data-turbo-action="advance"
+             onclick="updateActiveLink('resume-link')"
+             target="_blank"
+          >
+            <i class="fas fa-user fa-fw me-2"></i><%= t(:my_resume) %>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a id="about-link" class="nav-link <%= controller_name == 'posts' && action_name == 'about' ? 'active' : nil %>"
              href="<%= localed(about_path) %>"
              data-turbo-frame="visitor_frame" data-turbo-action="advance"

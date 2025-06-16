@@ -1,0 +1,12 @@
+<% content_for :title, "Edit Resume" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+    <%= tag.div(flash[:alert], class: "text-danger mb-3") if flash[:alert] %>
+
+    <h5 class="mb-3">Edit Resume: <%= @resume.title %></h5>
+
+    <%= render "form", resume: @resume %>
+  </div>
+</section>
