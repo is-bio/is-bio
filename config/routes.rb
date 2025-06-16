@@ -63,11 +63,21 @@
 #                               edit_admin_theme GET    /admin/themes/:id/edit(.:format)                                                                  admin/themes#edit
 #                                    admin_theme PATCH  /admin/themes/:id(.:format)                                                                       admin/themes#update
 #                                                PUT    /admin/themes/:id(.:format)                                                                       admin/themes#update
+#                                  admin_resumes GET    /admin/resumes(.:format)                                                                          admin/resumes#index
+#                                                POST   /admin/resumes(.:format)                                                                          admin/resumes#create
+#                               new_admin_resume GET    /admin/resumes/new(.:format)                                                                      admin/resumes#new
+#                              edit_admin_resume GET    /admin/resumes/:id/edit(.:format)                                                                 admin/resumes#edit
+#                                   admin_resume GET    /admin/resumes/:id(.:format)                                                                      admin/resumes#show
+#                                                PATCH  /admin/resumes/:id(.:format)                                                                      admin/resumes#update
+#                                                PUT    /admin/resumes/:id(.:format)                                                                      admin/resumes#update
+#                                                DELETE /admin/resumes/:id(.:format)                                                                      admin/resumes#destroy
 #                                          posts GET    (/:locale)/posts(.:format)                                                                        posts#index {:locale=>/en|zh/}
 #                                    locale_root GET    /(:locale)(.:format)                                                                              posts#index {:locale=>/en|zh/}
 #                                   locale_about GET    (/:locale)/about(.:format)                                                                        posts#about {:locale=>/en|zh/}
 #                                    locale_hire GET    (/:locale)/hire(.:format)                                                                         posts#hire {:locale=>/en|zh/}
 #                               locale_blog_post GET    (/:locale)/blog/:permalink-:id2(.:format)                                                         posts#show {:locale=>/en|zh/}
+#                                  locale_resume GET    (/:locale)/resume(.:format)                                                                       resumes#show {:locale=>/en|zh/}
+#                                      locale_cv GET    (/:locale)/cv(.:format)                                                                           resumes#show {:locale=>/en|zh/}
 #                                     categories GET    (/:locale)/categories(.:format)                                                                   categories#index {:locale=>/en|zh/}
 #                                       category GET    (/:locale)/category(.:format)                                                                     categories#index {:locale=>/en|zh/}
 #                                                GET    (/:locale)/category/:name(.:format)                                                               categories#show {:locale=>/en|zh/}
@@ -78,6 +88,8 @@
 #                                          about GET    /about(.:format)                                                                                  posts#about
 #                                           hire GET    /hire(.:format)                                                                                   posts#hire
 #                                      blog_post GET    /blog/:permalink-:id2(.:format)                                                                   posts#show
+#                                         resume GET    /resume(.:format)                                                                                 resumes#show
+#                                             cv GET    /cv(.:format)                                                                                     resumes#show
 #                                                GET    /categories(.:format)                                                                             categories#index
 #                                                GET    /category(.:format)                                                                               categories#index
 #                                                GET    /category/:name(.:format)                                                                         categories#show
@@ -183,6 +195,8 @@ Rails.application.routes.draw do
     get "about" => "posts#about", as: :locale_about
     get "hire" => "posts#hire", as: :locale_hire
     get "blog/:permalink-:id2" => "posts#show", as: :locale_blog_post
+    get "resume" => "resumes#show", as: :locale_resume
+    get "cv" => "resumes#show", as: :locale_cv
 
     resources :categories, only: :index
     get "category" => "categories#index"
@@ -196,6 +210,8 @@ Rails.application.routes.draw do
   get "about" => "posts#about", as: :about
   get "hire" => "posts#hire", as: :hire
   get "blog/:permalink-:id2" => "posts#show", as: :blog_post
+  get "resume" => "resumes#show", as: :resume
+  get "cv" => "resumes#show", as: :cv
 
   resources :categories, only: :index
   get "category" => "categories#index"

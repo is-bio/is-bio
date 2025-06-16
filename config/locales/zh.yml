@@ -3,9 +3,11 @@ zh:
   # 小技巧：搜索 "张三" 并用你的姓名替换它。
   author_name: "张三"
   blog_name: "张三的博客"
+  resume_name: "张三的简历"
   headline: "张三的博客 - 一个程序员的自白"
   brief_personal_introduction: "嗨，我是张三。这里介绍下自己，说出自己能为读者带来什么独特的价值。如：我是一名全栈工程师，如果你想学 Web 开发，找我就对了！"
   blog_home: "博客首页"
+  my_resume: "我的简历"
   about_me: "关于我"
   admin: "管理员"
   read_more: "更多"

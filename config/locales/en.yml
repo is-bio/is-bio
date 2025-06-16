@@ -2,10 +2,12 @@ en:
   # Tip: Search for "John Doe" and replace it with your name.
   author_name: "John Doe"
   blog_name: "John Doe's Blog"
+  resume_name: "John Doe's Resume"
   headline: "John Doe's Blog - A Programmer's Soliloquy"
   brief_personal_introduction: "Hi, my name is John Doe. Let the readers know what unique value you can bring to him/her here."
   blog_home: "Blog Home"
   about_me: "About Me"
+  my_resume: "My Resume"
   admin: "Admin"
   read_more: "Read more"
   min_read: "min read"

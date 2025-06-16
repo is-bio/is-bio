@@ -30,11 +30,11 @@ puts "Table 'settings' data inserted."
 
 %w[
   email
-  github_username
-  linkedin_profile_url
   phone_number
   website_url
   blog_url
+  github_username
+  linkedin_profile_url
   wechat_id
   x_username
   tiktok_username
