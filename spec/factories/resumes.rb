@@ -22,6 +22,9 @@ FactoryBot.define do
     name { "John Doe" }
     sequence(:email_address) { |n| "john.doe#{n}@example.com" }
     phone_number { "+1 (555) 123-4567" }
+    position { "Ruby Developer" }
+    city { "New York" }
+    summary { "I am a good developer." }
     birth_date { Date.new(1990, 1, 15) }
     height { 175 }
     weight { 68 }
