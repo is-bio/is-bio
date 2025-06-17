@@ -3,6 +3,9 @@
 # For more information, please refer to the documentation: https://docs.clacky.ai/clacky-workspace/configure
 
 # Command to run when "Run" button clicked
-run_command: ['bundle install && rails db:migrate && rails db:seed && rails assets:precompile && bin/rails s']
+run_command:
+  - 'RAILS_ENV=development rails assets:precompile'
+  - 'RAILS_ENV=development rails s'
+  - 'RAILS_ENV=development bin/jobs'
 # Command to install or update dependencies, will execute each time a new thread created to ensure dependencies up-to-date
-dependency_command: bundle install
+dependency_command: bundle install && yarn install
