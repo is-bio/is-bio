@@ -28,20 +28,33 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
+# Ignore compiled assets
 /public/assets
 /public/images
 /public/files
+/public/uploads/
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /config/credentials.yml.enc
+/config/credentials.yml.development
+/config/credentials/development.key
 
+# IDE configuration
 /.idea/*
+/.vscode/
 
+# Theme files
 _themes/DevBlog-Theme
+_themes/DevResume-Theme
+_themes/DevCard-Theme
 
+# Theme-related assets (managed by theme installer)
 /app/assets/images
 !/app/assets/images/profile.jpg
+!/app/assets/images/.keep
+!/app/assets/images/blog/blog-post-thumb-1.jpg
+!/app/assets/images/blog/blog-post-thumb-2.jpg
 /app/assets/stylesheets/theme-1.css
 /app/assets/stylesheets/theme-2.css
 /app/assets/stylesheets/theme-3.css
@@ -53,27 +66,36 @@ _themes/DevBlog-Theme
 app/javascript/src/fontawesome/js
 app/stylesheets
 
-# Clacky-related configuration
+# Clacky-specific configuration
 .1024*
 !.1024
 .breakpoints
-log/*.log
-tmp/
-coverage
 
-_themes/DevResume-Theme
-_themes/DevCard-Theme
+# Ruby/Rails specific
+*.rbc
+capybara-*.html
+.rspec
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-[0-9]*
+/coverage/
+/spec/tmp
+*.orig
+rerun.txt
+pickle-email-*.html
+node_modules/
+yarn-error.log
+yarn-debug.log*
+.yarn-integrity
 
 # Local configuration files
-config/credentials.yml.development
 .ruby-gemset
 .ruby-version.local
 
-# Editor files
+# Editor temporary files
 *.swp
 *.swo
 *~
-.vscode/
 
 # OS generated files
 .DS_Store
