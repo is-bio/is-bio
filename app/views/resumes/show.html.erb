@@ -2,7 +2,12 @@
   <div class="row align-items-center">
     <div class="resume-title col-12 col-md-6 col-lg-8 col-xl-9">
       <h2 class="resume-name mb-0 text-uppercase"><%= @resume.name || "Full Name" %></h2>
-      <div class="resume-tagline mb-3 mb-md-0"><%= @resume.position || "Position Information" %></div>
+      <div class="resume-tagline mb-3 mb-md-0">
+        <%= @resume.position || "Position Information" %>
+        <% if authenticated? %>
+          &nbsp;<%= link_to "edit", edit_admin_resume_path(@resume) %>
+        <% end %>
+      </div>
     </div>
 
     <div class="resume-contact col-12 col-md-6 col-lg-4 col-xl-3">
@@ -10,27 +15,26 @@
         <li class="mb-2">
           <i class="fas fa-globe fa-fw fa-lg me-2"></i><a class="resume-link" href="<%= root_path %>" target="_blank">Portfolio & Blogs</a>
         </li>
-      <% @social_media_accounts.each do |account| %>
-        <% if account.key == 'phone_number' %>
-          <li class="mb-2">
-            <i class="fas fa-phone-square fa-fw fa-lg me-2 "></i><a class="resume-link" href="#"><%= account.value %></a>
-          </li>
-        <% elsif account.key == 'email' %>
-          <li class="mb-2">
-            <i class="fas fa-envelope-square fa-fw fa-lg me-2"></i><a class="resume-link" href="#"><%= account.value %></a>
-          </li>
-        <% elsif account.key == 'website_url' %>
-          <li class="mb-2">
-            <i class="fas fa-globe fa-fw fa-lg me-2"></i><a class="resume-link" href="<%= account.value %>" target="_blank"><%= account.value %></a>
-          </li>
-        <% elsif account.key == 'blog_url' %>
-          <li class="mb-2">
-            <i class="fas fa-globe fa-fw fa-lg me-2"></i><a class="resume-link" href="<%= account.value %>" target="_blank"><%= account.value %></a>
-          </li>
-        <% end %>
+        <li class="mb-2">
+          <i class="fas fa-envelope-square fa-fw fa-lg me-2"></i><a class="resume-link" href="#"><%= @resume.email_address %></a>
+        </li>
+    <% @social_media_accounts.each do |account| %>
+      <% if account.key == 'phone_number' %>
+        <li class="mb-2">
+          <i class="fas fa-phone-square fa-fw fa-lg me-2 "></i><a class="resume-link" href="#"><%= account.value %></a>
+        </li>
+      <% elsif account.key == 'website_url' %>
+        <li class="mb-2">
+          <i class="fas fa-globe fa-fw fa-lg me-2"></i><a class="resume-link" href="<%= account.value %>" target="_blank"><%= account.value %></a>
+        </li>
+      <% elsif account.key == 'blog_url' %>
+        <li class="mb-2">
+          <i class="fas fa-globe fa-fw fa-lg me-2"></i><a class="resume-link" href="<%= account.value %>" target="_blank"><%= account.value %></a>
+        </li>
       <% end %>
+    <% end %>
         <li class="mb-0">
-          <i class="fas fa-map-marker-alt fa-fw fa-lg me-2"></i><%= @resume.city || "City Name" %>
+          <i class="fas fa-map-marker-alt fa-fw fa-lg me-2"></i><%= @resume.city || "City Name" %><% if authenticated? %>&nbsp;<%= link_to "edit social", admin_social_media_accounts_path, title: "Edit Social Media Accounts" %><% end %>
         </li>
       </ul>
     </div>
@@ -235,6 +239,9 @@
             <li class="mb-2">Object-oriented design</li>
             <li class="mb-2">Design and implement database structures</li>
             <li>Lead and deliver complex software systems</li>
+            <% if authenticated? %>
+              <li><%= link_to "edit", admin_technical_skills_path %></li>
+            <% end %>
           </ul>
         </div><!--//item-->
         <div class="item">

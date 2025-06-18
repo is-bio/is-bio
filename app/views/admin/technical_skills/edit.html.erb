@@ -1,0 +1,30 @@
+<% content_for :title, "Edit technical skill" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <h5 class="mb-3">Edit technical skill</h5>
+
+    <%= form_with(model: [:admin, @technical_skill]) do |form| %>
+      <% if @technical_skill.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@technical_skill.errors.count, "error") %> prohibited this technical skill from being saved:</h2>
+
+          <ul>
+          <% @technical_skill.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-2">
+        <%= form.label :name, class: "required" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit nil, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>

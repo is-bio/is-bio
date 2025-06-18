@@ -6,7 +6,7 @@
       <p style="color: green"><%= notice %></p>
     <% end %>
 
-    <h5 class="mb-3">Add New Locale</h5>
+    <h5 class="mb-3">Add Locale</h5>
 
     <%= form_with(model: [:admin, @locale], url: admin_locales_path) do |form| %>
       <% if @locale.errors.any? %>

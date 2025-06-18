@@ -35,9 +35,9 @@ puts "Table 'settings' data inserted."
   blog_url
   github_username
   linkedin_profile_url
-  wechat_id
   x_username
   tiktok_username
+  wechat_id
   youtube_channel_handle
   facebook_username
   instagram_username

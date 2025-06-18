@@ -64,13 +64,17 @@
 #                                    admin_theme PATCH  /admin/themes/:id(.:format)                                                                       admin/themes#update
 #                                                PUT    /admin/themes/:id(.:format)                                                                       admin/themes#update
 #                                  admin_resumes GET    /admin/resumes(.:format)                                                                          admin/resumes#index
-#                                                POST   /admin/resumes(.:format)                                                                          admin/resumes#create
 #                               new_admin_resume GET    /admin/resumes/new(.:format)                                                                      admin/resumes#new
 #                              edit_admin_resume GET    /admin/resumes/:id/edit(.:format)                                                                 admin/resumes#edit
-#                                   admin_resume GET    /admin/resumes/:id(.:format)                                                                      admin/resumes#show
-#                                                PATCH  /admin/resumes/:id(.:format)                                                                      admin/resumes#update
+#                                   admin_resume PATCH  /admin/resumes/:id(.:format)                                                                      admin/resumes#update
 #                                                PUT    /admin/resumes/:id(.:format)                                                                      admin/resumes#update
 #                                                DELETE /admin/resumes/:id(.:format)                                                                      admin/resumes#destroy
+#                         admin_technical_skills GET    /admin/technical_skills(.:format)                                                                 admin/technical_skills#index
+#                      new_admin_technical_skill GET    /admin/technical_skills/new(.:format)                                                             admin/technical_skills#new
+#                     edit_admin_technical_skill GET    /admin/technical_skills/:id/edit(.:format)                                                        admin/technical_skills#edit
+#                          admin_technical_skill PATCH  /admin/technical_skills/:id(.:format)                                                             admin/technical_skills#update
+#                                                PUT    /admin/technical_skills/:id(.:format)                                                             admin/technical_skills#update
+#                                                DELETE /admin/technical_skills/:id(.:format)                                                             admin/technical_skills#destroy
 #                                          posts GET    (/:locale)/posts(.:format)                                                                        posts#index {:locale=>/en|zh/}
 #                                    locale_root GET    /(:locale)(.:format)                                                                              posts#index {:locale=>/en|zh/}
 #                                   locale_about GET    (/:locale)/about(.:format)                                                                        posts#about {:locale=>/en|zh/}
@@ -185,7 +189,8 @@ Rails.application.routes.draw do
 
     resources :locales
     resources :themes, only: [ :index, :edit, :update ]
-    resources :resumes
+    resources :resumes, only: [ :new, :index, :edit, :update, :destroy ]
+    resources :technical_skills, only: [ :new, :index, :create, :edit, :update, :destroy ]
   end
 
   # Move to top
