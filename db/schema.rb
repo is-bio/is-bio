@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_17_205124) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_17_205428) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -55,6 +55,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_17_205124) do
     t.string "thumbnail"
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["id2"], name: "index_posts_on_id2", unique: true
+  end
+
+  create_table "professional_skills", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "resumes", force: :cascade do |t|

@@ -70,23 +70,31 @@
 #                                                PUT    /admin/resumes/:id(.:format)                                                                      admin/resumes#update
 #                                                DELETE /admin/resumes/:id(.:format)                                                                      admin/resumes#destroy
 #                         admin_technical_skills GET    /admin/technical_skills(.:format)                                                                 admin/technical_skills#index
+#                                                POST   /admin/technical_skills(.:format)                                                                 admin/technical_skills#create
 #                      new_admin_technical_skill GET    /admin/technical_skills/new(.:format)                                                             admin/technical_skills#new
 #                     edit_admin_technical_skill GET    /admin/technical_skills/:id/edit(.:format)                                                        admin/technical_skills#edit
 #                          admin_technical_skill PATCH  /admin/technical_skills/:id(.:format)                                                             admin/technical_skills#update
 #                                                PUT    /admin/technical_skills/:id(.:format)                                                             admin/technical_skills#update
 #                                                DELETE /admin/technical_skills/:id(.:format)                                                             admin/technical_skills#destroy
-#                                          posts GET    (/:locale)/posts(.:format)                                                                        posts#index {:locale=>/en|zh/}
-#                                    locale_root GET    /(:locale)(.:format)                                                                              posts#index {:locale=>/en|zh/}
-#                                   locale_about GET    (/:locale)/about(.:format)                                                                        posts#about {:locale=>/en|zh/}
-#                                    locale_hire GET    (/:locale)/hire(.:format)                                                                         posts#hire {:locale=>/en|zh/}
-#                               locale_blog_post GET    (/:locale)/blog/:permalink-:id2(.:format)                                                         posts#show {:locale=>/en|zh/}
-#                                  locale_resume GET    (/:locale)/resume(.:format)                                                                       resumes#show {:locale=>/en|zh/}
-#                                      locale_cv GET    (/:locale)/cv(.:format)                                                                           resumes#show {:locale=>/en|zh/}
-#                                     categories GET    (/:locale)/categories(.:format)                                                                   categories#index {:locale=>/en|zh/}
-#                                       category GET    (/:locale)/category(.:format)                                                                     categories#index {:locale=>/en|zh/}
-#                                                GET    (/:locale)/category/:name(.:format)                                                               categories#show {:locale=>/en|zh/}
-#                                  locale_drafts GET    (/:locale)/drafts(.:format)                                                                       categories#drafts_index {:locale=>/en|zh/}
-#                                                GET    (/:locale)/drafts/:name(.:format)                                                                 categories#drafts_show {:locale=>/en|zh/}
+#                      admin_professional_skills GET    /admin/professional_skills(.:format)                                                              admin/professional_skills#index
+#                                                POST   /admin/professional_skills(.:format)                                                              admin/professional_skills#create
+#                   new_admin_professional_skill GET    /admin/professional_skills/new(.:format)                                                          admin/professional_skills#new
+#                  edit_admin_professional_skill GET    /admin/professional_skills/:id/edit(.:format)                                                     admin/professional_skills#edit
+#                       admin_professional_skill PATCH  /admin/professional_skills/:id(.:format)                                                          admin/professional_skills#update
+#                                                PUT    /admin/professional_skills/:id(.:format)                                                          admin/professional_skills#update
+#                                                DELETE /admin/professional_skills/:id(.:format)                                                          admin/professional_skills#destroy
+#                                          posts GET    (/:locale)/posts(.:format)                                                                        posts#index {:locale=>/en/}
+#                                    locale_root GET    /(:locale)(.:format)                                                                              posts#index {:locale=>/en/}
+#                                   locale_about GET    (/:locale)/about(.:format)                                                                        posts#about {:locale=>/en/}
+#                                    locale_hire GET    (/:locale)/hire(.:format)                                                                         posts#hire {:locale=>/en/}
+#                               locale_blog_post GET    (/:locale)/blog/:permalink-:id2(.:format)                                                         posts#show {:locale=>/en/}
+#                                  locale_resume GET    (/:locale)/resume(.:format)                                                                       resumes#show {:locale=>/en/}
+#                                      locale_cv GET    (/:locale)/cv(.:format)                                                                           resumes#show {:locale=>/en/}
+#                                     categories GET    (/:locale)/categories(.:format)                                                                   categories#index {:locale=>/en/}
+#                                       category GET    (/:locale)/category(.:format)                                                                     categories#index {:locale=>/en/}
+#                                                GET    (/:locale)/category/:name(.:format)                                                               categories#show {:locale=>/en/}
+#                                  locale_drafts GET    (/:locale)/drafts(.:format)                                                                       categories#drafts_index {:locale=>/en/}
+#                                                GET    (/:locale)/drafts/:name(.:format)                                                                 categories#drafts_show {:locale=>/en/}
 #                                                GET    /posts(.:format)                                                                                  posts#index
 #                                           root GET    /                                                                                                 posts#index
 #                                          about GET    /about(.:format)                                                                                  posts#about
@@ -191,6 +199,7 @@ Rails.application.routes.draw do
     resources :themes, only: [ :index, :edit, :update ]
     resources :resumes, only: [ :new, :index, :edit, :update, :destroy ]
     resources :technical_skills, only: [ :new, :index, :create, :edit, :update, :destroy ]
+    resources :professional_skills, only: [ :new, :index, :create, :edit, :update, :destroy ]
   end
 
   # Move to top

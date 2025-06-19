@@ -228,33 +228,32 @@
     <aside class="resume-aside col-12 col-lg-4 col-xl-3 px-lg-4 pb-lg-4">
       <section class="skills-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Skills</h3>
+
         <div class="item">
           <h4 class="item-title">Technical</h4>
           <ul class="list-unstyled resume-skills-list">
-            <li class="mb-2">JavaScript/Angular/React/Vue</li>
-            <li class="mb-2">Python/Ruby/PHP
-            <li>
-            <li class="mb-2">Node.js/ASP.NET</li>
-            <li class="mb-2">PostgreSQL/MySQL</li>
-            <li class="mb-2">Object-oriented design</li>
-            <li class="mb-2">Design and implement database structures</li>
-            <li>Lead and deliver complex software systems</li>
-            <% if authenticated? %>
-              <li><%= link_to "edit", admin_technical_skills_path %></li>
-            <% end %>
+          <% @technical_skills.each do |skill| %>
+            <li class="mb-2"><%= skill.name %></li>
+          <% end %>
+          <% if authenticated? %>
+            <li><%= link_to "edit", admin_technical_skills_path %></li>
+          <% end %>
           </ul>
-        </div><!--//item-->
+        </div>
+
         <div class="item">
           <h4 class="item-title">Professional</h4>
           <ul class="list-unstyled resume-skills-list">
-            <li class="mb-2">Effective communication</li>
-            <li class="mb-2">Team player
-            <li>
-            <li class="mb-2">Strong problem solver</li>
-            <li>Good time management</li>
+          <% @professional_skills.each do |skill| %>
+            <li class="mb-2"><%= skill.name %></li>
+          <% end %>
+          <% if authenticated? %>
+            <li><%= link_to "edit", admin_professional_skills_path %></li>
+          <% end %>
           </ul>
-        </div><!--//item-->
-      </section><!--//skills-section-->
+        </div>
+      </section>
+
       <section class="education-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Education</h3>
         <ul class="list-unstyled resume-education-list">
