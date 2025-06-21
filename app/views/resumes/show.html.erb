@@ -4,8 +4,9 @@
       <h2 class="resume-name mb-0 text-uppercase"><%= @resume.name || "Full Name" %></h2>
       <div class="resume-tagline mb-3 mb-md-0">
         <%= @resume.position || "Position Information" %>
-        <% if authenticated? %>
+        <% if @can_edit %>
           &nbsp;<%= link_to "edit", edit_admin_resume_path(@resume) %>
+          &nbsp;<%= link_to "visitor's view", "#{localed(cv_path)}?view=visitor" %>
         <% end %>
       </div>
     </div>
@@ -34,7 +35,7 @@
       <% end %>
     <% end %>
         <li class="mb-0">
-          <i class="fas fa-map-marker-alt fa-fw fa-lg me-2"></i><%= @resume.city || "City Name" %><% if authenticated? %>&nbsp;<%= link_to "edit social", admin_social_media_accounts_path, title: "Edit Social Media Accounts" %><% end %>
+          <i class="fas fa-map-marker-alt fa-fw fa-lg me-2"></i><%= @resume.city || "City Name" %><% if @can_edit %>&nbsp;<%= link_to "edit social", admin_social_media_accounts_path, title: "Edit Social Media Accounts" %><% end %>
         </li>
       </ul>
     </div>
@@ -235,7 +236,7 @@
           <% @technical_skills.each do |skill| %>
             <li class="mb-2"><%= skill.name %></li>
           <% end %>
-          <% if authenticated? %>
+          <% if @can_edit %>
             <li><%= link_to "edit", admin_technical_skills_path %></li>
           <% end %>
           </ul>
@@ -247,7 +248,7 @@
           <% @professional_skills.each do |skill| %>
             <li class="mb-2"><%= skill.name %></li>
           <% end %>
-          <% if authenticated? %>
+          <% if @can_edit %>
             <li><%= link_to "edit", admin_professional_skills_path %></li>
           <% end %>
           </ul>

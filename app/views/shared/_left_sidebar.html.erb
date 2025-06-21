@@ -58,7 +58,7 @@
 
         <li class="nav-item">
           <a id="resume-link" class="nav-link <%= controller_name == 'resumes' && action_name == 'show' ? 'active' : nil %>"
-             href="<%= localed(resume_path) %>"
+             href="<%= localed(cv_path) %>"
              data-turbo-frame="visitor_frame" data-turbo-action="advance"
              onclick="updateActiveLink('resume-link')"
              target="_blank"
