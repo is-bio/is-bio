@@ -226,10 +226,13 @@
         </div><!--//item-->
       </section><!--//project-section-->
     </div><!--//resume-main-->
+
     <aside class="resume-aside col-12 col-lg-4 col-xl-3 px-lg-4 pb-lg-4">
+      <% if @technical_skills.present? || @professional_skills.present? || @can_edit %>
       <section class="skills-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Skills</h3>
 
+        <% if @technical_skills.present? || @can_edit %>
         <div class="item">
           <h4 class="item-title">Technical</h4>
           <ul class="list-unstyled resume-skills-list">
@@ -240,8 +243,10 @@
             <li><%= link_to "edit", admin_technical_skills_path %></li>
           <% end %>
           </ul>
+          <% end %>
         </div>
 
+        <% if @professional_skills.present? || @can_edit %>
         <div class="item">
           <h4 class="item-title">Professional</h4>
           <ul class="list-unstyled resume-skills-list">
@@ -253,7 +258,9 @@
           <% end %>
           </ul>
         </div>
+        <% end %>
       </section>
+      <% end %>
 
       <section class="education-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Education</h3>
