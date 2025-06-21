@@ -9,5 +9,6 @@ class ResumesController < ApplicationController
     @resume = Resume.first_or_initialize
     @technical_skills = TechnicalSkill.all.order(:id)
     @professional_skills = ProfessionalSkill.all.order(:id)
+    @interests = Interest.all.order(:id)
   end
 end

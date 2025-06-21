@@ -297,16 +297,20 @@
           <li>Spanish <span class="text-muted">(Professional)</span></li>
         </ul>
       </section><!--//certificates-section-->
+
+      <% if @interests.present? || @can_edit %>
       <section class="skills-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Interests</h3>
         <ul class="list-unstyled resume-interests-list mb-0">
-          <li class="mb-2">Climbing</li>
-          <li class="mb-2">Snowboarding</li>
-          <li class="mb-2">Photography</li>
-          <li>Travelling</li>
+        <% @interests.each do |interest| %>
+          <li class="mb-2"><%= interest.name %></li>
+        <% end %>
+        <% if @can_edit %>
+          <li><%= link_to "edit", admin_interests_path %></li>
+        <% end %>
         </ul>
-      </section><!--//certificates-section-->
-
+      </section>
+      <% end %>
     </aside><!--//resume-aside-->
   </div><!--//row-->
 </div><!--//resume-body-->

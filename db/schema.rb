@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_17_205428) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_21_150742) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -31,6 +31,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_17_205428) do
     t.string "value"
     t.datetime "updated_at"
     t.index ["key"], name: "index_github_app_settings_on_key", unique: true
+  end
+
+  create_table "interests", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "locales", force: :cascade do |t|

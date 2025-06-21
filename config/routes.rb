@@ -83,18 +83,25 @@
 #                       admin_professional_skill PATCH  /admin/professional_skills/:id(.:format)                                                          admin/professional_skills#update
 #                                                PUT    /admin/professional_skills/:id(.:format)                                                          admin/professional_skills#update
 #                                                DELETE /admin/professional_skills/:id(.:format)                                                          admin/professional_skills#destroy
-#                                          posts GET    (/:locale)/posts(.:format)                                                                        posts#index {:locale=>/en/}
-#                                    locale_root GET    /(:locale)(.:format)                                                                              posts#index {:locale=>/en/}
-#                                   locale_about GET    (/:locale)/about(.:format)                                                                        posts#about {:locale=>/en/}
-#                                    locale_hire GET    (/:locale)/hire(.:format)                                                                         posts#hire {:locale=>/en/}
-#                               locale_blog_post GET    (/:locale)/blog/:permalink-:id2(.:format)                                                         posts#show {:locale=>/en/}
-#                                  locale_resume GET    (/:locale)/resume(.:format)                                                                       resumes#show {:locale=>/en/}
-#                                      locale_cv GET    (/:locale)/cv(.:format)                                                                           resumes#show {:locale=>/en/}
-#                                     categories GET    (/:locale)/categories(.:format)                                                                   categories#index {:locale=>/en/}
-#                                       category GET    (/:locale)/category(.:format)                                                                     categories#index {:locale=>/en/}
-#                                                GET    (/:locale)/category/:name(.:format)                                                               categories#show {:locale=>/en/}
-#                                  locale_drafts GET    (/:locale)/drafts(.:format)                                                                       categories#drafts_index {:locale=>/en/}
-#                                                GET    (/:locale)/drafts/:name(.:format)                                                                 categories#drafts_show {:locale=>/en/}
+#                                admin_interests GET    /admin/interests(.:format)                                                                        admin/interests#index
+#                                                POST   /admin/interests(.:format)                                                                        admin/interests#create
+#                             new_admin_interest GET    /admin/interests/new(.:format)                                                                    admin/interests#new
+#                            edit_admin_interest GET    /admin/interests/:id/edit(.:format)                                                               admin/interests#edit
+#                                 admin_interest PATCH  /admin/interests/:id(.:format)                                                                    admin/interests#update
+#                                                PUT    /admin/interests/:id(.:format)                                                                    admin/interests#update
+#                                                DELETE /admin/interests/:id(.:format)                                                                    admin/interests#destroy
+#                                          posts GET    (/:locale)/posts(.:format)                                                                        posts#index {:locale=>/en|zh/}
+#                                    locale_root GET    /(:locale)(.:format)                                                                              posts#index {:locale=>/en|zh/}
+#                                   locale_about GET    (/:locale)/about(.:format)                                                                        posts#about {:locale=>/en|zh/}
+#                                    locale_hire GET    (/:locale)/hire(.:format)                                                                         posts#hire {:locale=>/en|zh/}
+#                               locale_blog_post GET    (/:locale)/blog/:permalink-:id2(.:format)                                                         posts#show {:locale=>/en|zh/}
+#                                  locale_resume GET    (/:locale)/resume(.:format)                                                                       resumes#show {:locale=>/en|zh/}
+#                                      locale_cv GET    (/:locale)/cv(.:format)                                                                           resumes#show {:locale=>/en|zh/}
+#                                     categories GET    (/:locale)/categories(.:format)                                                                   categories#index {:locale=>/en|zh/}
+#                                       category GET    (/:locale)/category(.:format)                                                                     categories#index {:locale=>/en|zh/}
+#                                                GET    (/:locale)/category/:name(.:format)                                                               categories#show {:locale=>/en|zh/}
+#                                  locale_drafts GET    (/:locale)/drafts(.:format)                                                                       categories#drafts_index {:locale=>/en|zh/}
+#                                                GET    (/:locale)/drafts/:name(.:format)                                                                 categories#drafts_show {:locale=>/en|zh/}
 #                                                GET    /posts(.:format)                                                                                  posts#index
 #                                           root GET    /                                                                                                 posts#index
 #                                          about GET    /about(.:format)                                                                                  posts#about
@@ -200,6 +207,7 @@ Rails.application.routes.draw do
     resources :resumes, only: [ :new, :index, :edit, :update, :destroy ]
     resources :technical_skills, only: [ :new, :index, :create, :edit, :update, :destroy ]
     resources :professional_skills, only: [ :new, :index, :create, :edit, :update, :destroy ]
+    resources :interests, only: [ :new, :index, :create, :edit, :update, :destroy ]
   end
 
   # Move to top

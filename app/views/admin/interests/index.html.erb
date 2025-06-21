@@ -1,13 +1,13 @@
-<% content_for :title, "Technical skills" %>
+<% content_for :title, "Interests" %>
 
 <section class="px-3 py-5 p-md-5">
   <div class="container single-col-max-width">
     <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
 
     <div class="d-flex justify-content-between align-items-center">
-      <h5>Technical skills</h5>
-      <a href="<%= new_admin_technical_skill_path %>" data-turbo-action="advance">
-        <button type="button" class="btn btn-primary btn-sm">Add technical skill</button>
+      <h5>Interests</h5>
+      <a href="<%= new_admin_interest_path %>" data-turbo-action="advance">
+        <button type="button" class="btn btn-primary btn-sm">Add interest</button>
       </a>
     </div>
 
@@ -15,28 +15,28 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Skill Name</th>
+          <th>Interest Name</th>
           <th></th>
         </tr>
       </thead>
 
       <tbody>
-      <% @technical_skills.each do |skill| %>
+      <% @interests.each do |skill| %>
         <tr>
           <th><%= skill.id %></th>
           <td><%= skill.name %></td>
           <td>
             <div class="d-flex gap-2">
-              <a href="<%= edit_admin_technical_skill_path(skill) %>" data-turbo-action="advance">
+              <a href="<%= edit_admin_interest_path(skill) %>" data-turbo-action="advance">
                 <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
               </a>
               <%= button_to "Delete",
-                            admin_technical_skill_path(skill),
+                            admin_interest_path(skill),
                             method: :delete,
                             class: "btn btn-danger btn-sm",
                             form: {
                               data: {
-                                turbo_confirm: "Are you sure you want to delete this technical skill?",
+                                turbo_confirm: "Are you sure you want to delete this interest?",
                                 turbo_confirm_type: "danger"
                               }
                             } %>

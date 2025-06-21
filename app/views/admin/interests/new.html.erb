@@ -1,0 +1,30 @@
+<% content_for :title, "Add interest" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <h5 class="mb-3">Add interest</h5>
+
+    <%= form_with(model: [:admin, @interest]) do |form| %>
+      <% if @interest.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@interest.errors.count, "error") %> prohibited this interest from being saved:</h2>
+
+          <ul>
+          <% @interest.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-2">
+        <%= form.label :name, class: "required" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit nil, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>
