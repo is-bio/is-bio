@@ -2,11 +2,11 @@ ru:
   # Совет: Найдите "John Doe" и замените его своим именем.
   author_name: "John Doe"
   blog_name: "Блог John Doe"
-  resume_name: "张三的简历"
+  resume_name: "Резюме Джона Доу"
   headline: "Блог John Doe - Монолог программиста"
   brief_personal_introduction: "Привет, меня зовут John Doe. Расскажите читателям, какую уникальную ценность вы можете им принести."
   blog_home: "Главная"
-  my_resume: "我的简历"
+  my_resume: "Мое резюме"
   about_me: "Обо мне"
   admin: "Админ"
   read_more: "Читать далее"

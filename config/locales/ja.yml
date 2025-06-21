@@ -2,11 +2,11 @@ ja:
   # ヒント：「张三」を検索してあなたの名前に置き換えてください。
   author_name: "張三"
   blog_name: "張三のブログ"
-  resume_name: "张三的简历"
+  resume_name: "張三の履歴書"
   headline: "張三のブログ - プログラマーの告白"
   brief_personal_introduction: "こんにちは、張三です。自己紹介をします。読者に独自の価値を提供できることを説明します。例：私はフルスタックエンジニアです。Web開発を学びたいなら、私に相談してください！"
   blog_home: "ブログホーム"
-  my_resume: "我的简历"
+  my_resume: "私の履歴書"
   about_me: "プロフィール"
   admin: "管理者"
   read_more: "続きを読む"

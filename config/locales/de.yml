@@ -2,11 +2,11 @@ de: # It is actually 'de-DE' for this file.
   # Tip: Search for "John Doe" and replace it with your name.
   author_name: "John Doe"
   blog_name: "John Does Blog"
-  resume_name: "张三的简历"
+  resume_name: "Lebenslauf"
   headline: "John Does Blog - Ein Monolog eines Programmierers"
   brief_personal_introduction: "Hallo, ich heiße John Doe. Teilen Sie den Lesern mit, welchen einzigartigen Wert Sie ihm/ihr hier bieten können."
   blog_home: "Blog-Startseite"
-  my_resume: "我的简历"
+  my_resume: "Mein Lebenslauf"
   about_me: "Über Mich"
   admin: "Admin"
   read_more: "Weiterlesen"

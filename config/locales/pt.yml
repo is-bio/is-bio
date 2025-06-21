@@ -2,11 +2,11 @@ pt: # It is actually 'pt-BR' for this file.
   # Dica: Procure por "John Doe" e substitua pelo seu nome.
   author_name: "John Doe"
   blog_name: "Blog do John Doe"
-  resume_name: "张三的简历"
+  resume_name: "Currículo de John Doe"
   headline: "Blog do John Doe - O Solilóquio de um Programador"
   brief_personal_introduction: "Olá, meu nome é John Doe. Conte aos leitores que valor único você pode trazer para eles aqui."
   blog_home: "Início do Blog"
-  my_resume: "我的简历"
+  my_resume: "Meu Currículo"
   about_me: "Sobre Mim"
   admin: "Admin"
   read_more: "Leia mais"

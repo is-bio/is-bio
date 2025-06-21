@@ -2,11 +2,11 @@ fr:
   # Tip: Search for "John Doe" and replace it with your name.
   author_name: "John Doe"
   blog_name: "Blog de John Doe"
-  resume_name: "张三的简历"
+  resume_name: "CV de John Doe"
   headline: "Blog de John Doe - Soliloque d'un Programmeur"
   brief_personal_introduction: "Bonjour, je m'appelle John Doe. Faites savoir aux lecteurs quelle valeur unique vous pouvez leur apporter ici."
   blog_home: "Accueil du Blog"
-  my_resume: "我的简历"
+  my_resume: "Mon CV"
   about_me: "À Propos de Moi"
   admin: "Admin"
   read_more: "Lire la suite"

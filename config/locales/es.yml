@@ -3,11 +3,11 @@ es:
   # Consejo: Busca "John Doe" y reemplázalo con tu nombre.
   author_name: "John Doe"
   blog_name: "Blog de John Doe"
-  resume_name: "张三的简历"
+  resume_name: "Currículum de John Doe"
   headline: "Blog de John Doe - El soliloquio de un programador"
   brief_personal_introduction: "Hola, me llamo John Doe. Aquí puedes contar a los lectores qué valor único puedes aportar."
   blog_home: "Inicio del Blog"
-  my_resume: "我的简历"
+  my_resume: "Mi Currículum"
   about_me: "Sobre Mí"
   admin: "Administrador"
   read_more: "Leer más"
