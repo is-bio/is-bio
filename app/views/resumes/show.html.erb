@@ -277,26 +277,36 @@
           </li>
         </ul>
       </section><!--//education-section-->
-      <section class="education-section py-3">
-        <h3 class="text-uppercase resume-section-heading mb-4">Awards</h3>
-        <ul class="list-unstyled resume-awards-list">
-          <li class="mb-3">
-            <div class="font-weight-bold">Award Lorem Ipsum</div>
-            <div class="text-muted">Microsoft lorem ipsum (2023)</div>
-          </li>
-          <li>
-            <div class="font-weight-bold">Award Donec Sodales</div>
-            <div class="text-muted">Oracle Aenean (2020)</div>
-          </li>
-        </ul>
-      </section><!--//education-section-->
+
+<!--      <section class="education-section py-3">-->
+<!--        <h3 class="text-uppercase resume-section-heading mb-4">Awards</h3>-->
+<!--        <ul class="list-unstyled resume-awards-list">-->
+<!--          <li class="mb-3">-->
+<!--            <div class="font-weight-bold">Award Lorem Ipsum</div>-->
+<!--            <div class="text-muted">Microsoft lorem ipsum (2023)</div>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <div class="font-weight-bold">Award Donec Sodales</div>-->
+<!--            <div class="text-muted">Oracle Aenean (2020)</div>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </section>-->
+
+      <% if @languages.present? || @can_edit %>
       <section class="skills-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Languages</h3>
         <ul class="list-unstyled resume-lang-list">
-          <li class="mb-2">English <span class="text-muted">(Native)</span></li>
-          <li>Spanish <span class="text-muted">(Professional)</span></li>
+        <% @languages.each do |language| %>
+          <li class="mb-2">
+            <%= language.name %><% if language.proficiency %> <span class="text-muted">(<%= language.proficiency.humanize %>)</span><% end %>
+          </li>
+        <% end %>
+        <% if @can_edit %>
+          <li><%= link_to "edit", admin_languages_path %></li>
+        <% end %>
         </ul>
-      </section><!--//certificates-section-->
+      </section>
+      <% end %>
 
       <% if @interests.present? || @can_edit %>
       <section class="skills-section py-3">

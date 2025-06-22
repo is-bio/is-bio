@@ -1,0 +1,35 @@
+<% content_for :title, "Edit language" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <h5 class="mb-3">Edit language</h5>
+
+    <%= form_with(model: [:admin, @language]) do |form| %>
+      <% if @language.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@language.errors.count, "error") %> prohibited this language from being saved:</h2>
+
+          <ul>
+          <% @language.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-2">
+        <%= form.label :name, class: "required" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :proficiency, class: "required" %>
+        <%= form.select :proficiency, options_for_select(proficiency_options, @language.proficiency) %>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit nil, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -208,6 +208,7 @@ Rails.application.routes.draw do
     resources :technical_skills, only: [ :new, :index, :create, :edit, :update, :destroy ]
     resources :professional_skills, only: [ :new, :index, :create, :edit, :update, :destroy ]
     resources :interests, only: [ :new, :index, :create, :edit, :update, :destroy ]
+    resources :languages, only: [ :new, :index, :create, :edit, :update, :destroy ]
   end
 
   # Move to top
