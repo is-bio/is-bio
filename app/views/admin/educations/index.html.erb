@@ -1,0 +1,58 @@
+<% content_for :title, "Educations" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h5>Educations</h5>
+      <a href="<%= new_admin_education_path %>" data-turbo-action="advance">
+        <button type="button" class="btn btn-primary btn-sm">Add education</button>
+      </a>
+    </div>
+
+    <table class="table table-striped my-4">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>School Name</th>
+          <th>Degree</th>
+          <th>Field of Study</th>
+          <th>Start Year</th>
+          <th>End Year</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @educations.each do |education| %>
+        <tr>
+          <th><%= education.id %></th>
+          <td><%= education.school_name %></td>
+          <td><%= education.degree %></td>
+          <td><%= education.field_of_study %></td>
+          <td><%= education.start_year %></td>
+          <td><%= education.end_year %></td>
+          <td>
+            <div class="d-flex gap-2">
+              <a href="<%= edit_admin_education_path(education) %>" data-turbo-action="advance">
+                <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+              </a>
+              <%= button_to "Delete",
+                            admin_education_path(education),
+                            method: :delete,
+                            class: "btn btn-danger btn-sm",
+                            form: {
+                              data: {
+                                turbo_confirm: "Are you sure you want to delete this education?",
+                                turbo_confirm_type: "danger"
+                              }
+                            } %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

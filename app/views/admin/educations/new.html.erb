@@ -1,0 +1,50 @@
+<% content_for :title, "Add education" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <h5 class="mb-3">Add education</h5>
+
+    <%= form_with(model: [:admin, @education]) do |form| %>
+      <% if @education.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@education.errors.count, "error") %> prohibited this education from being saved:</h2>
+
+          <ul>
+          <% @education.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-2">
+        <%= form.label :school_name, class: "required" %>
+        <%= form.text_field :school_name, class: "form-control" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :degree %>
+        <%= form.text_field :degree, class: "form-control" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :field_of_study %>
+        <%= form.text_field :field_of_study, class: "form-control" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :start_year %>
+        <%= form.text_field :start_year, class: "form-control" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :end_year %>
+        <%= form.text_field :end_year, class: "form-control" %>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit nil, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>

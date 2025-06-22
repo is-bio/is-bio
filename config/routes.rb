@@ -90,6 +90,20 @@
 #                                 admin_interest PATCH  /admin/interests/:id(.:format)                                                                    admin/interests#update
 #                                                PUT    /admin/interests/:id(.:format)                                                                    admin/interests#update
 #                                                DELETE /admin/interests/:id(.:format)                                                                    admin/interests#destroy
+#                                admin_languages GET    /admin/languages(.:format)                                                                        admin/languages#index
+#                                                POST   /admin/languages(.:format)                                                                        admin/languages#create
+#                             new_admin_language GET    /admin/languages/new(.:format)                                                                    admin/languages#new
+#                            edit_admin_language GET    /admin/languages/:id/edit(.:format)                                                               admin/languages#edit
+#                                 admin_language PATCH  /admin/languages/:id(.:format)                                                                    admin/languages#update
+#                                                PUT    /admin/languages/:id(.:format)                                                                    admin/languages#update
+#                                                DELETE /admin/languages/:id(.:format)                                                                    admin/languages#destroy
+#                               admin_educations GET    /admin/educations(.:format)                                                                       admin/educations#index
+#                                                POST   /admin/educations(.:format)                                                                       admin/educations#create
+#                            new_admin_education GET    /admin/educations/new(.:format)                                                                   admin/educations#new
+#                           edit_admin_education GET    /admin/educations/:id/edit(.:format)                                                              admin/educations#edit
+#                                admin_education PATCH  /admin/educations/:id(.:format)                                                                   admin/educations#update
+#                                                PUT    /admin/educations/:id(.:format)                                                                   admin/educations#update
+#                                                DELETE /admin/educations/:id(.:format)                                                                   admin/educations#destroy
 #                                          posts GET    (/:locale)/posts(.:format)                                                                        posts#index {:locale=>/en|zh/}
 #                                    locale_root GET    /(:locale)(.:format)                                                                              posts#index {:locale=>/en|zh/}
 #                                   locale_about GET    (/:locale)/about(.:format)                                                                        posts#about {:locale=>/en|zh/}
@@ -209,6 +223,7 @@ Rails.application.routes.draw do
     resources :professional_skills, only: [ :new, :index, :create, :edit, :update, :destroy ]
     resources :interests, only: [ :new, :index, :create, :edit, :update, :destroy ]
     resources :languages, only: [ :new, :index, :create, :edit, :update, :destroy ]
+    resources :educations, only: [ :new, :index, :create, :edit, :update, :destroy ]
   end
 
   # Move to top

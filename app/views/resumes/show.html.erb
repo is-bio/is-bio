@@ -262,21 +262,23 @@
       </section>
       <% end %>
 
+      <% if @educations.present? || @can_edit %>
       <section class="education-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Education</h3>
         <ul class="list-unstyled resume-education-list">
+        <% @educations.each do |education| %>
           <li class="mb-3">
-            <div class="resume-degree font-weight-bold">MSc in Computer Science</div>
-            <div class="resume-degree-org text-muted">University College London</div>
-            <div class="resume-degree-time text-muted">2012 - 2016</div>
+            <div class="resume-degree font-weight-bold"><%= education.degree %><% if education.field_of_study.present? %> in <%= education.field_of_study %><% end %></div>
+            <div class="resume-degree-org text-muted"><%= education.school_name %></div>
+            <div class="resume-degree-time text-muted"><%= education.start_year %> - <%= education.end_year %></div>
           </li>
-          <li>
-            <div class="resume-degree font-weight-bold">BSc Maths and Physics</div>
-            <div class="resume-degree-org text-muted">Imperial College London</div>
-            <div class="resume-degree-time text-muted">2016 - 2017</div>
-          </li>
+        <% end %>
+        <% if @can_edit %>
+          <li><%= link_to "edit", admin_educations_path %></li>
+        <% end %>
         </ul>
-      </section><!--//education-section-->
+      </section>
+      <% end %>
 
 <!--      <section class="education-section py-3">-->
 <!--        <h3 class="text-uppercase resume-section-heading mb-4">Awards</h3>-->

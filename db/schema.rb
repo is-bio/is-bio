@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_22_081145) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_22_160057) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
     t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.string "school_name", null: false
+    t.string "degree"
+    t.string "field_of_study"
+    t.integer "start_year"
+    t.integer "end_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "email_subscribers", force: :cascade do |t|
