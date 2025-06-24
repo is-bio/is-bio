@@ -365,7 +365,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
-    solid_cable (3.0.8)
+    solid_cable (3.0.11)
       actioncable (>= 7.2)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -422,7 +422,7 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
     websocket (1.2.11)
-    websocket-driver (0.7.7)
+    websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -471,7 +471,7 @@ DEPENDENCIES
   safe_yaml (~> 1.0.5)
   selenium-webdriver (= 4.33.0)
   simplecov
-  solid_cable (= 3.0.8)
+  solid_cable (= 3.0.11)
   solid_cache (= 1.0.7)
   solid_queue (= 1.1.5)
   sqlite3 (>= 2.1)
