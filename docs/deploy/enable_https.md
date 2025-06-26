@@ -35,7 +35,7 @@ exit
 ssh root@the_server_ip
 
 acme.sh --set-default-ca --server letsencrypt
-acme.sh --issue -d your-domain.com -d www.your-domain.com -w /srv/personal-brand-website-builder/public # Add more if you have more domain or subdomain. Replace the "your-domain.com" with your actual domain name.
+acme.sh --issue -d your-domain.com -d www.your-domain.com -w /srv/is-bio/public # Add more if you have more domain or subdomain. Replace the "your-domain.com" with your actual domain name.
 ```
 
 If you get an error message `your-domain.com: Invalid status. Verification error details: 2606:4700:3030::ac43:9171: Invalid response from http://your-domain.com/.well-known/acme-challenge/pffchpZxkQd3vm5TcBO3L-ifnGEAzsbzl7OmUDxg_H4: 404`,

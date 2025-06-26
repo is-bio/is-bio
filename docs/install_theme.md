@@ -7,7 +7,7 @@
   If your network is not good, you can try `option 2`.
 
     ```shell
-    cd /path/to/personal-brand-website-builder/_themes
+    cd /path/to/is-bio/_themes
     git clone https://github.com/xriley/DevBlog-Theme.git
     ```
 
@@ -22,7 +22,7 @@
 ### Install 'DevBlog' theme
 
 ```shell
-cd /path/to/personal-brand-website-builder/_themes
+cd /path/to/is-bio/_themes
 sh install-theme-devblog.sh
 ```
 
@@ -35,7 +35,7 @@ sh install-theme-devblog.sh
   If your network is not good, you can try `option 2`.
 
     ```shell
-    cd /path/to/personal-brand-website-builder/_themes
+    cd /path/to/is-bio/_themes
     git clone https://github.com/xriley/DevResume-Theme.git
     ```
 
@@ -50,6 +50,6 @@ sh install-theme-devblog.sh
 ### Install 'DevResume' theme
 
 ```shell
-cd /path/to/personal-brand-website-builder/_themes
+cd /path/to/is-bio/_themes
 sh install-theme-devresume.sh
 ```

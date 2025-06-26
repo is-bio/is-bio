@@ -1,14 +1,14 @@
 [English document](deploy_on_CentOS10.md)
 
-# 搭建基于 personal-brand-website-builder 的网站
+# 搭建基于 is-bio 的网站
 
-本文介绍如何在 **CentOS 10 SELinux**（安全增强型 Linux）上安装 *personal-brand-website-builder* 网站。
+本文介绍如何在 **CentOS 10 SELinux**（安全增强型 Linux）上安装 *is-bio* 网站。
 
 ## 申请域名并添加 DNS A 记录
 
-现在您需要决定在哪台服务器上安装 *personal-brand-website-builder*。
+现在您需要决定在哪台服务器上安装 *is-bio*。
 
-如果您的预算有限，并且已经有一台未充分利用的服务器，则可以将 *personal-brand-website-builder* 安装在该服务器上。
+如果您的预算有限，并且已经有一台未充分利用的服务器，则可以将 *is-bio* 安装在该服务器上。
 
 **端口 80 可以由多个网站共享而不会产生冲突。**
 
@@ -56,8 +56,8 @@ yum info libyaml-devel
 
 ```shell
 cd /srv
-git clone https://github.com/PersonalBranding/personal-brand-website-builder.git
-cd /srv/personal-brand-website-builder
+git clone https://github.com/is-bio/is-bio.git
+cd /srv/is-bio
 bundle install
 ```
 
@@ -75,7 +75,7 @@ echo $RAILS_ENV # 检查环境变量是否已生效
 ## 设置credentials
 
 ```shell
-cd /srv/personal-brand-website-builder
+cd /srv/is-bio
 
 # 此文件包含所有需要设置的credentials。
 cat config/credentials.yml.example # 使用下一个命令设置“所有”credentials：
@@ -92,7 +92,7 @@ EDITOR="vim" bin/rails credentials:edit
 ## 准备 SQLite 数据库
 
 ```shell
-cd /srv/personal-brand-website-builder
+cd /srv/is-bio
 rails db:migrate # 数据库文件是 `./storage/development.sqlite3`。运行它没有副作用。
 rails db:seed # 运行它没有副作用。
 ```
@@ -104,7 +104,7 @@ rails db:seed # 运行它没有副作用。
 ## 启动或重启 Rails Web 服务器
 
 ```shell
-cd /srv/personal-brand-website-builder
+cd /srv/is-bio
 rails assets:precompile # 每当任何资源发生更改时都需要执行此操作。运行它没有副作用。
 pkill -F /var/run/blog.pid # 停止 Rails Web 服务器。如果尚未启动 Rails Web 服务器，则无需运行此命令。
 bundle exec puma -w 1 -e production # 用于测试 Rails Web 服务器是否可以正常运行。
@@ -141,9 +141,9 @@ setsebool -P httpd_can_network_connect 1
 sudo setenforce 0
 
 cd /etc/nginx
-cp /srv/personal-brand-website-builder/docs/deploy/nginx.conf ./ # 替换现有文件
+cp /srv/is-bio/docs/deploy/nginx.conf ./ # 替换现有文件
 cd /etc/nginx/conf.d
-cp /srv/personal-brand-website-builder/docs/deploy/blog_nginx.conf ./
+cp /srv/is-bio/docs/deploy/blog_nginx.conf ./
 vim blog_nginx.conf # 将 "your-domain.com" 替换为您的实际域名。
 
 nginx -t # 检查配置是否正确。
@@ -202,7 +202,7 @@ systemctl restart nginx
 ## 创建管理员用户
 
 ```shell
-cd /srv/personal-brand-website-builder
+cd /srv/is-bio
 vim db/seeds.rb
 ```
 
@@ -224,7 +224,7 @@ git restore db/seeds.rb
 博客文章、图片、文件同步、发送电子邮件、生成缩略图等都需要启动后台任务！
 
 ```shell
-cd /srv/personal-brand-website-builder
+cd /srv/is-bio
 # 如果屏幕上有内容输出，则表示某些资源文件已被重写。
 #   您需要重新启动 Rails Web 服务器才能使更改生效。
 rails assets:precompile
@@ -256,7 +256,7 @@ ps -ef|grep solid # 确认它已启动。
 因为运行 "Solid Queue" 会开启几个Linux进程，会消耗掉一些内存。如果平时不运行这几个进程，只在想要更新博客或向用户发送邮件的时候，手动执行:
 
 ```shell
-cd /srv/personal-brand-website-builder
+cd /srv/is-bio
 bin/jobs # 执行完成后 ctrl + c 关闭进程
 ```
 
@@ -266,7 +266,7 @@ bin/jobs # 执行完成后 ctrl + c 关闭进程
 
 在这里，博客网站是您的真实 Web 服务器。
 
-如果您不熟悉如何使用 *Markdown* 和 *Git* 发布博客，请阅读 [markdown-blog](https://github.com/PersonalBranding/markdown-blog)。
+如果您不熟悉如何使用 *Markdown* 和 *Git* 发布博客，请阅读 [markdown-blog](https://github.com/is-bio/markdown-blog)。
 
 请按照 [GitHub_App.md](/docs/GitHub_App.md) 中的说明完成此步骤。
 
@@ -325,7 +325,7 @@ pkill -F /var/run/blog.pid # 停止 Rails Web 服务器
 #ps -ef | grep puma # 您将获得一个与 `cat /var/run/blog.pid` 相同的 pid。
 #kill -9 主进程pid # 一些工作进程是由主进程启动的，您可以终止主进程 pid。
 
-cd /srv/personal-brand-website-builder
+cd /srv/is-bio
 git stash
 git pull origin main
 git stash apply
@@ -342,5 +342,5 @@ rails assets:precompile # 每当任何资源发生更改时都需要执行此操
 
 ```shell
 # 在您的本地计算机上运行它
-scp root@the_server_ip:/srv/personal-brand-website-builder/storage/production.sqlite3 ./
+scp root@the_server_ip:/srv/is-bio/storage/production.sqlite3 ./
 ```
