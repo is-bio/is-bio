@@ -53,7 +53,6 @@
     <div id="resume_summary" class="col text-start">
       <%= raw markdown_text(@resume.summary) %>
 <!--      <p class="mb-0">-->
-
 <!--      </p>-->
     </div>
   </div>
@@ -63,114 +62,34 @@
 
 <div class="resume-body">
   <div class="row">
-    <div class="resume-main col-12 col-lg-8 col-xl-9   pe-0   pe-lg-5">
+    <div class="resume-main col-12 col-lg-8 col-xl-9 pe-0 pe-lg-5">
       <section class="work-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Work Experiences</h3>
+        <% @experiences.each do |experience| %>
         <div class="item mb-3">
           <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Senior Software
-              Engineer</h4>
+            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"><%= experience.title %></h4>
             <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Google | 2023 - Present
+              <%= experience.company_name %> | <%= experience.start_year %><%= experience.start_month.present? ? "-#{experience.start_month}" : '' %> - <%= experience.end_year.present? ? "#{experience.end_year}" + (experience.end_month.present? ? "-#{experience.end_month}" : '') : 'Present' %>
             </div>
-
           </div>
           <div class="item-content">
-            <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit.
-              Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
-              magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-              ultricies nec, pellentesque eu, pretium quis, sem. Donec pede justo, fringilla
-              vel. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-              ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
-              parturient montes, nascetur ridiculus mus. Donec quam felis.</p>
-            <ul class="resume-list">
-              <li>Lorem ipsum dolor sit amet, consectetuer.</li>
-              <li>Aenean commodo ligula eget dolor.</li>
-              <li>Etiam ultricies nisi vel augue.</li>
-            </ul>
+            <%= raw markdown_text(experience.description) %>
+<!--            <p></p>-->
+<!--            <ul class="resume-list">-->
+<!--              <li>Lorem ipsum dolor sit amet, consectetuer.</li>-->
+<!--              <li>Aenean commodo ligula eget dolor.</li>-->
+<!--              <li>Etiam ultricies nisi vel augue.</li>-->
+<!--            </ul>-->
           </div>
-        </div><!--//item-->
-        <div class="item mb-3">
-          <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Lead Software
-              Developer</h4>
-            <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Apple | 2022 - 2023
-            </div>
-
-          </div>
-          <div class="item-content">
-            <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit.
-              Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
-              magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-              ultricies nec, pellentesque eu, pretium quis, sem. Donec pede justo, fringilla
-              vel.</p>
-            <ul class="resume-list">
-              <li>Lorem ipsum dolor sit amet, consectetuer.</li>
-              <li>Aenean commodo ligula eget dolor.</li>
-            </ul>
-          </div>
-        </div><!--//item-->
-        <div class="item mb-3">
-          <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Senior Software
-              Developer</h4>
-            <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Dropbox | 2020 - 2022
-            </div>
-
-          </div>
-          <div class="item-content">
-            <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit.
-              Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
-              magnis dis parturient montes, nascetur ridiculus mus.</p>
-          </div>
-        </div><!--//item-->
+        </div>
+        <% end %>
+        <% if @can_edit %>
         <div class="item">
-          <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Senior Developer</h4>
-            <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Uber | 2019 - 2020
-            </div>
-
-          </div>
-          <div class="item-content">
-            <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit.
-              Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus. </p>
-          </div>
-        </div><!--//item-->
-        <div class="item">
-          <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Backend Developer</h4>
-            <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Amazon | 2018 - 2019
-            </div>
-
-          </div>
-          <div class="item-content">
-            <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit.
-              Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
-              magnis dis parturient montes, nascetur ridiculus mus.</p>
-          </div>
-        </div><!--//item-->
-        <div class="item">
-          <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Frontend Developer</h4>
-            <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Startup | 2017 - 2018
-            </div>
-
-          </div>
-          <div class="item-content">
-            <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit.
-              Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus. </p>
-          </div>
-        </div><!--//item-->
-
-      </section><!--//work-section-->
-
+          <p><%= link_to "edit", admin_experiences_path %></p>
+        </div>
+        <% end %>
+      </section>
 
       <section class="project-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Projects</h3>

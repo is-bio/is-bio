@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_22_160057) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_28_093725) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -34,6 +34,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_22_160057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_email_subscribers_on_email", unique: true
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.string "company_name", null: false
+    t.string "title", null: false
+    t.string "description"
+    t.integer "start_year"
+    t.integer "start_month"
+    t.integer "end_year"
+    t.integer "end_month"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "github_app_settings", force: :cascade do |t|

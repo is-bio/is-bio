@@ -1,6 +1,6 @@
 [English README](README.md)
 
-# 个人品牌网站引擎
+# isBio: 个人网站引擎
 
 ## 使用 "Markdown" 和 "Git" 享受博客写作
 

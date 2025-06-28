@@ -12,5 +12,6 @@ class ResumesController < ApplicationController
     @interests = Interest.all.order(:id)
     @languages = Language.all.order(:id)
     @educations = Education.all.order(end_year: :desc)
+    @experiences = Experience.all.order(start_year: :desc, start_month: :desc)
   end
 end

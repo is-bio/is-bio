@@ -224,6 +224,7 @@ Rails.application.routes.draw do
     resources :interests, only: [ :new, :index, :create, :edit, :update, :destroy ]
     resources :languages, only: [ :new, :index, :create, :edit, :update, :destroy ]
     resources :educations, only: [ :new, :index, :create, :edit, :update, :destroy ]
+    resources :experiences, only: [ :new, :index, :create, :edit, :update, :destroy ]
   end
 
   # Move to top
