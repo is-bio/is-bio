@@ -10,7 +10,7 @@
 #  name          :string           not null
 #  phone_number  :string
 #  position      :string
-#  summary       :string
+#  summary       :text
 #  title         :string           not null
 #  weight        :integer
 #  created_at    :datetime         not null

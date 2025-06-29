@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_28_093725) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "ancestry", null: false, collation: "BINARY"
@@ -39,7 +39,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_093725) do
   create_table "experiences", force: :cascade do |t|
     t.string "company_name", null: false
     t.string "title", null: false
-    t.string "description"
+    t.text "description"
     t.integer "start_year"
     t.integer "start_month"
     t.integer "end_year"
@@ -113,7 +113,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_093725) do
     t.string "phone_number"
     t.string "position"
     t.string "city"
-    t.string "summary"
+    t.text "summary"
     t.date "birth_date"
     t.integer "height"
     t.integer "weight"

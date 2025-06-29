@@ -7,7 +7,7 @@ class CreateResumes < ActiveRecord::Migration[8.0]
       t.string :phone_number
       t.string :position
       t.string :city
-      t.string :summary
+      t.text :summary
       t.date :birth_date
       t.integer :height
       t.integer :weight

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: experiences
+#
+#  id           :integer          not null, primary key
+#  company_name :string           not null
+#  description  :text
+#  end_month    :integer
+#  end_year     :integer
+#  start_month  :integer
+#  start_year   :integer
+#  title        :string           not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
 class Experience < ApplicationRecord
   MAX_YEAR = Date.current.year + 8
   MIN_YEAR = 1960

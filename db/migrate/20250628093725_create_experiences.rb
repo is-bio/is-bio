@@ -3,7 +3,7 @@ class CreateExperiences < ActiveRecord::Migration[8.0]
     create_table :experiences do |t|
       t.string :company_name, null: false
       t.string :title, null: false
-      t.string :description
+      t.text :description
       t.integer :start_year
       t.integer :start_month
       t.integer :end_year

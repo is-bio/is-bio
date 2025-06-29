@@ -4,9 +4,14 @@ class ResumesController < ApplicationController
   layout "resume"
 
   def show
+    @resume = Resume.first_or_initialize
+
+    if @resume.new_record? && authenticated?
+      redirect_to admin_resumes_path
+    end
+
     @can_edit = params["view"] != "visitor" && authenticated?
     @social_media_accounts = SocialMediaAccount.where.not(value: nil).order(:id)
-    @resume = Resume.first_or_initialize
     @technical_skills = TechnicalSkill.all.order(:id)
     @professional_skills = ProfessionalSkill.all.order(:id)
     @interests = Interest.all.order(:id)
