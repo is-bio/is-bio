@@ -1,0 +1,40 @@
+<% content_for :title, "Add project" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <h5 class="mb-3">Add project</h5>
+
+    <%= form_with(model: [:admin, @project]) do |form| %>
+      <% if @project.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+          <ul>
+          <% @project.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="my-2">
+        <%= form.label :name, class: "required" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :summary, class: "required" %>
+        <%= form.text_field :summary, class: "form-control" %>
+      </div>
+
+      <div class="my-2">
+        <%= form.label :description, class: "required" %>
+        <%= form.text_area :description, cols: 90, rows: 8 %>
+      </div>
+
+      <div class="mt-4">
+        <%= form.submit nil, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>

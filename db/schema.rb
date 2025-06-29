@@ -98,6 +98,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_093725) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "summary"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "resumes", force: :cascade do |t|
     t.string "title", null: false
     t.string "name", null: false

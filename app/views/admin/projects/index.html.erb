@@ -1,0 +1,56 @@
+<% content_for :title, "Projects" %>
+
+<section class="px-3 py-5 p-md-5">
+  <div class="container single-col-max-width">
+    <%= tag.div(flash[:notice], class: "text-success mb-3") if flash[:notice] %>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h5>Projects</h5>
+      <a href="<%= new_admin_project_path %>" data-turbo-action="advance">
+        <button type="button" class="btn btn-primary btn-sm">Add project</button>
+      </a>
+    </div>
+
+    <table class="table table-striped my-4">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Company Name</th>
+        <th>Job Title</th>
+        <th>Description</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <th><%= project.id %></th>
+          <td><%= project.name %></td>
+          <td><%= project.summary %></td>
+          <td><%= raw markdown_text(project.description) %></td>
+          <td>
+            <div class="d-flex gap-2">
+              <a href="<%= edit_admin_project_path(project) %>" data-turbo-action="advance">
+                <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+              </a>
+              <%= button_to "Delete",
+                            admin_project_path(project),
+                            method: :delete,
+                            class: "btn btn-danger btn-sm",
+                            form: {
+                              data: {
+                                turbo_confirm: "Are you sure you want to delete this project?",
+                                turbo_confirm_type: "danger"
+                              }
+                            } %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

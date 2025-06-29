@@ -93,58 +93,27 @@
 
       <section class="project-section py-3">
         <h3 class="text-uppercase resume-section-heading mb-4">Projects</h3>
+        <% @projects.each do |project| %>
         <div class="item mb-3">
           <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Project Lorem
-              Ipsum</h4>
+            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"><%= project.name %></h4>
             <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Open Source
+              <%= project.summary %>
             </div>
-
           </div>
+
           <div class="item-content">
-            <p>You can use this section for your side projects. You can <a href="#"
-                                                                           class="theme-link">provide
-              a project link here</a> as well. Lorem ipsum dolor sit amet, consectetuer
-              adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-              natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-
-
+            <%= raw markdown_text(project.description) %>
           </div>
-        </div><!--//item-->
+        </div>
+        <% end %>
+        <% if @can_edit %>
         <div class="item">
-          <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Project Sed
-              Fringilla</h4>
-            <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Open Source
-            </div>
-
-          </div>
-          <div class="item-content">
-            <p>You can use this section for your side projects. Cras dapibus. Vivamus elementum
-              semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
-              consequat vitae, eleifend ac, enim.</p>
-
-          </div>
-        </div><!--//item-->
-        <div class="item">
-          <div class="item-heading row align-items-center mb-2">
-            <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Project Praesent </h4>
-            <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-start text-md-end">
-              Open Source
-            </div>
-
-          </div>
-          <div class="item-content">
-            <p>You can use this section for your side projects. Cras dapibus. Vivamus elementum
-              semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
-              consequat vitae, eleifend ac, enim.</p>
-
-          </div>
-        </div><!--//item-->
-      </section><!--//project-section-->
-    </div><!--//resume-main-->
+          <p><%= link_to "edit", admin_projects_path %></p>
+        </div>
+        <% end %>
+      </section>
+    </div>
 
     <aside class="resume-aside col-12 col-lg-4 col-xl-3 px-lg-4 pb-lg-4">
       <% if @technical_skills.present? || @professional_skills.present? || @can_edit %>
