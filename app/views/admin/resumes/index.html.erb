@@ -31,7 +31,7 @@
         <% @resumes.each do |resume| %>
           <tr>
             <th><%= resume.id %></th>
-            <td><%= resume.title %></td>
+            <td><%= link_to resume.title, cv_path, target: "_blank" %></td>
             <td><%= resume.name %></td>
             <td><%= resume.email_address %></td>
             <td><%= resume.created_at.strftime("%Y-%m-%d %H:%M") %></td>

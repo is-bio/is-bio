@@ -154,6 +154,65 @@ class SocialMediaAccount < ApplicationRecord
     end
   end
 
+  def icon_brand_name
+    case key
+    when "github_username"
+      "fa-github-square"
+    when "linkedin_profile_url"
+      "fa-linkedin"
+    when "x_username"
+      "fa-square-x-twitter"
+    when "stackoverflow_profile_url"
+      "fab fa-stack-overflow"
+    when "leetcode_profile_url"
+      "fa fa-code" # not correct
+    when "quora_profile_url"
+      "fab fa-quora"
+    when "kuaishou_profile_url"
+      "fa fa-video-camera" # not correct
+    when "zhihu_profile_url"
+      "fa fa-question"
+    when "qq"
+      "fab fa-qq"
+    when "weibo_profile_id"
+      "fab fa-weibo"
+    when "weibo_nickname"
+      "fab fa-weibo"
+    when "wechat_id"
+      "fab fa-weixin"
+    when "weixin_mp_name"
+      "fab fa-weixin"
+    when "tiktok_username"
+      "fa fa-video-camera" # not correct
+    when "youtube_channel_handle"
+      "fab fa-youtube"
+    when "instagram_username"
+      "fab fa-instagram"
+    when "facebook_username"
+      "fab fa-facebook"
+    when "messenger_username"
+      "fab fa-whatsapp" # not correct
+    when "whatsapp_account"
+      "fab fa-whatsapp"
+    when "telegram_username"
+      "fab fa-telegram"
+    when "snapchat_username"
+      "fab fa-snapchat"
+    when "pinterest_username"
+      "fab fa-pinterest"
+    when "threads_username"
+      "fa fa-mars-double" # not correct
+    when "douyin_identifier"
+      "fa fa-video-camera" # not correct
+    when "line_id"
+      "fab fa-whatsapp" # not correct
+    when "kakaotalk_id"
+      "fab fa-whatsapp" # not correct
+    else
+      "fab fa-link"
+    end
+  end
+
 private
 
   # noinspection RubyNilAnalysis
