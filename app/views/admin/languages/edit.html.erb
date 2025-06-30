@@ -4,7 +4,7 @@
   <div class="container single-col-max-width">
     <h5 class="mb-3">Edit language</h5>
 
-    <%= form_with(model: [:admin, @language]) do |form| %>
+    <%= form_with(model: [:admin, @language], data: { "turbo-action": "advance" }) do |form| %>
       <% if @language.errors.any? %>
         <div style="color: red">
           <h2><%= pluralize(@language.errors.count, "error") %> prohibited this language from being saved:</h2>

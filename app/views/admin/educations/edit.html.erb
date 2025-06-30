@@ -4,7 +4,7 @@
   <div class="container single-col-max-width">
     <h5 class="mb-3">Edit education</h5>
 
-    <%= form_with(model: [:admin, @education]) do |form| %>
+    <%= form_with(model: [:admin, @education], data: { "turbo-action": "advance" }) do |form| %>
       <% if @education.errors.any? %>
         <div style="color: red">
           <h2><%= pluralize(@education.errors.count, "error") %> prohibited this education from being saved:</h2>

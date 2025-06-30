@@ -1,4 +1,4 @@
-<%= form_with(model: [ :admin, @resume ]) do |form| %>
+<%= form_with(model: [ :admin, @resume ], data: { "turbo-action": "advance" }) do |form| %>
   <% if @resume.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(@resume.errors.count, "error") %> prohibited this resume from being saved:</h2>

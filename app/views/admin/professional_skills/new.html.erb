@@ -4,7 +4,7 @@
   <div class="container single-col-max-width">
     <h5 class="mb-3">Add professional skill</h5>
 
-    <%= form_with(model: [:admin, @professional_skill]) do |form| %>
+    <%= form_with(model: [:admin, @professional_skill], data: { "turbo-action": "advance" }) do |form| %>
       <% if @professional_skill.errors.any? %>
         <div style="color: red">
           <h2><%= pluralize(@professional_skill.errors.count, "error") %> prohibited this professional skill from being saved:</h2>

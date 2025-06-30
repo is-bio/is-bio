@@ -8,7 +8,7 @@
 
     <h5 class="mb-3">Edit social media account</h5>
 
-    <%= form_with(model: [:admin, @social_media_account]) do |form| %>
+    <%= form_with(model: [:admin, @social_media_account], data: { "turbo-action": "advance" }) do |form| %>
       <% if @social_media_account.errors.any? %>
         <div style="color: red">
           <h2><%= pluralize(@social_media_account.errors.count, "error") %> prohibited this social media account from being saved:</h2>

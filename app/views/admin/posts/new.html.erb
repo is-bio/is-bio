@@ -4,7 +4,7 @@
   <div class="container single-col-max-width">
     <h5 class="mb-3">New post</h5>
 
-    <%= form_with(model: [:admin, @post]) do |form| %>
+    <%= form_with(model: [:admin, @post], data: { turbo: "false" }) do |form| %>
       <% if @post.errors.any? %>
         <div style="color: red">
           <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>

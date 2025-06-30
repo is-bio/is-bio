@@ -12,7 +12,7 @@
       </div>
       <div class="d-flex gap-2">
         <%= link_to "Back to Edit Post", edit_admin_post_path(@post), class: "btn btn-light btn-sm h-100" %>
-        <%= link_to "Add Translation", new_admin_post_translation_path(@post), class: "btn btn-primary btn-sm h-100" %>
+        <%= link_to "Add Translation", new_admin_post_translation_path(@post), class: "btn btn-primary btn-sm h-100", "data-turbo-action": "advance" %>
       </div>
     </div>
 

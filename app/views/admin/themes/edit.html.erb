@@ -9,7 +9,7 @@
       <h5 class="mb-1">Edit Theme: <%= @theme.name %></h5>
     </div>
 
-    <%= form_with(model: [:admin, @theme]) do |form| %>
+    <%= form_with(model: [:admin, @theme], data: { "turbo-action": "advance" }) do |form| %>
       <% if @theme.errors.any? %>
         <div style="color: red">
           <h2><%= pluralize(@theme.errors.count, "error") %> prohibited this theme from being saved:</h2>

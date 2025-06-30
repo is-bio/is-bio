@@ -1,4 +1,4 @@
-<%= form_with(model: [:admin, locale]) do |form| %>
+<%= form_with(model: [:admin, locale], data: { "turbo-action": "advance" }) do |form| %>
   <% if locale.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(locale.errors.count, "error") %> prohibited this locale from being saved:</h2>
