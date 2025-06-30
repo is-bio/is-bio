@@ -22,6 +22,14 @@ class Resume < ApplicationRecord
   validates :phone_number, format: { with: /\A\+?[\d\s\-\(\)]+\z/, message: "is not a valid phone number format" }, allow_blank: true
   validate :validate_birth_date
 
+  has_many :experiences, dependent: :destroy
+  has_many :projects, dependent: :destroy
+  has_many :educations, dependent: :destroy
+  has_many :technical_skills, dependent: :destroy
+  has_many :professional_skills, dependent: :destroy
+  has_many :languages, dependent: :destroy
+  has_many :interests, dependent: :destroy
+
   private
 
   def validate_birth_date
