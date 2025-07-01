@@ -12,6 +12,15 @@
 #  title        :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  resume_id    :integer          not null
+#
+# Indexes
+#
+#  index_experiences_on_resume_id  (resume_id)
+#
+# Foreign Keys
+#
+#  resume_id  (resume_id => resumes.id)
 #
 class Experience < ApplicationRecord
   MAX_YEAR = Date.current.year + 8

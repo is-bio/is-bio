@@ -10,6 +10,15 @@
 #  start_year     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  resume_id      :integer          not null
+#
+# Indexes
+#
+#  index_educations_on_resume_id  (resume_id)
+#
+# Foreign Keys
+#
+#  resume_id  (resume_id => resumes.id)
 #
 class Education < ApplicationRecord
   MAX_YEAR = Date.current.year + 8

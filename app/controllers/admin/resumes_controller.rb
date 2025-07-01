@@ -36,8 +36,8 @@ class Admin::ResumesController < Admin::BaseController
     else
       redirect_to admin_resumes_path, alert: "Failed to delete resume."
     end
-  rescue => e
-    redirect_to admin_resumes_path, alert: "Error deleting resume: #{e.message}"
+  rescue => exception
+    redirect_to admin_resumes_path, alert: "Error deleting resume: #{exception.message}"
   end
 
   private

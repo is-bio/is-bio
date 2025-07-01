@@ -18,6 +18,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
   end
 
   create_table "educations", force: :cascade do |t|
+    t.integer "resume_id", null: false
     t.string "school_name", null: false
     t.string "degree"
     t.string "field_of_study"
@@ -25,6 +26,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
     t.integer "end_year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_educations_on_resume_id"
   end
 
   create_table "email_subscribers", force: :cascade do |t|
@@ -37,6 +39,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
   end
 
   create_table "experiences", force: :cascade do |t|
+    t.integer "resume_id", null: false
     t.string "company_name", null: false
     t.string "title", null: false
     t.text "description"
@@ -46,6 +49,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
     t.integer "end_month"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_experiences_on_resume_id"
   end
 
   create_table "github_app_settings", force: :cascade do |t|
@@ -56,16 +60,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
   end
 
   create_table "interests", force: :cascade do |t|
+    t.integer "resume_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_interests_on_resume_id"
   end
 
   create_table "languages", force: :cascade do |t|
+    t.integer "resume_id", null: false
     t.string "name", null: false
     t.integer "proficiency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_languages_on_resume_id"
   end
 
   create_table "locales", force: :cascade do |t|
@@ -93,17 +101,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
   end
 
   create_table "professional_skills", force: :cascade do |t|
+    t.integer "resume_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_professional_skills_on_resume_id"
   end
 
   create_table "projects", force: :cascade do |t|
+    t.integer "resume_id", null: false
     t.string "name", null: false
     t.string "summary"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_projects_on_resume_id"
   end
 
   create_table "resumes", force: :cascade do |t|
@@ -145,9 +157,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
   end
 
   create_table "technical_skills", force: :cascade do |t|
+    t.integer "resume_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_technical_skills_on_resume_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -176,8 +190,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_105542) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "educations", "resumes"
+  add_foreign_key "experiences", "resumes"
+  add_foreign_key "interests", "resumes"
+  add_foreign_key "languages", "resumes"
   add_foreign_key "posts", "categories"
+  add_foreign_key "professional_skills", "resumes"
+  add_foreign_key "projects", "resumes"
   add_foreign_key "sessions", "users"
+  add_foreign_key "technical_skills", "resumes"
   add_foreign_key "translations", "locales"
   add_foreign_key "translations", "posts"
 end

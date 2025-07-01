@@ -1,6 +1,7 @@
 class CreateEducations < ActiveRecord::Migration[8.0]
   def change
     create_table :educations do |t|
+      t.references :resume, null: false, foreign_key: true
       t.string :school_name, null: false
       t.string :degree
       t.string :field_of_study
