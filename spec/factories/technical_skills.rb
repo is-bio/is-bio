@@ -16,8 +16,9 @@
 #
 #  resume_id  (resume_id => resumes.id)
 #
-class TechnicalSkill < ApplicationRecord
-  belongs_to :resume
-
-  validates :name, presence: true, uniqueness: true
+FactoryBot.define do
+  factory :technical_skill do
+    sequence(:name) { |n| "Technical Skill #{n}" }
+    association :resume
+  end
 end

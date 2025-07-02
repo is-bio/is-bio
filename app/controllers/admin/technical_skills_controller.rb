@@ -14,6 +14,7 @@ class Admin::TechnicalSkillsController < Admin::BaseController
 
   def create
     @technical_skill = TechnicalSkill.new(technical_skill_params)
+    @technical_skill.resume = Resume.first!
 
     if @technical_skill.save
       redirect_to admin_technical_skills_path, notice: "Technical skill was successfully created."

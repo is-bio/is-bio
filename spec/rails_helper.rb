@@ -40,6 +40,15 @@ end
 RSpec.configure do |config|
   config.before(:suite) do
     Rails.application.load_seed # loading seeds
+
+    Resume.create!(
+      title: "my resume",
+      name: "John Doe",
+      email_address: "test@test.com",
+      position: "Senior Developer",
+      city: "New York",
+      summary: "This is me."
+    )
   end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
