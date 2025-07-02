@@ -14,6 +14,7 @@ class Admin::ProjectsController < Admin::BaseController
 
   def create
     @project = Project.new(project_params)
+    @project.resume = Resume.first!
 
     if @project.save
       redirect_to admin_projects_path, notice: "Project was successfully created."

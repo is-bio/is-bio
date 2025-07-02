@@ -19,6 +19,8 @@
 #  resume_id  (resume_id => resumes.id)
 #
 class Project < ApplicationRecord
+  belongs_to :resume
+
   validates :name, presence: true
   validates :summary, presence: true
   validates :description, presence: true

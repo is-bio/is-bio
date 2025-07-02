@@ -14,6 +14,7 @@ class Admin::EducationsController < Admin::BaseController
 
   def create
     @education = Education.new(education_params)
+    @education.resume = Resume.first!
 
     if @education.save
       redirect_to admin_educations_path, notice: "Education was successfully created."

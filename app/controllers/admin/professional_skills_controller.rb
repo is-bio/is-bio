@@ -14,6 +14,7 @@ class Admin::ProfessionalSkillsController < Admin::BaseController
 
   def create
     @professional_skill = ProfessionalSkill.new(professional_skill_params)
+    @professional_skill.resume = Resume.first!
 
     if @professional_skill.save
       redirect_to admin_professional_skills_path, notice: "Professional skill was successfully created."

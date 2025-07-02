@@ -14,6 +14,7 @@ class Admin::LanguagesController < Admin::BaseController
 
   def create
     @language = Language.new(language_params)
+    @language.resume = Resume.first!
 
     if @language.save
       redirect_to admin_languages_path, notice: "Language was successfully created."

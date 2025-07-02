@@ -24,6 +24,8 @@ class Education < ApplicationRecord
   MAX_YEAR = Date.current.year + 8
   MIN_YEAR = 1960
 
+  belongs_to :resume
+
   validates :school_name, presence: true
   validates :start_year, :end_year,
             presence: true,

@@ -14,6 +14,7 @@ class Admin::InterestsController < Admin::BaseController
 
   def create
     @interest = Interest.new(interest_params)
+    @interest.resume = Resume.first!
 
     if @interest.save
       redirect_to admin_interests_path, notice: "Interest was successfully created."

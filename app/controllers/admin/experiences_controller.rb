@@ -14,6 +14,7 @@ class Admin::ExperiencesController < Admin::BaseController
 
   def create
     @experience = Experience.new(experience_params)
+    @experience.resume = Resume.first!
 
     if @experience.save
       redirect_to admin_experiences_path, notice: "Experience was successfully created."

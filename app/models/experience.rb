@@ -26,6 +26,8 @@ class Experience < ApplicationRecord
   MAX_YEAR = Date.current.year + 8
   MIN_YEAR = 1960
 
+  belongs_to :resume
+
   validates :company_name, presence: true
   validates :title, presence: true
   validates :description, presence: true

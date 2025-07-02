@@ -17,5 +17,7 @@
 #  resume_id  (resume_id => resumes.id)
 #
 class ProfessionalSkill < ApplicationRecord
+  belongs_to :resume
+
   validates :name, presence: true, uniqueness: true
 end
