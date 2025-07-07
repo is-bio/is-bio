@@ -44,7 +44,7 @@ gem "rouge", "~> 4.5.2" # Highlight code
 
 gem "ancestry", "~> 4.3.3" # Handle 'categories' which have 'parent' and 'children'
 
-gem "faraday", "~> 2.13.1"
+gem "faraday", "~> 2.13.2"
 
 gem "safe_yaml", "~> 1.0.5"
 
