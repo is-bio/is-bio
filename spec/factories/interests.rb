@@ -18,7 +18,7 @@
 #
 FactoryBot.define do
   factory :interest do
-    name { "Music" }
+    sequence(:name) { |n| "interest #{n}" }
     association :resume
   end
 end

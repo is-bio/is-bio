@@ -13,37 +13,48 @@
 #
 FactoryBot.define do
   factory :social_media_account do
-    key { "website_url" }
-    value { "https://example.com" }
+    sequence(:key) { |n| "website_url#{n}" }
+    sequence(:value) { |n| "https://example#{n}.com" }
 
     trait :email do
       key { "email" }
-      value { "user@example.com" }
+      sequence(:value) { |n| "user#{n}@example.com" }
+      # 或者使用 Faker:
+      # value { Faker::Internet.unique.email }
     end
 
     trait :phone do
       key { "phone_number" }
-      value { "+1 123-456-7890" }
+      sequence(:value) { |n| "+1 #{800 + n}-555-#{1000 + n}" }
+      # 或者使用 Faker:
+      # value { Faker::PhoneNumber.unique.cell_phone_in_e164 }
     end
 
     trait :github do
       key { "github_username" }
-      value { "github-user" }
+      sequence(:value) { |n| "github-user-#{n}" }
+      # 或者使用 Faker:
+      # value { Faker::Internet.unique.username(specifier: 5..10) }
     end
 
     trait :x_twitter do
       key { "x_username" }
-      value { "twitter_handle" }
+      sequence(:value) { |n| "x-user-#{n}" }
+      # 或者使用 Faker:
+      # value { Faker::Internet.unique.username(specifier: 5..10) }
     end
 
     trait :linkedin do
       key { "linkedin_profile_url" }
-      value { "https://www.linkedin.com/in/user-profile/" }
+      sequence(:value) { |n| "https://www.linkedin.com/in/user-profile-#{n}/" }
     end
 
     trait :website do
       key { "website_url" }
-      value { "https://example.com" }
+      value { Faker::Internet.unique.url }
+      # sequence(:value) { |n| "https://example#{n}.com" }
+      # 或者使用 Faker:
+      # value { Faker::Internet.unique.url }
     end
   end
 end

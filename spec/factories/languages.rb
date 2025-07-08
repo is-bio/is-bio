@@ -19,7 +19,7 @@
 #
 FactoryBot.define do
   factory :language do
-    name { "Spanish" }
+    sequence(:name) { |n| "#{Faker::Nation.language}#{n}" }
     proficiency { :professional_working }
     association :resume
   end
