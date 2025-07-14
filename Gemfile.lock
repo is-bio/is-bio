@@ -180,7 +180,7 @@ GEM
       logger
     mini_mime (1.1.5)
     minitest (5.25.5)
-    mission_control-jobs (1.0.2)
+    mission_control-jobs (1.1.0)
       actioncable (>= 7.1)
       actionpack (>= 7.1)
       activejob (>= 7.1)
@@ -292,7 +292,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.3.0)
-    rdoc (6.14.1)
+    rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
     redcarpet (3.6.1)
@@ -457,7 +457,7 @@ DEPENDENCIES
   jbuilder (= 2.13.0)
   kamal (= 2.7.0)
   mini_magick (~> 5.2)
-  mission_control-jobs (= 1.0.2)
+  mission_control-jobs (= 1.1.0)
   propshaft (= 1.1.0)
   puma (= 6.6.0)
   rails (~> 8.0.2)
