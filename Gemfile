@@ -55,7 +55,7 @@ gem "mini_magick", "~> 5.2"
 gem "rails-i18n", "~> 8.0.0"
 
 group :development, :test do
-  gem "annotaterb", "4.16.0"
+  gem "annotaterb", "4.17.0"
 
   gem "factory_bot_rails", "~> 6.5.0"
   gem "rails-controller-testing", "~> 1.0.5"
