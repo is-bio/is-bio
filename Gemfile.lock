@@ -125,7 +125,7 @@ GEM
       railties (>= 6.1.0)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
-    faraday (2.13.2)
+    faraday (2.13.4)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
@@ -150,7 +150,7 @@ GEM
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    json (2.12.2)
+    json (2.13.1)
     kamal (2.7.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
@@ -452,7 +452,7 @@ DEPENDENCIES
   debug
   factory_bot_rails (~> 6.5.0)
   faker (~> 3.5.2)
-  faraday (~> 2.13.2)
+  faraday (~> 2.13.4)
   importmap-rails (= 2.1.0)
   jbuilder (= 2.13.0)
   kamal (= 2.7.0)
