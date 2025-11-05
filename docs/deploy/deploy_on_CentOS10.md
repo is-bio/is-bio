@@ -295,6 +295,29 @@ exit
 magick -version # To test if it has been installed successfully.
 ```
 
+## Solve assets 404 issue
+On CentOS 10 SELinux, you might have this issue. 
+
+If all assets are 404, but the asset files do exist on the server, you can try the following steps:
+
+```
+tail -f /var/log/nginx/error.log
+```
+
+If you found this error:
+
+```
+2025/11/05 00:54:34 [crit] 517102#517102: *413 stat() "/srv/is-bio/public/assets/theme-6-ee0e7768.css" failed (13: Permission denied),
+```
+
+You can solve it by:
+
+```
+sudo semanage fcontext -a -t httpd_sys_content_t "/srv/is-bio/public(/.*)?"
+sudo restorecon -R -v /srv/is-bio/public
+sudo systemctl reload nginx
+```
+
 ## Support "https" (TLS/SSL) for web
 
 It is recommended that you enable https because the canonical url of the pages start with "https://".
