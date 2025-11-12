@@ -9,7 +9,7 @@ gem "sqlite3", ">= 2.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "6.6.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails", "2.1.0"
+gem "importmap-rails", "2.2.2"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", "2.0.16"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
