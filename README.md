@@ -1,10 +1,15 @@
 [中文文档](README_zh.md)
 
 # isBio: Personal Website Builder
+## Upgraded version of is-bio
+
+[www.me.expert](https://www.me.expert) is an upgraded version of `is-bio`, allowing you to build your online personal brand without installing the source code on your server.
+
+It includes features such as a **portfolio**, **resume**, and **blog**, and you can also choose five subdomains from a set of premium domains (including **engineer.dev**, **cto.page**, **an.dev**, etc.).
 
 ## Enjoy blogging with "Markdown" and "Git"
 
-Demo website: [Zhang Jian's Blog](https://zhangjian.dev).
+Demo website: [Reduce Gaming Blog](https://reducegaming.com).
 
 ## How can I write articles locally with Markdown files and publish them with `git push`? 
 
@@ -44,7 +49,7 @@ So your cost increase may be only $2/month.
 
 ## is-bio: A blog engine focused on bringing value to developers
 
-- You can see [Zhang Jian's new blog](https://zhangjian.dev) (based on *is-bio*) is well-designed.
+- You can see [Zhang Jian's new blog](https://reducegaming.com) (based on *is-bio*) is well-designed.
 - I started expecting clients to **pay for my services directly on my blog**!
 - Through the blog, I convey a message to potential customers: I am an expert in web development, algorithms, and game addiction!
 
