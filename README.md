@@ -1,11 +1,21 @@
 [中文文档](README_zh.md)
 
 # isBio: Personal Website Builder
-## Upgraded version of is-bio
+## 'is-bio' has evolved into SaaS - Like.dev!
 
-[www.me.expert](https://www.me.expert) is an upgraded version of `is-bio`, allowing you to build your online personal brand without installing the source code on your server.
+> 🚀 **Level Up Your Developer Identity**
+>
+> [**Like.dev**](https://www.like.dev) — the ultimate all-in-one personal branding platform for programmers.
+>
+> **The All-In-One Career Powerhouse:**
+> - 📄 **Resume, Portfolio & Blog:** Integrate your skills, GitHub projects, and writing into one stunning site.
+> - 🌐 **Free Custom Domain:** Bind your own personal domain for free—forever.
+> - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.page` or `name.engineer.dev`.
+> - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `an.dev/yourname`.
+>
+> [**Build Your Programmer Brand at Like.dev →**](https://www.like.dev)
 
-It includes features such as a **portfolio**, **resume**, and **blog**, and you can also choose five subdomains from a set of premium domains (including **engineer.dev**, **cto.page**, **an.dev**, etc.).
+---
 
 ## Enjoy blogging with "Markdown" and "Git"
 
@@ -195,3 +205,17 @@ ps -ef|grep solid
 ## Setting up your website
 
 Read [setup_website.md](/docs/setup_website.md).
+
+---
+
+> 🚀 **Level Up Your Developer Identity**
+>
+> [**Like.dev**](https://www.like.dev) — the ultimate all-in-one personal branding platform for programmers.
+>
+> **The All-In-One Career Powerhouse:**
+> - 📄 **Resume, Portfolio & Blog:** Integrate your skills, GitHub projects, and writing into one stunning site.
+> - 🌐 **Free Custom Domain:** Bind your own personal domain for free—forever.
+> - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.page` or `name.engineer.dev`.
+> - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `an.dev/yourname`.
+>
+> [**Build Your Programmer Brand at Like.dev →**](https://www.like.dev)
