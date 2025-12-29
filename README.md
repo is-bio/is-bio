@@ -11,7 +11,7 @@
 > - 📄 **Resume, Portfolio & Blog:** Integrate your skills, GitHub projects, and writing into one stunning site.
 > - 🌐 **Free Custom Domain:** Bind your own personal domain for free—forever.
 > - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.is` or `name.that.dev`.
-> - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `an.dev/yourname`.
+> - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `that.dev/yourname`.
 >
 > [**Build Your Programmer Brand at leader.me →**](https://www.leader.me)
 
@@ -19,7 +19,7 @@
 
 ## Enjoy blogging with "Markdown" and "Git"
 
-Demo website: [Zhang Jian Blog](https://www.zhangjian.dev).
+Demo website: [Zhang Jian Blog](https://www.jian.pro).
 
 ## How can I write articles locally with Markdown files and publish them with `git push`? 
 
@@ -59,7 +59,7 @@ So your cost increase may be only $2/month.
 
 ## is-bio: A blog engine focused on bringing value to developers
 
-- You can see [Zhang Jian's new blog](https://www.zhangjian.dev) (based on *is-bio*) is well-designed.
+- You can see [Zhang Jian's new blog](https://www.jian.pro) (based on *is-bio*) is well-designed.
 - I started expecting clients to **pay for my services directly on my blog**!
 - Through the blog, I convey a message to potential customers: I am an expert in web development, algorithms, and game addiction!
 
@@ -216,6 +216,6 @@ Read [setup_website.md](/docs/setup_website.md).
 > - 📄 **Resume, Portfolio & Blog:** Integrate your skills, GitHub projects, and writing into one stunning site.
 > - 🌐 **Free Custom Domain:** Bind your own personal domain for free—forever.
 > - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.is` or `name.that.dev`.
-> - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `an.dev/yourname`.
+> - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `that.dev/yourname`.
 >
 > [**Build Your Programmer Brand at leader.me →**](https://www.leader.me)
