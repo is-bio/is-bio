@@ -10,7 +10,7 @@
 > **The All-In-One Career Powerhouse:**
 > - 📄 **Resume, Portfolio & Blog:** Integrate your skills, GitHub projects, and writing into one stunning site.
 > - 🌐 **Free Custom Domain:** Bind your own personal domain for free—forever.
-> - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.page` or `name.engineer.dev`.
+> - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.is` or `name.that.dev`.
 > - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `an.dev/yourname`.
 >
 > [**Build Your Programmer Brand at leader.me →**](https://www.leader.me)
@@ -215,7 +215,7 @@ Read [setup_website.md](/docs/setup_website.md).
 > **The All-In-One Career Powerhouse:**
 > - 📄 **Resume, Portfolio & Blog:** Integrate your skills, GitHub projects, and writing into one stunning site.
 > - 🌐 **Free Custom Domain:** Bind your own personal domain for free—forever.
-> - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.page` or `name.engineer.dev`.
+> - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.is` or `name.that.dev`.
 > - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `an.dev/yourname`.
 >
 > [**Build Your Programmer Brand at leader.me →**](https://www.leader.me)
