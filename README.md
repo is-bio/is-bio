@@ -1,19 +1,18 @@
 [中文文档](README_zh.md)
 
 # isBio: Personal Website Builder
-## 'is-bio' has evolved into SaaS - that.dev!
+## 'is-bio' has evolved into SaaS - leader.me!
 
 > 🚀 **Level Up Your Developer Identity**
 >
-> [**that.dev**](https://www.that.dev) — the ultimate all-in-one personal branding platform for programmers.
+> [**leader.me**](https://www.leader.me) — the ultimate all-in-one personal branding platform for programmers.
 >
 > **The All-In-One Career Powerhouse:**
 > - 📄 **Resume, Portfolio & Blog:** Integrate your skills, GitHub projects, and writing into one stunning site.
 > - 🌐 **Free Custom Domain:** Bind your own personal domain for free—forever.
-> - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.is` or `name.that.dev`.
-> - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `that.dev/yourname`.
+> - ✨ **Premium Subdomains:** Stand out with elite tech handle like `name.leader.me`.
 >
-> [**Build Your Programmer Brand at that.dev →**](https://www.that.dev)
+> [**Build Your Programmer Brand at leader.me →**](https://www.leader.me)
 
 ---
 
@@ -210,12 +209,11 @@ Read [setup_website.md](/docs/setup_website.md).
 
 > 🚀 **Level Up Your Developer Identity**
 >
-> [**that.dev**](https://www.that.dev) — the ultimate all-in-one personal branding platform for programmers.
+> [**leader.me**](https://www.leader.me) — the ultimate all-in-one personal branding platform for programmers.
 >
 > **The All-In-One Career Powerhouse:**
 > - 📄 **Resume, Portfolio & Blog:** Integrate your skills, GitHub projects, and writing into one stunning site.
 > - 🌐 **Free Custom Domain:** Bind your own personal domain for free—forever.
-> - ✨ **Premium Subdomains:** Stand out with elite tech handles like `name.cto.is` or `name.that.dev`.
-> - 🔗 **Cool Short Links:** Get sleek, memorable bio-links like `is.bio/yourname` and `that.dev/yourname`.
+> - ✨ **Premium Subdomains:** Stand out with elite tech handle like `name.leader.me`.
 >
-> [**Build Your Programmer Brand at that.dev →**](https://www.that.dev)
+> [**Build Your Programmer Brand at leader.me →**](https://www.leader.me)
