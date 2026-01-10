@@ -300,7 +300,7 @@ GEM
     reline (0.6.1)
       io-console (~> 0.5)
     rexml (3.4.1)
-    rouge (4.5.2)
+    rouge (4.6.1)
     rspec-core (3.13.4)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
@@ -464,7 +464,7 @@ DEPENDENCIES
   rails-controller-testing (~> 1.0.5)
   rails-i18n (~> 8.0.0)
   redcarpet (~> 3.6.1)
-  rouge (~> 4.5.2)
+  rouge (~> 4.6.1)
   rspec-rails (~> 8.0.1)
   rubocop-rails-omakase
   rubocop-rspec
